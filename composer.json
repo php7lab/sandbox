@@ -1,0 +1,21 @@
+{
+	"name": "php7lab/sandbox",
+	"type": "extension",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Yamshikov Vitaliy",
+			"email": "theyamshikov@yandex.ru"
+		}
+	],
+	"minimum-stability": "dev",
+	"require": {
+		"illuminate/database": "^6.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"PhpLab\\Sandbox\\": "src",
+			"PhpLab\\Sandbox\\Tests\\": "tests"
+		}
+	}
+}
