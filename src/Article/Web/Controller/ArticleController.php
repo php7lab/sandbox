@@ -48,6 +48,16 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    public function update($id, Request $request) : Response
+    {
+        $query = new Query;
+        $query->with('category');
+        $entity = $this->service->oneById($id, $query);
+        return $this->render('@Article/post/update.html.twig', [
+            'post' => $entity,
+        ]);
+    }
+
     public function delete($id, Request $request) : Response
     {
         $this->service->deleteById($id);

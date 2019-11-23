@@ -16,7 +16,7 @@ web_article_post_view:
         id: '\d+'
 
 web_article_post_update:
-    methods: [POST]
+    methods: [GET,POST]
     path: /article/update/{id}
     controller: PhpLab\Sandbox\Article\Web\Controller\ArticleController::update
     requirements:
