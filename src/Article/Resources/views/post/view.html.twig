@@ -4,9 +4,36 @@
 
 {% block body %}
 
+    <div class="pull-right">
+        <a class="btn btn-primary" href="{{ path('web_article_post_update', {id: post.id}) }}">update</a>
+        <a class="btn btn-danger" href="#deleteModal" data-toggle="modal"  href111="{{ path('web_article_post_delete', {id: post.id}) }}">delete</a>
+    </div>
+
     <h3>
         {{ post.title }}
         <span class="label label-default">{{ post.category.title }}</span>
     </h3>
+
+    <div id="deleteModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Delete item</h4>
+                </div>
+                <div class="modal-body">
+                    A you sure delete item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" href="{{ path('web_article_post_delete', {id: post.id}) }}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
 
 {% endblock %}
