@@ -48,6 +48,11 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    public function create(Request $request) : Response
+    {
+        return $this->render('@Article/post/create.html.twig');
+    }
+
     public function update($id, Request $request) : Response
     {
         $query = new Query;

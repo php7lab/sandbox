@@ -6,6 +6,12 @@
 
     {% include '@Article/post/index.list.html.twig' %}
 
-    {{ pagination(dataProviderEntity) }}
+    <span class="pull-right">
+        <a class="btn btn-success" href="{{ path('web_article_post_create') }}">Create</a>
+    </span>
+
+    <span>
+        {{ pagination(dataProviderEntity) }}
+    </span>
 
 {% endblock %}

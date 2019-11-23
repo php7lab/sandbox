@@ -5,7 +5,7 @@ web_article_post_index:
 
 web_article_post_create:
     path: /article/create
-    methods: [POST]
+    methods: [GET,POST]
     controller: PhpLab\Sandbox\Article\Web\Controller\ArticleController::create
 
 web_article_post_view:
