@@ -1,0 +1,3 @@
+
+article_api:
+    resource: "@MessengerBundle/Api/config/routes.yaml"

@@ -1,0 +1,42 @@
+messenger_chat_index:
+    methods: [GET]
+    path: /v1/messenger-chat
+    controller: PhpLab\Sandbox\Bundle\Messenger\Api\Controller\ChatController::index
+
+messenger_chat_create:
+    path: /v1/messenger-chat
+    methods: [POST]
+    controller: PhpLab\Sandbox\Bundle\Messenger\Api\Controller\ChatController::create
+
+messenger_chat_view:
+    methods: [GET]
+    path: /v1/messenger-chat/{id}
+    controller: PhpLab\Sandbox\Bundle\Messenger\Api\Controller\ChatController::view
+    requirements:
+        id: '\d+'
+
+messenger_chat_update:
+    methods: [PUT]
+    path: /v1/messenger-chat/{id}
+    controller: PhpLab\Sandbox\Bundle\Messenger\Api\Controller\ChatController::update
+    requirements:
+        id: '\d+'
+
+messenger_chat_delete:
+    methods: [DELETE]
+    path: /v1/messenger-chat/{id}
+    controller: PhpLab\Sandbox\Bundle\Messenger\Api\Controller\ChatController::delete
+    requirements:
+        id: '\d+'
+
+messenger_chat_index_options:
+    methods: [OPTIONS]
+    path: /v1/messenger-chat
+    controller: PhpLab\Sandbox\Bundle\Messenger\Api\Controller\ChatController::options
+
+messenger_chat_options:
+    methods: [OPTIONS]
+    path: /v1/messenger-chat/{id}
+    controller: PhpLab\Sandbox\Bundle\Messenger\Api\Controller\ChatController::options
+    requirements:
+        id: '\d+'

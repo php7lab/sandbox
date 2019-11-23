@@ -1,0 +1,11 @@
+{% extends '@Article/base.html.twig' %}
+
+{% block title %}Main page{% endblock %}
+
+{% block body %}
+
+    {% include '@Article/post/index.list.html.twig' %}
+
+    {{ pagination(dataProviderEntity) }}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+web_article_post_index:
+    methods: [GET]
+    path: /article
+    controller: PhpLab\Sandbox\Bundle\Article\Web\Controller\ArticleController::index
+
+web_article_post_create:
+    path: /article/create
+    methods: [POST]
+    controller: PhpLab\Sandbox\Bundle\Article\Web\Controller\ArticleController::create
+
+web_article_post_view:
+    methods: [GET]
+    path: /article/view/{id}
+    controller: PhpLab\Sandbox\Bundle\Article\Web\Controller\ArticleController::view
+    requirements:
+        id: '\d+'
+
+web_article_post_update:
+    methods: [PUT]
+    path: /article/update/{id}
+    controller: PhpLab\Sandbox\Bundle\Article\Web\Controller\ArticleController::update
+    requirements:
+        id: '\d+'
+
+web_article_post_delete:
+    methods: [DELETE]
+    path: /article/delete/{id}
+    controller: PhpLab\Sandbox\Bundle\Article\Web\Controller\ArticleController::delete
+    requirements:
+        id: '\d+'
