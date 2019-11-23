@@ -21,16 +21,6 @@ class ArticleController extends AbstractController
         $this->service = $postService;
     }
 
-    public function view($id, Request $request) : Response
-    {
-        $query = new Query;
-        $query->with('category');
-        $entity = $this->service->oneById($id, $query);
-        return $this->render('@Article/post/view.html.twig', [
-            'post' => $entity,
-        ]);
-    }
-
     public function index(Request $request) : Response
     {
         $getParams = new GetParams;
@@ -46,6 +36,23 @@ class ArticleController extends AbstractController
         return $this->render('@Article/post/index.html.twig', [
             'dataProviderEntity' => $dataProvider->getAll(),
         ]);
+    }
+
+    public function view($id, Request $request) : Response
+    {
+        $query = new Query;
+        $query->with('category');
+        $entity = $this->service->oneById($id, $query);
+        return $this->render('@Article/post/view.html.twig', [
+            'post' => $entity,
+        ]);
+    }
+
+    public function delete($id, Request $request) : Response
+    {
+        $this->service->deleteById($id);
+        $postListUrl = $this->generateUrl('web_article_post_index');
+        return $this->redirect($postListUrl);
     }
 
 }

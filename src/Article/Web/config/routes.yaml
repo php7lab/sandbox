@@ -16,14 +16,14 @@ web_article_post_view:
         id: '\d+'
 
 web_article_post_update:
-    methods: [PUT]
+    methods: [POST]
     path: /article/update/{id}
     controller: PhpLab\Sandbox\Article\Web\Controller\ArticleController::update
     requirements:
         id: '\d+'
 
 web_article_post_delete:
-    methods: [DELETE]
+    methods: [POST]
     path: /article/delete/{id}
     controller: PhpLab\Sandbox\Article\Web\Controller\ArticleController::delete
     requirements:

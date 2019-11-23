@@ -25,14 +25,19 @@
                     A you sure delete item?
                 </div>
                 <div class="modal-footer">
+                    <form id="post_delete_form" method="post" action="{{ path('web_article_post_delete', {id: post.id}) }}"></form>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger" href="{{ path('web_article_post_delete', {id: post.id}) }}">Delete</a>
+                    <button class="btn btn-danger" onclick="$('#post_delete_form').submit()">Delete</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+
+        var deletePost = function (id) {
+            alert(id);
+        }
 
     </script>
 
