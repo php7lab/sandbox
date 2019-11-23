@@ -9,6 +9,8 @@ use php7extension\core\web\enums\HttpStatusCodeEnum;
 class ChatControllerTest extends BaseRestTest
 {
 
+    protected $basePath = 'api/v1/';
+
     public function testAll()
     {
         $response = $this->sendGet('messenger-chat', [
