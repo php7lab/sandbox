@@ -8,6 +8,7 @@ use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Domain\Data\DataProvider;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
+use PhpLab\Sandbox\Notify\Enums\FlashMessageTypeEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,6 +69,10 @@ class ChatController extends AbstractController
     {
         $this->service->deleteById($id);
         $chatListUrl = $this->generateUrl('web_messenger_chat_index');
+        $this->addFlash(
+            FlashMessageTypeEnum::SUCCESS,
+            'Chat deleted!'
+        );
         return $this->redirect($chatListUrl);
     }
 

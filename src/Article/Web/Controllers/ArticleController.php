@@ -7,6 +7,7 @@ use php7rails\domain\data\Query;
 use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Domain\Data\DataProvider;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
+use PhpLab\Sandbox\Notify\Enums\FlashMessageTypeEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,6 +68,10 @@ class ArticleController extends AbstractController
     {
         $this->service->deleteById($id);
         $postListUrl = $this->generateUrl('web_article_post_index');
+        $this->addFlash(
+            FlashMessageTypeEnum::SUCCESS,
+            'Post deleted!'
+        );
         return $this->redirect($postListUrl);
     }
 
