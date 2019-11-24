@@ -1,3 +1,6 @@
 
-article_api:
+web_messenger:
     resource: "@MessengerBundle/Api/config/routes.yaml"
+
+api_messenger:
+    resource: "@MessengerBundle/Web/config/routes.yaml"

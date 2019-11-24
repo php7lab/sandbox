@@ -1,0 +1,30 @@
+web_messenger_chat_index:
+    methods: [GET]
+    path: /chat
+    controller: PhpLab\Sandbox\Messenger\Web\Controllers\ChatController::index
+
+web_messenger_chat_create:
+    path: /chat/create
+    methods: [GET,POST]
+    controller: PhpLab\Sandbox\Messenger\Web\Controllers\ChatController::create
+
+web_messenger_chat_view:
+    methods: [GET]
+    path: /chat/view/{id}
+    controller: PhpLab\Sandbox\Messenger\Web\Controllers\ChatController::view
+    requirements:
+        id: '\d+'
+
+web_messenger_chat_update:
+    methods: [GET,POST]
+    path: /chat/update/{id}
+    controller: PhpLab\Sandbox\Messenger\Web\Controllers\ChatController::update
+    requirements:
+        id: '\d+'
+
+web_messenger_chat_delete:
+    methods: [POST]
+    path: /chat/delete/{id}
+    controller: PhpLab\Sandbox\Messenger\Web\Controllers\ChatController::delete
+    requirements:
+        id: '\d+'
