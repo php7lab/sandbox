@@ -2,9 +2,9 @@
 auth_index:
     methods: [GET]
     path: /v1/auth
-    controller: PhpLab\Sandbox\User\Api\Controller\AuthController::index
+    controller: PhpLab\Sandbox\User\Api\Controllers\AuthController::index
 
 auth_login:
     path: /v1/auth
     methods: [POST]
-    controller: PhpLab\Sandbox\User\Api\Controller\AuthController::login
+    controller: PhpLab\Sandbox\User\Api\Controllers\AuthController::login

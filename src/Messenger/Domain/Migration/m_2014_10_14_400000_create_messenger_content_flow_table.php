@@ -4,7 +4,7 @@ namespace Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
 use PhpLab\Eloquent\Migration\Base\BaseCreateTableMigration;
-use PhpLab\Eloquent\Migration\Enum\ForeignActionEnum;
+use PhpLab\Eloquent\Migration\Enums\ForeignActionEnum;
 
 if ( ! class_exists(m_2014_10_14_400000_create_messenger_content_flow_table::class)) {
 

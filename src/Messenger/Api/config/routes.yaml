@@ -1,42 +1,42 @@
 messenger_chat_index:
     methods: [GET]
     path: /v1/messenger-chat
-    controller: PhpLab\Sandbox\Messenger\Api\Controller\ChatController::index
+    controller: PhpLab\Sandbox\Messenger\Api\Controllers\ChatController::index
 
 messenger_chat_create:
     path: /v1/messenger-chat
     methods: [POST]
-    controller: PhpLab\Sandbox\Messenger\Api\Controller\ChatController::create
+    controller: PhpLab\Sandbox\Messenger\Api\Controllers\ChatController::create
 
 messenger_chat_view:
     methods: [GET]
     path: /v1/messenger-chat/{id}
-    controller: PhpLab\Sandbox\Messenger\Api\Controller\ChatController::view
+    controller: PhpLab\Sandbox\Messenger\Api\Controllers\ChatController::view
     requirements:
         id: '\d+'
 
 messenger_chat_update:
     methods: [PUT]
     path: /v1/messenger-chat/{id}
-    controller: PhpLab\Sandbox\Messenger\Api\Controller\ChatController::update
+    controller: PhpLab\Sandbox\Messenger\Api\Controllers\ChatController::update
     requirements:
         id: '\d+'
 
 messenger_chat_delete:
     methods: [DELETE]
     path: /v1/messenger-chat/{id}
-    controller: PhpLab\Sandbox\Messenger\Api\Controller\ChatController::delete
+    controller: PhpLab\Sandbox\Messenger\Api\Controllers\ChatController::delete
     requirements:
         id: '\d+'
 
 messenger_chat_index_options:
     methods: [OPTIONS]
     path: /v1/messenger-chat
-    controller: PhpLab\Sandbox\Messenger\Api\Controller\ChatController::options
+    controller: PhpLab\Sandbox\Messenger\Api\Controllers\ChatController::options
 
 messenger_chat_options:
     methods: [OPTIONS]
     path: /v1/messenger-chat/{id}
-    controller: PhpLab\Sandbox\Messenger\Api\Controller\ChatController::options
+    controller: PhpLab\Sandbox\Messenger\Api\Controllers\ChatController::options
     requirements:
         id: '\d+'
