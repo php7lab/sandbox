@@ -42,10 +42,10 @@ class ChatController extends AbstractController
     public function view($id, Request $request) : Response
     {
         $query = new Query;
-        $query->with('category');
+        //$query->with('category');
         $entity = $this->service->oneById($id, $query);
         return $this->render('@Messenger/chat/view.html.twig', [
-            'post' => $entity,
+            'chat' => $entity,
         ]);
     }
 
@@ -57,18 +57,18 @@ class ChatController extends AbstractController
     public function update($id, Request $request) : Response
     {
         $query = new Query;
-        $query->with('category');
+        //$query->with('category');
         $entity = $this->service->oneById($id, $query);
         return $this->render('@Messenger/chat/update.html.twig', [
-            'post' => $entity,
+            'chat' => $entity,
         ]);
     }
 
     public function delete($id, Request $request) : Response
     {
         $this->service->deleteById($id);
-        $postListUrl = $this->generateUrl('web_messenger_chat_index');
-        return $this->redirect($postListUrl);
+        $chatListUrl = $this->generateUrl('web_messenger_chat_index');
+        return $this->redirect($chatListUrl);
     }
 
 }

@@ -1,8 +1,8 @@
 <div class="list-group">
-    {% for post in dataProviderEntity.collection %}
-        <a href="{{ path('web_messenger_chat_view', {id: post.id}) }}" class="list-group-item">
-            {{ post.title }}
-            {#<span class="badge">{{ post.category.title }}</span>#}
+    {% for chat in dataProviderEntity.collection %}
+        <a href="{{ path('web_messenger_chat_view', {id: chat.id}) }}" class="list-group-item">
+            {{ chat.title }}
+            {#<span class="badge">{{ chat.category.title }}</span>#}
         </a>
     {% endfor %}
 </div>
