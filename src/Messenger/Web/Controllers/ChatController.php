@@ -9,12 +9,15 @@ use PhpLab\Domain\Data\DataProvider;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Sandbox\Notify\Enums\FlashMessageTypeEnum;
+use PhpLab\Sandbox\Web\Traits\AccessTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChatController extends AbstractController
 {
+
+    use AccessTrait;
 
     private $service;
 
@@ -25,6 +28,7 @@ class ChatController extends AbstractController
 
     public function index(Request $request) : Response
     {
+        $this->checkAuth();
         $getParams = new GetParams;
         $query = $getParams->getAllParams($request->query->all());
         //$query->with('category');
@@ -42,6 +46,7 @@ class ChatController extends AbstractController
 
     public function view($id, Request $request) : Response
     {
+        $this->checkAuth();
         $query = new Query;
         //$query->with('category');
         $entity = $this->service->oneById($id, $query);
@@ -52,11 +57,13 @@ class ChatController extends AbstractController
 
     public function create(Request $request) : Response
     {
+        $this->checkAuth();
         return $this->render('@Messenger/chat/create.html.twig');
     }
 
     public function update($id, Request $request) : Response
     {
+        $this->checkAuth();
         $query = new Query;
         //$query->with('category');
         $entity = $this->service->oneById($id, $query);
@@ -67,6 +74,7 @@ class ChatController extends AbstractController
 
     public function delete($id, Request $request) : Response
     {
+        $this->checkAuth();
         $this->service->deleteById($id);
         $chatListUrl = $this->generateUrl('web_messenger_chat_index');
         $this->addFlash(
