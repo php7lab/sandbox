@@ -1,4 +1,6 @@
 
-{{ printStyle() }}
+{% for style in styleList() %}
+    <link href="{{ asset(style.path) }}" rel="stylesheet">
+{% endfor %}
 
 {% block stylesheets %}{% endblock %}

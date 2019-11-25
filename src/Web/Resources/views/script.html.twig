@@ -1,4 +1,6 @@
 
-{{ printScript() }}
+{% for script in scriptList() %}
+    <script src="{{ asset(script.path) }}"></script>
+{% endfor %}
 
 {% block javascripts %}{% endblock %}
