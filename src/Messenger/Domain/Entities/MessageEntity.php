@@ -2,6 +2,8 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
+use PhpLab\Sandbox\User\Domain\Entities\Identity;
+
 class MessageEntity
 {
 
@@ -63,7 +65,11 @@ class MessageEntity
      */
     public function getAuthor()
     {
-        return $this->author;
+        $author = new Identity;
+        $author->setId($this->getAuthorId());
+        $author->setUsername('User ' . $this->getAuthorId());
+        return $author;
+        //return $this->author;
     }
 
     /**

@@ -16,7 +16,7 @@
     <div>
         {% for message in chat.messages %}
             <div class="alert alert-info" role="alert">
-                User #{{ message.message.authorId }}: {{ message.message.text }}
+                {{ message.message.author.username }}: {{ message.message.text }}
             </div>
         {% endfor %}
     </div>
