@@ -20,6 +20,7 @@ class Identity implements UserInterface
     private $confirmationToken;
     private $passwordRequestedAt;
     private $roles;
+    private $logo;
 
     public function eraseCredentials() {}
 
@@ -213,6 +214,22 @@ class Identity implements UserInterface
     public function setRoles($roles): void
     {
         $this->roles = $roles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLogo()
+    {
+        return 'https://www.gravatar.com/avatar/' . md5($this->getUsername()) . '?d=retro';
+    }
+
+    /**
+     * @param mixed $logo
+     */
+    public function setLogo($logo): void
+    {
+        $this->logo = $logo;
     }
 
 }

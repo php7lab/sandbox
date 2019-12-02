@@ -15,8 +15,8 @@
 
     <div>
         {% for message in chat.messages %}
-            <div class="alert alert-info" role="alert">
-                {{ message.message.author.username }}: {{ message.message.text }}
+            <div class="" role="alert">
+                <img src="{{ message.message.author.logo }}&s=16"/> <b>{{ message.message.author.username }}</b>: {{ message.message.text }}
             </div>
         {% endfor %}
     </div>
