@@ -11,6 +11,7 @@ use PhpLab\Domain\Interfaces\GetEntityClassInterface;
 use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
 use PhpLab\Domain\Libs\Relation\OneToMany;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\FlowRepositoryInterface;
+use PhpLab\Sandbox\Messenger\Domain\Interfaces\MemberRepositoryInterface;
 
 class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositoryInterface
 {
@@ -18,12 +19,14 @@ class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositor
     protected $tableName = 'messenger_chat';
     protected $entityClass = ChatEntity::class;
 
-    private $messageFlowRepository;
+    private $flowRepository;
+    private $memberRepository;
 
-    public function __construct(Manager $capsule, FlowRepositoryInterface $messageFlowRepository)
+    public function __construct(Manager $capsule, FlowRepositoryInterface $flowRepository, MemberRepositoryInterface $memberRepository)
     {
         parent::__construct($capsule);
-        $this->messageFlowRepository = $messageFlowRepository;
+        $this->flowRepository = $flowRepository;
+        $this->memberRepository = $memberRepository;
     }
 
     public function relations()
@@ -34,9 +37,20 @@ class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositor
                 'callback' => function(Collection $collection) {
                     $m2m = new OneToMany;
                     $m2m->selfModel = $this;
-                    $m2m->foreignModel = $this->messageFlowRepository;
+                    $m2m->foreignModel = $this->flowRepository;
                     $m2m->selfField = 'chatId';
                     $m2m->foreignContainerField = 'messages';
+                    $m2m->run($collection);
+                },
+            ],
+            'members' => [
+                'type' => RelationEnum::CALLBACK,
+                'callback' => function(Collection $collection) {
+                    $m2m = new OneToMany;
+                    $m2m->selfModel = $this;
+                    $m2m->foreignModel = $this->memberRepository;
+                    $m2m->selfField = 'chatId';
+                    $m2m->foreignContainerField = 'members';
                     $m2m->run($collection);
                 },
             ],

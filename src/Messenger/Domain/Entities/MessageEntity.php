@@ -8,6 +8,7 @@ class MessageEntity
     private $id;
     private $text;
     private $authorId;
+    private $author;
 
     /**
      * @return mixed
@@ -55,6 +56,22 @@ class MessageEntity
     public function setAuthorId($authorId): void
     {
         $this->authorId = $authorId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author): void
+    {
+        $this->author = $author;
     }
 
 }

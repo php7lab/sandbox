@@ -7,7 +7,7 @@ $fixture->setCount(30);
 $fixture->setCallback(function ($index, FixtureFactoryHelper $fixtureFactory) {
     return [
         'id' => $index,
-        'type' => 'public',
+        'type' => 'dialog',
         'title' => 'chat ' . $index,
     ];
 });

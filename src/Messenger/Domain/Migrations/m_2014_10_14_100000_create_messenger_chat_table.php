@@ -17,7 +17,7 @@ if ( ! class_exists(m_2014_10_14_100000_create_messenger_chat_table::class)) {
         {
             return function (Blueprint $table) {
                 $table->integer('id')->autoIncrement();
-                $table->enum('type', ['private', 'public'])->comment('Тип чата');
+                $table->enum('type', ['dialog', 'chat', 'channel'])->comment('Тип чата');
                 $table->string('title')->comment('Название чата');
             };
         }

@@ -2,12 +2,15 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 class MemberEntity
 {
 
     private $id;
     private $userId;
     private $chatId;
+    private $user;
 
     /**
      * @return mixed
@@ -55,6 +58,16 @@ class MemberEntity
     public function setChatId($chatId): void
     {
         $this->chatId = $chatId;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser(UserInterface $user): void
+    {
+        $this->user = $user;
     }
 
 }

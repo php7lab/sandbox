@@ -11,6 +11,7 @@ class ChatEntity
     private $title;
     private $type;
     private $messages;
+    private $members;
 
     public function getId()
     {
@@ -50,6 +51,16 @@ class ChatEntity
     public function setMessages(Collection $messages): void
     {
         $this->messages = $messages;
+    }
+
+    public function getMembers()
+    {
+        return $this->members;
+    }
+
+    public function setMembers($members): void
+    {
+        $this->members = $members;
     }
 
 }

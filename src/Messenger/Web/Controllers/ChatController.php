@@ -4,9 +4,11 @@ namespace PhpLab\Sandbox\Messenger\Web\Controllers;
 
 use php7rails\domain\data\GetParams;
 use php7rails\domain\data\Query;
+use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Domain\Data\DataProvider;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
+use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Sandbox\Notify\Enums\FlashMessageTypeEnum;
 use PhpLab\Sandbox\Web\Traits\AccessTrait;
@@ -49,10 +51,13 @@ class ChatController extends AbstractController
         $this->checkAuth();
         $query = new Query;
         $query->with('messages');
+        $query->with('members');
+        /** @var ChatEntity $entity */
         $entity = $this->service->oneById($id, $query);
         //dd($entity);
         return $this->render('@Messenger/chat/view.html.twig', [
             'chat' => $entity,
+            'members' => EntityHelper::indexingCollection($entity->getMembers(), 'id'),
         ]);
     }
 
