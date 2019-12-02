@@ -2,13 +2,13 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
-class MessageFlowEntity
+class FlowEntity
 {
 
     private $id;
     private $contentId;
     private $chatId;
-    private $text;
+    //private $text;
     private $message;
 
     public function getId()
@@ -41,10 +41,10 @@ class MessageFlowEntity
         $this->chatId = $chatId;
     }
 
-    public function getText()
+    /*public function getText()
     {
-        return 55555;
-    }
+        return $this->getMessage()->getText();
+    }*/
 
     public function getMessage() : MessageEntity
     {

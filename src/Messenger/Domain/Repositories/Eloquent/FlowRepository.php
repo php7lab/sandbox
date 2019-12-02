@@ -10,19 +10,19 @@ use PhpLab\Domain\Libs\Relation\OneToOne;
 use PhpLab\Eloquent\Db\Helpers\Manager;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Entities\MessageEntity;
-use PhpLab\Sandbox\Messenger\Domain\Entities\MessageFlowEntity;
+use PhpLab\Sandbox\Messenger\Domain\Entities\FlowEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
 use PhpLab\Domain\Interfaces\GetEntityClassInterface;
 use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
 use PhpLab\Domain\Libs\Relation\ManyToMany;
-use PhpLab\Sandbox\Messenger\Domain\Interfaces\MessageFlowRepositoryInterface;
+use PhpLab\Sandbox\Messenger\Domain\Interfaces\FlowRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\MessageRepositoryInterface;
 
-class MessageFlowRepository extends BaseEloquentCrudRepository implements MessageFlowRepositoryInterface
+class FlowRepository extends BaseEloquentCrudRepository implements FlowRepositoryInterface
 {
 
-    protected $tableName = 'messenger_message_flow';
-    protected $entityClass = MessageFlowEntity::class;
+    protected $tableName = 'messenger_flow';
+    protected $entityClass = FlowEntity::class;
 
     private $messageRepository;
 

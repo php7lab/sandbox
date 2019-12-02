@@ -10,7 +10,7 @@ use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
 use PhpLab\Domain\Interfaces\GetEntityClassInterface;
 use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
 use PhpLab\Domain\Libs\Relation\OneToMany;
-use PhpLab\Sandbox\Messenger\Domain\Interfaces\MessageFlowRepositoryInterface;
+use PhpLab\Sandbox\Messenger\Domain\Interfaces\FlowRepositoryInterface;
 
 class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositoryInterface
 {
@@ -20,7 +20,7 @@ class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositor
 
     private $messageFlowRepository;
 
-    public function __construct(Manager $capsule, MessageFlowRepositoryInterface $messageFlowRepository)
+    public function __construct(Manager $capsule, FlowRepositoryInterface $messageFlowRepository)
     {
         parent::__construct($capsule);
         $this->messageFlowRepository = $messageFlowRepository;
