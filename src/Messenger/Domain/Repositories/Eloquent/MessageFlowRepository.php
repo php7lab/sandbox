@@ -21,7 +21,7 @@ use PhpLab\Sandbox\Messenger\Domain\Interfaces\MessageRepositoryInterface;
 class MessageFlowRepository extends BaseEloquentCrudRepository implements MessageFlowRepositoryInterface
 {
 
-    protected $tableName = 'messenger_content_flow';
+    protected $tableName = 'messenger_message_flow';
     protected $entityClass = MessageFlowEntity::class;
 
     private $messageRepository;

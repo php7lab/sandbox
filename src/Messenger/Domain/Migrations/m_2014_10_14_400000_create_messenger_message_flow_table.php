@@ -6,12 +6,12 @@ use Illuminate\Database\Schema\Blueprint;
 use PhpLab\Eloquent\Migration\Base\BaseCreateTableMigration;
 use PhpLab\Eloquent\Migration\Enums\ForeignActionEnum;
 
-if ( ! class_exists(m_2014_10_14_400000_create_messenger_content_flow_table::class)) {
+if ( ! class_exists(m_2014_10_14_400000_create_messenger_message_flow_table::class)) {
 
-    class m_2014_10_14_400000_create_messenger_content_flow_table extends BaseCreateTableMigration
+    class m_2014_10_14_400000_create_messenger_message_flow_table extends BaseCreateTableMigration
     {
 
-        protected $tableName = 'messenger_content_flow';
+        protected $tableName = 'messenger_message_flow';
         protected $tableComment = 'Поток сообщений';
 
         public function tableSchema()
@@ -23,7 +23,7 @@ if ( ! class_exists(m_2014_10_14_400000_create_messenger_content_flow_table::cla
                 $table
                     ->foreign('content_id')
                     ->references('id')
-                    ->on($this->encodeTableName('messenger_content'))
+                    ->on($this->encodeTableName('messenger_message'))
                     ->onDelete(ForeignActionEnum::CASCADE)
                     ->onUpdate(ForeignActionEnum::CASCADE);
                 $table
