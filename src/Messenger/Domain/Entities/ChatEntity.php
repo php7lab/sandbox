@@ -2,12 +2,15 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
+use PhpLab\Domain\Data\Collection;
+
 class ChatEntity
 {
 
     private $id;
     private $title;
     private $type;
+    private $messages;
 
     public function getId()
     {
@@ -37,6 +40,16 @@ class ChatEntity
     public function setType($type): void
     {
         $this->type = $type;
+    }
+
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    public function setMessages(Collection $messages): void
+    {
+        $this->messages = $messages;
     }
 
 }

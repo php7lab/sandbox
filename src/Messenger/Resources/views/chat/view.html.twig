@@ -13,6 +13,14 @@
         {{ chat.title }}
     </h3>
 
+    <div>
+        {% for message in chat.messages %}
+            <div class="alert alert-info" role="alert">
+                {{ message.message.text }}
+            </div>
+        {% endfor %}
+    </div>
+
     <div id="deleteModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">

@@ -48,8 +48,9 @@ class ChatController extends AbstractController
     {
         $this->checkAuth();
         $query = new Query;
-        //$query->with('category');
+        $query->with('messages');
         $entity = $this->service->oneById($id, $query);
+        //dd($entity);
         return $this->render('@Messenger/chat/view.html.twig', [
             'chat' => $entity,
         ]);

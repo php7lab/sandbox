@@ -8,7 +8,7 @@ $fixture->setCallback(function ($index, FixtureFactoryHelper $fixtureFactory) {
     return [
         'id' => $index,
         'content_id' => $index,
-        'chat_id' => $fixtureFactory->ordIndex($index, 3),
+        'chat_id' => $fixtureFactory->ordIndex($index, 30),
     ];
 });
 return $fixture->generateCollection();
