@@ -25,14 +25,14 @@ class StressCommand extends Command
     {
         $output->writeln(['<fg=white># Stress test</>']);
 
-        $queryCount = 10;
-        $ageCount = 3;
+        $synchQueryCount = 20; // кол-во параллельных запросов
+        $ageCount = 5; // кол-во эпох теста
         $url = 'http://symfony-on-rails.lab/php/v1/article';
 
         /** @var TestEntity[] $queryCollection */
         $queryCollection = new Collection;
 
-        for ($i = 0; $i < $queryCount; $i++) {
+        for ($i = 0; $i < $synchQueryCount; $i++) {
             $testEntity = new TestEntity;
             $id = $i + 1;
             $testEntity->url = $url . '/' . $id;
@@ -40,13 +40,15 @@ class StressCommand extends Command
         }
 
         $resultEntity = $this->stressService->test($queryCollection, $ageCount);
+        $queryRuntime = $resultEntity->runtime / $resultEntity->queryCount;
 
         $output->writeln([
             '',
             '<fg=green>Stress success!</>',
             '<fg=green>Total runtime: ' . $resultEntity->runtime . '</>',
             '<fg=green>Query count: ' . $resultEntity->queryCount . '</>',
-            '<fg=green>Query runtime: ' . ($resultEntity->runtime / $resultEntity->queryCount) . '</>',
+            '<fg=green>Query runtime: ' . $queryRuntime . '</>',
+            '<fg=green>Performance: ' . round(1 / $queryRuntime) . ' queries per second</>',
             '',
         ]);
     }
