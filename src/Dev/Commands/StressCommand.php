@@ -2,21 +2,18 @@
 
 namespace PhpLab\Sandbox\Dev\Commands;
 
-use GuzzleHttp\Client;
-use php7extension\core\develop\helpers\Benchmark;
 use PhpLab\Domain\Data\Collection;
 use PhpLab\Sandbox\Dev\Domain\Entities\TestEntity;
 use PhpLab\Sandbox\Dev\Domain\Services\StressService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use function GuzzleHttp\Promise\settle;
 
 class StressCommand extends Command
 {
-    protected static $defaultName = 'dev:stress:test';
 
-    protected $stressService;
+    protected static $defaultName = 'dev:stress:test';
+    private $stressService;
 
     public function __construct(?string $name = null, StressService $stressService)
     {
@@ -26,11 +23,10 @@ class StressCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $output->writeln(['<fg=white># Stress test</>']);
 
         $queryCount = 10;
-        $ageCount = 2;
+        $ageCount = 3;
         $url = 'http://symfony-on-rails.lab/php/v1/article';
 
         /** @var TestEntity[] $queryCollection */
@@ -38,11 +34,12 @@ class StressCommand extends Command
 
         for ($i = 0; $i < $queryCount; $i++) {
             $testEntity = new TestEntity;
-            $testEntity->url = $url;
+            $id = $i + 1;
+            $testEntity->url = $url . '/' . $id;
             $queryCollection->add($testEntity);
         }
 
-        $resultEntity =  $this->stressService->test($queryCollection, $ageCount);
+        $resultEntity = $this->stressService->test($queryCollection, $ageCount);
 
         $output->writeln([
             '',
@@ -52,7 +49,6 @@ class StressCommand extends Command
             '<fg=green>Query runtime: ' . ($resultEntity->runtime / $resultEntity->queryCount) . '</>',
             '',
         ]);
-
     }
 
 }

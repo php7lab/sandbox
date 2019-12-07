@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\Dev\Domain\Entities;
 class ResultEntity
 {
 
-    public $queryCount;
-    public $runtime;
+    public $queryCount = 0;
+    public $runtime = 0;
 
 }
