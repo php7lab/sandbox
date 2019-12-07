@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Dotenv\Dotenv;
+use PhpLab\Eloquent\Db\Helpers\Manager;
+
+use PhpLab\Sandbox\Dev\Commands\StressCommand;
+use PhpLab\Sandbox\Dev\Domain\Services\StressService;
+
+require __DIR__ . '/../../../autoload.php';
+
+if (!class_exists(Dotenv::class)) {
+    throw new RuntimeException('Please run "composer require symfony/dotenv" to load the ".env" files configuring the application.');
+} else {
+    // load all the .env files
+    (new Dotenv(false))->loadEnv(__DIR__ . '/../../../../.env');
+}
+
+// создаем консольное приложение
+$application = new Application;
+
+$stressService = new StressService;
+
+// создаем и объявляем команду
+$command = new StressCommand(StressCommand::getDefaultName(), $stressService);
+$application->add($command);
+
+$application->run();
