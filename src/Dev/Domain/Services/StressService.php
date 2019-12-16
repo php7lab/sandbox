@@ -4,6 +4,7 @@ namespace PhpLab\Sandbox\Dev\Domain\Services;
 
 use GuzzleHttp\Client;
 use php7extension\core\develop\helpers\Benchmark;
+use php7extension\yii\helpers\ArrayHelper;
 use PhpLab\Domain\Data\Collection;
 use PhpLab\Sandbox\Dev\Domain\Entities\ResultEntity;
 use function GuzzleHttp\Promise\settle;
@@ -50,8 +51,8 @@ class StressService
 
     private function checkErrors(array $results) {
         foreach ($results as $result) {
-            if ($result['state'] != 'fulfilled' && $result['reason']['code'] > 500) {
-                throw new \UnexpectedValueException('Error!!!!!!!!!!!!!!!');
+            if ($result['state'] != 'fulfilled' || ArrayHelper::getValue($result, 'reason.code') > 500) {
+                throw new \UnexpectedValueException('Response error!');
             }
         }
     }

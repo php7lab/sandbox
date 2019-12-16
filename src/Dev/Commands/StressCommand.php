@@ -27,7 +27,8 @@ class StressCommand extends Command
 
         $synchQueryCount = 20; // кол-во параллельных запросов
         $ageCount = 5; // кол-во эпох теста
-        $url = 'http://symfony-on-rails.lab/php/v1/article';
+        $baseUrl = $_ENV['API_DOMAIN_URL'];
+        $url = $baseUrl . '/php/v1/article';
 
         /** @var TestEntity[] $queryCollection */
         $queryCollection = new Collection;

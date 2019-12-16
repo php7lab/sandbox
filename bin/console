@@ -3,7 +3,6 @@
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Dotenv\Dotenv;
-use PhpLab\Eloquent\Db\Helpers\Manager;
 
 use PhpLab\Sandbox\Dev\Commands\StressCommand;
 use PhpLab\Sandbox\Dev\Domain\Services\StressService;
