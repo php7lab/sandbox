@@ -1,6 +1,11 @@
 #!/usr/bin/env php
 <?php
 
+use PhpLab\Sandbox\Package\Commands\InfoChangedCommand;
+use PhpLab\Sandbox\Package\Domain\Repositories\File\GroupRepository;
+use PhpLab\Sandbox\Package\Domain\Repositories\File\InfoRepository;
+use PhpLab\Sandbox\Package\Domain\Services\GroupService;
+use PhpLab\Sandbox\Package\Domain\Services\InfoService;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -19,10 +24,18 @@ if (!class_exists(Dotenv::class)) {
 // создаем консольное приложение
 $application = new Application;
 
+// создаем и объявляем команды
 $stressService = new StressService;
-
-// создаем и объявляем команду
 $command = new StressCommand(StressCommand::getDefaultName(), $stressService);
+$application->add($command);
+
+$fileName = __DIR__ . '/../../../../vendor/php7extension/core/src/package/domain/data/package_group.php';
+$groupRepository = new GroupRepository($fileName);
+$groupService = new GroupService($groupRepository);
+
+$infoRepository = new InfoRepository($groupService);
+$infoService = new InfoService($infoRepository);
+$command = new InfoChangedCommand(null, $infoService);
 $application->add($command);
 
 $application->run();
