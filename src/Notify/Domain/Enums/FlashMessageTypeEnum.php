@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Sandbox\Notify\Enums;
+namespace PhpLab\Sandbox\Notify\Domain\Enums;
 
 class FlashMessageTypeEnum
 {
