@@ -3,11 +3,12 @@
 namespace PhpLab\Sandbox\Notify\Domain\Repositories\Smsc;
 
 use PhpLab\Sandbox\Notify\Domain\Entities\SmsEntity;
+use PhpLab\Sandbox\Notify\Domain\Interfaces\Repositories\SmsRepositoryInterface;
 
-class SmsRepository
+class SmsRepository implements SmsRepositoryInterface
 {
 
-    public function push(SmsEntity $smsEntity) {
+    public function send(SmsEntity $smsEntity) {
 
     }
 
