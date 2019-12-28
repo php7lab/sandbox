@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Notify\Domain\Interfaces\Services;
 
 use PhpLab\Sandbox\Notify\Domain\Entities\EmailEntity;
-use PhpLab\Sandbox\Notify\Domain\Enums\PriorityEnum;
+use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
 
 interface EmailServiceInterface
 {

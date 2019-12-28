@@ -2,178 +2,146 @@
 
 namespace PhpLab\Sandbox\Queue\Domain\Entities;
 
-class JobEntity
+use PhpLab\Domain\Interfaces\ValidateEntityInterface;
+use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
+use DateTime;
+use PhpLab\Sandbox\Queue\Domain\Helpers\JobHelper;
+use PhpLab\Sandbox\Queue\Domain\Interfaces\JobInterface;
+
+class JobEntity implements ValidateEntityInterface
 {
 
     private $id;
     private $channel;
     private $class;
     private $data;
-    private $priority;
-    private $delay;
-    private $attempt;
+    private $priority = PriorityEnum::NORMAL;
+    private $delay = 0;
+    private $attempt = 0;
     private $pushedAt;
     private $reservedAt;
     private $doneAt;
 
-    /**
-     * @return mixed
-     */
+    public function __construct()
+    {
+        $this->pushedAt = new DateTime;
+    }
+
+    public function validationRules() : array
+    {
+        return [];
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
     public function setId($id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
     public function getChannel()
     {
         return $this->channel;
     }
 
-    /**
-     * @param mixed $channel
-     */
     public function setChannel($channel): void
     {
         $this->channel = $channel;
     }
 
-    /**
-     * @return mixed
-     */
     public function getClass()
     {
         return $this->class;
     }
 
-    /**
-     * @param mixed $class
-     */
     public function setClass($class): void
     {
         $this->class = $class;
     }
 
-    /**
-     * @return mixed
-     */
+    public function getJob()
+    {
+        return JobHelper::decode($this->getData());
+    }
+
+    public function setJob(JobInterface $job): void
+    {
+        $base64Data = JobHelper::encode($job);
+        $this->setData($base64Data);
+        $this->setClass(get_class($job));
+    }
+
     public function getData()
     {
         return $this->data;
     }
 
-    /**
-     * @param mixed $data
-     */
     public function setData($data): void
     {
         $this->data = $data;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPriority()
     {
         return $this->priority;
     }
 
-    /**
-     * @param mixed $priority
-     */
     public function setPriority($priority): void
     {
         $this->priority = $priority;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDelay()
     {
         return $this->delay;
     }
 
-    /**
-     * @param mixed $delay
-     */
     public function setDelay($delay): void
     {
         $this->delay = $delay;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAttempt()
     {
         return $this->attempt;
     }
 
-    /**
-     * @param mixed $attempt
-     */
     public function setAttempt($attempt): void
     {
         $this->attempt = $attempt;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPushedAt()
+    public function getPushedAt(): DateTime
     {
         return $this->pushedAt;
     }
 
-    /**
-     * @param mixed $pushedAt
-     */
     public function setPushedAt($pushedAt): void
     {
-        $this->pushedAt = $pushedAt;
+        $this->pushedAt = new DateTime($pushedAt);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getReservedAt()
+    public function getReservedAt(): ?DateTime
     {
         return $this->reservedAt;
     }
 
-    /**
-     * @param mixed $reservedAt
-     */
     public function setReservedAt($reservedAt): void
     {
-        $this->reservedAt = $reservedAt;
+        $this->reservedAt = new DateTime($reservedAt);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDoneAt()
+    public function getDoneAt(): ?DateTime
     {
         return $this->doneAt;
     }
 
-    /**
-     * @param mixed $doneAt
-     */
     public function setDoneAt($doneAt): void
     {
-        $this->doneAt = $doneAt;
+        $this->doneAt = new DateTime($doneAt);
     }
 
 }

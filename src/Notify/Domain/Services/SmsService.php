@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Notify\Domain\Services;
 
 use PhpLab\Sandbox\Notify\Domain\Entities\SmsEntity;
-use PhpLab\Sandbox\Notify\Domain\Enums\PriorityEnum;
+use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
 use PhpLab\Sandbox\Notify\Domain\Interfaces\Services\SmsServiceInterface;
 
 class SmsService implements SmsServiceInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Sandbox\Notify\Domain\Enums;
+namespace PhpLab\Sandbox\Queue\Domain\Enums;
 
 class PriorityEnum
 {
