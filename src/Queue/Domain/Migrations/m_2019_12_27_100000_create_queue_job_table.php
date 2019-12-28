@@ -17,7 +17,7 @@ if ( ! class_exists(m_2019_12_27_100000_create_queue_job_table::class)) {
         {
             return function (Blueprint $table) {
                 $table->integer('id')->autoIncrement();
-                $table->string('channel')->comment('');
+                $table->string('channel')->comment('Имя канала потока обработки');
                 $table->string('class')->comment('Имя класса');
                 $table->text('data')->comment('Данные для задачи');
                 $table->integer('priority')->default(1024)->comment('Приоритет выполнения');
