@@ -9,5 +9,6 @@ interface EmailServiceInterface
 {
 
     public function push(EmailEntity $emailEntity, $priority = PriorityEnum::NORMAL);
+    public function send(EmailEntity $emailEntity);
 
 }

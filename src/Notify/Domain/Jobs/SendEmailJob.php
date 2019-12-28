@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Notify\Domain\Jobs;
 
 use PhpLab\Sandbox\Notify\Domain\Entities\EmailEntity;
-use PhpLab\Sandbox\Notify\Domain\Interfaces\Repositories\EmailRepositoryInterface;
+use PhpLab\Sandbox\Notify\Domain\Interfaces\Services\EmailServiceInterface;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobInterface;
 
 class SendEmailJob implements JobInterface
@@ -11,15 +11,15 @@ class SendEmailJob implements JobInterface
 
     /** @var EmailEntity */
     public $entity;
-    private $emailRepository;
+    private $emailService;
 
-    public function __construct(EmailRepositoryInterface $emailRepository)
+    public function __construct(EmailServiceInterface $emailService)
     {
-        $this->emailRepository = $emailRepository;
+        $this->emailService = $emailService;
     }
 
     public function run() {
-        $this->emailRepository->send($this->entity);
+        $this->emailService->send($this->entity);
     }
 
 }
