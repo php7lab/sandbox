@@ -129,7 +129,7 @@ class JobEntity implements ValidateEntityInterface
         return $this->reservedAt;
     }
 
-    public function setReservedAt($reservedAt): void
+    public function setReservedAt($reservedAt = null): void
     {
         $this->reservedAt = new DateTime($reservedAt);
     }
@@ -139,7 +139,7 @@ class JobEntity implements ValidateEntityInterface
         return $this->doneAt;
     }
 
-    public function setDoneAt($doneAt): void
+    public function setDoneAt($doneAt = null): void
     {
         $this->doneAt = new DateTime($doneAt);
     }

@@ -9,7 +9,7 @@ class EmailRepository implements EmailRepositoryInterface
 {
 
     public function send(EmailEntity $emailEntity) {
-        dd($emailEntity);
+        dump("Email to {$emailEntity->getTo()} sended");
     }
 
 }

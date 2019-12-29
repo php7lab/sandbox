@@ -2,8 +2,25 @@
 
 namespace PhpLab\Sandbox\Queue\Domain\Helpers;
 
+use PhpLab\Domain\Helpers\EntityHelper;
+use PhpLab\Sandbox\Queue\Domain\Entities\JobEntity;
+use PhpLab\Sandbox\Queue\Domain\Interfaces\JobInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class JobHelper
 {
+
+    public static function forgeJob(JobEntity $jobEntity, ContainerInterface $container = null) : JobInterface {
+        $jobClass = $jobEntity->getClass();
+        /** @var JobInterface $jobInstance */
+        $jobInstance = new $jobClass;
+        $data = $jobEntity->getJob();
+        if($container) {
+            $data['container'] = $container;
+        }
+        EntityHelper::setAttributes($jobInstance, $data);
+        return $jobInstance;
+    }
 
     public static function encode(object $job) : string {
         $data = get_object_vars($job);

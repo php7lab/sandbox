@@ -3,23 +3,22 @@
 namespace PhpLab\Sandbox\Notify\Domain\Jobs;
 
 use PhpLab\Sandbox\Notify\Domain\Entities\EmailEntity;
-use PhpLab\Sandbox\Notify\Domain\Interfaces\Services\EmailServiceInterface;
+use PhpLab\Sandbox\Notify\Domain\Interfaces\Repositories\EmailRepositoryInterface;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class SendEmailJob implements JobInterface
 {
 
+    use ContainerAwareTrait;
+
     /** @var EmailEntity */
     public $entity;
-    private $emailService;
-
-    public function __construct(EmailServiceInterface $emailService)
-    {
-        $this->emailService = $emailService;
-    }
 
     public function run() {
-        $this->emailService->send($this->entity);
+        /** @var EmailRepositoryInterface $emailRepository */
+        $emailRepository = $this->container->get(EmailRepositoryInterface::class);
+        $emailRepository->send($this->entity);
     }
 
 }

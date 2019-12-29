@@ -25,11 +25,6 @@ class EmailService implements EmailServiceInterface
         $emailJob = new SendEmailJob($this);
         $emailJob->entity = $emailEntity;
         $pushResult = $this->jobService->push($emailJob);
-        //dd($pushResult);
-    }
-
-    public function send(EmailEntity $emailEntity) {
-        $this->emailRepository->send($emailEntity);
     }
 
 }
