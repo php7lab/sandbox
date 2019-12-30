@@ -22,12 +22,14 @@ class RunCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln(['<fg=white># Queue run</>']);
+        $output->writeln(['']);
         $total = $this->jobService->runAll();
         if ($total) {
             $output->writeln(['<fg=green>Complete ' . $total . ' jobs!</>']);
         } else {
             $output->writeln(['<fg=green>Jobs empty!</>']);
         }
+        $output->writeln(['']);
     }
 
 }
