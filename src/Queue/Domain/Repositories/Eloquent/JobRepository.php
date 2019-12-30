@@ -2,6 +2,9 @@
 
 namespace PhpLab\Sandbox\Queue\Domain\Repositories\Eloquent;
 
+use Illuminate\Support\Collection;
+use php7rails\domain\data\Query;
+use php7rails\domain\entities\query\Where;
 use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Queue\Domain\Entities\JobEntity;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobRepositoryInterface;
@@ -12,4 +15,14 @@ class JobRepository extends BaseEloquentCrudRepository implements JobRepositoryI
     protected $tableName = 'queue_job';
     protected $entityClass = JobEntity::class;
 
+    public function allNew(Query $query = null) : Collection {
+        $where = new Where;
+        $where->column = 'done_at';
+        $where->value = null;
+        $query = Query::forge($query);
+        $query->whereNew($where);
+        $query->orderBy(['']);
+        return $this->all($query);
+    }
+    
 }

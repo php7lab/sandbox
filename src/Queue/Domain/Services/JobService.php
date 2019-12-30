@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Queue\Domain\Services;
 
 use Illuminate\Support\Collection;
 use php7rails\domain\data\Query;
-use php7rails\domain\data\query\Where;
+use php7rails\domain\entities\query\Where;
 use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Domain\Services\BaseCrudService;
 use PhpLab\Sandbox\Notify\Domain\Interfaces\Services\EmailServiceInterface;
@@ -28,7 +28,12 @@ class JobService extends BaseCrudService implements JobServiceInterface
         $this->container = $container;
     }
 
-    public function push(JobInterface $job, $priority = PriorityEnum::NORMAL)
+    public function getRepository() : JobRepositoryInterface
+    {
+        return parent::getRepository();
+    }
+
+    public function push(JobInterface $job, int $priority = PriorityEnum::NORMAL)
     {
         $isAvailable = $this->beforeMethod([$this, 'push']);
         $jobEntity = new JobEntity;
@@ -41,14 +46,9 @@ class JobService extends BaseCrudService implements JobServiceInterface
         return $jobEntity;
     }
 
-    public function runAll() {
-        $where = new Where;
-        $where->column = 'done_at';
-        $where->value = null;
-        $query = new Query;
-        $query->whereNew($where);
-        /** @var JobEntity[] | Collection | array $jobCollection */
-        $jobCollection = $this->getRepository()->all($query);
+    public function runAll(string $channel = null, Query $query = null) {
+        $query = Query::forge($query);
+        $jobCollection = $this->getRepository()->allNew($query);
         foreach ($jobCollection as $jobEntity) {
             $job = JobHelper::forgeJob($jobEntity, $this->container);
             $job->run();
