@@ -48,7 +48,7 @@ class JobService extends BaseCrudService implements JobServiceInterface
 
     public function runAll(string $channel = null, Query $query = null) {
         $query = Query::forge($query);
-        $jobCollection = $this->getRepository()->allNew($query);
+        $jobCollection = $this->getRepository()->allForRun($query);
         foreach ($jobCollection as $jobEntity) {
             $job = JobHelper::forgeJob($jobEntity, $this->container);
             $job->run();

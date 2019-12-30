@@ -11,10 +11,10 @@ interface JobRepositoryInterface extends CrudRepositoryInterface
 {
 
     /**
-     * Выбрать все необработанные задачи
+     * Выбрать невыполненные и зависшие задачи
      * @param Query|null $query
      * @return JobEntity[]
      */
-    public function allNew(Query $query = null) : Collection;
+    public function allForRun(Query $query = null) : Collection;
 
 }
