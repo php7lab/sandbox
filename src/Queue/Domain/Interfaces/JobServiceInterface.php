@@ -13,6 +13,6 @@ interface JobServiceInterface extends ServiceInterface, GetEntityClassInterface,
 {
 
     public function push(JobInterface $job, int $priority = PriorityEnum::NORMAL);
-    public function runAll(string $channel = null, Query $query = null);
+    public function runAll(string $channel = null, Query $query = null) : int;
 
 }

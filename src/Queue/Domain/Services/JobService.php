@@ -46,7 +46,7 @@ class JobService extends BaseCrudService implements JobServiceInterface
         return $jobEntity;
     }
 
-    public function runAll(string $channel = null, Query $query = null) {
+    public function runAll(string $channel = null, Query $query = null) : int {
         $query = Query::forge($query);
         $jobCollection = $this->getRepository()->allForRun($query);
         foreach ($jobCollection as $jobEntity) {
@@ -56,6 +56,7 @@ class JobService extends BaseCrudService implements JobServiceInterface
             $jobEntity->setDoneAt();
             $this->getRepository()->update($jobEntity);
         }
+        return $jobCollection->count();
     }
 
     /*public function create($data)
