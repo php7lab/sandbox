@@ -22,10 +22,8 @@ class DomainService implements DomainServiceInterface
                 'name' => $buildDto->name,
                 'driver' => $buildDto->driver,
             ]);
-            //$scenarioInstance->name = $name;
             $scenarioInstance->domainNamespace = $buildDto->domainNamespace;
             $scenarioInstance->run();
-            //dd($scenarioInstance);
         }
     }
 
