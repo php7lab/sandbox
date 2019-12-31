@@ -8,6 +8,8 @@ use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\helpers\ClassHelper;
 use php7extension\yii\helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Interfaces\DomainServiceInterface;
+use PhpLab\Sandbox\Generator\Domain\Scenarios\BaseScenario;
+use PhpLab\Sandbox\Generator\Domain\Scenarios\ServiceScenario;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -40,11 +42,12 @@ class DomainCommand extends Command
 
         $domainQuestion = new Question('Enter domain namespace: ');
         //$domainNamespace = $helper->ask($input, $output, $domainQuestion);
-        $domainNamespace = 'PhpLab\Sandbox\Queue\Domain';
+        $domainNamespace = 'PhpLab\Sandbox\Queue111\Domain';
 
+        $typeArray = ['service', 'repository', 'entity'];
         $typeQuestion = new ChoiceQuestion(
             'Please select your favorite color (defaults to red)',
-            ['service', 'repository', 'entity'],
+            $typeArray,
             0
         );
         $typeQuestion->setMultiselect(true);
@@ -55,29 +58,21 @@ class DomainCommand extends Command
         //$name = $helper->ask($input, $output, $domainQuestion);
         $name = 'qwerty';
 
-        if(in_array('service', $types)) {
-
-            $serviceClassName = Inflector::classify($name) . 'Service';
-
-            $serviceInterfaceClass = new InterfaceEntity;
-            $serviceInterfaceClass->name = $domainNamespace . '\\Interfaces\\Services\\' . $serviceClassName . 'Interface';
-            ClassHelper::generate($serviceInterfaceClass);
-
-            $useServiceInterface = new ClassUseEntity;
-            $useServiceInterface->name = $domainNamespace . '\\Interfaces\\Services\\' . $serviceClassName . 'Interface';
-
-            $uses = [
-                $useServiceInterface,
-            ];
-
-            $serviceClass = new ClassEntity;
-            $serviceClass->name = $domainNamespace . '\\Services\\' . $serviceClassName;
-            /*$serviceClass->uses = [
-                $useServiceInterface
-            ];*/
-            $serviceClass->implements = Inflector::classify($name) . 'ServiceInterface';
-            ClassHelper::generate($serviceClass, $uses);
+        foreach ($types as $typeIndex) {
+            $type = $typeArray[$typeIndex];
+            $type = Inflector::classify($type);
+            $scenarioClass = 'PhpLab\\Sandbox\\Generator\\Domain\Scenarios\\' . $type . 'Scenario';
+            /** @var BaseScenario $scenarioInstance */
+            $scenarioInstance = new $scenarioClass;
+            $scenarioInstance->name = $name;
+            $scenarioInstance->domainNamespace = $domainNamespace;
+            $scenarioInstance->run();
+            //dd($scenarioInstance);
         }
+
+        /*if(in_array('service', $types)) {
+            $this->domainService->generateService($domainNamespace, $name);
+        }*/
 
     }
 
