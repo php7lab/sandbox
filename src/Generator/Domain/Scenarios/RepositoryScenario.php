@@ -2,17 +2,19 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios;
 
-class ServiceScenario extends BaseScenario
+class RepositoryScenario extends BaseScenario
 {
+
+    public $driver;
 
     public function typeName()
     {
-        return 'Service';
+        return 'Repository';
     }
 
     public function classDir()
     {
-        return 'Services';
+        return 'Repositories\\' . $this->driver;
     }
 
     protected function isMakeInterface() : bool {

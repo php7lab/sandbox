@@ -7,6 +7,7 @@ use php7extension\core\code\entities\ClassUseEntity;
 use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\helpers\ClassHelper;
 use php7extension\yii\helpers\Inflector;
+use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use PhpLab\Sandbox\Generator\Domain\Interfaces\DomainServiceInterface;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\BaseScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\ServiceScenario;
@@ -40,35 +41,29 @@ class DomainCommand extends Command
     {
         $helper = $this->getHelper('question');
 
-        $domainQuestion = new Question('Enter domain namespace: ');
-        //$domainNamespace = $helper->ask($input, $output, $domainQuestion);
-        $domainNamespace = 'PhpLab\Sandbox\Queue111\Domain';
+        $buildDto = new BuildDto;
 
-        $typeArray = ['service', 'repository', 'entity'];
+        $domainQuestion = new Question('Enter domain namespace: ');
+        //$buildDto->domainNamespace = $helper->ask($input, $output, $domainQuestion);
+        $buildDto->domainNamespace = 'PhpLab\Sandbox\Queue111\Domain';
+
+        $buildDto->typeArray = ['service', 'repository', 'entity'];
         $typeQuestion = new ChoiceQuestion(
             'Please select your favorite color (defaults to red)',
-            $typeArray,
+            $buildDto->typeArray,
             0
         );
         $typeQuestion->setMultiselect(true);
-        //$types = $helper->ask($input, $output, $typeQuestion);
-        $types = [0];
+        //$buildDto->types = $helper->ask($input, $output, $typeQuestion);
+        $buildDto->types = [0, 1, 2];
 
         $nameQuestion = new Question('Enter unit name: ');
         //$name = $helper->ask($input, $output, $domainQuestion);
-        $name = 'qwerty';
+        $buildDto->name = 'qwerty';
 
-        foreach ($types as $typeIndex) {
-            $type = $typeArray[$typeIndex];
-            $type = Inflector::classify($type);
-            $scenarioClass = 'PhpLab\\Sandbox\\Generator\\Domain\Scenarios\\' . $type . 'Scenario';
-            /** @var BaseScenario $scenarioInstance */
-            $scenarioInstance = new $scenarioClass;
-            $scenarioInstance->name = $name;
-            $scenarioInstance->domainNamespace = $domainNamespace;
-            $scenarioInstance->run();
-            //dd($scenarioInstance);
-        }
+        $buildDto->driver = 'eloquentttttt';
+
+        $this->domainService->generate($buildDto);
 
         /*if(in_array('service', $types)) {
             $this->domainService->generateService($domainNamespace, $name);
