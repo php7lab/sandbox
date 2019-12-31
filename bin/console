@@ -12,6 +12,9 @@ use Symfony\Component\Dotenv\Dotenv;
 use PhpLab\Sandbox\Dev\Commands\StressCommand;
 use PhpLab\Sandbox\Dev\Domain\Services\StressService;
 
+use PhpLab\Sandbox\Generator\Commands\DomainCommand;
+use PhpLab\Sandbox\Generator\Domain\Services\DomainService;
+
 require __DIR__ . '/../../../autoload.php';
 
 if (!class_exists(Dotenv::class)) {
@@ -27,6 +30,11 @@ $application = new Application;
 // создаем и объявляем команды
 $stressService = new StressService;
 $command = new StressCommand(StressCommand::getDefaultName(), $stressService);
+$application->add($command);
+
+// создаем и объявляем команды
+$domainService = new DomainService;
+$command = new DomainCommand(DomainCommand::getDefaultName(), $domainService);
 $application->add($command);
 
 $fileName = __DIR__ . '/../../../../vendor/php7extension/core/src/package/domain/data/package_group.php';
