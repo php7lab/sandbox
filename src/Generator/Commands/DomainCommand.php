@@ -8,6 +8,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 class DomainCommand extends Command
@@ -25,9 +26,16 @@ class DomainCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $buildDto = new BuildDto;
-
         $buildDto->typeArray = ['service', 'repository', 'entity'];
+        $this->input($input, $output, $buildDto);
 
+        dd($buildDto);
+
+        $this->domainService->generate($buildDto);
+    }
+
+    private function input(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
+    {
         $this->inputDomainNamespace($input, $output, $buildDto);
         $this->inputType($input, $output, $buildDto);
         $this->inputName($input, $output, $buildDto);
@@ -38,17 +46,45 @@ class DomainCommand extends Command
             $this->inputEntityAttributes($input, $output, $buildDto);
         }
 
-        if(in_array($typesFlip['repository'], $buildDto->types)) {
-            $this->inputDriver($input, $output, $buildDto);
+        if(in_array($typesFlip['service'], $buildDto->types)) {
+            $this->inputIsCrudService($input, $output, $buildDto);
         }
 
-        $this->domainService->generate($buildDto);
+        if(in_array($typesFlip['repository'], $buildDto->types)) {
+            $this->inputIsCrudRepository($input, $output, $buildDto);
+            $this->inputDriver($input, $output, $buildDto);
+        }
+    }
+
+    private function inputIsCrudService(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
+    {
+        $helper = $this->getHelper('question');
+        $question = new ConfirmationQuestion(
+            'Is CRUD service? (y|n): ',
+            false
+        );
+
+        //$buildDto->idCrudService = $helper->ask($input, $output, $question);
+        $buildDto->idCrudService = false;
+    }
+
+    private function inputIsCrudRepository(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
+    {
+        $helper = $this->getHelper('question');
+        $question = new ConfirmationQuestion(
+            'Is CRUD repository? (y|n): ',
+            false
+        );
+
+        //$buildDto->idCrudRepository = $helper->ask($input, $output, $question);
+        $buildDto->idCrudRepository = false;
     }
 
     private function inputDomainNamespace(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
-        $domainQuestion = new Question('Enter domain namespace: ');
-        //$buildDto->domainNamespace = $helper->ask($input, $output, $domainQuestion);
+        $helper = $this->getHelper('question');
+        $question = new Question('Enter domain namespace: ');
+        //$buildDto->domainNamespace = $helper->ask($input, $output, $question);
         $buildDto->domainNamespace = 'PhpLab\Sandbox\Queue111\Domain';
     }
 
@@ -95,8 +131,7 @@ class DomainCommand extends Command
         $typeArray['a'] = 'all';
         $question = new ChoiceQuestion(
             'Select types',
-            $typeArray,
-            0
+            $typeArray
         );
         $question->setMultiselect(true);
         $buildDto->types = $helper->ask($input, $output, $question);
