@@ -15,8 +15,4 @@ class EntityScenario extends BaseScenario
         return 'Entities';
     }
 
-    public function interfaceDir()
-    {
-        return null;
-    }
 }

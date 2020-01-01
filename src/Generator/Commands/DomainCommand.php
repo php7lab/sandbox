@@ -24,28 +24,30 @@ class DomainCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $helper = $this->getHelper('question');
         $buildDto = new BuildDto;
 
         $buildDto->typeArray = ['service', 'repository', 'entity'];
 
-        $this->inputDomainNamespace($buildDto);
-        $this->inputType($buildDto);
-        $this->inputName($buildDto);
-        $this->inputDriver($buildDto);
+        $this->inputDomainNamespace($input, $output, $buildDto);
+        $this->inputType($input, $output, $buildDto);
+        $this->inputName($input, $output, $buildDto);
+        $this->inputDriver($input, $output, $buildDto);
+
+        //dd($buildDto);
 
         $this->domainService->generate($buildDto);
     }
 
-    private function inputDomainNamespace(BuildDto $buildDto)
+    private function inputDomainNamespace(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
         $domainQuestion = new Question('Enter domain namespace: ');
         //$buildDto->domainNamespace = $helper->ask($input, $output, $domainQuestion);
         $buildDto->domainNamespace = 'PhpLab\Sandbox\Queue111\Domain';
     }
 
-    private function inputDriver(BuildDto $buildDto)
+    private function inputDriver(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
+        $helper = $this->getHelper('question');
         $question = new ChoiceQuestion(
             'Please select your favorite color (defaults to red)',
             ['eloquent', 'file'],
@@ -57,15 +59,17 @@ class DomainCommand extends Command
         $buildDto->driver = 'eloquentttttt';
     }
 
-    private function inputName(BuildDto $buildDto)
+    private function inputName(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
+        $helper = $this->getHelper('question');
         $question = new Question('Enter unit name: ');
         //$buildDto->name = $helper->ask($input, $output, $question);
         $buildDto->name = 'qwerty';
     }
 
-    private function inputType(BuildDto $buildDto)
+    private function inputType(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
+        $helper = $this->getHelper('question');
         $question = new ChoiceQuestion(
             'Please select your favorite color (defaults to red)',
             $buildDto->typeArray,
@@ -73,7 +77,7 @@ class DomainCommand extends Command
         );
         $question->setMultiselect(true);
         //$buildDto->types = $helper->ask($input, $output, $question);
-        $buildDto->types = [0, 1, 2];
+        $buildDto->types = $buildDto->typeArray;
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios;
 
+use php7extension\core\code\entities\ClassVariableEntity;
 use php7extension\yii\helpers\Inflector;
 use php7extension\core\code\entities\ClassEntity;
 use php7extension\core\code\entities\ClassUseEntity;
@@ -67,6 +68,11 @@ abstract class BaseScenario
             $uses[] = $useEntity;
             $classEntity->implements = $this->getInterfaceName();
         }
+        $classEntity->variables = [
+            new ClassVariableEntity([
+                'name' => 'vvvvvvvvvvvv',
+            ])
+        ];
         ClassHelper::generate($classEntity, $uses);
         return $classEntity;
     }
