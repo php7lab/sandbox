@@ -2,6 +2,14 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios;
 
+use php7extension\core\code\entities\ClassVariableEntity;
+use php7extension\yii\helpers\Inflector;
+use php7extension\core\code\entities\ClassEntity;
+use php7extension\core\code\entities\ClassUseEntity;
+use php7extension\core\code\entities\InterfaceEntity;
+use php7extension\core\code\helpers\ClassHelper;
+use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
+
 class RepositoryScenario extends BaseScenario
 {
 
@@ -14,10 +22,39 @@ class RepositoryScenario extends BaseScenario
 
     public function classDir()
     {
-        return 'Repositories\\' . $this->driver;
+        return 'Repositories';
     }
 
     protected function isMakeInterface() : bool {
         return true;
+    }
+
+    protected function createClass() {
+        foreach ($this->buildDto->driver as $driver) {
+            $this->createOneClass($driver);
+        }
+    }
+
+    protected function createOneClass(string $driver) : ClassEntity {
+        $className = $this->getClassName();
+        $uses = [];
+        $classEntity = new ClassEntity;
+        $classEntity->name = $this->domainNamespace . '\\' . $this->classDir() . '\\' . $driver . '\\' . $className;
+        if($this->isMakeInterface()) {
+            $useEntity = new ClassUseEntity;
+            $useEntity->name = $this->getInterfaceFullName();
+            $uses[] = $useEntity;
+            $classEntity->implements = $this->getInterfaceName();
+        }
+
+        if($this->attributes) {
+            foreach ($this->attributes as $attribute) {
+                $classEntity->addVariable(new ClassVariableEntity([
+                    'name' => $attribute,
+                ]));
+            }
+        }
+        ClassHelper::generate($classEntity, $uses);
+        return $classEntity;
     }
 }

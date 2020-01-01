@@ -20,6 +20,7 @@ class DomainService implements DomainServiceInterface
             ClassHelper::configure($scenarioInstance, [
                 'name' => $buildDto->name,
                 'driver' => $buildDto->driver,
+                'buildDto' => $buildDto,
                 'domainNamespace' => $buildDto->domainNamespace,
                 'attributes' => $buildDto->attributes,
             ]);

@@ -8,6 +8,7 @@ use php7extension\core\code\entities\ClassEntity;
 use php7extension\core\code\entities\ClassUseEntity;
 use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\helpers\ClassHelper;
+use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 
 abstract class BaseScenario
 {
@@ -15,6 +16,9 @@ abstract class BaseScenario
     public $domainNamespace;
     public $name;
     public $attributes;
+
+    /** @var BuildDto */
+    public $buildDto;
 
     abstract public function typeName();
     abstract public function classDir();
@@ -57,7 +61,7 @@ abstract class BaseScenario
         return $interfaceEntity;
     }
 
-    protected function createClass() : ClassEntity {
+    protected function createClass() {
         $className = $this->getClassName();
         $uses = [];
         $classEntity = new ClassEntity;
