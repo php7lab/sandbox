@@ -14,10 +14,10 @@ abstract class BaseScenario
 
     public $domainNamespace;
     public $name;
+    public $attributes;
 
     abstract public function typeName();
     abstract public function classDir();
-    //abstract public function interfaceDir();
 
     public function run()
     {
@@ -68,11 +68,14 @@ abstract class BaseScenario
             $uses[] = $useEntity;
             $classEntity->implements = $this->getInterfaceName();
         }
-        $classEntity->variables = [
-            new ClassVariableEntity([
-                'name' => 'vvvvvvvvvvvv',
-            ])
-        ];
+
+        if($this->attributes) {
+            foreach ($this->attributes as $attribute) {
+                $classEntity->addVariable(new ClassVariableEntity([
+                    'name' => $attribute,
+                ]));
+            }
+        }
         ClassHelper::generate($classEntity, $uses);
         return $classEntity;
     }

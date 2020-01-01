@@ -31,9 +31,16 @@ class DomainCommand extends Command
         $this->inputDomainNamespace($input, $output, $buildDto);
         $this->inputType($input, $output, $buildDto);
         $this->inputName($input, $output, $buildDto);
-        $this->inputDriver($input, $output, $buildDto);
 
-        //dd($buildDto);
+        $typesFlip = array_flip($buildDto->typeArray);
+
+        if(in_array($typesFlip['entity'], $buildDto->types)) {
+            $this->inputEntityAttributes($input, $output, $buildDto);
+        }
+
+        if(in_array($typesFlip['repository'], $buildDto->types)) {
+            $this->inputDriver($input, $output, $buildDto);
+        }
 
         $this->domainService->generate($buildDto);
     }
@@ -67,17 +74,39 @@ class DomainCommand extends Command
         $buildDto->name = 'qwerty';
     }
 
+    private function inputEntityAttributes(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
+    {
+        $helper = $this->getHelper('question');
+        $question = new Question('Enter entity attribute: ');
+        do {
+            $attribute = $helper->ask($input, $output, $question);
+            $attribute = trim($attribute);
+            if($attribute) {
+                $buildDto->attributes[] = $attribute;
+            }
+        } while( ! empty($attribute));
+        //$buildDto->name = 'qwerty';
+    }
+
     private function inputType(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
         $helper = $this->getHelper('question');
+        $typeArray = $buildDto->typeArray;
+        $typeArray['a'] = 'all';
         $question = new ChoiceQuestion(
-            'Please select your favorite color (defaults to red)',
-            $buildDto->typeArray,
+            'Select types',
+            $typeArray,
             0
         );
         $question->setMultiselect(true);
-        //$buildDto->types = $helper->ask($input, $output, $question);
-        $buildDto->types = $buildDto->typeArray;
+        $buildDto->types = $helper->ask($input, $output, $question);
+        //$buildDto->types = ['a'];
+        if(in_array('a', $buildDto->types)) {
+            $buildDto->types = array_keys($buildDto->typeArray);
+        }
+        $buildDto->types = array_map(function ($item) {
+            return intval($item);
+        }, $buildDto->types);
     }
 
 }

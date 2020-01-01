@@ -14,12 +14,14 @@ class DomainService implements DomainServiceInterface
     public function generate(BuildDto $buildDto)
     {
         foreach ($buildDto->types as $typeName) {
-            $type = Inflector::classify($typeName);
+            $type = $buildDto->typeArray[$typeName];
+            $type = Inflector::classify($type);
             $scenarioInstance = $this->createScenarioByTypeName($type);
             ClassHelper::configure($scenarioInstance, [
                 'name' => $buildDto->name,
                 'driver' => $buildDto->driver,
                 'domainNamespace' => $buildDto->domainNamespace,
+                'attributes' => $buildDto->attributes,
             ]);
             $scenarioInstance->run();
         }
