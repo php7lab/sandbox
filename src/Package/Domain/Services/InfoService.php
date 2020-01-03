@@ -29,7 +29,7 @@ class InfoService
 
     public function allChanged($query = null) {
         $query = Query::forge($query);
-        $query->with('has_changes');
+        //$query->with('has_changes');
         return $this->infoRepository->allChanged($query);
     }
 

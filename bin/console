@@ -4,8 +4,10 @@
 use PhpLab\Sandbox\Package\Commands\InfoChangedCommand;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\GroupRepository;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\InfoRepository;
+use PhpLab\Sandbox\Package\Domain\Repositories\File\PackageRepository;
 use PhpLab\Sandbox\Package\Domain\Services\GroupService;
 use PhpLab\Sandbox\Package\Domain\Services\InfoService;
+use PhpLab\Sandbox\Package\Domain\Services\PackageService;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -37,13 +39,15 @@ $domainService = new DomainService;
 $command = new DomainCommand(DomainCommand::getDefaultName(), $domainService);
 $application->add($command);
 
-$fileName = __DIR__ . '/../../../../vendor/php7extension/core/src/package/domain/data/package_group.php';
+$fileName = __DIR__ . '/../../../../vendor/php7lab/legacy/src/php7extension/core/package/domain/data/package_group.php';
 $groupRepository = new GroupRepository($fileName);
-$groupService = new GroupService($groupRepository);
+$packageRepository = new PackageRepository($groupRepository);
+$groupService = new GroupService($groupRepository, $packageRepository);
 
-$infoRepository = new InfoRepository($groupService);
+$infoRepository = new InfoRepository($groupService, $packageRepository);
 $infoService = new InfoService($infoRepository);
-$command = new InfoChangedCommand(null, $infoService);
+$packageService = new PackageService($packageRepository);
+$command = new InfoChangedCommand(null, $packageService);
 $application->add($command);
 
 $application->run();

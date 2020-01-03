@@ -3,7 +3,9 @@
 namespace PhpLab\Sandbox\Package\Commands;
 
 use PhpLab\Domain\Data\Collection;
+use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\TestEntity;
+use PhpLab\Sandbox\Package\Domain\Interfaces\Services\PackageServiceInterface;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\GroupRepository;
 use PhpLab\Sandbox\Package\Domain\Services\GroupService;
 use PhpLab\Sandbox\Package\Domain\Services\InfoService;
@@ -15,25 +17,25 @@ class InfoChangedCommand extends Command
 {
 
     protected static $defaultName = 'package:info:changed';
-    private $infoService;
+    private $packageService;
 
-    public function __construct(?string $name = null, InfoService $infoService)
+    public function __construct(?string $name = null, PackageServiceInterface $packageService)
     {
         parent::__construct($name);
-        $this->infoService = $infoService;
+        $this->packageService = $packageService;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(['<fg=white># Stress test</>']);
+        $output->writeln(['<fg=white># Package changed</>']);
 
-        /*$fileName = __DIR__ . '/../../../../../../vendor/php7extension/core/src/package/domain/data/package_group.php';
-        $groupRepository = new GroupRepository($fileName);
-        $groupService = new GroupService($groupRepository);
-        dd($groupService->all());*/
-
-        $collection = $this->infoService->allChanged();
-        dd($collection);
+        /** @var PackageEntity[] $collection */
+        $collection = $this->packageService->allChanged();
+        $output->writeln(['']);
+        foreach ($collection as $packageEntity) {
+            $output->writeln([$packageEntity->getId()]);
+        }
+        $output->writeln(['']);
     }
 
 }

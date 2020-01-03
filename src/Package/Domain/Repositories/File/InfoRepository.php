@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
+use Illuminate\Support\Collection;
 use php7extension\yii\base\InvalidArgumentException;
 use php7extension\yii\web\NotFoundHttpException;
 use php7extension\core\scenario\collections\ScenarioCollection;
@@ -14,9 +15,12 @@ use php7tool\vendor\domain\entities\RepoEntity;
 use php7tool\vendor\domain\entities\RequiredEntity;
 use php7tool\vendor\domain\filters\IsIgnoreFilter;
 use php7tool\vendor\domain\filters\IsPackageFilter;
+use php7tool\vendor\domain\helpers\GitShell;
 use php7tool\vendor\domain\helpers\RepositoryHelper;
 use php7tool\vendor\domain\helpers\UseHelper;
 use PhpLab\Domain\Helpers\EntityHelper;
+use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
+use PhpLab\Sandbox\Package\Domain\Interfaces\Repositories\PackageRepositoryInterface;
 use PhpLab\Sandbox\Package\Domain\Services\GroupService;
 
 /**
@@ -30,10 +34,12 @@ class InfoRepository extends BaseRepository implements ReadInterface {
 	
 	protected $withList = ['group', 'branch', 'has_changes', 'has_readme', 'has_changelog', 'has_guide', 'has_license', 'has_test', 'version', 'need_release', 'head_commit', 'remote_url'];
 	private $groupService;
+	private $packageRepository;
 
-	public function __construct(GroupService $groupService)
+	public function __construct(GroupService $groupService, PackageRepositoryInterface $packageRepository)
     {
         $this->groupService = $groupService;
+        $this->packageRepository = $packageRepository;
     }
 
     public function isExistsById($id) {
@@ -82,12 +88,28 @@ class InfoRepository extends BaseRepository implements ReadInterface {
 		$queryClone = $this->removeRelationWhere($query);
 		$groupCollection = $this->groupService->all();
 
+		/** @var PackageEntity[] $packageCollection */
+        $packageCollection = $this->packageRepository->all();
+
+        $vendorDir = realpath(__DIR__ . '/../../../../../../../');
+
+        foreach ($packageCollection as $packageEntity) {
+            $dir = $vendorDir . DIRECTORY_SEPARATOR . $packageEntity->getId();
+            $shell = new GitShell($dir);
+            $hasChanges = $shell->hasChanges();
+
+            dd($hasChanges);
+        }
+
+
+
         $ownerNames = EntityHelper::getColumn($groupCollection, 'name');
 
         //$ownerNames = \App::$domain->package->group->allNames();
 		$list = RepositoryHelper::allByOwners($ownerNames);
 		$list = $this->separateCollection($list);
 		$filteredList = ArrayIterator::allFromArray($queryClone, $list);
+        dd($ownerNames);
 		$listWithRelation = [];
 		foreach($filteredList as $item) {
 			$listWithRelation[] = $this->loadRelations($item, $query);
@@ -103,10 +125,25 @@ class InfoRepository extends BaseRepository implements ReadInterface {
 		return count($collection);
 	}
 	
-	public function allChanged($query = null) {
-		$query = Query::forge($query);
-		$query->where('has_changes', true);
-		return $this->all($query);
+	public function allChanged(Query $query = null) {
+        $query = Query::forge($query);
+        $query->with(['group']);
+        $queryClone = $this->removeRelationWhere($query);
+        $groupCollection = $this->groupService->all();
+
+        /** @var PackageEntity[] $packageCollection */
+        $packageCollection = $this->packageRepository->all();
+        $vendorDir = realpath(__DIR__ . '/../../../../../../../');
+        $changedCollection = new Collection;
+        foreach ($packageCollection as $packageEntity) {
+            $dir = $vendorDir . DIRECTORY_SEPARATOR . $packageEntity->getId();
+            $shell = new GitShell($dir);
+            $hasChanges = $shell->hasChanges();
+            if($hasChanges) {
+                $changedCollection->add($packageEntity);
+            }
+        }
+	    return $changedCollection;
 	}
 	
 	public function allWithTagAndCommit($query = null) {
@@ -165,7 +202,7 @@ class InfoRepository extends BaseRepository implements ReadInterface {
 			],
 			[
 				'class' => IsIgnoreFilter::class,
-				'ignore' => $this->domain->info->ignore,
+				//'ignore' => $this->domain->info->ignore,
 			],
 		];
 		$filterCollection = new ScenarioCollection($filters);
