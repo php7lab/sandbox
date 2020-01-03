@@ -10,7 +10,7 @@ class IsCrudRepositoryInputScenario extends BaseInputScenario
 
     protected function paramName()
     {
-        return 'idCrudRepository';
+        return 'isCrudRepository';
     }
 
     protected function question(): Question

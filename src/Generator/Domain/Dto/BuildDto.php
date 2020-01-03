@@ -11,6 +11,6 @@ class BuildDto
     public $attributes = [];
     public $driver;
     public $typeArray;
-    public $idCrudService;
-    public $idCrudRepository;
+    public $isCrudService;
+    public $isCrudRepository;
 }

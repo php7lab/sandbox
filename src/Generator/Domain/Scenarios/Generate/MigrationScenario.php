@@ -59,7 +59,7 @@ if ( ! class_exists({$className}::class)) {
     class {$className} extends BaseCreateTableMigration
     {
 
-        protected \$tableName = '{$this->name}';
+        protected \$tableName = '';
         protected \$tableComment = '';
 
         public function tableSchema()

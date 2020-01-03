@@ -42,8 +42,8 @@ class DomainCommand extends Command
         $buildDto->types = array_keys($buildDto->typeArray);
         $buildDto->name = 'qwerty';
         $buildDto->attributes = ['id', 'title', 'author', 'is_archive', 'created_at'];
-        $buildDto->idCrudService = true;
-        $buildDto->idCrudRepository = true;
+        $buildDto->isCrudService = true;
+        $buildDto->isCrudRepository = true;
         $buildDto->driver = [
             'eloquent',
             'file',

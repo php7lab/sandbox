@@ -10,7 +10,7 @@ class IsCrudServiceInputScenario extends BaseInputScenario
 
     protected function paramName()
     {
-        return 'idCrudService';
+        return 'isCrudService';
     }
 
     protected function question(): Question
