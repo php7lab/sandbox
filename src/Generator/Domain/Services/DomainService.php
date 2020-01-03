@@ -6,7 +6,7 @@ use php7extension\core\helpers\ClassHelper;
 use php7extension\yii\helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use PhpLab\Sandbox\Generator\Domain\Interfaces\DomainServiceInterface;
-use PhpLab\Sandbox\Generator\Domain\Scenarios\BaseScenario;
+use PhpLab\Sandbox\Generator\Domain\Scenarios\Generate\BaseScenario;
 
 class DomainService implements DomainServiceInterface
 {
@@ -22,7 +22,7 @@ class DomainService implements DomainServiceInterface
                 'driver' => $buildDto->driver,
                 'buildDto' => $buildDto,
                 'domainNamespace' => $buildDto->domainNamespace,
-                'attributes' => $buildDto->attributes,
+                //'attributes' => $buildDto->attributes,
             ]);
             $scenarioInstance->run();
         }
@@ -30,7 +30,7 @@ class DomainService implements DomainServiceInterface
 
     private function createScenarioByTypeName($type): BaseScenario
     {
-        $scenarioClass = 'PhpLab\\Sandbox\\Generator\\Domain\Scenarios\\' . $type . 'Scenario';
+        $scenarioClass = 'PhpLab\\Sandbox\\Generator\\Domain\Scenarios\\Generate\\' . $type . 'Scenario';
         /** @var BaseScenario $scenarioInstance */
         $scenarioInstance = new $scenarioClass;
         return $scenarioInstance;

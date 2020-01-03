@@ -31,7 +31,7 @@ class DomainCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $buildDto = new BuildDto;
-        $buildDto->typeArray = ['service', 'repository', 'entity'];
+        $buildDto->typeArray = ['service', 'repository', 'entity', 'migration'];
         $this->input($input, $output, $buildDto);
 
         //dd($buildDto);
@@ -41,6 +41,19 @@ class DomainCommand extends Command
 
     private function input(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
+        $buildDto->domainNamespace = 'App\\Domain';
+        $buildDto->types = array_keys($buildDto->typeArray);
+        $buildDto->name = 'qwerty';
+        $buildDto->attributes = ['id'];
+        $buildDto->idCrudService = true;
+        $buildDto->idCrudRepository = true;
+        $buildDto->driver = [
+            'eloquent',
+            'file',
+        ];
+        return;
+
+
         $this->runInputScenario(DomainNamespaceInputScenario::class, $input, $output, $buildDto);
         $this->runInputScenario(TypeInputScenario::class, $input, $output, $buildDto);
         $this->runInputScenario(NameInputScenario::class, $input, $output, $buildDto);
@@ -59,10 +72,15 @@ class DomainCommand extends Command
             $this->runInputScenario(DriverInputScenario::class, $input, $output, $buildDto);
             $this->runInputScenario(IsCrudRepositoryInputScenario::class, $input, $output, $buildDto);
         }
+
+        /*if (in_array($typesFlip['migration'], $buildDto->types)) {
+
+        }*/
     }
 
     private function runInputScenario(string $className, InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
+        $output->writeln('');
         /** @var BaseInputScenario $inputScenario */
         $inputScenario = new $className;
         $inputScenario->helper = $this->getHelper('question');

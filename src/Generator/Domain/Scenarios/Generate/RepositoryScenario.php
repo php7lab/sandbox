@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Sandbox\Generator\Domain\Scenarios;
+namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
 use php7extension\core\code\entities\ClassVariableEntity;
 use php7extension\yii\helpers\Inflector;
@@ -47,13 +47,14 @@ class RepositoryScenario extends BaseScenario
             $classEntity->implements = $this->getInterfaceName();
         }
 
-        if($this->attributes) {
-            foreach ($this->attributes as $attribute) {
+        if($this->buildDto->attributes) {
+            foreach ($this->buildDto->attributes as $attribute) {
                 $classEntity->addVariable(new ClassVariableEntity([
                     'name' => $attribute,
                 ]));
             }
         }
+
         ClassHelper::generate($classEntity, $uses);
         return $classEntity;
     }

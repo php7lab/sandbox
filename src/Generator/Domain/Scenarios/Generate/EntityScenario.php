@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Sandbox\Generator\Domain\Scenarios;
+namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
 class EntityScenario extends BaseScenario
 {

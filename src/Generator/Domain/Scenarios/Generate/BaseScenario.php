@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Sandbox\Generator\Domain\Scenarios;
+namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
 use php7extension\core\code\entities\ClassVariableEntity;
 use php7extension\yii\helpers\Inflector;
