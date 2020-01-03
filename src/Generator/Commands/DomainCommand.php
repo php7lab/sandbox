@@ -15,9 +15,6 @@ use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\TypeInputScenario;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
 
 class DomainCommand extends Command
 {
@@ -50,22 +47,22 @@ class DomainCommand extends Command
 
         $typesFlip = array_flip($buildDto->typeArray);
 
-        if(in_array($typesFlip['entity'], $buildDto->types)) {
+        if (in_array($typesFlip['entity'], $buildDto->types)) {
             $this->runInputScenario(EntityAttributesInputScenario::class, $input, $output, $buildDto);
         }
 
-        if(in_array($typesFlip['service'], $buildDto->types)) {
+        if (in_array($typesFlip['service'], $buildDto->types)) {
             $this->runInputScenario(IsCrudServiceInputScenario::class, $input, $output, $buildDto);
         }
 
-        if(in_array($typesFlip['repository'], $buildDto->types)) {
+        if (in_array($typesFlip['repository'], $buildDto->types)) {
             $this->runInputScenario(DriverInputScenario::class, $input, $output, $buildDto);
             $this->runInputScenario(IsCrudRepositoryInputScenario::class, $input, $output, $buildDto);
-
         }
     }
 
-    private function runInputScenario(string $className, InputInterface $input, OutputInterface $output, BuildDto $buildDto) {
+    private function runInputScenario(string $className, InputInterface $input, OutputInterface $output, BuildDto $buildDto)
+    {
         /** @var BaseInputScenario $inputScenario */
         $inputScenario = new $className;
         $inputScenario->helper = $this->getHelper('question');
