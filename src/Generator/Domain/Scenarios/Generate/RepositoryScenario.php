@@ -47,13 +47,25 @@ class RepositoryScenario extends BaseScenario
             $classEntity->implements = $this->getInterfaceName();
         }
 
-        if($this->buildDto->attributes) {
-            foreach ($this->buildDto->attributes as $attribute) {
+        $entityClassName = Inflector::camelize($this->name) . 'Entity';
+        $entityFullClassName = $this->buildDto->domainNamespace . '\\Entities\\' . $entityClassName;
+        $uses[] = new ClassUseEntity(['name' => $entityFullClassName]);
+        //dd($entityFullClassName);
+
+
+        $code = "
+    protected \$tableName = '';
+    protected \$entityClass = {$entityClassName}::class;
+";
+        $classEntity->code = $code;
+
+        /*if($this->attributes) {
+            foreach ($this->attributes as $attribute) {
                 $classEntity->addVariable(new ClassVariableEntity([
                     'name' => $attribute,
                 ]));
             }
-        }
+        }*/
 
         ClassHelper::generate($classEntity, $uses);
         return $classEntity;

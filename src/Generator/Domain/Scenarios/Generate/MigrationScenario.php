@@ -2,23 +2,9 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
-use php7extension\core\code\entities\ClassVariableEntity;
-use php7extension\core\code\helpers\CodeHelper;
 use php7extension\yii\helpers\FileHelper;
 use php7extension\yii\helpers\Inflector;
-use php7extension\core\code\entities\ClassEntity;
-use php7extension\core\code\entities\ClassUseEntity;
-use php7extension\core\code\entities\InterfaceEntity;
-use php7extension\core\code\helpers\ClassHelper;
-use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use PhpLab\Sandbox\Package\Domain\Helpers\PackageHelper;
-
-use php7rails\domain\BaseEntity;
-use php7rails\domain\helpers\Helper;
-use php7extension\core\code\entities\CodeEntity;
-use php7extension\core\code\render\ClassRender;
-use php7extension\core\code\render\InterfaceRender;
-use php7extension\yii\helpers\ArrayHelper;
 
 class MigrationScenario extends BaseScenario
 {
@@ -40,36 +26,26 @@ class MigrationScenario extends BaseScenario
         return $className;
     }
 
-    protected function createClass() {
+    protected function createClass()
+    {
 
         $fileName = $this->getFileName();
         $code = $this->generateCode();
         FileHelper::save($fileName, $code);
     }
 
-    private function getFileName() {
+    private function getFileName()
+    {
         $className = $this->getClassName();
         $dir = PackageHelper::pathByNamespace($this->buildDto->domainNamespace . '/' . $this->classDir());
         $fileName = $dir . '/' . $className . '.php';
         return $fileName;
     }
 
-    private function generateCode() : string {
+    private function generateCode(): string
+    {
         $className = $this->getClassName();
-        $fieldCode = '';
-        foreach ($this->buildDto->attributes as $attribute) {
-            if($attribute == 'id') {
-                $fieldCode .= "\t\t\t\t\$table->integer('id')->autoIncrement();" . PHP_EOL;
-            } elseif(strpos($attribute, '_at') == strlen($attribute) - 3) {
-                $fieldCode .= "\t\t\t\t\$table->dateTime('{$attribute}')->comment('');" . PHP_EOL;
-            } elseif(strpos($attribute, 'is_') === 0) {
-                $fieldCode .= "\t\t\t\t\$table->boolean('{$attribute}')->comment('');" . PHP_EOL;
-            } else {
-                $fieldCode .= "\t\t\t\t\$table->string('{$attribute}')->comment('');" . PHP_EOL;
-            }
-        }
-        $fieldCode = rtrim($fieldCode);
-
+        $fieldCode = $this->generateAttributes();
         $code =
             "<?php
 
@@ -84,7 +60,7 @@ if ( ! class_exists({$className}::class)) {
     {
 
         protected \$tableName = '{$this->name}';
-        protected \$tableComment = '{$this->name}';
+        protected \$tableComment = '';
 
         public function tableSchema()
         {
@@ -97,5 +73,25 @@ if ( ! class_exists({$className}::class)) {
 
 }";
         return $code;
+    }
+
+    private function generateAttributes() {
+        $fieldCode = '';
+        $fields = [];
+        $spaces = str_repeat(" ", 4 * 4);
+        foreach ($this->buildDto->attributes as $attribute) {
+            $attribute = Inflector::underscore($attribute);
+            if ($attribute == 'id') {
+                $fields[] = "$spaces\$table->integer('id')->autoIncrement();";
+            } elseif (strpos($attribute, '_at') == strlen($attribute) - 3) {
+                $fields[] = "$spaces\$table->dateTime('{$attribute}')->comment('');";
+            } elseif (strpos($attribute, 'is_') === 0) {
+                $fields[] = "$spaces\$table->boolean('{$attribute}')->comment('');";
+            } else {
+                $fields[] = "$spaces\$table->string('{$attribute}')->comment('');";
+            }
+        }
+        $fieldCode = implode(PHP_EOL, $fields);
+        return $fieldCode;
     }
 }

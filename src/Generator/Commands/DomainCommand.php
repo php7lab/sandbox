@@ -33,9 +33,6 @@ class DomainCommand extends Command
         $buildDto = new BuildDto;
         $buildDto->typeArray = ['service', 'repository', 'entity', 'migration'];
         $this->input($input, $output, $buildDto);
-
-        //dd($buildDto);
-
         $this->domainService->generate($buildDto);
     }
 

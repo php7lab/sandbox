@@ -3,6 +3,7 @@
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
 use php7extension\core\code\entities\ClassVariableEntity;
+use php7extension\core\code\enums\AccessEnum;
 use php7extension\yii\helpers\Inflector;
 use php7extension\core\code\entities\ClassEntity;
 use php7extension\core\code\entities\ClassUseEntity;
@@ -15,7 +16,6 @@ abstract class BaseScenario
 
     public $domainNamespace;
     public $name;
-    /** @deprecated */
     public $attributes;
 
     /** @var BuildDto */
@@ -81,9 +81,10 @@ abstract class BaseScenario
 
         if($this->attributes) {
             foreach ($this->attributes as $attribute) {
-                $classEntity->addVariable(new ClassVariableEntity([
-                    'name' => $attribute,
-                ]));
+                $variableEntity = new ClassVariableEntity;
+                $variableEntity->name = Inflector::variablize($attribute);
+                //$variableEntity->access = AccessEnum::PRIVATE;
+                $classEntity->addVariable($variableEntity);
             }
         }
         ClassHelper::generate($classEntity, $uses);
