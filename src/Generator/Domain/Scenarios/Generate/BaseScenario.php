@@ -15,6 +15,7 @@ abstract class BaseScenario
 
     public $domainNamespace;
     public $name;
+    /** @deprecated */
     public $attributes;
 
     /** @var BuildDto */
@@ -22,6 +23,11 @@ abstract class BaseScenario
 
     abstract public function typeName();
     abstract public function classDir();
+
+    public function init()
+    {
+
+    }
 
     public function run()
     {

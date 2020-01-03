@@ -17,13 +17,15 @@ class DomainService implements DomainServiceInterface
             $type = $buildDto->typeArray[$typeName];
             $type = Inflector::classify($type);
             $scenarioInstance = $this->createScenarioByTypeName($type);
-            ClassHelper::configure($scenarioInstance, [
+            $scenarioParams = [
                 'name' => $buildDto->name,
                 'driver' => $buildDto->driver,
                 'buildDto' => $buildDto,
                 'domainNamespace' => $buildDto->domainNamespace,
                 //'attributes' => $buildDto->attributes,
-            ]);
+            ];
+            ClassHelper::configure($scenarioInstance, $scenarioParams);
+            $scenarioInstance->init();
             $scenarioInstance->run();
         }
     }

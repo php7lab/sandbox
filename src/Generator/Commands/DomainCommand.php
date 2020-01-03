@@ -44,7 +44,7 @@ class DomainCommand extends Command
         $buildDto->domainNamespace = 'App\\Domain';
         $buildDto->types = array_keys($buildDto->typeArray);
         $buildDto->name = 'qwerty';
-        $buildDto->attributes = ['id'];
+        $buildDto->attributes = ['id', 'title', 'author', 'is_archive', 'created_at'];
         $buildDto->idCrudService = true;
         $buildDto->idCrudRepository = true;
         $buildDto->driver = [
