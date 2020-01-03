@@ -29,11 +29,15 @@ class InfoChangedCommand extends Command
     {
         $output->writeln(['<fg=white># Package changed</>']);
 
-        /** @var PackageEntity[] $collection */
+        /** @var PackageEntity[] | \Illuminate\Support\Collection $collection */
         $collection = $this->packageService->allChanged();
         $output->writeln(['']);
-        foreach ($collection as $packageEntity) {
-            $output->writeln([$packageEntity->getId()]);
+        if($collection->count()) {
+            foreach ($collection as $packageEntity) {
+                $output->writeln([$packageEntity->getId()]);
+            }
+        } else {
+            $output->writeln(['<fg=green>No changes!</>']);
         }
         $output->writeln(['']);
     }

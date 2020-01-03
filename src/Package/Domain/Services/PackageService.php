@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Services;
 
+use Illuminate\Support\Collection;
 use php7rails\domain\data\Query;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\PackageServiceInterface;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Repositories\PackageRepositoryInterface;
@@ -14,7 +15,7 @@ class PackageService extends BaseCrudService implements PackageServiceInterface 
         $this->repository = $repository;
     }
 
-    public function allChanged(Query $query = null) {
+    public function allChanged(Query $query = null) : Collection {
         $query = Query::forge($query);
         return $this->repository->allChanged($query);
     }
