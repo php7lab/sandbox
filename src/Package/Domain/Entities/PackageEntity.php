@@ -2,21 +2,17 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Entities;
 
-class PackageEntity {
+class PackageEntity
+{
 
-	private $id;
-	private $name;
-	private $group;
-	private $directory;
+    private $id;
+    private $name;
+    private $group;
+    private $directory;
 
     public function getId()
     {
         return $this->group->name . '/' . $this->name;
-    }
-
-    public function setId($id): void
-    {
-        //$this->id = $id;
     }
 
     public function getName()

@@ -8,10 +8,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class InfoChangedCommand extends Command
+class GitPullCommand extends Command
 {
 
-    protected static $defaultName = 'package:info:changed';
+    protected static $defaultName = 'package:git:pull';
     private $packageService;
 
     public function __construct(?string $name = null, PackageServiceInterface $packageService)
@@ -22,16 +22,17 @@ class InfoChangedCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(['<fg=white># Packages with changes</>']);
+        $output->writeln(['<fg=white># Packages git pull</>']);
         /** @var PackageEntity[] | \Illuminate\Support\Collection $collection */
-        $collection = $this->packageService->allChanged();
+        $collection = $this->packageService->all();
         $output->writeln(['']);
         if ($collection->count()) {
             foreach ($collection as $packageEntity) {
                 $output->writeln([$packageEntity->getId()]);
+                $this->packageService->pullPackage($packageEntity);
             }
         } else {
-            $output->writeln(['<fg=green>No changes!</>']);
+            $output->writeln(['<fg=red>No packages!</>']);
         }
         $output->writeln(['']);
     }

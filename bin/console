@@ -2,6 +2,7 @@
 <?php
 
 use PhpLab\Sandbox\Package\Commands\InfoChangedCommand;
+use PhpLab\Sandbox\Package\Commands\GitPullCommand;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\GroupRepository;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\InfoRepository;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\PackageRepository;
@@ -48,6 +49,9 @@ $infoRepository = new InfoRepository($groupService, $packageRepository);
 $infoService = new InfoService($infoRepository);
 $packageService = new PackageService($packageRepository);
 $command = new InfoChangedCommand(null, $packageService);
+$application->add($command);
+
+$command = new GitPullCommand(null, $packageService);
 $application->add($command);
 
 $application->run();

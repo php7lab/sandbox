@@ -25,7 +25,8 @@ class PackageRepository extends BaseRepository implements PackageRepositoryInter
         $this->groupRepostory = $groupRepostory;
     }
 
-    public function allChanged(Query $query = null) {
+    public function allChanged(Query $query = null)
+    {
         /** @var PackageEntity[] $packageCollection */
         $packageCollection = $this->all();
         $vendorDir = realpath(self::VENDOR_DIR);
@@ -34,7 +35,7 @@ class PackageRepository extends BaseRepository implements PackageRepositoryInter
             $dir = $vendorDir . DIRECTORY_SEPARATOR . $packageEntity->getId();
             $shell = new GitShell($dir);
             $hasChanges = $shell->hasChanges();
-            if($hasChanges) {
+            if ($hasChanges) {
                 $changedCollection->add($packageEntity);
             }
         }
