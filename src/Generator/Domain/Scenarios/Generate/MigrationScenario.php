@@ -4,7 +4,9 @@ namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
 use php7extension\yii\helpers\FileHelper;
 use php7extension\yii\helpers\Inflector;
+use PhpLab\Sandbox\Generator\Domain\Helpers\TemplateCodeHelper;
 use PhpLab\Sandbox\Package\Domain\Helpers\PackageHelper;
+use function Symfony\Component\Debug\Tests\testHeader;
 
 class MigrationScenario extends BaseScenario
 {
@@ -28,9 +30,8 @@ class MigrationScenario extends BaseScenario
 
     protected function createClass()
     {
-
         $fileName = $this->getFileName();
-        $code = $this->generateCode();
+        $code = TemplateCodeHelper::generateMigrationClassCode($this->getClassName(), $this->buildDto->attributes);
         FileHelper::save($fileName, $code);
     }
 
@@ -42,56 +43,4 @@ class MigrationScenario extends BaseScenario
         return $fileName;
     }
 
-    private function generateCode(): string
-    {
-        $className = $this->getClassName();
-        $fieldCode = $this->generateAttributes();
-        $code =
-            "<?php
-
-namespace Migrations;
-
-use Illuminate\Database\Schema\Blueprint;
-use PhpLab\Eloquent\Migration\Base\BaseCreateTableMigration;
-
-if ( ! class_exists({$className}::class)) {
-
-    class {$className} extends BaseCreateTableMigration
-    {
-
-        protected \$tableName = '';
-        protected \$tableComment = '';
-
-        public function tableSchema()
-        {
-            return function (Blueprint \$table) {
-{$fieldCode}
-            };
-        }
-
-    }
-
-}";
-        return $code;
-    }
-
-    private function generateAttributes() {
-        $fieldCode = '';
-        $fields = [];
-        $spaces = str_repeat(" ", 4 * 4);
-        foreach ($this->buildDto->attributes as $attribute) {
-            $attribute = Inflector::underscore($attribute);
-            if ($attribute == 'id') {
-                $fields[] = "$spaces\$table->integer('id')->autoIncrement();";
-            } elseif (strpos($attribute, '_at') == strlen($attribute) - 3) {
-                $fields[] = "$spaces\$table->dateTime('{$attribute}')->comment('');";
-            } elseif (strpos($attribute, 'is_') === 0) {
-                $fields[] = "$spaces\$table->boolean('{$attribute}')->comment('');";
-            } else {
-                $fields[] = "$spaces\$table->string('{$attribute}')->comment('');";
-            }
-        }
-        $fieldCode = implode(PHP_EOL, $fields);
-        return $fieldCode;
-    }
 }
