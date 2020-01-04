@@ -57,11 +57,11 @@ class DomainCommand extends Command
         $this->runInputScenario(DomainNamespaceInputScenario::class, $input, $output, $buildDto);
 
         $domainClass = $buildDto->domainNamespace . '\\Domain';
-        if(class_exists($domainClass)) {
+        if (class_exists($domainClass)) {
             $domainInstance = new $domainClass;
             $buildDto->domainName = $domainInstance->getName();
         }
-        if(empty($buildDto->domainName)) {
+        if (empty($buildDto->domainName)) {
             $this->runInputScenario(DomainNameInputScenario::class, $input, $output, $buildDto);
         }
 
