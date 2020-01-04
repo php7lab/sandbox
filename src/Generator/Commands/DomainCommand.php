@@ -41,6 +41,7 @@ class DomainCommand extends Command
     private function input(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
         /*$buildDto->domainNamespace = 'App\\Domain';
+        $buildDto->domainName = 'app';
         $buildDto->types = array_keys($buildDto->typeArray);
         $buildDto->name = 'qwerty';
         $buildDto->attributes = ['id', 'title', 'author', 'is_archive', 'created_at'];

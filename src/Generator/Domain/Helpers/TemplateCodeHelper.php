@@ -7,7 +7,7 @@ use php7extension\yii\helpers\Inflector;
 class TemplateCodeHelper
 {
 
-    public static function generateMigrationClassCode(string $className, array $attributes): string
+    public static function generateMigrationClassCode(string $className, array $attributes, string $tableName = ''): string
     {
         $fieldCode = self::generateAttributes($attributes);
         $code =
@@ -23,7 +23,7 @@ if ( ! class_exists({$className}::class)) {
     class {$className} extends BaseCreateTableMigration
     {
 
-        protected \$tableName = '';
+        protected \$tableName = '{$tableName}';
         protected \$tableComment = '';
 
         public function tableSchema()

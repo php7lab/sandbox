@@ -70,7 +70,7 @@ class RepositoryScenario extends BaseScenario
         $classEntity->extends = basename($parentClass);
 
         $classEntity->code = "
-    protected \$tableName = '';
+    protected \$tableName = '{$this->buildDto->domainName}_{$this->buildDto->name}';
     protected \$entityClass = {$entityClassName}::class;
 ";
 

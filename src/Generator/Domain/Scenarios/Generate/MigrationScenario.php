@@ -31,7 +31,8 @@ class MigrationScenario extends BaseScenario
     protected function createClass()
     {
         $fileName = $this->getFileName();
-        $code = TemplateCodeHelper::generateMigrationClassCode($this->getClassName(), $this->buildDto->attributes);
+        $tableName = $this->buildDto->domainName . '_' . $this->buildDto->name;
+        $code = TemplateCodeHelper::generateMigrationClassCode($this->getClassName(), $this->buildDto->attributes, $tableName);
         FileHelper::save($fileName, $code);
     }
 
