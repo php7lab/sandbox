@@ -17,8 +17,18 @@ class GitChangedCommand extends BaseCommand
         $output->writeln('<fg=white># Packages with changes</>');
         $collection = $this->packageService->all();
         $output->writeln('');
+        if ($collection->count() == 0) {
+            $output->writeln('<fg=magenta>Not found packages!</>');
+            $output->writeln('');
+            return;
+        }
         $totalCollection = $this->displayProgress($collection, $input, $output);
         $output->writeln('');
+        if ($totalCollection->count() == 0) {
+            $output->writeln('<fg=magenta>No changes!</>');
+            $output->writeln('');
+            return;
+        }
         $this->displayTotal($totalCollection, $input, $output);
         $output->writeln('');
     }
@@ -28,20 +38,16 @@ class GitChangedCommand extends BaseCommand
         /** @var PackageEntity[] | Collection $collection */
         /** @var PackageEntity[] | Collection $totalCollection */
         $totalCollection = new Collection;
-        if ($collection->count()) {
-            foreach ($collection as $packageEntity) {
-                $packageId = $packageEntity->getId();
-                $output->write(" $packageId ... ");
-                $isHasChanges = $this->gitService->isHasChanges($packageEntity);
-                if ($isHasChanges) {
-                    $output->writeln("<fg=yellow>Has changes</>");
-                    $totalCollection->add($packageEntity);
-                } else {
-                    $output->writeln("<fg=green>OK</>");
-                }
+        foreach ($collection as $packageEntity) {
+            $packageId = $packageEntity->getId();
+            $output->write(" $packageId ... ");
+            $isHasChanges = $this->gitService->isHasChanges($packageEntity);
+            if ($isHasChanges) {
+                $output->writeln("<fg=yellow>Has changes</>");
+                $totalCollection->add($packageEntity);
+            } else {
+                $output->writeln("<fg=green>OK</>");
             }
-        } else {
-            $output->writeln('<fg=magenta>No changes!</>');
         }
         return $totalCollection;
     }
@@ -49,15 +55,11 @@ class GitChangedCommand extends BaseCommand
     private function displayTotal(Collection $totalCollection, InputInterface $input, OutputInterface $output)
     {
         /** @var PackageEntity[] | Collection $totalCollection */
-        if ($totalCollection->count()) {
-            $output->writeln('<fg=yellow>Has changes:</>');
-            $output->writeln('');
-            foreach ($totalCollection as $packageEntity) {
-                $packageId = $packageEntity->getId();
-                $output->writeln("<fg=yellow> {$packageId}</>");
-            }
-        } else {
-            $output->writeln('<fg=magenta>No changes!</>');
+        $output->writeln('<fg=yellow>Has changes:</>');
+        $output->writeln('');
+        foreach ($totalCollection as $packageEntity) {
+            $packageId = $packageEntity->getId();
+            $output->writeln("<fg=yellow> {$packageId}</>");
         }
     }
 }

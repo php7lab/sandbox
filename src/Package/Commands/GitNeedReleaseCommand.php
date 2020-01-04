@@ -17,8 +17,18 @@ class GitNeedReleaseCommand extends BaseCommand
         $output->writeln('<fg=white># Packages need release</>');
         $collection = $this->packageService->all();
         $output->writeln('');
+        if ($collection->count() == 0) {
+            $output->writeln('<fg=magenta>Not found packages!</>');
+            $output->writeln('');
+            return;
+        }
         $totalCollection = $this->displayProgress($collection, $input, $output);
         $output->writeln('');
+        if ($totalCollection->count() == 0) {
+            $output->writeln('<fg=magenta>All packages released!</>');
+            $output->writeln('');
+            return;
+        }
         $this->displayTotal($totalCollection, $input, $output);
         $output->writeln('');
     }
@@ -28,18 +38,15 @@ class GitNeedReleaseCommand extends BaseCommand
         /** @var PackageEntity[] | Collection $collection */
         /** @var PackageEntity[] | Collection $totalCollection */
         $totalCollection = new Collection;
-
-        if ($collection->count()) {
-            foreach ($collection as $packageEntity) {
-                $packageId = $packageEntity->getId();
-                $output->write(" $packageId ... ");
-                $isNeedRelease = $this->gitService->isNeedRelease($packageEntity);
-                if ($isNeedRelease) {
-                    $output->writeln("<fg=yellow>Need release</>");
-                    $totalCollection->add($packageEntity);
-                } else {
-                    $output->writeln("<fg=green>OK</>");
-                }
+        foreach ($collection as $packageEntity) {
+            $packageId = $packageEntity->getId();
+            $output->write(" $packageId ... ");
+            $isNeedRelease = $this->gitService->isNeedRelease($packageEntity);
+            if ($isNeedRelease) {
+                $output->writeln("<fg=yellow>Need release</>");
+                $totalCollection->add($packageEntity);
+            } else {
+                $output->writeln("<fg=green>OK</>");
             }
         }
         return $totalCollection;
@@ -48,15 +55,11 @@ class GitNeedReleaseCommand extends BaseCommand
     private function displayTotal(Collection $totalCollection, InputInterface $input, OutputInterface $output)
     {
         /** @var PackageEntity[] | Collection $totalCollection */
-        if ($totalCollection->count()) {
-            $output->writeln('<fg=yellow>Need release!</>');
-            $output->writeln('');
-            foreach ($totalCollection as $packageEntity) {
-                $packageId = $packageEntity->getId();
-                $output->writeln("<fg=yellow> {$packageId}</>");
-            }
-        } else {
-            $output->writeln('<fg=magenta>Not found packages!</>');
+        $output->writeln('<fg=yellow>Need release!</>');
+        $output->writeln('');
+        foreach ($totalCollection as $packageEntity) {
+            $packageId = $packageEntity->getId();
+            $output->writeln("<fg=yellow> {$packageId}</>");
         }
     }
 }

@@ -17,6 +17,11 @@ class GitVersionCommand extends BaseCommand
         $output->writeln('<fg=white># Packages version</>');
         $collection = $this->packageService->all();
         $output->writeln('');
+        if ($collection->count() == 0) {
+            $output->writeln('<fg=magenta>Not found packages!</>');
+            $output->writeln('');
+            return;
+        }
         $totalCollection = $this->displayProgress($collection, $input, $output);
         $output->writeln('');
     }
@@ -26,19 +31,16 @@ class GitVersionCommand extends BaseCommand
         /** @var PackageEntity[] | Collection $collection */
         /** @var PackageEntity[] | Collection $totalCollection */
         $totalCollection = new Collection;
-        if ($collection->count()) {
-            foreach ($collection as $packageEntity) {
-                $packageId = $packageEntity->getId();
-                $output->write(" $packageId ... ");
-                $lastVersion = $this->gitService->lastVersion($packageEntity);
-                if ($lastVersion) {
-                    $output->writeln("<fg=green>{$lastVersion}</>");
-                } else {
-                    $output->writeln("<fg=yellow>dev-master</>");
-                }
+        foreach ($collection as $packageEntity) {
+            $packageId = $packageEntity->getId();
+            $output->write(" $packageId ... ");
+            $lastVersion = $this->gitService->lastVersion($packageEntity);
+            if ($lastVersion) {
+                $output->writeln("<fg=green>{$lastVersion}</>");
+            } else {
+                $output->writeln("<fg=yellow>dev-master</>");
+                $totalCollection->add($packageEntity);
             }
-        } else {
-            $output->writeln('<fg=green>No changes!</>');
         }
         return $totalCollection;
     }

@@ -17,8 +17,18 @@ class GitPullCommand extends BaseCommand
         $output->writeln('<fg=white># Packages git pull</>');
         $collection = $this->packageService->all();
         $output->writeln('');
+        if ($collection->count() == 0) {
+            $output->writeln('<fg=magenta>Not found packages!</>');
+            $output->writeln('');
+            return;
+        }
         $totalCollection = $this->displayProgress($collection, $input, $output);
         $output->writeln('');
+        if ($totalCollection->count() == 0) {
+            $output->writeln('<fg=magenta>All packages already up-to-date!</>');
+            $output->writeln('');
+            return;
+        }
         $this->displayTotal($totalCollection, $input, $output);
         $output->writeln('');
     }
@@ -28,20 +38,16 @@ class GitPullCommand extends BaseCommand
         /** @var PackageEntity[] | Collection $collection */
         /** @var PackageEntity[] | Collection $totalCollection */
         $totalCollection = new Collection;
-        if ($collection->count()) {
-            foreach ($collection as $packageEntity) {
-                $packageId = $packageEntity->getId();
-                $output->write(" $packageId ... ");
-                $result = $this->gitService->pullPackage($packageEntity);
-                if ($result == 'Already up to date.') {
-                    $result = "<fg=green>{$result}</>";
-                } else {
-                    $totalCollection->add($packageEntity);
-                }
-                $output->writeln($result);
+        foreach ($collection as $packageEntity) {
+            $packageId = $packageEntity->getId();
+            $output->write(" $packageId ... ");
+            $result = $this->gitService->pullPackage($packageEntity);
+            if ($result == 'Already up to date.') {
+                $result = "<fg=green>{$result}</>";
+            } else {
+                $totalCollection->add($packageEntity);
             }
-        } else {
-            $output->writeln('<fg=magenta>Not found packages!</>');
+            $output->writeln($result);
         }
         return $totalCollection;
     }
@@ -49,15 +55,11 @@ class GitPullCommand extends BaseCommand
     private function displayTotal(Collection $totalCollection, InputInterface $input, OutputInterface $output)
     {
         /** @var PackageEntity[] | Collection $totalCollection */
-        if ($totalCollection->count()) {
-            $output->writeln('<fg=yellow>Updated packages!</>');
-            $output->writeln('');
-            foreach ($totalCollection as $packageEntity) {
-                $packageId = $packageEntity->getId();
-                $output->writeln("<fg=yellow> {$packageId}</>");
-            }
-        } else {
-            $output->writeln('<fg=green>All packages already up-to-date!</>');
+        $output->writeln('<fg=yellow>Updated packages!</>');
+        $output->writeln('');
+        foreach ($totalCollection as $packageEntity) {
+            $packageId = $packageEntity->getId();
+            $output->writeln("<fg=yellow> {$packageId}</>");
         }
     }
 }
