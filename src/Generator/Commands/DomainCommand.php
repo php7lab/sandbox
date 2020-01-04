@@ -30,6 +30,7 @@ class DomainCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln('<fg=white># Domain generator</>');
         $buildDto = new BuildDto;
         $buildDto->typeArray = ['service', 'repository', 'entity', 'migration'];
         $this->input($input, $output, $buildDto);

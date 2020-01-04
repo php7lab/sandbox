@@ -22,18 +22,18 @@ class InfoChangedCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(['<fg=white># Packages with changes</>']);
+        $output->writeln('<fg=white># Packages with changes</>');
         /** @var PackageEntity[] | \Illuminate\Support\Collection $collection */
         $collection = $this->packageService->allChanged();
-        $output->writeln(['']);
+        $output->writeln('');
         if ($collection->count()) {
             foreach ($collection as $packageEntity) {
                 $output->writeln([$packageEntity->getId()]);
             }
         } else {
-            $output->writeln(['<fg=green>No changes!</>']);
+            $output->writeln('<fg=green>No changes!</>');
         }
-        $output->writeln(['']);
+        $output->writeln('');
     }
 
 }

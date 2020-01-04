@@ -27,7 +27,14 @@ class PackageService extends BaseCrudService implements PackageServiceInterface
     public function pullPackage(PackageEntity $packageEntity)
     {
         $git = new GitShell($packageEntity->getDirectory());
-        $git->pull();
+        //$git->pull();
+
+        $result = $git->pullWithInfo();
+        if($result == 'Already up-to-date.') {
+            return false;
+        } else {
+            return $result;
+        }
     }
 
 }

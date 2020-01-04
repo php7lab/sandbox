@@ -22,19 +22,24 @@ class GitPullCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(['<fg=white># Packages git pull</>']);
+        $output->writeln('<fg=white># Packages git pull</>');
         /** @var PackageEntity[] | \Illuminate\Support\Collection $collection */
         $collection = $this->packageService->all();
-        $output->writeln(['']);
+        $output->writeln('');
         if ($collection->count()) {
             foreach ($collection as $packageEntity) {
-                $output->writeln([$packageEntity->getId()]);
-                $this->packageService->pullPackage($packageEntity);
+                $title = $packageEntity->getId() . ' ... ';
+                $output->write($title);
+                $result = $this->packageService->pullPackage($packageEntity);
+                if($result == 'Already up to date.') {
+                    $result = "<fg=green>{$result}</>";
+                }
+                $output->writeln($result);
             }
         } else {
-            $output->writeln(['<fg=red>No packages!</>']);
+            $output->writeln('<fg=red>No packages!</>');
         }
-        $output->writeln(['']);
+        $output->writeln('');
     }
 
 }
