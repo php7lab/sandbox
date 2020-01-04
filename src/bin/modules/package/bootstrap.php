@@ -3,6 +3,7 @@
 use PhpLab\Sandbox\Package\Commands\GitChangedCommand;
 use PhpLab\Sandbox\Package\Commands\GitNeedReleaseCommand;
 use PhpLab\Sandbox\Package\Commands\GitPullCommand;
+use PhpLab\Sandbox\Package\Commands\GitVersionCommand;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\GitRepository;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\GroupRepository;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\PackageRepository;
@@ -29,4 +30,7 @@ $command = new GitChangedCommand(null, $gitService);
 $application->add($command);
 
 $command = new GitNeedReleaseCommand(null, $packageService, $gitService);
+$application->add($command);
+
+$command = new GitVersionCommand(null, $packageService, $gitService);
 $application->add($command);

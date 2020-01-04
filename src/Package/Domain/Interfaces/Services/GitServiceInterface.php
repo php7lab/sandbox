@@ -6,7 +6,9 @@ use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 
 interface GitServiceInterface {
 
+    public function lastVersion(PackageEntity $packageEntity);
     public function pullPackage(PackageEntity $packageEntity);
+    public function isNeedRelease(PackageEntity $packageEntity): bool;
     public function allChanged();
 
 }

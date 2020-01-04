@@ -19,6 +19,15 @@ class GitService extends BaseService implements GitServiceInterface
         $this->repository = $repository;
     }
 
+    public function lastVersion(PackageEntity $packageEntity)
+    {
+        $tags = $this->repository->allVersion($packageEntity);
+        if ($tags) {
+            return $tags[0];
+        }
+        return null;
+    }
+
     public function isNeedRelease(PackageEntity $packageEntity): bool
     {
         $commitCollection = $this->repository->allCommit($packageEntity);
@@ -67,4 +76,5 @@ class GitService extends BaseService implements GitServiceInterface
     {
         return $this->repository->allChanged();
     }
+
 }
