@@ -58,7 +58,7 @@ class ServiceScenario extends BaseScenario
         }
 
         $repositoryInterfaceFullClassName = $this->buildDto->domainNamespace . LocationHelper::fullInterfaceName($this->name, TypeEnum::REPOSITORY);
-        $repositoryInterfaceClassName = dirname($repositoryInterfaceFullClassName);
+        $repositoryInterfaceClassName = basename($repositoryInterfaceFullClassName);
         $uses[] = new ClassUseEntity(['name' => $repositoryInterfaceFullClassName]);
 
         if($this->buildDto->isCrudService) {
