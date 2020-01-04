@@ -3,6 +3,7 @@
 namespace PhpLab\Sandbox\Package\Commands;
 
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
+use PhpLab\Sandbox\Package\Domain\Interfaces\Services\GitServiceInterface;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\PackageServiceInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,11 +14,13 @@ class GitPullCommand extends Command
 
     protected static $defaultName = 'package:git:pull';
     private $packageService;
+    private $gitService;
 
-    public function __construct(?string $name = null, PackageServiceInterface $packageService)
+    public function __construct(?string $name = null, PackageServiceInterface $packageService, GitServiceInterface $gitService)
     {
         parent::__construct($name);
         $this->packageService = $packageService;
+        $this->gitService = $gitService;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -30,8 +33,8 @@ class GitPullCommand extends Command
             foreach ($collection as $packageEntity) {
                 $title = $packageEntity->getId() . ' ... ';
                 $output->write($title);
-                $result = $this->packageService->pullPackage($packageEntity);
-                if($result == 'Already up to date.') {
+                $result = $this->gitService->pullPackage($packageEntity);
+                if ($result == 'Already up to date.') {
                     $result = "<fg=green>{$result}</>";
                 }
                 $output->writeln($result);

@@ -5,7 +5,6 @@ namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 use Illuminate\Support\Collection;
 use php7extension\yii\helpers\FileHelper;
 use php7rails\domain\data\Query;
-use php7tool\vendor\domain\helpers\GitShell;
 use PhpLab\Domain\Repositories\BaseRepository;
 use PhpLab\Sandbox\Package\Domain\Entities\GroupEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
@@ -23,23 +22,6 @@ class PackageRepository extends BaseRepository implements PackageRepositoryInter
     public function __construct(GroupRepository $groupRepostory)
     {
         $this->groupRepostory = $groupRepostory;
-    }
-
-    public function allChanged(Query $query = null)
-    {
-        /** @var PackageEntity[] $packageCollection */
-        $packageCollection = $this->all();
-        $vendorDir = realpath(self::VENDOR_DIR);
-        $changedCollection = new Collection;
-        foreach ($packageCollection as $packageEntity) {
-            $dir = $vendorDir . DIRECTORY_SEPARATOR . $packageEntity->getId();
-            $shell = new GitShell($dir);
-            $hasChanges = $shell->hasChanges();
-            if ($hasChanges) {
-                $changedCollection->add($packageEntity);
-            }
-        }
-        return $changedCollection;
     }
 
     public function all(Query $query = null)

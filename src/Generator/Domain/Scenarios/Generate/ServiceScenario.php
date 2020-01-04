@@ -34,6 +34,7 @@ class ServiceScenario extends BaseScenario
 
     protected function createInterface() : InterfaceEntity {
         $className = $this->getClassName();
+        $uses = [];
         $interfaceEntity = new InterfaceEntity;
         $interfaceEntity->name = $this->getInterfaceFullName($className);
         if($this->buildDto->isCrudService) {

@@ -1,12 +1,14 @@
 #!/usr/bin/env php
 <?php
 
-use PhpLab\Sandbox\Package\Commands\InfoChangedCommand;
+use PhpLab\Sandbox\Package\Commands\GitChangedCommand;
 use PhpLab\Sandbox\Package\Commands\GitPullCommand;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\GroupRepository;
+use PhpLab\Sandbox\Package\Domain\Repositories\File\GitRepository;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\InfoRepository;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\PackageRepository;
 use PhpLab\Sandbox\Package\Domain\Services\GroupService;
+use PhpLab\Sandbox\Package\Domain\Services\GitService;
 use PhpLab\Sandbox\Package\Domain\Services\InfoService;
 use PhpLab\Sandbox\Package\Domain\Services\PackageService;
 use Symfony\Component\Console\Application;
@@ -48,10 +50,13 @@ $groupService = new GroupService($groupRepository, $packageRepository);
 $infoRepository = new InfoRepository($groupService, $packageRepository);
 $infoService = new InfoService($infoRepository);
 $packageService = new PackageService($packageRepository);
-$command = new InfoChangedCommand(null, $packageService);
+
+$gitRepository = new GitRepository($packageRepository);
+$gitService = new GitService($gitRepository);
+$command = new GitPullCommand(null, $packageService, $gitService);
 $application->add($command);
 
-$command = new GitPullCommand(null, $packageService);
+$command = new GitChangedCommand(null, $gitService);
 $application->add($command);
 
 $application->run();
