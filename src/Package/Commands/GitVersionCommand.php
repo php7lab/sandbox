@@ -32,7 +32,8 @@ class GitVersionCommand extends Command
         $output->writeln('');
         if ($collection->count()) {
             foreach ($collection as $packageEntity) {
-                $output->write($packageEntity->getId() . ' ... ');
+                $packageId = $packageEntity->getId();
+                $output->write(" $packageId ... ");
                 $lastVersion = $this->gitService->lastVersion($packageEntity);
                 if ($lastVersion) {
                     $output->writeln("<fg=green>{$lastVersion}</>");

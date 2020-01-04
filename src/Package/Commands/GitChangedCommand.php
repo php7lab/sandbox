@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Commands;
 
+use Illuminate\Support\Collection;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\GitServiceInterface;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\PackageServiceInterface;
@@ -27,22 +28,39 @@ class GitChangedCommand extends Command
     {
         $output->writeln('<fg=white># Packages with changes</>');
 
-        /** @var PackageEntity[] | \Illuminate\Support\Collection $collection */
+        /** @var PackageEntity[] | Collection $collection */
         $collection = $this->packageService->all();
         //$collection = $this->gitService->allChanged();
         $output->writeln('');
+
+        /** @var PackageEntity[] | Collection $changedCollection */
+        $changedCollection = new Collection;
+
         if ($collection->count()) {
             foreach ($collection as $packageEntity) {
-                $output->write($packageEntity->getId() . ' ... ');
+                $packageId = $packageEntity->getId();
+                $output->write(" $packageId ... ");
                 $isHasChanges = $this->gitService->isHasChanges($packageEntity);
                 if ($isHasChanges) {
                     $output->writeln("<fg=yellow>Has changes</>");
+                    $changedCollection->add($packageEntity);
                 } else {
                     $output->writeln("<fg=green>OK</>");
                 }
             }
         } else {
-            $output->writeln('<fg=green>No changes!</>');
+            $output->writeln('<fg=magenta>No changes!</>');
+        }
+        $output->writeln('');
+        if($changedCollection->count()) {
+            $output->writeln('<fg=yellow>Has changes:</>');
+            $output->writeln('');
+            foreach ($changedCollection as $packageEntity) {
+                $packageId = $packageEntity->getId();
+                $output->writeln("<fg=yellow> {$packageId}</>");
+            }
+        } else {
+            $output->writeln('<fg=magenta>No changes!</>');
         }
         $output->writeln('');
     }

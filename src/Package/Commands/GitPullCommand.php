@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Commands;
 
+use Illuminate\Support\Collection;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\GitServiceInterface;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\PackageServiceInterface;
@@ -28,19 +29,37 @@ class GitPullCommand extends Command
         $output->writeln('<fg=white># Packages git pull</>');
         /** @var PackageEntity[] | \Illuminate\Support\Collection $collection */
         $collection = $this->packageService->all();
+
+        /** @var PackageEntity[] | Collection $pulledCollection */
+        $pulledCollection = new Collection;
+
         $output->writeln('');
         if ($collection->count()) {
             foreach ($collection as $packageEntity) {
-                $title = $packageEntity->getId() . ' ... ';
-                $output->write($title);
+                $packageId = $packageEntity->getId();
+                $output->write(" $packageId ... ");
                 $result = $this->gitService->pullPackage($packageEntity);
                 if ($result == 'Already up to date.') {
                     $result = "<fg=green>{$result}</>";
+                } else {
+                    $pulledCollection->add($packageEntity);
                 }
                 $output->writeln($result);
             }
         } else {
-            $output->writeln('<fg=red>No packages!</>');
+            $output->writeln('<fg=magenta>Not found packages!</>');
+        }
+
+        $output->writeln('');
+        if($pulledCollection->count()) {
+            $output->writeln('<fg=yellow>Updated packages!</>');
+            $output->writeln('');
+            foreach ($pulledCollection as $packageEntity) {
+                $packageId = $packageEntity->getId();
+                $output->writeln("<fg=yellow> {$packageId}</>");
+            }
+        } else {
+            $output->writeln('<fg=green>All packages already up-to-date!</>');
         }
         $output->writeln('');
     }

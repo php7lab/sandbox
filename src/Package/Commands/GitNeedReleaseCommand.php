@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Commands;
 
+use Illuminate\Support\Collection;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\GitServiceInterface;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\PackageServiceInterface;
@@ -28,22 +29,37 @@ class GitNeedReleaseCommand extends Command
 
         $output->writeln('<fg=white># Packages need release</>');
 
-        /** @var PackageEntity[] | \Illuminate\Support\Collection $collection */
+        /** @var PackageEntity[] | Collection $collection */
         $collection = $this->packageService->all();
+
+        /** @var PackageEntity[] | Collection $releaseCollection */
+        $releaseCollection = new Collection;
 
         $output->writeln('');
         if ($collection->count()) {
             foreach ($collection as $packageEntity) {
-                $output->write($packageEntity->getId() . ' ... ');
+                $packageId = $packageEntity->getId();
+                $output->write(" $packageId ... ");
                 $isNeedRelease = $this->gitService->isNeedRelease($packageEntity);
                 if ($isNeedRelease) {
                     $output->writeln("<fg=yellow>Need release</>");
+                    $releaseCollection->add($packageEntity);
                 } else {
                     $output->writeln("<fg=green>OK</>");
                 }
             }
+        }
+
+        $output->writeln('');
+        if($releaseCollection->count()) {
+            $output->writeln('<fg=yellow>Need release!</>');
+            $output->writeln('');
+            foreach ($releaseCollection as $packageEntity) {
+                $packageId = $packageEntity->getId();
+                $output->writeln("<fg=yellow> {$packageId}</>");
+            }
         } else {
-            $output->writeln('<fg=red>No packages!</>');
+            $output->writeln('<fg=magenta>Not found packages!</>');
         }
         $output->writeln('');
     }
