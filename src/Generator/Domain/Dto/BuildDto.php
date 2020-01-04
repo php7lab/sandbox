@@ -5,6 +5,7 @@ namespace PhpLab\Sandbox\Generator\Domain\Dto;
 class BuildDto
 {
 
+    public $domainName = '';
     public $domainNamespace;
     public $types;
     public $name;

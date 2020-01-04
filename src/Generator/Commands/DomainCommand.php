@@ -5,6 +5,7 @@ namespace PhpLab\Sandbox\Generator\Commands;
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use PhpLab\Sandbox\Generator\Domain\Interfaces\DomainServiceInterface;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\BaseInputScenario;
+use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\DomainNameInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\DomainNamespaceInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\DriverInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\EntityAttributesInputScenario;
@@ -32,7 +33,7 @@ class DomainCommand extends Command
     {
         $output->writeln('<fg=white># Domain generator</>');
         $buildDto = new BuildDto;
-        $buildDto->typeArray = ['service', 'repository', 'entity', 'migration'];
+        $buildDto->typeArray = ['service', 'repository', 'entity', 'migration', 'domain'];
         $this->input($input, $output, $buildDto);
         $this->domainService->generate($buildDto);
     }
@@ -53,6 +54,17 @@ class DomainCommand extends Command
 
 
         $this->runInputScenario(DomainNamespaceInputScenario::class, $input, $output, $buildDto);
+
+        $domainClass = $buildDto->domainNamespace . '\\Domain';
+        $domainName = $buildDto->domainName;
+        if(class_exists($domainClass)) {
+            $domainInstance = new $domainClass;
+            $domainName = $domainInstance->getName();
+        }
+        if(empty($domainName)) {
+            $this->runInputScenario(DomainNameInputScenario::class, $input, $output, $buildDto);
+        }
+
         $this->runInputScenario(TypeInputScenario::class, $input, $output, $buildDto);
         $this->runInputScenario(NameInputScenario::class, $input, $output, $buildDto);
 
