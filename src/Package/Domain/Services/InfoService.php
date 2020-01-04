@@ -27,11 +27,11 @@ class InfoService
         return $newCollection;
     }
 
-    public function allChanged($query = null) {
+    /*public function allChanged($query = null) {
         $query = Query::forge($query);
         //$query->with('has_changes');
         return $this->infoRepository->allChanged($query);
-    }
+    }*/
 
     public function allVersion($query = null) {
         return $this->infoRepository->allWithTag($query);
@@ -45,7 +45,7 @@ class InfoService
         return $this->infoRepository->usesById($id);
     }
 
-    public function allWithGuide() {
+    /*public function allWithGuide() {
         $query = Query::forge();
         $query->where('has_guide', true);
         return $this->infoRepository->all($query);
@@ -55,6 +55,6 @@ class InfoService
         $query = Query::forge();
         $query->where('has_test', true);
         return $this->infoRepository->all($query);
-    }
+    }*/
 
 }
