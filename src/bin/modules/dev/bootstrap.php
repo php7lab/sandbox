@@ -10,5 +10,5 @@ use Symfony\Component\Console\Application;
 
 // создаем и объявляем команды
 $stressService = new StressService;
-$command = new StressCommand(StressCommand::getDefaultName(), $stressService);
+$command = new StressCommand(null, $stressService);
 $application->add($command);

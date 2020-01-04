@@ -7,7 +7,6 @@ use PhpLab\Sandbox\Package\Domain\Repositories\File\GitRepository;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\GroupRepository;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\PackageRepository;
 use PhpLab\Sandbox\Package\Domain\Services\GitService;
-use PhpLab\Sandbox\Package\Domain\Services\GroupService;
 use PhpLab\Sandbox\Package\Domain\Services\PackageService;
 use Symfony\Component\Console\Application;
 
@@ -18,12 +17,11 @@ use Symfony\Component\Console\Application;
 $fileName = __DIR__ . '/../../../../../../../vendor/php7lab/legacy/src/php7extension/core/package/domain/data/package_group.php';
 $groupRepository = new GroupRepository($fileName);
 $packageRepository = new PackageRepository($groupRepository);
-$groupService = new GroupService($groupRepository, $packageRepository);
+$gitRepository = new GitRepository($packageRepository);
 
 $packageService = new PackageService($packageRepository);
-
-$gitRepository = new GitRepository($packageRepository);
 $gitService = new GitService($gitRepository);
+
 $command = new GitPullCommand(null, $packageService, $gitService);
 $application->add($command);
 

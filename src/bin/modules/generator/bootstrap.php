@@ -10,5 +10,5 @@ use Symfony\Component\Console\Application;
 
 // создаем и объявляем команды
 $domainService = new DomainService;
-$command = new DomainCommand(DomainCommand::getDefaultName(), $domainService);
+$command = new DomainCommand(null, $domainService);
 $application->add($command);
