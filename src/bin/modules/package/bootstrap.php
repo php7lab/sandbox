@@ -26,7 +26,7 @@ $gitService = new GitService($gitRepository);
 $command = new GitPullCommand(null, $packageService, $gitService);
 $application->add($command);
 
-$command = new GitChangedCommand(null, $gitService);
+$command = new GitChangedCommand(null, $packageService, $gitService);
 $application->add($command);
 
 $command = new GitNeedReleaseCommand(null, $packageService, $gitService);

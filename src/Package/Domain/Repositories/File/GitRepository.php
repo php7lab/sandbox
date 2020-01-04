@@ -3,17 +3,17 @@
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use Illuminate\Support\Collection;
-use php7rails\domain\data\Query;
 use php7tool\vendor\domain\helpers\GitShell;
 use PhpLab\Domain\Helpers\EntityHelper;
+use PhpLab\Domain\Repositories\BaseRepository;
 use PhpLab\Sandbox\Package\Domain\Entities\CommitEntity;
+use PhpLab\Sandbox\Package\Domain\Entities\GitEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\TagEntity;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Repositories\GitRepositoryInterface;
-use PhpLab\Sandbox\Package\Domain\Entities\GitEntity;
-use PhpLab\Domain\Repositories\BaseRepository;
 
-class GitRepository extends BaseRepository implements GitRepositoryInterface {
+class GitRepository extends BaseRepository implements GitRepositoryInterface
+{
 
     const VENDOR_DIR = __DIR__ . '/../../../../../../..';
 
@@ -26,16 +26,22 @@ class GitRepository extends BaseRepository implements GitRepositoryInterface {
         $this->packageRepostory = $packageRepostory;
     }
 
+    public function isHasChanges(PackageEntity $packageEntity): bool
+    {
+        $vendorDir = realpath(self::VENDOR_DIR);
+        $dir = $vendorDir . DIRECTORY_SEPARATOR . $packageEntity->getId();
+        $shell = new GitShell($dir);
+        $hasChanges = $shell->hasChanges();
+        return $hasChanges;
+    }
+
     public function allChanged()
     {
         /** @var PackageEntity[] $packageCollection */
         $packageCollection = $this->packageRepostory->all();
-        $vendorDir = realpath(self::VENDOR_DIR);
         $changedCollection = new Collection;
         foreach ($packageCollection as $packageEntity) {
-            $dir = $vendorDir . DIRECTORY_SEPARATOR . $packageEntity->getId();
-            $shell = new GitShell($dir);
-            $hasChanges = $shell->hasChanges();
+            $hasChanges = $this->isHasChanges($packageEntity);
             if ($hasChanges) {
                 $changedCollection->add($packageEntity);
             }
@@ -67,7 +73,7 @@ class GitRepository extends BaseRepository implements GitRepositoryInterface {
         }
     }
 
-    public function allCommit(PackageEntity $packageEntity) : Collection
+    public function allCommit(PackageEntity $packageEntity): Collection
     {
         $git = new GitShell($packageEntity->getDirectory());
         $commits = $git->getCommits();
@@ -75,7 +81,7 @@ class GitRepository extends BaseRepository implements GitRepositoryInterface {
         return $commitCollection;
     }
 
-    public function allTag(PackageEntity $packageEntity) : Collection
+    public function allTag(PackageEntity $packageEntity): Collection
     {
         $git = new GitShell($packageEntity->getDirectory());
         $tags = $git->getTagsSha();

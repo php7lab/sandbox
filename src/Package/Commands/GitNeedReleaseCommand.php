@@ -27,27 +27,20 @@ class GitNeedReleaseCommand extends Command
     {
 
         $output->writeln('<fg=white># Packages need release</>');
-        //return;
 
         /** @var PackageEntity[] | \Illuminate\Support\Collection $collection */
         $collection = $this->packageService->all();
-        //dd($collection);
 
         $output->writeln('');
         if ($collection->count()) {
             foreach ($collection as $packageEntity) {
-
+                $output->write($packageEntity->getId() . ' ... ');
                 $isNeedRelease = $this->gitService->isNeedRelease($packageEntity);
-
-                if($isNeedRelease) {
-                    $title = $packageEntity->getId();
-                    $output->writeln($title);
+                if ($isNeedRelease) {
+                    $output->writeln("<fg=yellow>Need release</>");
+                } else {
+                    $output->writeln("<fg=green>OK</>");
                 }
-
-                /*if ($result == 'Already up to date.') {
-                    $result = "<fg=green>{$result}</>";
-                }
-                $output->writeln($result);*/
             }
         } else {
             $output->writeln('<fg=red>No packages!</>');

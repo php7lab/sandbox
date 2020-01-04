@@ -7,6 +7,7 @@ use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 
 interface GitRepositoryInterface {
 
+    public function isHasChanges(PackageEntity $packageEntity): bool;
     public function allChanged();
     public function allVersion(PackageEntity $packageEntity);
     public function allCommit(PackageEntity $packageEntity) : Collection;

@@ -56,12 +56,11 @@ class DomainCommand extends Command
         $this->runInputScenario(DomainNamespaceInputScenario::class, $input, $output, $buildDto);
 
         $domainClass = $buildDto->domainNamespace . '\\Domain';
-        $domainName = $buildDto->domainName;
         if(class_exists($domainClass)) {
             $domainInstance = new $domainClass;
-            $domainName = $domainInstance->getName();
+            $buildDto->domainName = $domainInstance->getName();
         }
-        if(empty($domainName)) {
+        if(empty($buildDto->domainName)) {
             $this->runInputScenario(DomainNameInputScenario::class, $input, $output, $buildDto);
         }
 
@@ -82,10 +81,6 @@ class DomainCommand extends Command
             $this->runInputScenario(DriverInputScenario::class, $input, $output, $buildDto);
             $this->runInputScenario(IsCrudRepositoryInputScenario::class, $input, $output, $buildDto);
         }
-
-        /*if (in_array($typesFlip['migration'], $buildDto->types)) {
-
-        }*/
     }
 
     private function runInputScenario(string $className, InputInterface $input, OutputInterface $output, BuildDto $buildDto)
