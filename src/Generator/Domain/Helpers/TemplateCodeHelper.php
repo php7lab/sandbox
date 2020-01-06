@@ -7,6 +7,54 @@ use php7extension\yii\helpers\Inflector;
 class TemplateCodeHelper
 {
 
+    public static function generateCrudApiRoutesConfig(string $module, string $entity, string $endpoint, string $controllerClassName) {
+        $tpl =
+"{$module}_{$entity}_index:
+    methods: [GET]
+    path: /v1/{$endpoint}
+    controller: {$controllerClassName}::index
+
+{$module}_{$entity}_create:
+    path: /v1/{$endpoint}
+    methods: [POST]
+    controller: {$controllerClassName}::create
+
+{$module}_{$entity}_view:
+    methods: [GET]
+    path: /v1/{$endpoint}/{id}
+    controller: {$controllerClassName}::view
+    requirements:
+        id: '\d+'
+
+{$module}_{$entity}_update:
+    methods: [PUT]
+    path: /v1/{$endpoint}/{id}
+    controller: {$controllerClassName}::update
+    requirements:
+        id: '\d+'
+
+{$module}_{$entity}_delete:
+    methods: [DELETE]
+    path: /v1/{$endpoint}/{id}
+    controller: {$controllerClassName}::delete
+    requirements:
+        id: '\d+'
+
+{$module}_{$entity}_index_options:
+    methods: [OPTIONS]
+    path: /v1/{$endpoint}
+    controller: {$controllerClassName}::options
+
+{$module}_{$entity}_options:
+    methods: [OPTIONS]
+    path: /v1/{$endpoint}/{id}
+    controller: {$controllerClassName}::options
+    requirements:
+        id: '\d+'
+";
+        return $tpl;
+    }
+
     public static function generateMigrationClassCode(string $className, array $attributes, string $tableName = ''): string
     {
         $fieldCode = self::generateAttributes($attributes);
