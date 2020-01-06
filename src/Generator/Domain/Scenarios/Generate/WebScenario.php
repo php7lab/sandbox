@@ -8,8 +8,11 @@ use php7extension\core\code\entities\ClassVariableEntity;
 use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\enums\AccessEnum;
 use php7extension\core\code\helpers\ClassHelper;
+use php7extension\yii\helpers\FileHelper;
 use PhpLab\Sandbox\Generator\Domain\Enums\TypeEnum;
 use PhpLab\Sandbox\Generator\Domain\Helpers\LocationHelper;
+use PhpLab\Sandbox\Generator\Domain\Helpers\TemplateCodeHelper;
+use PhpLab\Sandbox\Package\Domain\Helpers\PackageHelper;
 
 class WebScenario extends BaseScenario
 {
@@ -45,7 +48,8 @@ class WebScenario extends BaseScenario
         //dd($className);
         $uses = [];
         $classEntity = new ClassEntity;
-        $classEntity->name = $this->moduleNamespace . '\\' . $this->classDir() . '\\' . $className;
+        $classFullName = $this->moduleNamespace . '\\' . $this->classDir() . '\\' . $className;
+        $classEntity->name = $classFullName;
         if ($this->isMakeInterface()) {
             $useEntity = new ClassUseEntity;
             $useEntity->name = $this->getInterfaceFullName();
@@ -85,6 +89,11 @@ class WebScenario extends BaseScenario
 ";
 
         ClassHelper::generate($classEntity, $uses);
+
+        $path = PackageHelper::pathByNamespace($this->buildDto->moduleNamespace);
+        $routesConfigFile = $path . '/config/routes.yaml';
+        FileHelper::save($routesConfigFile, TemplateCodeHelper::generateCrudWebRoutesConfig($this->buildDto, $classFullName));
+
         return $classEntity;
     }
 }

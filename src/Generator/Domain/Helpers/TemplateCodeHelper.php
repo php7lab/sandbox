@@ -3,55 +3,26 @@
 namespace PhpLab\Sandbox\Generator\Domain\Helpers;
 
 use php7extension\yii\helpers\Inflector;
+use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 
 class TemplateCodeHelper
 {
 
-    public static function generateCrudApiRoutesConfig(string $module, string $entity, string $endpoint, string $controllerClassName) {
-        $tpl =
-"{$module}_{$entity}_index:
-    methods: [GET]
-    path: /v1/{$endpoint}
-    controller: {$controllerClassName}::index
+    public static function generateCrudWebRoutesConfig(BuildDto $buildDto, string $controllerClassName) {
+        $tpl = file_get_contents(__DIR__ . '/../Templates/Web/config/routes.yaml');
+        $tpl = str_replace('{{moduleName}}', $buildDto->moduleName, $tpl);
+        $tpl = str_replace('{{name}}', $buildDto->name, $tpl);
+        $tpl = str_replace('{{endpoint}}', $buildDto->endpoint, $tpl);
+        $tpl = str_replace('{{controllerClassName}}', $controllerClassName, $tpl);
+        return $tpl;
+    }
 
-{$module}_{$entity}_create:
-    path: /v1/{$endpoint}
-    methods: [POST]
-    controller: {$controllerClassName}::create
-
-{$module}_{$entity}_view:
-    methods: [GET]
-    path: /v1/{$endpoint}/{id}
-    controller: {$controllerClassName}::view
-    requirements:
-        id: '\d+'
-
-{$module}_{$entity}_update:
-    methods: [PUT]
-    path: /v1/{$endpoint}/{id}
-    controller: {$controllerClassName}::update
-    requirements:
-        id: '\d+'
-
-{$module}_{$entity}_delete:
-    methods: [DELETE]
-    path: /v1/{$endpoint}/{id}
-    controller: {$controllerClassName}::delete
-    requirements:
-        id: '\d+'
-
-{$module}_{$entity}_index_options:
-    methods: [OPTIONS]
-    path: /v1/{$endpoint}
-    controller: {$controllerClassName}::options
-
-{$module}_{$entity}_options:
-    methods: [OPTIONS]
-    path: /v1/{$endpoint}/{id}
-    controller: {$controllerClassName}::options
-    requirements:
-        id: '\d+'
-";
+    public static function generateCrudApiRoutesConfig(BuildDto $buildDto, string $controllerClassName) {
+        $tpl = file_get_contents(__DIR__ . '/../Templates/Api/config/routes.yaml');
+        $tpl = str_replace('{{moduleName}}', $buildDto->moduleName, $tpl);
+        $tpl = str_replace('{{name}}', $buildDto->name, $tpl);
+        $tpl = str_replace('{{endpoint}}', $buildDto->endpoint, $tpl);
+        $tpl = str_replace('{{controllerClassName}}', $controllerClassName, $tpl);
         return $tpl;
     }
 

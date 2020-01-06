@@ -73,7 +73,7 @@ class ApiScenario extends BaseScenario
 
         $path = PackageHelper::pathByNamespace($this->buildDto->moduleNamespace);
         $routesConfigFile = $path . '/config/routes.yaml';
-        FileHelper::save($routesConfigFile, TemplateCodeHelper::generateCrudApiRoutesConfig($this->buildDto->moduleName, $this->buildDto->name, $this->buildDto->endpoint, $classFullName));
+        FileHelper::save($routesConfigFile, TemplateCodeHelper::generateCrudApiRoutesConfig($this->buildDto, $classFullName));
 
         return $classEntity;
     }
