@@ -4,9 +4,8 @@ namespace PhpLab\Sandbox\Messenger\Web\Controllers;
 
 use php7rails\domain\data\GetParams;
 use php7rails\domain\data\Query;
-use PhpLab\Domain\Helpers\EntityHelper;
-use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Domain\Data\DataProvider;
+use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
@@ -28,7 +27,7 @@ class ChatController extends AbstractController
         $this->service = $chatService;
     }
 
-    public function index(Request $request) : Response
+    public function index(Request $request): Response
     {
         $this->checkAuth();
         $getParams = new GetParams;
@@ -46,7 +45,7 @@ class ChatController extends AbstractController
         ]);
     }
 
-    public function view($id, Request $request) : Response
+    public function view($id, Request $request): Response
     {
         $this->checkAuth();
         $query = new Query;
@@ -61,13 +60,13 @@ class ChatController extends AbstractController
         ]);
     }
 
-    public function create(Request $request) : Response
+    public function create(Request $request): Response
     {
         $this->checkAuth();
         return $this->render('@Messenger/chat/create.html.twig');
     }
 
-    public function update($id, Request $request) : Response
+    public function update($id, Request $request): Response
     {
         $this->checkAuth();
         $query = new Query;
@@ -78,7 +77,7 @@ class ChatController extends AbstractController
         ]);
     }
 
-    public function delete($id, Request $request) : Response
+    public function delete($id, Request $request): Response
     {
         $this->checkAuth();
         $this->service->deleteById($id);

@@ -42,7 +42,7 @@ abstract class BaseScenario
     }
 
     protected function getClassName() : string {
-        return Inflector::classify($this->name) . $this->typeName();
+        return Inflector::classify($this->buildDto->name) . $this->typeName();
     }
 
     protected function interfaceDir()

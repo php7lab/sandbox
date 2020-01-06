@@ -7,6 +7,8 @@ class BuildDto
 
     public $domainName = '';
     public $domainNamespace;
+    public $typeModule;
+    public $moduleNamespace;
     public $types;
     public $name;
     public $attributes = [];
@@ -14,4 +16,5 @@ class BuildDto
     public $typeArray;
     public $isCrudService;
     public $isCrudRepository;
+    public $isCrudController;
 }

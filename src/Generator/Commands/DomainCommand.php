@@ -60,6 +60,8 @@ class DomainCommand extends Command
         if (class_exists($domainClass)) {
             $domainInstance = new $domainClass;
             $buildDto->domainName = $domainInstance->getName();
+            $output->writeln('');
+            $output->writeln("<fg=green>Domain founded ({$buildDto->domainName})</>");
         }
         if (empty($buildDto->domainName)) {
             $this->runInputScenario(DomainNameInputScenario::class, $input, $output, $buildDto);
