@@ -5,11 +5,14 @@ namespace PhpLab\Sandbox\Notify\Domain\Repositories\Dev;
 use PhpLab\Sandbox\Notify\Domain\Entities\EmailEntity;
 use PhpLab\Sandbox\Notify\Domain\Interfaces\Repositories\EmailRepositoryInterface;
 
-class EmailRepository implements EmailRepositoryInterface
+class EmailRepository extends BaseRepository implements EmailRepositoryInterface
 {
 
-    public function send(EmailEntity $emailEntity) {
-        dump("Email to {$emailEntity->getTo()} sended");
+    const DIRECTORY = __DIR__ . '/../../../../../../../../var/data/notify/email';
+
+    public function send(EmailEntity $emailEntity)
+    {
+        $this->saveToFile($emailEntity);
     }
 
 }
