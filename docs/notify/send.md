@@ -1,6 +1,6 @@
 # Отправка уведомлений
 
-Отправка почты:
+## Отправка письма
 
 ```php
 /** @var \PhpLab\Sandbox\Notify\Domain\Interfaces\Services\EmailServiceInterface $emailService */
@@ -13,6 +13,18 @@ $email->setBody('Body text');
 $emailService->push($email);
 ```
 
-Заметьте, что письмо не отправляется сразу,
-а добавляется в очередь на отправку.
+## Отправка SMS-сообщения
 
+```php
+/** @var \PhpLab\Sandbox\Notify\Domain\Interfaces\Services\SmsServiceInterface $smsService */
+
+$sms = new SmsEntity;
+$sms->setPhone('77051112233');
+$sms->setMessage('text of message');
+$smsService->push($sms);
+```
+
+Заметьте, что для SMS и Email сообщения не отправляется сразу,
+а добавляется в очередь задач.
+
+Подробнее об очередях [тут](../queue/README.md).
