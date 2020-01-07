@@ -8,6 +8,7 @@ class CommitEntity {
     private $author;
     private $date;
     private $message;
+    private $merge;
 
     public function getSha()
     {
@@ -47,6 +48,16 @@ class CommitEntity {
     public function setMessage($message): void
     {
         $this->message = $message;
+    }
+
+    public function getMerge()
+    {
+        return $this->merge;
+    }
+
+    public function setMerge($merge): void
+    {
+        $this->merge = $merge;
     }
 
 }
