@@ -2,19 +2,14 @@
 
 namespace PhpLab\Sandbox\Queue\Domain\Services;
 
-use Illuminate\Support\Collection;
-use php7rails\domain\data\Query;
-use php7rails\domain\entities\query\Where;
 use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Domain\Services\BaseCrudService;
-use PhpLab\Sandbox\Notify\Domain\Interfaces\Services\EmailServiceInterface;
 use PhpLab\Sandbox\Queue\Domain\Entities\JobEntity;
 use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
 use PhpLab\Sandbox\Queue\Domain\Helpers\JobHelper;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobInterface;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobRepositoryInterface;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobServiceInterface;
-use BadMethodCallException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class JobService extends BaseCrudService implements JobServiceInterface
@@ -28,7 +23,7 @@ class JobService extends BaseCrudService implements JobServiceInterface
         $this->container = $container;
     }
 
-    public function getRepository() : JobRepositoryInterface
+    public function getRepository(): JobRepositoryInterface
     {
         return parent::getRepository();
     }
@@ -46,9 +41,9 @@ class JobService extends BaseCrudService implements JobServiceInterface
         return $jobEntity;
     }
 
-    public function runAll(string $channel = null, Query $query = null) : int {
-        $query = Query::forge($query);
-        $jobCollection = $this->getRepository()->allForRun($query);
+    public function runAll(string $channel = null): int
+    {
+        $jobCollection = $this->getRepository()->allForRun();
         foreach ($jobCollection as $jobEntity) {
             $job = JobHelper::forgeJob($jobEntity, $this->container);
             $job->run();
@@ -58,20 +53,5 @@ class JobService extends BaseCrudService implements JobServiceInterface
         }
         return $jobCollection->count();
     }
-
-    /*public function create($data)
-    {
-        throw new BadMethodCallException('Deny method');
-    }
-
-    public function deleteById($id)
-    {
-        throw new BadMethodCallException('Deny method');
-    }
-
-    public function updateById($id, $data)
-    {
-        throw new BadMethodCallException('Deny method');
-    }*/
 
 }
