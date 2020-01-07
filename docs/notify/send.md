@@ -3,7 +3,6 @@
 Отправка почты:
 
 ```php
-
 /** @var \PhpLab\Sandbox\Notify\Domain\Interfaces\Services\EmailServiceInterface $emailService */
 
 $email = new EmailEntity;
