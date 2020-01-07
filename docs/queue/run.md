@@ -4,7 +4,7 @@
 но можно это сделать в коде так:
 
 ```php
-$this->jobService->runAll('email');
+$jobService->runAll('email');
 ```
 
 либо выполнить команду:
