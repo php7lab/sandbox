@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Input;
 
-use Symfony\Component\Console\Question\ChoiceQuestion;
+use PhpLab\Sandbox\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
 class TypeInputScenario extends BaseInputScenario
@@ -15,11 +15,9 @@ class TypeInputScenario extends BaseInputScenario
 
     protected function question(): Question
     {
-        $typeArray = $this->buildDto->typeArray;
-        $typeArray['a'] = 'all';
         $question = new ChoiceQuestion(
             'Select types',
-            $typeArray,
+            $this->buildDto->typeArray,
             'a'
         );
         $question->setMultiselect(true);
@@ -29,19 +27,7 @@ class TypeInputScenario extends BaseInputScenario
     public function run()
     {
         $question = $this->question();
-        $types = $this->ask($question);
-        //$types = ['a'];
-        $this->buildDto->types = $this->filterValue($types);
-    }
-
-    private function filterValue($value) {
-        if(in_array('a', $value)) {
-            $value = array_keys($this->buildDto->typeArray);
-        }
-        $value = array_map(function ($item) {
-            return intval($item);
-        }, $value);
-        return $value;
+        $this->buildDto->types = $this->ask($question);
     }
 
 }
