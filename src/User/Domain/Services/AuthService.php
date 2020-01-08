@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use php7extension\core\common\helpers\StringHelper;
 use php7extension\yii\base\Security;
-use PhpLab\Domain\Data\Collection;
+use Illuminate\Support\Collection;
 use PhpLab\Domain\Exceptions\UnauthorizedException;
 use PhpLab\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Rest\Entities\ValidateErrorEntity;

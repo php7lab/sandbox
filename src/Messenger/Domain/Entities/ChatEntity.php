@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
-use PhpLab\Domain\Data\Collection;
+use Illuminate\Support\Collection;
 
 class ChatEntity
 {

@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Article\Domain\Entities;
 
 use DateTime;
-use PhpLab\Domain\Data\Collection;
+use Illuminate\Support\Collection;
 use PhpLab\Domain\Interfaces\ValidateEntityInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;

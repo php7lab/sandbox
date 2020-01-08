@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Dev\Commands;
 
-use PhpLab\Domain\Data\Collection;
+use Illuminate\Support\Collection;
 use PhpLab\Sandbox\Dev\Domain\Entities\TestEntity;
 use PhpLab\Sandbox\Dev\Domain\Services\StressService;
 use Symfony\Component\Console\Command\Command;

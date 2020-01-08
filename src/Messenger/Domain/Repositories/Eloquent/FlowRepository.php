@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
 use php7rails\domain\data\Query;
 use php7rails\domain\enums\RelationEnum;
-use PhpLab\Domain\Data\Collection;
+use Illuminate\Support\Collection;
 use PhpLab\Domain\Libs\Relation\OneToMany;
 use PhpLab\Domain\Libs\Relation\OneToOne;
 use PhpLab\Eloquent\Db\Helpers\Manager;

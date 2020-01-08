@@ -11,7 +11,7 @@ use PhpLab\Sandbox\Article\Domain\Interfaces\PostRepositoryInterface;
 use php7rails\domain\enums\RelationEnum;
 use PhpLab\Sandbox\Article\Domain\Interfaces\TagPostRepositoryInterface;
 use PhpLab\Sandbox\Article\Domain\Interfaces\TagRepositoryInterface;
-use PhpLab\Domain\Data\Collection;
+use Illuminate\Support\Collection;
 use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Domain\Interfaces\GetEntityClassInterface;
 use PhpLab\Domain\Libs\Relation\ManyToMany;
