@@ -30,14 +30,7 @@ class TemplateCodeHelper
     {
         $fieldCode = self::generateAttributes($attributes);
         $code =
-            "<?php
-
-namespace Migrations;
-
-use Illuminate\Database\Schema\Blueprint;
-use PhpLab\Eloquent\Migration\Base\BaseCreateTableMigration;
-
-if ( ! class_exists({$className}::class)) {
+"if ( ! class_exists({$className}::class)) {
 
     class {$className} extends BaseCreateTableMigration
     {

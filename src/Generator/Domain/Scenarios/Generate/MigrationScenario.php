@@ -7,6 +7,7 @@ use php7extension\yii\helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Helpers\TemplateCodeHelper;
 use PhpLab\Sandbox\Package\Domain\Helpers\PackageHelper;
 use function Symfony\Component\Debug\Tests\testHeader;
+use Zend\Code\Generator\FileGenerator;
 
 class MigrationScenario extends BaseScenario
 {
@@ -30,10 +31,19 @@ class MigrationScenario extends BaseScenario
 
     protected function createClass()
     {
-        $fileName = $this->getFileName();
+
+        $fileGenerator = new FileGenerator;
+
+        $fileGenerator->setNamespace('Migrations');
+        $fileGenerator->setUse('Illuminate\Database\Schema\Blueprint');
+        $fileGenerator->setUse('PhpLab\Eloquent\Migration\Base\BaseCreateTableMigration');
+
         $tableName = $this->buildDto->domainName . '_' . $this->buildDto->name;
         $code = TemplateCodeHelper::generateMigrationClassCode($this->getClassName(), $this->buildDto->attributes, $tableName);
-        FileHelper::save($fileName, $code);
+
+        $fileGenerator->setBody($code);
+        $fileName = $this->getFileName();
+        FileHelper::save($fileName, $fileGenerator->generate());
     }
 
     private function getFileName()

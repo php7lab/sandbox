@@ -2,11 +2,11 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
-use php7extension\core\code\entities\ClassEntity;
-use php7extension\core\code\entities\ClassUseEntity;
 use php7extension\core\code\helpers\ClassHelper;
-use PhpLab\Sandbox\Generator\Domain\Enums\TypeEnum;
-use PhpLab\Sandbox\Generator\Domain\Helpers\LocationHelper;
+use PhpLab\Domain\Interfaces\DomainInterface;
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\FileGenerator;
+use Zend\Code\Generator\MethodGenerator;
 
 class DomainScenario extends BaseScenario
 {
@@ -23,22 +23,19 @@ class DomainScenario extends BaseScenario
 
     protected function createClass()
     {
-        $className = $this->getClassName();
-        $uses = [];
-        $classEntity = new ClassEntity;
-        $classEntity->name = $this->domainNamespace . '\\Domain';
-
-        $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Interfaces\DomainInterface']);
-        $classEntity->implements = 'DomainInterface';
-
-        $classEntity->code = "
-    public function getName()
-    {
-        return '{$this->buildDto->domainName}';
-    }
-";
-
-        ClassHelper::generate($classEntity, $uses);
-        return $classEntity;
+        $fileGenerator = new FileGenerator;
+        $classGenerator = new ClassGenerator;
+        $classGenerator->setName('Domain');
+        $classGenerator->setImplementedInterfaces(['DomainInterface']);
+        $classGenerator->addMethods([
+            MethodGenerator::fromArray([
+                'name' => 'getName',
+                'body' => "return '{$this->buildDto->domainName}';",
+            ]),
+        ]);
+        $fileGenerator->setClass($classGenerator);
+        $fileGenerator->setUse(DomainInterface::class);
+        $fileGenerator->setNamespace($this->domainNamespace);
+        ClassHelper::generateFile($fileGenerator->getNamespace() . '\\' . 'Domain', $fileGenerator->generate());
     }
 }

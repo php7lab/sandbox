@@ -10,6 +10,10 @@ use php7extension\core\code\entities\ClassUseEntity;
 use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\helpers\ClassHelper;
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\FileGenerator;
+use Zend\Code\Generator\InterfaceGenerator;
+use Zend\Code\Generator\ParameterGenerator;
 
 abstract class BaseScenario
 {
@@ -45,6 +49,10 @@ abstract class BaseScenario
         return Inflector::classify($this->buildDto->name) . $this->typeName();
     }
 
+    protected function getFullClassName() : string {
+        return $this->domainNamespace . '\\' . $this->classDir() . '\\' . $this->getClassName();
+    }
+
     protected function interfaceDir()
     {
         return 'Interfaces\\' . $this->classDir();
@@ -59,16 +67,54 @@ abstract class BaseScenario
         return $className . 'Interface';
     }
 
-    protected function createInterface() : InterfaceEntity {
-        $className = $this->getClassName();
+    protected function createInterface() {
+        $fileGenerator = new FileGenerator;
+        $interfaceGenerator = new InterfaceGenerator;
+        $interfaceGenerator->setName($this->getInterfaceName());
+
+        $fileGenerator->setClass($interfaceGenerator);
+        $fileGenerator->setUse($this->getInterfaceFullName());
+        $fileGenerator->setNamespace($this->domainNamespace . '\\' . $this->interfaceDir());
+        ClassHelper::generateFile($this->getInterfaceName(), $fileGenerator->generate());
+
+        /*$className = $this->getClassName();
         $interfaceEntity = new InterfaceEntity;
         $interfaceEntity->name = $this->getInterfaceFullName($className);
         ClassHelper::generate($interfaceEntity);
-        return $interfaceEntity;
+        return $interfaceEntity;*/
     }
 
     protected function createClass() {
         $className = $this->getClassName();
+        $fullClassName = $this->getFullClassName();
+        $fileGenerator = new FileGenerator;
+        $classGenerator = new ClassGenerator;
+        $classGenerator->setName($className);
+        if($this->isMakeInterface()) {
+            $classGenerator->setImplementedInterfaces([$this->getInterfaceName()]);
+            $fileGenerator->setUse($this->getInterfaceFullName());
+        }
+        if($this->attributes) {
+            foreach ($this->attributes as $attribute) {
+                $classGenerator->addProperties([
+                    [Inflector::variablize($attribute)]
+                ]);
+            }
+        }
+        $fileGenerator->setNamespace($this->domainNamespace . '\\' . $this->classDir());
+        $fileGenerator->setClass($classGenerator);
+        ClassHelper::generateFile($fileGenerator->getNamespace() . '\\' . $className, $fileGenerator->generate());
+
+
+        /*$classGenerator->addMethods([
+            MethodGenerator::fromArray([
+                'name' => 'getName',
+                'body' => "return '{$this->buildDto->domainName}';",
+            ]),
+        ]);*/
+
+
+        /*$className = $this->getClassName();
         $uses = [];
         $classEntity = new ClassEntity;
         $classEntity->name = $this->domainNamespace . '\\' . $this->classDir() . '\\' . $className;
@@ -88,6 +134,6 @@ abstract class BaseScenario
             }
         }
         ClassHelper::generate($classEntity, $uses);
-        return $classEntity;
+        return $classEntity;*/
     }
 }
