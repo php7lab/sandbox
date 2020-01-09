@@ -34,16 +34,15 @@ class ModuleCommand extends Command
 
     private function input(InputInterface $input, OutputInterface $output, BuildDto $buildDto)
     {
-        /*$buildDto->moduleNamespace = 'App\\Api';
-        $buildDto->moduleName = 'app';
+        $buildDto->moduleNamespace = 'App\\Api';
         $buildDto->typeModule = 'api';
-        $buildDto->name = 'qwerty';
-        $buildDto->endpoint = 'qwerty';*/
-        $buildDto->moduleNamespace = 'App\\Web';
+        /*$buildDto->moduleNamespace = 'App\\Web';
+        $buildDto->typeModule = 'web';*/
+
         $buildDto->moduleName = 'app';
-        $buildDto->typeModule = 'web';
         $buildDto->name = 'qwerty';
         $buildDto->endpoint = 'qwerty';
+
         return;
 
         $this->runInputScenario(NameInputScenario::class, $input, $output, $buildDto);

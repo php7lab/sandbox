@@ -9,10 +9,16 @@ use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\enums\AccessEnum;
 use php7extension\core\code\helpers\ClassHelper;
 use php7extension\yii\helpers\FileHelper;
+use php7extension\yii\helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Enums\TypeEnum;
 use PhpLab\Sandbox\Generator\Domain\Helpers\LocationHelper;
 use PhpLab\Sandbox\Generator\Domain\Helpers\TemplateCodeHelper;
 use PhpLab\Sandbox\Package\Domain\Helpers\PackageHelper;
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\FileGenerator;
+use Zend\Code\Generator\MethodGenerator;
+use Zend\Code\Generator\ParameterGenerator;
+use Zend\Code\Generator\PropertyGenerator;
 
 class WebScenario extends BaseScenario
 {
@@ -27,73 +33,52 @@ class WebScenario extends BaseScenario
         return 'Controllers';
     }
 
-    /*protected function createInterface(): InterfaceEntity
-    {
-        $className = $this->getClassName();
-        $uses = [];
-        $interfaceEntity = new InterfaceEntity;
-        $interfaceEntity->name = $this->getInterfaceFullName($className);
-        if ($this->buildDto->isCrudService) {
-            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Interfaces\CrudServiceInterface']);
-            $interfaceEntity->extends = 'CrudServiceInterface';
-        }
-        ClassHelper::generate($interfaceEntity, $uses);
-        return $interfaceEntity;
-    }*/
-
     protected function createClass()
     {
-
         $className = $this->getClassName();
-        //dd($className);
-        $uses = [];
-        $classEntity = new ClassEntity;
-        $classFullName = $this->moduleNamespace . '\\' . $this->classDir() . '\\' . $className;
-        $classEntity->name = $classFullName;
-        if ($this->isMakeInterface()) {
-            $useEntity = new ClassUseEntity;
-            $useEntity->name = $this->getInterfaceFullName();
-            $uses[] = $useEntity;
-            $classEntity->implements = $this->getInterfaceName();
+        $fullClassName = $this->getFullClassName();
+        $fileGenerator = new FileGenerator;
+        $classGenerator = new ClassGenerator;
+        $classGenerator->setName($className);
+        if($this->isMakeInterface()) {
+            $classGenerator->setImplementedInterfaces([$this->getInterfaceName()]);
+            $fileGenerator->setUse($this->getInterfaceFullName());
         }
 
-        /*$repositoryInterfaceFullClassName = $this->buildDto->moduleNamespace . LocationHelper::fullInterfaceName($this->buildDto->name, TypeEnum::REPOSITORY);
-        $repositoryInterfaceClassName = basename($repositoryInterfaceFullClassName);
-        $uses[] = new ClassUseEntity(['name' => $repositoryInterfaceFullClassName]);*/
+        $classGenerator->addProperties([
+            ['service', null, PropertyGenerator::FLAG_PRIVATE]
+        ]);
+        
+        $fileGenerator->setUse('Symfony\Bundle\FrameworkBundle\Controller\AbstractController');
+        $fileGenerator->setUse('PhpLab\Sandbox\Web\Traits\AccessTrait');
 
-        /*if ($this->buildDto->isCrudController) {
-            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Services\BaseCrudService']);
-            $classEntity->extends = 'BaseCrudService';
-        } else {
-            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Services\BaseService']);
-            $classEntity->extends = 'BaseService';
-        }*/
-        $uses[] = new ClassUseEntity(['name' => 'Symfony\Bundle\FrameworkBundle\Controller\AbstractController']);
-        $uses[] = new ClassUseEntity(['name' => 'PhpLab\Sandbox\Web\Traits\AccessTrait']);
-        $classEntity->extends = 'AbstractController';
+        $classGenerator->setExtendedClass('AbstractController');
+        $classGenerator->addTrait('AccessTrait');
 
-        $classEntity->uses = [new ClassUseEntity(['name' => 'AccessTrait'])];
 
-        $classEntity->variables = [
-            new ClassVariableEntity([
-                'name' => 'service',
-                'access' => AccessEnum::PRIVATE,
-            ]),
-        ];
+        $parameterGenerator = new ParameterGenerator;
+        $parameterGenerator->setName('service');
+        $parameterGenerator->setType('ExampleService');
 
-        $classEntity->code = "
-    /*public function __construct(ExampleService \$service)
+        $methodGenerator = new MethodGenerator;
+        $methodGenerator->setName('__construct');
+        $methodGenerator->setParameter($parameterGenerator);
+        $methodGenerator->setBody('$this->service = $service;');
+        $classGenerator->addMethods([$methodGenerator]);
+
+        $fileGenerator->setNamespace($this->buildDto->moduleNamespace . '\\' . $this->classDir());
+        $fileGenerator->setClass($classGenerator);
+
+        ClassHelper::generateFile($fileGenerator->getNamespace() . '\\' . $className, $fileGenerator->generate());
+
+        $this->generateRouteConfig($fileGenerator->getNamespace() . '\\' . $className);
+    }
+
+    private function generateRouteConfig($classFullName)
     {
-        \$this->service = \$service;
-    }*/
-";
-
-        ClassHelper::generate($classEntity, $uses);
-
         $path = PackageHelper::pathByNamespace($this->buildDto->moduleNamespace);
         $routesConfigFile = $path . '/config/routes.yaml';
         FileHelper::save($routesConfigFile, TemplateCodeHelper::generateCrudWebRoutesConfig($this->buildDto, $classFullName));
-
-        return $classEntity;
     }
+
 }
