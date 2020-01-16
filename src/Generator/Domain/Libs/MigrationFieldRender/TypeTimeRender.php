@@ -2,12 +2,14 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender;
 
+use PhpLab\Sandbox\Generator\Domain\Helpers\FieldRenderHelper;
+
 class TypeTimeRender extends BaseRender
 {
 
     public function isMatch() : bool
     {
-        return strpos($this->attributeName, '_at') == strlen($this->attributeName) - 3;
+        return FieldRenderHelper::isMatchSuffix($this->attributeName, '_at');
     }
 
     public function run() : string

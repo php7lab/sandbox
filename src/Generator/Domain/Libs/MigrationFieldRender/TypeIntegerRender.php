@@ -2,12 +2,14 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender;
 
+use PhpLab\Sandbox\Generator\Domain\Helpers\FieldRenderHelper;
+
 class TypeIntegerRender extends BaseRender
 {
 
     public function isMatch() : bool
     {
-        return strpos($this->attributeName, '_id') === mb_strlen($this->attributeName) - 3;
+        return FieldRenderHelper::isMatchSuffix($this->attributeName, '_id');
     }
 
     public function run() : string
