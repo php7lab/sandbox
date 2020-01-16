@@ -108,14 +108,12 @@ class ServiceScenario extends BaseScenario
 
         $classGenerator->addMethods([$methodGenerator]);
 
-        $code = "
+        /*$code = "
     public function __construct({$repositoryInterfaceClassName} \$repository)
     {
         \$this->repository = \$repository;
     }
-";
-
-
+";*/
 
         ClassHelper::generateFile($fileGenerator->getNamespace() . '\\' . $className, $fileGenerator->generate());
 
