@@ -44,7 +44,7 @@ class DomainCommand extends Command
         $buildDto->domainName = 'app';
         $buildDto->types = array_keys($buildDto->typeArray);
         $buildDto->name = 'qwerty';
-        $buildDto->attributes = ['id', 'title', 'author', 'is_archive', 'created_at'];
+        $buildDto->attributes = ['id', 'category_id', 'title', 'author', 'is_archive', 'status', 'size', 'created_at'];
         $buildDto->isCrudService = true;
         $buildDto->isCrudRepository = true;
         $buildDto->driver = [

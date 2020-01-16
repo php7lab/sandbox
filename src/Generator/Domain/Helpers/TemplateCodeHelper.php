@@ -4,6 +4,16 @@ namespace PhpLab\Sandbox\Generator\Domain\Helpers;
 
 use php7extension\yii\helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\CreatedAtRender;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\IdRender;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\MiscRender;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\SizeRender;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\StatusRender;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\TimeRender;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\TypeBooleanRender;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\TypeIntegerRender;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\TypeTimeRender;
+use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\UpdatedAtRender;
 
 class TemplateCodeHelper
 {
@@ -55,30 +65,42 @@ class TemplateCodeHelper
         $fieldCode = '';
         $fields = [];
         $spaces = str_repeat(" ", 4 * 4);
-        foreach ($attributes as $attribute) {
-            $attribute = Inflector::underscore($attribute);
-            if ($attribute == 'id') {
-                $fields[] = "$spaces\$table->integer('id')->autoIncrement();";
-            } elseif ($attribute == 'created_at') {
-                $fields[] = "$spaces\$table->dateTime('{$attribute}')->comment('Время создания');";
-            } elseif ($attribute == 'updated_at') {
-                $fields[] = "$spaces\$table->dateTime('{$attribute}')->nullable()->comment('Время обновления');";
-            } elseif ($attribute == 'size') {
-                $fields[] = "$spaces\$table->integer('{$attribute}')->comment('Размер');";
-            } elseif ($attribute == 'status') {
-                $fields[] = "$spaces\$table->smallInteger('{$attribute}')->default(1)->comment('Статус');";
-            } elseif (strpos($attribute, '_at') == strlen($attribute) - 3) {
-                $fields[] = "$spaces\$table->dateTime('{$attribute}')->comment('');";
-            } elseif (strpos($attribute, 'is_') === 0) {
-                $fields[] = "$spaces\$table->boolean('{$attribute}')->comment('');";
-            } elseif (strpos($attribute, '_id') === mb_strlen($attribute) - 3) {
-                $fields[] = "$spaces\$table->integer('{$attribute}')->comment('');";
-            } else {
-                $fields[] = "$spaces\$table->string('{$attribute}')->comment('');";
-            }
+        foreach ($attributes as $attributeName) {
+            $fields[] = $spaces . self::generateField($attributeName);
         }
         $fieldCode = implode(PHP_EOL, $fields);
         return $fieldCode;
+    }
+
+    private static function runFieldRender(string $renderClass, string $attributeName) : ?string {
+        $renderInstance = new $renderClass;
+        $renderInstance->attributeName = $attributeName;
+        if( ! $renderInstance->isMatch()) {
+            return null;
+        }
+        return $renderInstance->run();
+    }
+
+    private static function generateField(string $attributeName) : string {
+        $attributeName = Inflector::underscore($attributeName);
+        $renderClasses = [
+            IdRender::class,
+            CreatedAtRender::class,
+            UpdatedAtRender::class,
+            SizeRender::class,
+            StatusRender::class,
+            TypeTimeRender::class,
+            TypeBooleanRender::class,
+            TypeIntegerRender::class,
+        ];
+        $renderClasses[] = MiscRender::class;
+        foreach ($renderClasses as $renderClass) {
+            $field = self::runFieldRender($renderClass, $attributeName);
+            if($field) {
+                return $field;
+            }
+        }
+        return $field;
     }
 
 }
