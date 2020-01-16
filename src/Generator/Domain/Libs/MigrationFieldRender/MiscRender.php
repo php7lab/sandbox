@@ -12,8 +12,7 @@ class MiscRender extends BaseRender
 
     public function run() : string
     {
-        $code = "\$table->string('{$this->attributeName}')->comment('');";
-        return $code;
+        return $this->renderCode('string', $this->attributeName);
     }
 
 }

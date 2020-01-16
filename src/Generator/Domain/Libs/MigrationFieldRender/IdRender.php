@@ -12,8 +12,7 @@ class IdRender extends BaseRender
 
     public function run() : string
     {
-        $code = "\$table->integer('{$this->attributeName}')->autoIncrement();";
-        return $code;
+        return $this->renderCode('integer', $this->attributeName, 'Идентификатор', '->autoIncrement()');
     }
 
 }

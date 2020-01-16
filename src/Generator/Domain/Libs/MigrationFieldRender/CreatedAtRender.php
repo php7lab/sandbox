@@ -12,8 +12,7 @@ class CreatedAtRender extends BaseRender
 
     public function run() : string
     {
-        $code = "\$table->dateTime('{$this->attributeName}')->comment('Время создания');";
-        return $code;
+        return $this->renderCode('dateTime', $this->attributeName, 'Время создания');
     }
 
 }

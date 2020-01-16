@@ -12,8 +12,7 @@ class TypeBooleanRender extends BaseRender
 
     public function run() : string
     {
-        $code = "\$table->boolean('{$this->attributeName}')->comment('');";
-        return $code;
+        return $this->renderCode('boolean', $this->attributeName);
     }
 
 }

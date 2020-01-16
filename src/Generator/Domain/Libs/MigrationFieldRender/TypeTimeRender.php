@@ -12,8 +12,7 @@ class TypeTimeRender extends BaseRender
 
     public function run() : string
     {
-        $code = "\$table->dateTime('{$this->attributeName}')->comment('');";
-        return $code;
+        return $this->renderCode('dateTime', $this->attributeName);
     }
 
 }

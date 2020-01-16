@@ -12,8 +12,7 @@ class SizeRender extends BaseRender
 
     public function run() : string
     {
-        $code = "\$table->integer('{$this->attributeName}')->comment('Размер');";
-        return $code;
+        return $this->renderCode('integer', $this->attributeName, 'Размер');
     }
 
 }

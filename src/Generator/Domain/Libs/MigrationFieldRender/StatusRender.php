@@ -12,8 +12,7 @@ class StatusRender extends BaseRender
 
     public function run() : string
     {
-        $code = "\$table->smallInteger('{$this->attributeName}')->default(1)->comment('Статус');";
-        return $code;
+        return $this->renderCode('smallInteger', $this->attributeName, 'Статус');
     }
 
 }

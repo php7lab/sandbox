@@ -12,8 +12,7 @@ class TypeIntegerRender extends BaseRender
 
     public function run() : string
     {
-        $code = "\$table->integer('{$this->attributeName}')->comment('');";
-        return $code;
+        return $this->renderCode('integer', $this->attributeName);
     }
 
 }

@@ -12,8 +12,7 @@ class UpdatedAtRender extends BaseRender
 
     public function run() : string
     {
-        $code = "\$table->dateTime('{$this->attributeName}')->nullable()->comment('Время обновления');";
-        return $code;
+        return $this->renderCode('dateTime', $this->attributeName, 'Время обновления', '->nullable()');
     }
 
 }
