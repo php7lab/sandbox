@@ -59,10 +59,20 @@ class TemplateCodeHelper
             $attribute = Inflector::underscore($attribute);
             if ($attribute == 'id') {
                 $fields[] = "$spaces\$table->integer('id')->autoIncrement();";
+            } elseif ($attribute == 'created_at') {
+                $fields[] = "$spaces\$table->dateTime('{$attribute}')->comment('Время создания');";
+            } elseif ($attribute == 'updated_at') {
+                $fields[] = "$spaces\$table->dateTime('{$attribute}')->nullable()->comment('Время обновления');";
+            } elseif ($attribute == 'size') {
+                $fields[] = "$spaces\$table->integer('{$attribute}')->comment('Размер');";
+            } elseif ($attribute == 'status') {
+                $fields[] = "$spaces\$table->smallInteger('{$attribute}')->default(1)->comment('Статус');";
             } elseif (strpos($attribute, '_at') == strlen($attribute) - 3) {
                 $fields[] = "$spaces\$table->dateTime('{$attribute}')->comment('');";
             } elseif (strpos($attribute, 'is_') === 0) {
                 $fields[] = "$spaces\$table->boolean('{$attribute}')->comment('');";
+            } elseif (strpos($attribute, '_id') === mb_strlen($attribute) - 3) {
+                $fields[] = "$spaces\$table->integer('{$attribute}')->comment('');";
             } else {
                 $fields[] = "$spaces\$table->string('{$attribute}')->comment('');";
             }
