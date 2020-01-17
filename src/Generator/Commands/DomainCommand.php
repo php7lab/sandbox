@@ -17,7 +17,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DomainCommand extends Command
+class DomainCommand extends BaseGeneratorCommand
 {
 
     protected static $defaultName = 'generator:domain';
@@ -84,18 +84,6 @@ class DomainCommand extends Command
             $this->runInputScenario(DriverInputScenario::class, $input, $output, $buildDto);
             $this->runInputScenario(IsCrudRepositoryInputScenario::class, $input, $output, $buildDto);
         }
-    }
-
-    private function runInputScenario(string $className, InputInterface $input, OutputInterface $output, BuildDto $buildDto)
-    {
-        $output->writeln('');
-        /** @var BaseInputScenario $inputScenario */
-        $inputScenario = new $className;
-        $inputScenario->helper = $this->getHelper('question');
-        $inputScenario->input = $input;
-        $inputScenario->output = $output;
-        $inputScenario->buildDto = $buildDto;
-        return $inputScenario->run();
     }
 
 }

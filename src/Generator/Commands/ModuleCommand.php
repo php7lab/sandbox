@@ -12,7 +12,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ModuleCommand extends Command
+class ModuleCommand extends BaseGeneratorCommand
 {
 
     protected static $defaultName = 'generator:module';
@@ -48,18 +48,6 @@ class ModuleCommand extends Command
         $this->runInputScenario(NameInputScenario::class, $input, $output, $buildDto);
         $this->runInputScenario(ModuleNamespaceInputScenario::class, $input, $output, $buildDto);
         $this->runInputScenario(TypeModuleInputScenario::class, $input, $output, $buildDto);
-    }
-
-    private function runInputScenario(string $className, InputInterface $input, OutputInterface $output, BuildDto $buildDto)
-    {
-        $output->writeln('');
-        /** @var BaseInputScenario $inputScenario */
-        $inputScenario = new $className;
-        $inputScenario->helper = $this->getHelper('question');
-        $inputScenario->input = $input;
-        $inputScenario->output = $output;
-        $inputScenario->buildDto = $buildDto;
-        return $inputScenario->run();
     }
 
 }
