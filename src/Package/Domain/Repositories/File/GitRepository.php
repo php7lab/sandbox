@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use Illuminate\Support\Collection;
-use php7tool\vendor\domain\helpers\GitShell;
+use PhpLab\Sandbox\Package\Domain\Libs\GitShell;
 use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Domain\Repositories\BaseRepository;
 use PhpLab\Sandbox\Package\Domain\Entities\CommitEntity;
