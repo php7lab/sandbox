@@ -15,7 +15,7 @@ use php7tool\vendor\domain\entities\RepoEntity;
 use php7tool\vendor\domain\entities\RequiredEntity;
 use php7tool\vendor\domain\filters\IsIgnoreFilter;
 use php7tool\vendor\domain\filters\IsPackageFilter;
-use php7tool\vendor\domain\helpers\GitShell;
+use PhpLab\Sandbox\Package\Domain\Libs\GitShell;
 use php7tool\vendor\domain\helpers\RepositoryHelper;
 use php7tool\vendor\domain\helpers\UseHelper;
 use PhpLab\Domain\Helpers\EntityHelper;

@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Package\Domain\Services;
 
 use php7extension\yii\helpers\ArrayHelper;
-use php7tool\vendor\domain\helpers\GitShell;
+use PhpLab\Sandbox\Package\Domain\Libs\GitShell;
 use PhpLab\Domain\Services\BaseService;
 use PhpLab\Sandbox\Package\Domain\Entities\CommitEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
