@@ -5,7 +5,7 @@ namespace Migrations;
 use Illuminate\Database\Schema\Blueprint;
 use PhpLab\Eloquent\Migration\Base\BaseCreateTableMigration;
 
-if ( ! class_exists(m_2020_01_16_094221_create_service_table::class)) {
+if ( ! class_exists(m_2020_01_16_093109_create_service_table::class)) {
 
     class m_2020_01_16_093109_create_service_table extends BaseCreateTableMigration
     {

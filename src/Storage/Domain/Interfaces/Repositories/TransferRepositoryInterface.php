@@ -2,9 +2,9 @@
 
 namespace PhpLab\Sandbox\Storage\Domain\Interfaces\Repositories;
 
-use PhpLab\Domain\Interfaces\CrudRepositoryInterface;
+use PhpLab\Domain\Interfaces\RepositoryInterface;
 
-interface TransferRepositoryInterface extends CrudRepositoryInterface
+interface TransferRepositoryInterface extends RepositoryInterface
 {
 
 
