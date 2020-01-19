@@ -8,7 +8,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class BaseGeneratorCommand extends Command
+abstract class BaseGeneratorCommand extends Command
 {
 
     protected function runInputScenario(string $className, InputInterface $input, OutputInterface $output, BuildDto $dto)
