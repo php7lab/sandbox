@@ -22,7 +22,9 @@
     <!-- Main Header -->
     <header class="main-header">
         {% include '@AdminPanel/block/header_logo.html.twig' %}
-        {% include '@AdminPanel/block/navbar.html.twig' %}
+        <nav class="navbar navbar-static-top" role="navigation">
+            {% include '@AdminPanel/block/navbar.html.twig' %}
+        </nav>
     </header>
     <aside class="main-sidebar">
         <section class="sidebar">
@@ -40,8 +42,13 @@
             {% block body %}<i class="text-muted">Empty content</i>{% endblock %}
         </section>
     </div>
-    {% include '@AdminPanel/block/footer.html.twig' %}
-    {% include '@AdminPanel/block/control_sidebar.html.twig' %}
+    <footer class="main-footer">
+        {% include '@AdminPanel/block/footer.html.twig' %}
+    </footer>
+    <aside class="control-sidebar control-sidebar-dark">
+        {% include '@AdminPanel/block/control_sidebar.html.twig' %}
+    </aside>
+    <div class="control-sidebar-bg"></div>
 </div>
 {% include '@Web/script.html.twig' %}
 </body>
