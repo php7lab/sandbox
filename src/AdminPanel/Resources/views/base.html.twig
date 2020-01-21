@@ -4,52 +4,68 @@
     <meta charset="utf-8">
     <title>{% block title %}Admin panel{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    {{ style('/bundles/web/vendor/bootstrap/dist/css/bootstrap.min.css') }}
-    {{ style('/bundles/web/vendor/font-awesome/css/font-awesome.min.css') }}
-    {{ style('/bundles/web/vendor/Ionicons/css/ionicons.min.css') }}
-    {{ style('/bundles/web/vendor/admin-lte/dist/css/AdminLTE.min.css') }}
-    {{ style('/bundles/web/vendor/admin-lte/dist/css/skins/skin-blue.min.css') }}
-    {{ style('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic') }} <!-- Google Font -->
-    {{ script('/bundles/web/vendor/jquery/dist/jquery.min.js') }}
-    {{ script('/bundles/web/vendor/bootstrap/dist/js/bootstrap.min.js') }}
-    {{ script('/bundles/web/vendor/admin-lte/dist/js/adminlte.min.js') }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ style('/bundles/web/vendor/fontawesome-free/css/all.min.css') }}
+    {{ style('/bundles/web/vendor/adminlte/css/adminlte.min.css') }}
+    {{ style('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') }}
+    {{ style('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') }}
+    {{ script('/bundles/web/vendor/jquery/jquery.min.js') }}
+    {{ script('/bundles/web/vendor/bootstrap/js/bootstrap.bundle.min.js') }}
+    {{ script('/bundles/web/vendor/adminlte/js/adminlte.min.js') }}
+    {{ script('/bundles/web/vendor/adminlte/js/demo.js') }}
     {% include '@Web/style.html.twig' %}
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
 <div class="wrapper">
     {% include '@Notify/notify.html.twig' %}
-    <!-- Main Header -->
-    <header class="main-header">
-        {% include '@AdminPanel/block/header_logo.html.twig' %}
-        <nav class="navbar navbar-static-top" role="navigation">
-            {% include '@AdminPanel/block/navbar.html.twig' %}
-        </nav>
-    </header>
-    <aside class="main-sidebar">
-        <section class="sidebar">
-            {% include '@AdminPanel/block/sidebar/user.html.twig' %}
-            {% include '@AdminPanel/block/sidebar/search_form.html.twig' %}
-            {% include '@AdminPanel/block/sidebar/menu.html.twig' %}
-        </section>
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        {% include '@AdminPanel/block/navbar.html.twig' %}
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        {% include '@AdminPanel/block/main_sidebar.html.twig' %}
     </aside>
+
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>{{ block('title') }} <small>Optional description</small></h1>
-            {% include '@AdminPanel/block/breadcrumb.html.twig' %}
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>{{ block('title') }}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        {% include '@AdminPanel/block/breadcrumb.html.twig' %}
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
         </section>
-        <section class="content container-fluid">
+
+        <!-- Main content -->
+        <section class="content">
             {% block body %}<i class="text-muted">Empty content</i>{% endblock %}
         </section>
+        <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
+
     <footer class="main-footer">
         {% include '@AdminPanel/block/footer.html.twig' %}
     </footer>
+
+    <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         {% include '@AdminPanel/block/control_sidebar.html.twig' %}
     </aside>
-    <div class="control-sidebar-bg"></div>
+    <!-- /.control-sidebar -->
 </div>
+<!-- ./wrapper -->
+
 {% include '@Web/script.html.twig' %}
 </body>
 </html>

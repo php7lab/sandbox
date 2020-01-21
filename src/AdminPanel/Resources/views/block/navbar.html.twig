@@ -1,18 +1,25 @@
-<!-- Header Navbar -->
+<!-- Left navbar links -->
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="/bundles/web/index3.html" class="nav-link">Home</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+    </li>
+</ul>
 
-<!-- Sidebar toggle button-->
-<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-    <span class="sr-only">Toggle navigation</span>
-</a>
-<!-- Navbar Right Menu -->
-<div class="navbar-custom-menu">
-    <ul class="nav navbar-nav">
-        {% include '@AdminPanel/block/navbar/messages.html.twig' %}
-        {% include '@AdminPanel/block/navbar/notifications.html.twig' %}
-        {% include '@AdminPanel/block/navbar/tasks.html.twig' %}
-        {% include '@AdminPanel/block/navbar/account.html.twig' %}
-        <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-        </li>
-    </ul>
-</div>
+{% include '@AdminPanel/block/navbar/search_form.html.twig' %}
+
+<!-- Right navbar links -->
+<ul class="navbar-nav ml-auto">
+    {% include '@AdminPanel/block/navbar/messages.html.twig' %}
+    {% include '@AdminPanel/block/navbar/Notifications.html.twig' %}
+    <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+            <i class="fas fa-th-large"></i>
+        </a>
+    </li>
+</ul>
