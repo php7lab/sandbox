@@ -13,7 +13,7 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            {% include '@AdminPanel/block/main_sidebar_menu.html.twig' %}
+            {{ widget('PhpLab\\Sandbox\\AdminPanel\\MenuWidget') }}
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

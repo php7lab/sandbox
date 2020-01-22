@@ -20,7 +20,7 @@ class HelpersExtension extends AbstractExtension
         ];
     }
 
-    public function widget($widgetClass, $params)
+    public function widget($widgetClass, $params = [])
     {
         /** @var WidgetInterface $widget */
         $widget = new $widgetClass;
