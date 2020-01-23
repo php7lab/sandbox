@@ -53,9 +53,7 @@ class MenuWidget extends BaseWidget
      *
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
-    public $itemOptions = [
-        'class' => 'nav-item',
-    ];
+    public $itemOptions = [];
 
     /**
      * @var string the template used to render the body of a menu which is a link.
@@ -64,13 +62,11 @@ class MenuWidget extends BaseWidget
      * This property will be overridden by the `template` option set in individual menu items via [[items]].
      */
     public $linkTemplate =
-        '<a href="{url}" class="nav-link {class}">
+        '<a href="{url}" class="{class}">
             {icon}
-            <p>
-                {label}
-                {treeViewIcon}
-                {badge}
-            </p>
+            {label}
+            {treeViewIcon}
+            {badge}
         </a>';
 
     /**
@@ -84,7 +80,7 @@ class MenuWidget extends BaseWidget
      * @var string the template used to render a list of sub-menus.
      * In this template, the token `{items}` will be replaced with the rendered sub-menu items.
      */
-    public $submenuTemplate = '<ul class="nav nav-treeview">{items}</ul>';
+    public $submenuTemplate = '<ul>{items}</ul>';
 
     /**
      * @var bool whether the labels for menu items should be HTML-encoded.
@@ -156,7 +152,7 @@ class MenuWidget extends BaseWidget
     /**
      * @var string
      */
-    public $treeViewIcon = '<i class="right fas fa-angle-left"></i>';
+    public $treeViewIcon = '<i>&lt;</i>';
 
     public function render(): string
     {
@@ -212,7 +208,7 @@ class MenuWidget extends BaseWidget
     {
         if (isset($item['url'])) {
             $template = ArrayHelper::getValue($item, 'template', $this->linkTemplate);
-//dd($template);
+
             $params = [
                 'class' => '',
                 'treeViewIcon' => '',
