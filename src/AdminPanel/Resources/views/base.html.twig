@@ -40,7 +40,8 @@
                         <h1>{{ block('title') }}</h1>
                     </div>
                     <div class="col-sm-6">
-                        {% include '@AdminPanel/block/breadcrumb.html.twig' %}
+                        {{ breadcrumbAdd('Home', './') }}
+                        {{ breadcrumb() }}
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

@@ -82,6 +82,8 @@ class MenuWidget extends BaseWidget
      */
     public $submenuTemplate = '<ul>{items}</ul>';
 
+    public $wrapTemplate = '{items}';
+
     /**
      * @var bool whether the labels for menu items should be HTML-encoded.
      */
@@ -157,7 +159,11 @@ class MenuWidget extends BaseWidget
     public function render(): string
     {
         $items = $this->normalizeItems($this->items, $hasActiveChild);
-        return $this->renderItems($items);
+
+        $code = $this->renderItems($items);
+        return $this->renderTemplate($this->wrapTemplate, [
+            'items' => $code,
+        ]);
     }
 
     /**
