@@ -1,23 +1,24 @@
 <?php
 
-namespace PhpLab\Sandbox\Web\Twig;
+namespace PhpLab\Sandbox\Html\Twig;
 
 use PhpLab\Sandbox\Html\Widgets\WidgetInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class HelpersExtension extends AbstractExtension
+class WidgetExtension extends AbstractExtension
 {
+
+    private $items = [];
 
     public function getFunctions()
     {
         return [
-            new TwigFunction('asset', [$this, 'asset'], ['is_safe' => ['html']]),
             new TwigFunction('widget', [$this, 'widget'], ['is_safe' => ['html']]),
         ];
     }
 
-    public function widget($widgetClass, $params = [])
+    public function widget(string $widgetClass, array $params = [])
     {
         /** @var WidgetInterface $widget */
         $widget = new $widgetClass;
@@ -25,11 +26,6 @@ class HelpersExtension extends AbstractExtension
             $widget->{$paramName} = $paramValue;
         }
         return $widget->render();
-    }
-
-    public function asset($path, $param = null)
-    {
-        return $path;
     }
 
 }

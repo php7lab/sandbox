@@ -1,5 +1,5 @@
 
-{% for style in styleList() %}
+{% for style in resourceList('style') %}
     <link href="{{ asset(style.path) }}" rel="stylesheet">
 {% endfor %}
 

@@ -3,9 +3,6 @@
 namespace PhpLab\Sandbox\Web\Twig;
 
 use php7extension\yii\helpers\FileHelper;
-use PhpLab\Sandbox\Html\Widgets\PaginationWidget;
-use PhpLab\Sandbox\Html\Widgets\WidgetInterface;
-use PhpLab\Domain\Data\DataProviderEntity;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -18,46 +15,46 @@ class AssetExtension extends AbstractExtension
         'css' => 'style',
         'js' => 'script',
     ];
-    private $includes = [];
+    private $resources = [];
 
     public function getFunctions()
     {
         return [
+            new TwigFunction('asset', [$this, 'asset'], ['is_safe' => ['html']]),
             new TwigFunction('style', [$this, 'style'], ['is_safe' => ['html']]),
-            new TwigFunction('styleList', [$this, 'styleList'], ['is_safe' => ['html']]),
             new TwigFunction('script', [$this, 'script'], ['is_safe' => ['html']]),
-            new TwigFunction('scriptList', [$this, 'scriptList'], ['is_safe' => ['html']]),
+            new TwigFunction('resourceList', [$this, 'resourceList'], ['is_safe' => ['html']]),
             new TwigFunction('resource', [$this, 'includeResource'], ['is_safe' => ['html']]),
         ];
     }
 
-    public function includeResource($path, $attributes = [])
+    public function asset(string $path)
     {
-        $urlInfo = parse_url($path);
-        $extension = FileHelper::fileExt($urlInfo['path']);
-        $type = $this->types[$extension];
+        return $path;
+    }
+
+    public function includeResource(string $path, string $type = null, array $attributes = [])
+    {
+        if (empty($type)) {
+            $urlInfo = parse_url($path);
+            $extension = FileHelper::fileExt($urlInfo['path']);
+            $type = $this->types[$extension];
+        }
         $this->{$type}[] = [
             'path' => $path,
             'attributes' => $attributes,
         ];
     }
 
-    public function script($path, $attributes = [])
+    public function script(string $path, array $attributes = [])
     {
-        $extension = FileHelper::fileExt($path);
-        $type = $this->types[$extension];
-        $this->{$type}[] = [
+        $this->script[] = [
             'path' => $path,
             'attributes' => $attributes,
         ];
     }
 
-    public function scriptList()
-    {
-        return $this->script;
-    }
-
-    public function style($path, $attributes = [])
+    public function style(string $path, array $attributes = [])
     {
         $this->style[] = [
             'path' => $path,
@@ -65,8 +62,9 @@ class AssetExtension extends AbstractExtension
         ];
     }
 
-    public function styleList()
+    public function resourceList(string $name)
     {
-        return $this->style;
+        return $this->{$name};
     }
+
 }

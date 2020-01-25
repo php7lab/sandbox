@@ -30,7 +30,7 @@ class BreadcrumbExtension extends AbstractExtension
         return $widgetInstance->render();
     }
 
-    public function breadcrumbAdd($title, $url = null)
+    public function breadcrumbAdd(string $title, string $url = null)
     {
         //dd($title);
         $this->items[] = [
