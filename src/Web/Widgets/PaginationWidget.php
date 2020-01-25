@@ -27,14 +27,14 @@ class PaginationWidget extends BaseWidget implements WidgetInterface
         }
         $itemsHtml .= $this->renderNextItem();
         $renderPageSizeSelector = $this->renderPageSizeSelector();
-        $itemsHtml .= $renderPageSizeSelector ? '<li>' . $renderPageSizeSelector . '</li>' : '';
-        return $this->renderLayout($itemsHtml);
+        $itemsHtml .= $renderPageSizeSelector ? '<li class="page-item">' . $renderPageSizeSelector . '</li>' : '';
+        return $this->renderLayout($itemsHtml)/* . ($renderPageSizeSelector ? '' . $renderPageSizeSelector . '' : '')*/;
     }
 
     private function renderLayout(string $items) {
         return "
             <nav aria-label=\"Page navigation\">
-                <ul class=\"pagination\">
+                <ul class=\"pagination justify-content-end\">
                     {$items}
                 </ul>
             </nav>
@@ -47,26 +47,25 @@ class PaginationWidget extends BaseWidget implements WidgetInterface
         }
         $html = '';
         foreach ($this->perPageArray as $size) {
-            $html .= "<li><a href='?per-page={$size}'>{$size}</a></li>";
+            $html .= "<a class=\"dropdown-item\" href='?per-page={$size}'>{$size}</a>";
         }
         return "
-            <span class=\"dropup btn btn-link\">
-                <span class=\"dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">
+            <li class=\"page-item \">
+                <a class=\"page-link dropdown-toggle\" href=\"#\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     {$this->dataProviderEntity->getPageSize()}
-                    <span class=\"caret\"></span>
-                </span>
-                <ul class=\"dropdown-menu\">
+                </a>
+                <div class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"navbarDropdown\">
+                    <h6 class=\"dropdown-header\">Page size</h6>
                     {$html}
-                </ul>
-            </span>
-        ";
+                </div>
+            </li>";
     }
 
     private function renderPageItem(int $page) {
         $selectedClass = ($this->dataProviderEntity->page == $page) ? 'active' : '';
         return "
-            <li class=\"{$selectedClass}\">
-                <a href=\"?page={$page}\">
+            <li class=\"page-item {$selectedClass}\">
+                <a class=\"page-link\" href=\"?page={$page}\">
                     {$page}
                 </a>
             </li>
@@ -76,8 +75,8 @@ class PaginationWidget extends BaseWidget implements WidgetInterface
     private function renderPrevItem() {
         $prevClass = $this->dataProviderEntity->isFirstPage() ? 'disabled' : '';
         return "
-            <li class=\"{$prevClass}\">
-                <a href=\"?page={$this->dataProviderEntity->getPrevPage()}\" aria-label=\"Previous\">
+            <li class=\"page-item {$prevClass}\">
+                <a class=\"page-link\" href=\"?page={$this->dataProviderEntity->getPrevPage()}\" aria-label=\"Previous\">
                     <span aria-hidden=\"true\">&laquo;</span>
                 </a>
             </li>
@@ -87,8 +86,8 @@ class PaginationWidget extends BaseWidget implements WidgetInterface
     private function renderNextItem() {
         $nextClass = $this->dataProviderEntity->isLastPage() ? 'disabled' : '';
         return "
-            <li class=\"{$nextClass}\">
-                <a href=\"?page={$this->dataProviderEntity->getNextPage()}\" aria-label=\"Next\">
+            <li class=\"page-item {$nextClass}\">
+                <a class=\"page-link\" href=\"?page={$this->dataProviderEntity->getNextPage()}\" aria-label=\"Next\">
                     <span aria-hidden=\"true\">&raquo;</span>
                 </a>
             </li>
