@@ -6,7 +6,7 @@
 
     <div class="pull-right">
         <a class="btn btn-primary" href="{{ path('web_article_post_update', {id: post.id}) }}">update</a>
-        <a class="btn btn-danger" href="#deleteModal" data-toggle="modal"  href111="{{ path('web_article_post_delete', {id: post.id}) }}">delete</a>
+        <a class="btn btn-danger" href="#deleteModal" data-toggle="modal">delete</a>
     </div>
 
     <h3>
@@ -14,23 +14,12 @@
         <span class="label label-default">{{ post.category.title }}</span>
     </h3>
 
-    <div id="deleteModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Delete item</h4>
-                </div>
-                <div class="modal-body">
-                    A you sure delete item?
-                </div>
-                <div class="modal-footer">
-                    <form id="post_delete_form" method="post" action="{{ path('web_article_post_delete', {id: post.id}) }}"></form>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-danger" onclick="$('#post_delete_form').submit()">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% set footer %}
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form id="post_delete_form" method="post" action="{{ path('web_article_post_delete', {id: post.id}) }}"></form>
+        <button class="btn btn-danger" onclick="$('#post_delete_form').submit()">Delete</button>
+    {% endset %}
+
+    {{ modal('deleteModal', 'Delete item', 'A you sure delete item?', footer) }}
 
 {% endblock %}
