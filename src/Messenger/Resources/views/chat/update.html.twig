@@ -4,6 +4,10 @@
 
 {% block body %}
 
+    {{ breadcrumbAdd('Message', '/chat') }}
+    {{ breadcrumbAdd(chat.title, '/chat/view/' ~ chat.id) }}
+    {{ breadcrumbAdd('Update', '/chat/update/' ~ chat.id) }}
+
     <h3>
         {{ chat.title }} Update
         {#<span class="label label-default">{{ chat.category.title }}</span>#}

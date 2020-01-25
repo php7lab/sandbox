@@ -4,6 +4,10 @@
 
 {% block body %}
 
+    {{ breadcrumbAdd('Post', '/article') }}
+    {{ breadcrumbAdd(post.title, '/article/view/' ~ post.id) }}
+    {{ breadcrumbAdd('Update', '/article/update/' ~ post.id) }}
+
     <h3>
         {{ post.title }} Update
         <span class="label label-default">{{ post.category.title }}</span>

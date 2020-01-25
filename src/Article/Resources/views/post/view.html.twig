@@ -4,7 +4,10 @@
 
 {% block body %}
 
-    <div class="pull-right">
+    {{ breadcrumbAdd('Post', '/article') }}
+    {{ breadcrumbAdd(post.title, '/article/view/' ~ post.id) }}
+
+    <div class="float-right">
         <a class="btn btn-primary" href="{{ path('web_article_post_update', {id: post.id}) }}">update</a>
         <a class="btn btn-danger" href="#deleteModal" data-toggle="modal">delete</a>
     </div>

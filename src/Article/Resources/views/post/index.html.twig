@@ -4,6 +4,8 @@
 
 {% block body %}
 
+    {{ breadcrumbAdd('Post', '/article') }}
+
     {% include '@Article/post/index.list.html.twig' %}
 
     <span class="pull-right">
