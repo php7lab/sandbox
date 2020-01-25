@@ -1,21 +1,20 @@
 <?php
 
-namespace PhpLab\Sandbox\AdminPanel;
+namespace PhpLab\Sandbox\Web\Widgets;
 
-class MenuWidget extends \PhpLab\Sandbox\Web\Widgets\MenuWidget
+class NavbarMenuWidget extends \PhpLab\Sandbox\Web\Widgets\MenuWidget
 {
 
     public $itemOptions = [
         'class' => 'nav-item',
+        'tag' => 'span',
     ];
     public $linkTemplate =
         '<a href="{url}" class="nav-link {class}">
             {icon}
-            <p>
                 {label}
                 {treeViewIcon}
                 {badge}
-            </p>
         </a>';
     public $submenuTemplate = '<ul class="nav nav-treeview">{items}</ul>';
     public $activateParents = true;
@@ -23,7 +22,7 @@ class MenuWidget extends \PhpLab\Sandbox\Web\Widgets\MenuWidget
 
     public function __construct()
     {
-        $this->items = include(__DIR__ . '/../../../../../config/menu/admin.php');
+        $this->items = include(__DIR__ . '/../../../../../../config/menu/web.php');
     }
 
 }
