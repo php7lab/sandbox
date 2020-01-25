@@ -3,8 +3,8 @@
 namespace PhpLab\Sandbox\Web\Twig;
 
 use php7extension\yii\helpers\FileHelper;
-use PhpLab\Sandbox\Web\Widgets\PaginationWidget;
-use PhpLab\Sandbox\Web\Widgets\WidgetInterface;
+use PhpLab\Sandbox\Html\Widgets\PaginationWidget;
+use PhpLab\Sandbox\Html\Widgets\WidgetInterface;
 use PhpLab\Domain\Data\DataProviderEntity;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;

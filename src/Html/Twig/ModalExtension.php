@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Sandbox\Web\Twig;
+namespace PhpLab\Sandbox\Html\Twig;
 
-use PhpLab\Sandbox\Web\Widgets\ModalWidget;
+use PhpLab\Sandbox\Html\Widgets\ModalWidget;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

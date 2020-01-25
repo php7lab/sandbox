@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Sandbox\Web\Widgets;
+namespace PhpLab\Sandbox\Html\Widgets;
 
 use php7extension\yii\helpers\Html;
-use PhpLab\Sandbox\Web\Widgets\BaseWidget;
+use PhpLab\Sandbox\Html\Widgets\BaseWidget;
 use Closure;
 use Yii;
 use php7extension\yii\base\Widget;

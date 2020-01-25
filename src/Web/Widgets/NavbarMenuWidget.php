@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Web\Widgets;
 
-class NavbarMenuWidget extends \PhpLab\Sandbox\Web\Widgets\MenuWidget
+class NavbarMenuWidget extends \PhpLab\Sandbox\Html\Widgets\MenuWidget
 {
 
     public $itemOptions = [

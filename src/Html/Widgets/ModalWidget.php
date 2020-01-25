@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Sandbox\Web\Widgets;
+namespace PhpLab\Sandbox\Html\Widgets;
 
 use PhpLab\Domain\Data\DataProviderEntity;
 

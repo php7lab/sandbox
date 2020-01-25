@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Sandbox\Web\Twig;
+namespace PhpLab\Sandbox\Html\Twig;
 
-use PhpLab\Sandbox\Web\Widgets\BreadcrumbWidget;
-use PhpLab\Sandbox\Web\Widgets\PaginationWidget;
-use PhpLab\Sandbox\Web\Widgets\WidgetInterface;
+use PhpLab\Sandbox\Html\Widgets\BreadcrumbWidget;
+use PhpLab\Sandbox\Html\Widgets\PaginationWidget;
+use PhpLab\Sandbox\Html\Widgets\WidgetInterface;
 use PhpLab\Domain\Data\DataProviderEntity;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
