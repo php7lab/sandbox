@@ -10,7 +10,7 @@ class BreadcrumbWidget extends MenuWidget implements WidgetInterface
     public $itemOptions = [
         'class' => 'breadcrumb-item',
     ];
-    public $wrapTemplate = '<ol class="breadcrumb float-sm-right">{items}</ol>';
+    public $wrapTemplate = '<ol class="breadcrumb">{items}</ol>';
 
     public function __construct(array $items)
     {

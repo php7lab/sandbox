@@ -40,8 +40,11 @@
                         <h1>{{ block('title') }}</h1>
                     </div>
                     <div class="col-sm-6">
-                        {{ breadcrumbAdd('Home', './') }}
-                        {{ breadcrumb() }}
+                        <div class="float-sm-right">
+                            {{ breadcrumbAdd('Home', './') }}
+                            {{ breadcrumb() }}
+                        </div>
+
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
