@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Libs;
 
-use php7extension\core\traits\classAttribute\MagicSetTrait;
+use PhpLab\Sandbox\Common\Traits\ClassAttribute\MagicSetTrait;
 use php7extension\psr\container\BaseContainer;
 use PhpLab\Sandbox\Crypt\Entities\JwtProfileEntity;
 use PhpLab\Sandbox\Crypt\Helpers\ConfigProfileHelper;

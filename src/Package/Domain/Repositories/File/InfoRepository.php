@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use php7extension\yii\base\InvalidArgumentException;
 use php7extension\yii\web\NotFoundHttpException;
 use PhpLab\Sandbox\Common\Libs\Scenario\Collections\ScenarioCollection;
-use php7extension\core\arrayTools\helpers\ArrayIterator;
+use PhpLab\Sandbox\Common\Libs\ArrayTools\Helpers\ArrayIterator;
 use PhpLab\Domain\Data\Query;
 use php7rails\domain\interfaces\repositories\ReadInterface;
 use php7rails\domain\repositories\BaseRepository;

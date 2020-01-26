@@ -6,7 +6,7 @@ use PhpLab\Domain\Base\BaseEntity;
 use PhpLab\Sandbox\Common\Helpers\Helper;
 use php7extension\yii\base\InvalidArgumentException;
 use php7extension\yii\helpers\ArrayHelper;
-use php7extension\core\arrayTools\helpers\Collection;
+use PhpLab\Sandbox\Common\Libs\ArrayTools\Helpers\Collection;
 use php7rails\domain\data\EntityCollection;
 use php7rails\domain\values\BaseValue;
 

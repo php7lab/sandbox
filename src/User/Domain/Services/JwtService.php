@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\User\Domain\Services;
 
 use PhpLab\Sandbox\User\Domain\Repositories\Config\ProfileRepository;
-use php7extension\core\traits\classAttribute\MagicSetTrait;
+use PhpLab\Sandbox\Common\Traits\ClassAttribute\MagicSetTrait;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
 use PhpLab\Sandbox\Crypt\Helpers\JwtEncodeHelper;
 use PhpLab\Sandbox\Crypt\Helpers\JwtHelper;

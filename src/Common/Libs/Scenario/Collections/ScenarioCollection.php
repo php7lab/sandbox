@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Common\Libs\Scenario\Collections;
 
 use php7extension\yii\base\BaseObject;
 use PhpLab\Sandbox\Common\Libs\Scenario\Base\BaseScenario;
-use php7extension\core\arrayTools\helpers\Collection;
+use PhpLab\Sandbox\Common\Libs\ArrayTools\Helpers\Collection;
 use php7rails\domain\values\BaseValue;
 use PhpLab\Sandbox\Common\Helpers\ClassHelper;
 use PhpLab\Sandbox\Common\Helpers\Helper;
