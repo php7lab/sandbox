@@ -8,7 +8,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use Illuminate\Support\Collection;
 use php7extension\yii\base\Security;
 use PhpLab\Domain\Exceptions\UnprocessibleEntityException;
-use PhpLab\Rest\Entities\ValidateErrorEntity;
+use PhpLab\Domain\Entities\ValidateErrorEntity;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
 use PhpLab\Sandbox\User\Domain\Entities\User;
 use PhpLab\Sandbox\User\Domain\Exceptions\UnauthorizedException;
