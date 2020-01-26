@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Sandbox\Html\Widgets;
+namespace PhpLab\Sandbox\Html\Interfaces;
 
 interface WidgetInterface
 {

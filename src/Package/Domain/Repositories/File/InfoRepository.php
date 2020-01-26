@@ -191,10 +191,10 @@ class InfoRepository extends BaseRepository implements ReadInterface
         foreach ($collection as $package) {
             try {
                 $package = FileHelper::getAlias('@' . $package);
-                $package = str_replace(VENDOR_DIR . DS, '', $package);
-                $packageArr = explode(BSL, $package);
-                $package = $packageArr[0] . BSL . $packageArr[1];
-                $package = str_replace(BSL, SL, $package);
+                $package = str_replace(VENDOR_DIR . DIRECTORY_SEPARATOR, '', $package);
+                $packageArr = explode('\\', $package);
+                $package = $packageArr[0] . '\\' . $packageArr[1];
+                $package = str_replace('\\', '/', $package);
                 $version = \Yii::$app->extensions[$package];
                 $packages[] = new RequiredEntity($version);
             } catch (InvalidArgumentException $e) {

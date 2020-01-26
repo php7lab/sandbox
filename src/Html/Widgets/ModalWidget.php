@@ -2,7 +2,9 @@
 
 namespace PhpLab\Sandbox\Html\Widgets;
 
-class ModalWidget extends BaseWidget implements WidgetInterface
+use PhpLab\Sandbox\Html\Base\BaseWidget;
+
+class ModalWidget extends BaseWidget
 {
 
     public $tagId;

@@ -63,7 +63,7 @@ abstract class BaseDiscRepository extends BaseRepository
     private function getFileName()
     {
         $dir = $this->getDbDir();
-        return $dir . DS . $this->table . DOT . $this->format;
+        return $dir . DIRECTORY_SEPARATOR . $this->table . '.' . $this->format;
     }
 
     private function getStore()

@@ -1,6 +1,8 @@
 <?php
 
-namespace PhpLab\Sandbox\Html\Widgets;
+namespace PhpLab\Sandbox\Html\Base;
+
+use PhpLab\Sandbox\Html\Interfaces\WidgetInterface;
 
 abstract class BaseWidget implements WidgetInterface
 {

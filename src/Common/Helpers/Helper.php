@@ -138,8 +138,8 @@ class Helper
 
     public static function microtimeId($length = 14)
     {
-        $timeArray = explode(DOT, microtime(true));
-        $time = implode(EMP, $timeArray);
+        $timeArray = explode('.', microtime(true));
+        $time = implode('', $timeArray);
         $time = strval($time);
         $time = StringHelper::fill($time, $length, '0');
         if ($length > 14) {
@@ -199,7 +199,7 @@ class Helper
 
     public static function loadData($name, $key = null)
     {
-        $file = COMMON_DATA_DIR . DS . $name . '.php';
+        $file = COMMON_DATA_DIR . DIRECTORY_SEPARATOR . $name . '.php';
         $data = FileHelper::loadData($file, $key, []);
         return $data;
     }

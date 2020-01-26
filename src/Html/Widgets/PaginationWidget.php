@@ -3,8 +3,9 @@
 namespace PhpLab\Sandbox\Html\Widgets;
 
 use PhpLab\Domain\Data\DataProviderEntity;
+use PhpLab\Sandbox\Html\Base\BaseWidget;
 
-class PaginationWidget extends BaseWidget implements WidgetInterface
+class PaginationWidget extends BaseWidget
 {
 
     private $dataProviderEntity;

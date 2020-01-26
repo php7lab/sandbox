@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Html\Widgets;
 
-class BreadcrumbWidget extends MenuWidget implements WidgetInterface
+class BreadcrumbWidget extends MenuWidget
 {
 
     public $itemOptions = [

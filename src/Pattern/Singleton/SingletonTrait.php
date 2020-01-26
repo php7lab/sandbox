@@ -10,8 +10,9 @@ class SingletonTrait implements SingletonInterface
      */
     private static $instances = [];
 
-    public static function instance(boolean $refresh = false): object
+    public static function instance(): object
     {
+        $refresh = false;
         $className = static::class;
         $isNotFound = ! isset(self::$instances[$className]);
         if ($refresh || $isNotFound) {

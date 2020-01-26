@@ -93,7 +93,7 @@ class JwtHelper
             $jwtEntity->audience = ArrayHelper::merge($jwtEntity->audience, $profileEntity->audience);
         }
         if ( ! $jwtEntity->expire_at && $profileEntity->life_time) {
-            $jwtEntity->expire_at = TIMESTAMP + $profileEntity->life_time;
+            $jwtEntity->expire_at = time() + $profileEntity->life_time;
         }
         $data = self::entityToToken($jwtEntity);
 

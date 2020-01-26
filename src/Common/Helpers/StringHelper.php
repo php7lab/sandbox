@@ -22,7 +22,7 @@ class StringHelper
     {
         $data = StringHelper::textToLine($data);
         $data = StringHelper::removeDoubleSpace($data);
-        $data = str_replace(SPC, DOT, $data);
+        $data = str_replace(' ', '.', $data);
         return $data;
     }
 
@@ -64,7 +64,7 @@ class StringHelper
     public static function stripContent($data, $beginText, $endText)
     {
         $pattern = preg_quote($beginText) . '[\s\S]+' . preg_quote($endText);
-        $data = preg_replace('#' . $pattern . '#i', EMP, $data);
+        $data = preg_replace('#' . $pattern . '#i', '', $data);
         return $data;
     }
 
@@ -153,7 +153,7 @@ class StringHelper
 
     public static function textToLine($text)
     {
-        $text = preg_replace(self::PATTERN_SPACES, SPC, $text);
+        $text = preg_replace(self::PATTERN_SPACES, ' ', $text);
         return $text;
     }
 
@@ -172,42 +172,42 @@ class StringHelper
 
     public static function removeDoubleSpace($text)
     {
-        $text = preg_replace(self::PATTERN_SPACES, SPC, $text);
+        $text = preg_replace(self::PATTERN_SPACES, ' ', $text);
         return $text;
     }
 
     public static function removeAllSpace($text)
     {
-        $text = preg_replace(self::PATTERN_SPACES, EMP, $text);
+        $text = preg_replace(self::PATTERN_SPACES, '', $text);
         return $text;
     }
 
     public static function filterNumOnly($text, $charSet = self::NUM_CHAR)
     {
-        $text = preg_replace($charSet, EMP, $text);
+        $text = preg_replace($charSet, '', $text);
         return $text;
     }
 
     public static function filterChar($text, $charSet = self::WITHOUT_CHAR)
     {
-        $text = preg_replace($charSet, EMP, $text);
+        $text = preg_replace($charSet, '', $text);
         return $text;
     }
 
     public static function textToArray($text)
     {
         $text = self::removeDoubleSpace($text);
-        return explode(SPC, $text);
+        return explode(' ', $text);
     }
 
     public static function mask($value, $length = 2, $valueLength = null)
     {
         if (empty($value)) {
-            return EMP;
+            return '';
         }
         if ($length == 0) {
-            $begin = EMP;
-            $end = EMP;
+            $begin = '';
+            $end = '';
         } else {
             $begin = substr($value, 0, $length);
             $end = substr($value, 0 - $length);
@@ -219,7 +219,7 @@ class StringHelper
 
     private static function extractWords($text)
     {
-        $text = preg_replace('/[^0-9A-Za-zА-Яа-яЁё]/iu', SPC, $text);
+        $text = preg_replace('/[^0-9A-Za-zА-Яа-яЁё]/iu', ' ', $text);
         $text = self::removeDoubleSpace($text);
         $text = trim($text);
         return $text;

@@ -6,6 +6,7 @@ use Closure;
 use php7extension\yii\base\Widget;
 use php7extension\yii\helpers\ArrayHelper;
 use php7extension\yii\helpers\Html;
+use PhpLab\Sandbox\Html\Base\BaseWidget;
 
 class MenuWidget extends BaseWidget
 {

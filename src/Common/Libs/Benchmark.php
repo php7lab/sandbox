@@ -76,7 +76,7 @@ class Benchmark
         if (is_string($name)) {
             return $name;
         }
-        $scope = microtime(true) . BL . serialize($name);
+        $scope = microtime(true) . '_' . serialize($name);
         $hash = hash('md5', $scope);
         return $hash;
     }
@@ -90,7 +90,7 @@ class Benchmark
     private static function getRequestId()
     {
         if ( ! self::$sessionId) {
-            self::$sessionId = TIMESTAMP . DOT . StringHelper::generateRandomString();
+            self::$sessionId = time() . '.' . StringHelper::generateRandomString();
         }
         return self::$sessionId;
     }
@@ -99,7 +99,7 @@ class Benchmark
     {
         $dir = ROOT_DIR . '/common/runtime/logs/benchmark';
         $file = self::getRequestId() . '.json';
-        return $dir . DS . $file;
+        return $dir . DIRECTORY_SEPARATOR . $file;
     }
 
     private static function getStoreInstance()

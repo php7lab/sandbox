@@ -36,11 +36,11 @@ class UrlHelper
 
     public static function baseDomain($domain)
     {
-        $arr = explode(DOT, $domain);
+        $arr = explode('.', $domain);
         while (count($arr) > 2) {
             array_shift($arr);
         }
-        return implode(DOT, $arr);
+        return implode('.', $arr);
     }
 
     public static function extractDomainFromUrl($url)
