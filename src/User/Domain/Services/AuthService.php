@@ -7,7 +7,7 @@ use PhpLab\Sandbox\User\Domain\Forms\AuthForm;
 use PhpLab\Sandbox\User\Domain\Repositories\Config\ProfileRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
-use php7extension\core\common\helpers\StringHelper;
+use PhpLab\Sandbox\Common\Helpers\StringHelper;
 use php7extension\yii\base\Security;
 use Illuminate\Support\Collection;
 use PhpLab\Domain\Exceptions\UnauthorizedException;

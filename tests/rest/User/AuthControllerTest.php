@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Tests\rest\User;
 
-use php7extension\core\web\enums\HttpStatusCodeEnum;
+use PhpLab\Sandbox\Web\Enums\HttpStatusCodeEnum;
 use PhpLab\Test\BaseRestTest;
 
 class AuthControllerTest extends BaseRestTest

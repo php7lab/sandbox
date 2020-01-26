@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Dev\Domain\Services;
 
 use GuzzleHttp\Client;
-use php7extension\core\develop\helpers\Benchmark;
+use PhpLab\Sandbox\Common\Libs\Benchmark;
 use php7extension\yii\helpers\ArrayHelper;
 use Illuminate\Support\Collection;
 use PhpLab\Sandbox\Dev\Domain\Entities\ResultEntity;

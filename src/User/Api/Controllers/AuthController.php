@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\User\Api\Controllers;
 use PhpLab\Sandbox\User\Domain\Entities\User;
 use PhpLab\Sandbox\User\Domain\Forms\AuthForm;
 use PhpLab\Sandbox\User\Domain\Services\AuthService;
-use php7extension\core\web\enums\HttpHeaderEnum;
+use PhpLab\Sandbox\Web\Enums\HttpHeaderEnum;
 use PhpLab\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Rest\Libs\JsonRestSerializer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
