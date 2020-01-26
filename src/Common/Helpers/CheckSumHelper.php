@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Common\Helpers;
 
-use php7extension\yii\base\InvalidArgumentException;
+use PhpLab\Sandbox\Common\Exceptions\InvalidArgumentException;
 use PhpLab\Sandbox\Common\Enums\CheckSumAlgorithmEnum;
 
 class CheckSumHelper {

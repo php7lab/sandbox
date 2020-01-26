@@ -8,18 +8,18 @@
 namespace PhpLab\Sandbox\Common\Exceptions;
 
 /**
- * InvalidCallException represents an exception caused by calling a method in a wrong way.
+ * InvalidArgumentException represents an exception caused by invalid arguments passed to a method.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * @since 2.0.14
  */
-class InvalidCallException extends \BadMethodCallException
+class InvalidArgumentException extends InvalidParamException
 {
     /**
      * @return string the user-friendly name of this exception
      */
     public function getName()
     {
-        return 'Invalid Call';
+        return 'Invalid Argument';
     }
 }

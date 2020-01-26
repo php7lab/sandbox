@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use Illuminate\Support\Collection;
-use php7extension\yii\base\InvalidArgumentException;
+use PhpLab\Sandbox\Common\Exceptions\InvalidArgumentException;
 use php7extension\yii\web\NotFoundHttpException;
 use PhpLab\Sandbox\Common\Libs\Scenario\Collections\ScenarioCollection;
 use PhpLab\Sandbox\Common\Libs\ArrayTools\Helpers\ArrayIterator;

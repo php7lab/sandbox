@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Crypt\Helpers;
 
 use PhpLab\Domain\Base\BaseEnum;
 use domain\union\v1\entities\MemberEntity;
-use php7extension\yii\base\Exception;
+use PhpLab\Sandbox\Common\Exceptions\Exception;
 use php7rails\app\domain\helpers\EnvService;
 use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;

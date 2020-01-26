@@ -8,18 +8,18 @@
 namespace PhpLab\Sandbox\Common\Exceptions;
 
 /**
- * InvalidCallException represents an exception caused by calling a method in a wrong way.
+ * InvalidConfigException represents an exception caused by incorrect object configuration.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class InvalidCallException extends \BadMethodCallException
+class InvalidConfigException extends Exception
 {
     /**
      * @return string the user-friendly name of this exception
      */
     public function getName()
     {
-        return 'Invalid Call';
+        return 'Invalid Configuration';
     }
 }

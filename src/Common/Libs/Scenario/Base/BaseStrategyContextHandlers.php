@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Common\Libs\Scenario\Base;
 
-use php7extension\yii\base\InvalidArgumentException;
+use PhpLab\Sandbox\Common\Exceptions\InvalidArgumentException;
 use php7extension\yii\helpers\ArrayHelper;
 
 /**

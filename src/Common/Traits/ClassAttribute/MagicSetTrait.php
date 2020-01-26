@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Common\Traits\ClassAttribute;
 
 use PhpLab\Sandbox\Common\Exceptions\InvalidCallException;
 use PhpLab\Sandbox\Common\Exceptions\UnknownPropertyException;
-use php7extension\yii\base\Exception;
+use PhpLab\Sandbox\Common\Exceptions\Exception;
 
 trait MagicSetTrait {
 

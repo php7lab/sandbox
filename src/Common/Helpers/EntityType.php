@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Common\Helpers;
 
-use php7extension\yii\base\InvalidConfigException;
+use PhpLab\Sandbox\Common\Exceptions\InvalidConfigException;
 
 class EntityType {
 	

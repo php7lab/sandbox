@@ -8,18 +8,18 @@
 namespace PhpLab\Sandbox\Common\Exceptions;
 
 /**
- * InvalidCallException represents an exception caused by calling a method in a wrong way.
+ * NotSupportedException represents an exception caused by accessing features that are not supported.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class InvalidCallException extends \BadMethodCallException
+class NotSupportedException extends Exception
 {
     /**
      * @return string the user-friendly name of this exception
      */
     public function getName()
     {
-        return 'Invalid Call';
+        return 'Not Supported';
     }
 }

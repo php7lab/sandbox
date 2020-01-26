@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Common\Helpers;
 
 use Yii;
 use InvalidArgumentException;
-use php7extension\yii\base\InvalidConfigException;
+use PhpLab\Sandbox\Common\Exceptions\InvalidConfigException;
 use php7extension\yii\web\ServerErrorHttpException;
 use PhpLab\Sandbox\Common\Exceptions\ClassInstanceException;
 

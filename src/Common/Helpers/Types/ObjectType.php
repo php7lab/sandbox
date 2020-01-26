@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Common\Helpers\Types;
 
 use PhpLab\Domain\Base\BaseEntity;
 use PhpLab\Sandbox\Common\Helpers\Helper;
-use php7extension\yii\base\InvalidArgumentException;
+use PhpLab\Sandbox\Common\Exceptions\InvalidArgumentException;
 use php7extension\yii\helpers\ArrayHelper;
 use PhpLab\Sandbox\Common\Libs\ArrayTools\Helpers\Collection;
 use php7rails\domain\data\EntityCollection;
