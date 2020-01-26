@@ -3,7 +3,6 @@
 namespace PhpLab\Sandbox\Common\Helpers;
 
 use DateTime;
-use Yii;
 use php7extension\yii\helpers\ArrayHelper;
 use PhpLab\Domain\Base\BaseEntity;
 use php7rails\domain\data\EntityCollection;

@@ -4,7 +4,6 @@ namespace PhpLab\Sandbox\Common\Helpers;
 
 use php7rails\app\helpers\EnvService;
 use php7extension\yii\helpers\FileHelper;
-use Yii;
 use php7extension\yii\base\Model;
 use php7extension\yii\helpers\ArrayHelper;
 use PhpLab\Domain\Base\BaseEntity;

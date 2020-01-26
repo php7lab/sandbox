@@ -3,7 +3,6 @@
 namespace PhpLab\Sandbox\Common\Libs\ArrayTools\Helpers;
 
 use PhpLab\Sandbox\Common\Helpers\ClassHelper;
-use Yii;
 use PhpLab\Sandbox\Common\Libs\ArrayTools\Base\BaseCollection;
 use php7extension\yii\helpers\ArrayHelper;
 

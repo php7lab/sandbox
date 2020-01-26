@@ -3,7 +3,6 @@
 namespace PhpLab\Sandbox\Common\Libs\ArrayTools\Repositories\Base;
 
 use php7extension\yii\helpers\FileHelper;
-use Yii;
 use php7rails\domain\repositories\BaseRepository;
 use PhpLab\Sandbox\Common\Libs\Store\Store;
 

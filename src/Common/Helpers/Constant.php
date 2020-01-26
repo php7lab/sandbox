@@ -3,7 +3,6 @@
 namespace PhpLab\Sandbox\Common\Helpers;
 
 use php7rails\app\enums\YiiEnvEnum;
-//use Yii;
 
 class Constant {
 	
