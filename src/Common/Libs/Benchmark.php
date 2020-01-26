@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\Common\Libs;
 use php7extension\yii\helpers\ArrayHelper;
 use php7extension\yii\web\ServerErrorHttpException;
 use php7rails\app\helpers\EnvService;
-use php7extension\core\store\StoreFile;
+use PhpLab\Sandbox\Common\Libs\Store\StoreFile;
 use PhpLab\Sandbox\Common\Helpers\StringHelper;
 
 class Benchmark {

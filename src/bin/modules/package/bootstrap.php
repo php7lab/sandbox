@@ -15,7 +15,7 @@ use Symfony\Component\Console\Application;
  * @var Application $application
  */
 
-$fileName = __DIR__ . '/../../../../../../../vendor/php7lab/legacy/src/php7extension/core/package/domain/data/package_group.php';
+$fileName = __DIR__ . '/../../../Package/Domain/Data/package_group.php';
 $groupRepository = new GroupRepository($fileName);
 $packageRepository = new PackageRepository($groupRepository);
 $gitRepository = new GitRepository($packageRepository);

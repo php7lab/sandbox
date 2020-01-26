@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Notify\Domain\Repositories\Dev;
 
-use php7extension\core\store\StoreFile;
+use PhpLab\Sandbox\Common\Libs\Store\StoreFile;
 use PhpLab\Domain\Helpers\EntityHelper;
 
 abstract class BaseRepository

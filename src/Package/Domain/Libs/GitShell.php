@@ -3,8 +3,8 @@
 namespace PhpLab\Sandbox\Package\Domain\Libs;
 
 use php7extension\yii\helpers\FileHelper;
-use php7extension\core\shell\exceptions\ShellException;
-use php7extension\core\shell\base\BaseShell;
+use PhpLab\Sandbox\Common\Libs\Shell\ShellException;
+use PhpLab\Sandbox\Common\Libs\Shell\BaseShell;
 use php7extension\yii\helpers\ArrayHelper;
 
 class GitShell extends BaseShell {

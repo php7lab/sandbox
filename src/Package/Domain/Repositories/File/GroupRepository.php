@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
-use php7extension\core\store\StoreFile;
+use PhpLab\Sandbox\Common\Libs\Store\StoreFile;
 use php7rails\domain\data\Query;
 use PhpLab\Domain\Interfaces\ReadRepositoryInterface;
 use PhpLab\Domain\Repositories\BaseRepository;
