@@ -2,10 +2,9 @@
 
 namespace PhpLab\Sandbox\Common\Libs\Scenario\Base;
 
-use php7extension\yii\base\BaseObject;
 use PhpLab\Sandbox\Common\Libs\Scenario\Interfaces\RunInterface;
 
-abstract class BaseScenario extends BaseObject implements RunInterface {
+abstract class BaseScenario implements RunInterface {
 	
 	private $data;
 	public $event;

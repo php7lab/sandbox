@@ -2,7 +2,6 @@
 
 namespace PhpLab\Sandbox\Common\Libs\Scenario\Base;
 
-use php7extension\yii\base\BaseObject;
 use PhpLab\Sandbox\Common\Helpers\InstanceHelper;
 use PhpLab\Sandbox\Common\Helpers\ClassHelper;
 
@@ -13,7 +12,7 @@ use PhpLab\Sandbox\Common\Helpers\ClassHelper;
  *
  * @property-read Object $strategyInstance
  */
-abstract class BaseStrategyContext extends BaseObject {
+abstract class BaseStrategyContext {
 	
 	private $strategyInstance;
 	

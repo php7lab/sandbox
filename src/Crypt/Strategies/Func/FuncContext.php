@@ -37,12 +37,12 @@ class FuncContext extends BaseStrategyContextHandlers {
 
     public function sign($msg, $algorithm, $key)
     {
-        return $this->strategyInstance->sign($msg, $algorithm, $key);
+        return $this->getStrategyInstance()->sign($msg, $algorithm, $key);
     }
 
     public function verify($msg, $algorithm, $key, $signature)
     {
-        return $this->strategyInstance->verify($msg, $algorithm, $key, $signature);
+        return $this->getStrategyInstance()->verify($msg, $algorithm, $key, $signature);
     }
 
 }

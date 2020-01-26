@@ -2,7 +2,6 @@
 
 namespace PhpLab\Sandbox\Common\Libs\Scenario\Collections;
 
-use php7extension\yii\base\BaseObject;
 use PhpLab\Sandbox\Common\Libs\Scenario\Base\BaseScenario;
 use PhpLab\Sandbox\Common\Libs\ArrayTools\Helpers\Collection;
 use php7rails\domain\values\BaseValue;
@@ -33,7 +32,7 @@ class ScenarioCollection extends Collection {
         return $result;
     }
 	
-	public function runIs($data = null, BaseObject $event = null) {
+	public function runIs($data = null, object $event = null) {
 		try {
 			$this->runAll($data, $event);
 			return true;
@@ -44,11 +43,11 @@ class ScenarioCollection extends Collection {
     
 	/**
 	 * @param            $data
-	 * @param BaseObject|null $event
+	 * @param object $event
 	 *
 	 * @return BaseValue
 	 */
-    public function runAll($data = null, BaseObject $event = null) {
+    public function runAll($data = null, object $event = null) {
 	    /** @var BaseScenario[] $filterCollection */
 	    $filterCollection = $this->all();
         if(empty($filterCollection)) {
