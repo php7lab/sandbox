@@ -3,9 +3,9 @@
 namespace PhpLab\Sandbox\Common\Helpers;
 
 use php7extension\yii\web\ServerErrorHttpException;
-use PhpLab\Sandbox\Common\Exceptions\ClassInstanceException;
 use PhpLab\Sandbox\Common\Exceptions\InvalidArgumentException;
 use PhpLab\Sandbox\Common\Exceptions\InvalidConfigException;
+use Exception;
 
 class ClassHelper
 {
@@ -33,7 +33,7 @@ class ClassHelper
         }
         if ( ! $instance instanceof $interface) {
             $instanceClassName = get_class($instance);
-            throw new ClassInstanceException("Class \"$instanceClassName\" not instanceof \"$interface\"");
+            throw new Exception("Class \"$instanceClassName\" not instanceof \"$interface\"");
         }
     }
 
