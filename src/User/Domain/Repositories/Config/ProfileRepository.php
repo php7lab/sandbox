@@ -3,8 +3,8 @@
 namespace PhpLab\Sandbox\User\Domain\Repositories\Config;
 
 use PhpLab\Sandbox\Common\Enums\TimeEnum;
-use php7extension\crypt\domain\entities\JwtProfileEntity;
-use php7extension\crypt\domain\entities\KeyEntity;
+use PhpLab\Sandbox\Crypt\Entities\JwtProfileEntity;
+use PhpLab\Sandbox\Crypt\Entities\KeyEntity;
 
 class ProfileRepository
 {

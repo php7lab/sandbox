@@ -2,9 +2,9 @@
 
 namespace PhpLab\Sandbox\User\Domain\Entities;
 
-use php7extension\crypt\domain\enums\EncryptAlgorithmEnum;
-use php7extension\crypt\domain\enums\EncryptFunctionEnum;
-use php7extension\crypt\domain\enums\JwtAlgorithmEnum;
+use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
+use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
+use PhpLab\Sandbox\Crypt\Enums\JwtAlgorithmEnum;
 use PhpLab\Sandbox\Common\Enums\TimeEnum;
 
 class JwtProfileEntity

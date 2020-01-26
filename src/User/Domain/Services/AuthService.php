@@ -14,7 +14,7 @@ use PhpLab\Domain\Exceptions\UnauthorizedException;
 use PhpLab\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Rest\Entities\ValidateErrorEntity;
 use FOS\UserBundle\Model\UserManagerInterface;
-use php7extension\crypt\domain\entities\JwtEntity;
+use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
 
 class AuthService
 {

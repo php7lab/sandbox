@@ -1,8 +1,7 @@
 <?php
 
-namespace PhpLab\Sandbox\User\Domain\Services;
+namespace PhpLab\Sandbox\Crypt\Services;
 
-use PhpLab\Sandbox\User\Domain\Repositories\Config\ProfileRepository;
 use php7extension\core\traits\classAttribute\MagicSetTrait;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
 use PhpLab\Sandbox\Crypt\Helpers\JwtEncodeHelper;
@@ -13,19 +12,17 @@ class JwtService {
 
     use MagicSetTrait;
 
-    private $profileRepository;
+    /** @var ProfileContainer */
+    private $profileContainer;
 
     public function sign(JwtEntity $jwtEntity, string $profileName) : string {
-        $profileEntity = $this->profileRepository->oneByName($profileName);
-        //print_r($profileEntity);exit;
-
-        //print_r($profileEntity);exit;
+        $profileEntity = $this->profileContainer->get($profileName);
         $token = JwtHelper::sign($jwtEntity, $profileEntity);
         return $token;
     }
 
     public function verify(string $token, string $profileName) : JwtEntity {
-        $profileEntity = $this->profileRepository->oneByName($profileName);
+        $profileEntity = $this->profileContainer->get($profileName);
         $jwtEntity = JwtHelper::decode($token, $profileEntity);
         return $jwtEntity;
     }
@@ -44,9 +41,9 @@ class JwtService {
         }
     }
 
-    public function __construct(ProfileRepository $profileRepository)
+    public function __construct($profiles = [])
     {
-        $this->profileRepository = $profileRepository;
+        $this->setProfiles($profiles);
     }
 
 }
