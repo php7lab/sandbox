@@ -7,7 +7,13 @@ use php7extension\yii\helpers\ArrayHelper;
 use php7extension\yii\helpers\Url;
 
 class UrlHelper {
-	
+
+    public static function splitUri(string $uri) : array {
+        $uri = trim($uri, '/');
+        $uriSegments = explode('/', $uri);
+        return $uriSegments;
+    }
+
 	public static function parse($url, $key = null) {
 		$r = parse_url($url);
 		if(!empty($r['query'])) {

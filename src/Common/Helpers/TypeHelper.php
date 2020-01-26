@@ -7,7 +7,7 @@ use Yii;
 use php7extension\yii\helpers\ArrayHelper;
 use php7rails\domain\BaseEntity;
 use php7rails\domain\data\EntityCollection;
-use php7rails\domain\helpers\types\BaseType;
+use PhpLab\Sandbox\Common\Helpers\Types\BaseType;
 use php7rails\domain\interfaces\ValueObjectInterface;
 use php7rails\domain\values\TimeValue;
 use PhpLab\Sandbox\Web\Enums\HttpHeaderEnum;
@@ -140,7 +140,7 @@ class TypeHelper {
 	}
 	
 	public static function getInstanceType($class) {
-		$class = 'php7rails\domain\helpers\types\\' . ucfirst($class) . 'Type';
+		$class = 'PhpLab\Sandbox\Common\Helpers\Types\\' . ucfirst($class) . 'Type';
 		if(!class_exists($class)) {
 			return null;
 		}
