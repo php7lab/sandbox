@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\User\Domain\Traits;
 
-use PhpLab\Domain\Exceptions\UnauthorizedException;
+use PhpLab\Sandbox\User\Domain\Exceptions\UnauthorizedException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
