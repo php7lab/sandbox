@@ -77,7 +77,7 @@ class ClassHelper {
             throw new InvalidConfigException('Empty class config');
         }
         if(class_exists('Yii')) {
-            $object = \php7extension\core\helpers\ClassHelper::createObject($definition, $params);
+            $object = ClassHelper::createObject($definition, $params);
         } else {
             $definition = self::normalizeComponentConfig($definition);
             $object = new $definition['class'];
