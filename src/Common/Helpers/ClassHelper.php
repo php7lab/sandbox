@@ -2,10 +2,10 @@
 
 namespace PhpLab\Sandbox\Common\Helpers;
 
+use Exception;
 use php7extension\yii\web\ServerErrorHttpException;
 use PhpLab\Sandbox\Common\Exceptions\InvalidArgumentException;
 use PhpLab\Sandbox\Common\Exceptions\InvalidConfigException;
-use Exception;
 
 class ClassHelper
 {
