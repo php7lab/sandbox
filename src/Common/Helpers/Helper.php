@@ -6,8 +6,8 @@ use php7extension\yii\base\Model;
 use php7extension\yii\helpers\ArrayHelper;
 use php7extension\yii\helpers\FileHelper;
 use php7rails\app\helpers\EnvService;
-use PhpLab\Domain\Base\BaseEntity;
 use PhpLab\Domain\Exceptions\UnprocessableEntityHttpException;
+use PhpLab\Domain\Helpers\EntityHelper;
 
 class Helper
 {
@@ -47,9 +47,9 @@ class Helper
                 }
             }
         } else {
-            /** @var BaseEntity $result */
             $result = new $className();
-            $result->load($value);
+            EntityHelper::setAttributes($result, $value);
+            //$result->load($value);
         }
         /*if($isCollection !== null) {
             if() {
