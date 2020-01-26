@@ -5,11 +5,10 @@ namespace PhpLab\Sandbox\Common\Libs\ArrayTools\Base;
 use ArrayAccess;
 use Countable;
 use Iterator;
-use php7extension\yii\base\Arrayable;
 use php7extension\yii\helpers\ArrayHelper;
 use Serializable;
 
-abstract class BaseCollection implements ArrayAccess, Countable, Iterator, Serializable, Arrayable
+abstract class BaseCollection implements ArrayAccess, Countable, Iterator, Serializable
 {
 
     private $items = [];
