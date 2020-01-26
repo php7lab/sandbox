@@ -15,7 +15,8 @@ class JobRepository extends BaseEloquentCrudRepository implements JobRepositoryI
     protected $tableName = 'queue_job';
     protected $entityClass = JobEntity::class;
 
-    public function allForRun(Query $query = null) : Collection {
+    public function allForRun(Query $query = null): Collection
+    {
         $where = new Where;
         $where->column = 'done_at';
         $where->value = null;
@@ -27,5 +28,5 @@ class JobRepository extends BaseEloquentCrudRepository implements JobRepositoryI
         ]);
         return $this->all($query);
     }
-    
+
 }

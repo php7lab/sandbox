@@ -2,10 +2,11 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Entities;
 
-class TagEntity {
+class TagEntity
+{
 
-	private $name;
-	private $sha;
+    private $name;
+    private $sha;
 
     public function getName()
     {

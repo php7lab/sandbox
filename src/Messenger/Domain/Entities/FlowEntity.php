@@ -46,7 +46,7 @@ class FlowEntity
         return $this->getMessage()->getText();
     }*/
 
-    public function getMessage() : MessageEntity
+    public function getMessage(): MessageEntity
     {
         return $this->message;
     }

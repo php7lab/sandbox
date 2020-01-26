@@ -4,11 +4,9 @@ namespace PhpLab\Sandbox\Generator\Commands;
 
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use PhpLab\Sandbox\Generator\Domain\Interfaces\Services\ModuleServiceInterface;
-use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\BaseInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\ModuleNamespaceInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\NameInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\TypeModuleInputScenario;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

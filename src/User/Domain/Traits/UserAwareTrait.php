@@ -19,9 +19,10 @@ trait UserAwareTrait
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function getUser() : UserInterface {
+    public function getUser(): UserInterface
+    {
         $user = $this->tokenStorage->getToken()->getUser();
-        if( ! $user instanceof UserInterface) {
+        if ( ! $user instanceof UserInterface) {
             throw new UnauthorizedException;
         }
         return $user;

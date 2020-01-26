@@ -8,6 +8,7 @@ interface JobInterface
 {
 
     public function run();
+
     public function setContainer(ContainerInterface $container = null);
 
 }

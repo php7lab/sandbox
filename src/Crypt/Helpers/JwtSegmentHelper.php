@@ -2,13 +2,16 @@
 
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
-class JwtSegmentHelper {
+class JwtSegmentHelper
+{
 
-    public static function encodeSegment($data) {
+    public static function encodeSegment($data)
+    {
         return SafeBase64Helper::encode(JwtJsonHelper::encode($data));
     }
 
-    public static function decodeSegment($data) {
+    public static function decodeSegment($data)
+    {
         return JwtJsonHelper::decode(SafeBase64Helper::decode($data));
     }
 

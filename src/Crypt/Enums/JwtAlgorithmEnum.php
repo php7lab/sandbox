@@ -4,7 +4,8 @@ namespace PhpLab\Sandbox\Crypt\Enums;
 
 use PhpLab\Domain\Base\BaseEnum;
 
-class JwtAlgorithmEnum extends BaseEnum {
+class JwtAlgorithmEnum extends BaseEnum
+{
 
     const HS256 = 'HS256';
     const HS512 = 'HS512';
@@ -22,12 +23,14 @@ class JwtAlgorithmEnum extends BaseEnum {
         JwtAlgorithmEnum::RS512 => [EncryptFunctionEnum::OPENSSL, EncryptAlgorithmEnum::SHA512],
     ];
 
-    public static function getHashAlgorithm($alg) {
+    public static function getHashAlgorithm($alg)
+    {
         list($function, $algorithm) = self::$supportedAlgorithms[$alg];
         return $algorithm;
     }
 
-    public static function isSupported($algorithm) {
+    public static function isSupported($algorithm)
+    {
         return array_key_exists($algorithm, self::$supportedAlgorithms);
     }
 

@@ -5,7 +5,8 @@ namespace PhpLab\Sandbox\Common\Traits\MagicAttribute;
 use PhpLab\Sandbox\Common\Exceptions\InvalidCallException;
 use PhpLab\Sandbox\Common\Exceptions\UnknownPropertyException;
 
-trait MagicSetterTrait {
+trait MagicSetterTrait
+{
 
     /**
      * Sets value of an object property.

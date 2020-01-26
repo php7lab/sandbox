@@ -3,13 +3,13 @@
 namespace PhpLab\Sandbox\Package\Domain\Services;
 
 use php7extension\yii\helpers\ArrayHelper;
-use PhpLab\Sandbox\Package\Domain\Libs\GitShell;
 use PhpLab\Domain\Services\BaseService;
 use PhpLab\Sandbox\Package\Domain\Entities\CommitEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\TagEntity;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Repositories\GitRepositoryInterface;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\GitServiceInterface;
+use PhpLab\Sandbox\Package\Domain\Libs\GitShell;
 
 class GitService extends BaseService implements GitServiceInterface
 {

@@ -2,13 +2,10 @@
 
 namespace PhpLab\Sandbox\Html\Widgets;
 
-use php7extension\yii\helpers\Html;
-use PhpLab\Sandbox\Html\Widgets\BaseWidget;
 use Closure;
-
 use php7extension\yii\base\Widget;
 use php7extension\yii\helpers\ArrayHelper;
-use php7extension\yii\helpers\Url;
+use php7extension\yii\helpers\Html;
 
 class MenuWidget extends BaseWidget
 {

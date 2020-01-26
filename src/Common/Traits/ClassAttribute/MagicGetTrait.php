@@ -4,9 +4,9 @@ namespace PhpLab\Sandbox\Common\Traits\ClassAttribute;
 
 use PhpLab\Sandbox\Common\Exceptions\InvalidCallException;
 use PhpLab\Sandbox\Common\Exceptions\UnknownPropertyException;
-use PhpLab\Sandbox\Common\Exceptions\Exception;
 
-trait MagicGetTrait {
+trait MagicGetTrait
+{
 
     /**
      * Returns the value of an object property.

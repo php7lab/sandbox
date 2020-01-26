@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Services;
 
-use PhpLab\Sandbox\Common\Helpers\ClassHelper;
 use php7extension\yii\helpers\Inflector;
+use PhpLab\Sandbox\Common\Helpers\ClassHelper;
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use PhpLab\Sandbox\Generator\Domain\Interfaces\DomainServiceInterface;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Generate\BaseScenario;

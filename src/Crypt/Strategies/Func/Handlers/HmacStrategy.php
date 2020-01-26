@@ -2,12 +2,10 @@
 
 namespace PhpLab\Sandbox\Crypt\Strategies\Func\Handlers;
 
-use PhpLab\Sandbox\Crypt\Dto\TokenDto;
-use PhpLab\Sandbox\Crypt\Enums\JwtAlgorithmEnum;
-use DomainException;
 use PhpLab\Sandbox\Crypt\Helpers\EncryptHelper;
 
-class HmacStrategy implements HandlerInterface {
+class HmacStrategy implements HandlerInterface
+{
 
     public function sign($msg, $algorithm, $key)
     {
@@ -30,5 +28,5 @@ class HmacStrategy implements HandlerInterface {
 
         return ($status === 0);
     }
-	
+
 }

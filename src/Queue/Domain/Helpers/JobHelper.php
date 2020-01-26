@@ -10,19 +10,21 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class JobHelper
 {
 
-    public static function forgeJob(JobEntity $jobEntity, ContainerInterface $container = null) : JobInterface {
+    public static function forgeJob(JobEntity $jobEntity, ContainerInterface $container = null): JobInterface
+    {
         $jobClass = $jobEntity->getClass();
         /** @var JobInterface $jobInstance */
         $jobInstance = new $jobClass;
         $data = $jobEntity->getJob();
-        if($container) {
+        if ($container) {
             $data['container'] = $container;
         }
         EntityHelper::setAttributes($jobInstance, $data);
         return $jobInstance;
     }
 
-    public static function encode(object $job) : string {
+    public static function encode(object $job): string
+    {
         $data = get_object_vars($job);
         $serializedData = serialize($data);
         $base64Data = base64_encode($serializedData);
@@ -31,7 +33,8 @@ class JobHelper
         //$this->setClass(get_class($job));
     }
 
-    public static function decode(string $data) {
+    public static function decode(string $data)
+    {
         $serializedData = base64_decode($data);
         $job = unserialize($serializedData);
         return $job;

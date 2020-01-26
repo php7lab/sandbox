@@ -2,23 +2,17 @@
 
 namespace PhpLab\Sandbox\Article\Domain\Repositories\Eloquent;
 
-use Doctrine\Common\Inflector\Inflector;
-use PhpLab\Domain\Data\Query;
-use PhpLab\Sandbox\Article\Domain\Entities\PostEntity;
-use PhpLab\Sandbox\Article\Domain\Entities\PostTagEntity;
-use PhpLab\Sandbox\Article\Domain\Interfaces\CategoryRepositoryInterface;
-use PhpLab\Sandbox\Article\Domain\Interfaces\PostRepositoryInterface;
-use PhpLab\Domain\Enums\RelationEnum;
-use PhpLab\Sandbox\Article\Domain\Interfaces\TagPostRepositoryInterface;
-use PhpLab\Sandbox\Article\Domain\Interfaces\TagRepositoryInterface;
 use Illuminate\Support\Collection;
-use PhpLab\Domain\Helpers\EntityHelper;
-use PhpLab\Domain\Interfaces\GetEntityClassInterface;
+use PhpLab\Domain\Enums\RelationEnum;
 use PhpLab\Domain\Libs\Relation\ManyToMany;
 use PhpLab\Domain\Libs\Relation\OneToOne;
-use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use PhpLab\Eloquent\Db\Helpers\Manager;
+use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
+use PhpLab\Sandbox\Article\Domain\Entities\PostEntity;
+use PhpLab\Sandbox\Article\Domain\Interfaces\CategoryRepositoryInterface;
+use PhpLab\Sandbox\Article\Domain\Interfaces\PostRepositoryInterface;
+use PhpLab\Sandbox\Article\Domain\Interfaces\TagPostRepositoryInterface;
+use PhpLab\Sandbox\Article\Domain\Interfaces\TagRepositoryInterface;
 
 class PostRepository extends BaseEloquentCrudRepository implements PostRepositoryInterface
 {
@@ -48,7 +42,7 @@ class PostRepository extends BaseEloquentCrudRepository implements PostRepositor
                     'field' => 'id',
                 ],*/
                 'type' => RelationEnum::CALLBACK,
-                'callback' => function(Collection $collection) {
+                'callback' => function (Collection $collection) {
                     $m2m = new OneToOne;
                     //$m2m->selfModel = $this;
 
@@ -61,7 +55,7 @@ class PostRepository extends BaseEloquentCrudRepository implements PostRepositor
             ],
             'tags' => [
                 'type' => RelationEnum::CALLBACK,
-                'callback' => function(Collection $collection) {
+                'callback' => function (Collection $collection) {
                     $m2m = new ManyToMany;
                     $m2m->selfModel = $this;
                     $m2m->selfField = 'postId';

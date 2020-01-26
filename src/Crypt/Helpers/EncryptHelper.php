@@ -3,11 +3,10 @@
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
 use PhpLab\Sandbox\Crypt\Entities\KeyEntity;
-use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
-use PhpLab\Domain\Base\BaseEnum;
 
-class EncryptHelper {
+class EncryptHelper
+{
 
     public static function sign($msg, string $profileName)
     {
@@ -25,7 +24,8 @@ class EncryptHelper {
         return SignatureHelper::verify($msg, $key, $signature, $function, $profile->algorithm);
     }
 
-    private static function getFunction(KeyEntity $keyEntity) {
+    private static function getFunction(KeyEntity $keyEntity)
+    {
         return $keyEntity->type === OPENSSL_KEYTYPE_RSA ? EncryptFunctionEnum::OPENSSL : EncryptFunctionEnum::HASH_HMAC;;
     }
 

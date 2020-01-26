@@ -2,7 +2,6 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Services;
 
-use PhpLab\Domain\Data\Query;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\InfoRepository;
 
 class InfoService
@@ -16,11 +15,12 @@ class InfoService
         $this->infoRepository = $infoRepository;
     }
 
-    public function allForRelease($query = null) {
+    public function allForRelease($query = null)
+    {
         $collection = $this->infoRepository->allWithTagAndCommit($query);
         $newCollection = [];
-        foreach($collection as $entity) {
-            if($entity->need_release) {
+        foreach ($collection as $entity) {
+            if ($entity->need_release) {
                 $newCollection[] = $entity;
             }
         }
@@ -33,15 +33,18 @@ class InfoService
         return $this->infoRepository->allChanged($query);
     }*/
 
-    public function allVersion($query = null) {
+    public function allVersion($query = null)
+    {
         return $this->infoRepository->allWithTag($query);
     }
 
-    public function shortNamesByOwner($owner) {
+    public function shortNamesByOwner($owner)
+    {
         return $this->infoRepository->shortNamesByOwner($owner);
     }
 
-    public function usesById($id) {
+    public function usesById($id)
+    {
         return $this->infoRepository->usesById($id);
     }
 

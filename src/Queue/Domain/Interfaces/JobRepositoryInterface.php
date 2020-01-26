@@ -15,6 +15,6 @@ interface JobRepositoryInterface extends CrudRepositoryInterface
      * @param Query|null $query
      * @return JobEntity[]
      */
-    public function allForRun(Query $query = null) : Collection;
+    public function allForRun(Query $query = null): Collection;
 
 }

@@ -31,21 +31,25 @@ class LocationHelper
         ],
     ];
 
-    public static function interfaceName(string $name, string $type) {
+    public static function interfaceName(string $name, string $type)
+    {
         return self::className($name, $type) . 'Interface';
     }
 
-    public static function fullInterfaceName(string $name, string $type) {
+    public static function fullInterfaceName(string $name, string $type)
+    {
         $classDir = self::$types[$type]['classDir'];
         return "\\Interfaces\\{$classDir}\\" . self::interfaceName($name, $type);
     }
 
-    public static function className(string $name, string $type) {
+    public static function className(string $name, string $type)
+    {
         $cc = self::$types[$type];
         return Inflector::classify($name) . $cc['typeName'];
     }
 
-    public static function fullClassName(string $name, string $type) {
+    public static function fullClassName(string $name, string $type)
+    {
         $classDir = self::$types[$type]['classDir'];
         return '\\' . $classDir . '\\' . self::className($name, $type);
     }

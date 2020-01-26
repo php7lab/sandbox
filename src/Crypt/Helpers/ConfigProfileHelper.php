@@ -2,44 +2,40 @@
 
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
-use PhpLab\Sandbox\Common\Exceptions\InvalidConfigException;
+use php7rails\app\domain\helpers\EnvService;
 use php7rails\extension\common\helpers\ClassHelper;
+use PhpLab\Sandbox\Common\Exceptions\InvalidConfigException;
 use PhpLab\Sandbox\Crypt\Entities\ConfigEntity;
 use PhpLab\Sandbox\Crypt\Entities\ProfileEntity;
-use PhpLab\Domain\Base\BaseEnum;
-use php7extension\yii\helpers\ArrayHelper;
-use php7rails\app\domain\helpers\EnvService;
-use PhpLab\Sandbox\Crypt\Entities\KeyEntity;
-use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
-use PhpLab\Sandbox\Crypt\Enums\RsaBitsEnum;
 
-class ConfigProfileHelper {
+class ConfigProfileHelper
+{
 
-    public static function load(string $profile, $profileEntityClass = ProfileEntity::class) : ProfileEntity
+    public static function load(string $profile, $profileEntityClass = ProfileEntity::class): ProfileEntity
     {
         $config = EnvService::get('encrypt.profiles.' . $profile);
         $profileEntity = self::createInstanse($config, $profileEntityClass);
         return $profileEntity;
     }
 
-    public static function prepareDefinition($config) : array
+    public static function prepareDefinition($config): array
     {
-        if(isset($config['key']['private_file'])) {
+        if (isset($config['key']['private_file'])) {
             $config['key']['private'] = file_get_contents($config['key']['private_file']);
         }
-        if(isset($config['key']['public_file'])) {
+        if (isset($config['key']['public_file'])) {
             $config['key']['public'] = file_get_contents($config['key']['public_file']);
         }
         return $config;
     }
 
-    private static function createInstanse($config, $profileEntityClass = ProfileEntity::class) : ProfileEntity
+    private static function createInstanse($config, $profileEntityClass = ProfileEntity::class): ProfileEntity
     {
 
-        if(isset($config['key']['private_file'])) {
+        if (isset($config['key']['private_file'])) {
             $config['key']['private'] = file_get_contents($config['key']['private_file']);
         }
-        if(isset($config['key']['public_file'])) {
+        if (isset($config['key']['public_file'])) {
             $config['key']['public'] = file_get_contents($config['key']['public_file']);
         }
 
@@ -50,7 +46,7 @@ class ConfigProfileHelper {
         //
 
         //if(!$profileEntity->key instanceof KeyEntity) {
-        if(!$profileEntity->key) {
+        if ( ! $profileEntity->key) {
             //d(debug_backtrace());
             throw new InvalidConfigException('Empty encryption key in profile!');
         }

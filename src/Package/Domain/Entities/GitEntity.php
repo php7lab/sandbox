@@ -2,9 +2,10 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Entities;
 
-class GitEntity {
+class GitEntity
+{
 
-	private $id;
+    private $id;
     private $directory;
     private $commits;
     private $tags;

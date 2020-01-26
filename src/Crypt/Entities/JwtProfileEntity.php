@@ -2,11 +2,10 @@
 
 namespace PhpLab\Sandbox\Crypt\Entities;
 
-use PhpLab\Domain\Base\BaseEntity;
+use PhpLab\Sandbox\Common\Enums\TimeEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
 use PhpLab\Sandbox\Crypt\Enums\JwtAlgorithmEnum;
-use PhpLab\Sandbox\Common\Enums\TimeEnum;
 
 /**
  * Class JwtProfileEntity
@@ -21,7 +20,8 @@ use PhpLab\Sandbox\Common\Enums\TimeEnum;
  * @property $audience string[]
  * @property $issuer_url string
  */
-class JwtProfileEntity extends ProfileEntity {
+class JwtProfileEntity extends ProfileEntity
+{
 
     protected $name;
     protected $life_time = TimeEnum::SECOND_PER_MINUTE * 20;

@@ -9,8 +9,6 @@ use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\enums\AccessEnum;
 use php7extension\core\code\helpers\ClassHelper;
 use php7extension\yii\helpers\FileHelper;
-use PhpLab\Sandbox\Generator\Domain\Enums\TypeEnum;
-use PhpLab\Sandbox\Generator\Domain\Helpers\LocationHelper;
 use PhpLab\Sandbox\Generator\Domain\Helpers\TemplateCodeHelper;
 use PhpLab\Sandbox\Package\Domain\Helpers\PackageHelper;
 use Zend\Code\Generator\ClassGenerator;
@@ -39,7 +37,7 @@ class ApiScenario extends BaseScenario
         $fileGenerator = new FileGenerator;
         $classGenerator = new ClassGenerator;
         $classGenerator->setName($className);
-        if($this->isMakeInterface()) {
+        if ($this->isMakeInterface()) {
             $classGenerator->setImplementedInterfaces([$this->getInterfaceName()]);
             $fileGenerator->setUse($this->getInterfaceFullName());
         }

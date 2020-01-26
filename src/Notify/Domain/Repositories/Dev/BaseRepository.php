@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\Notify\Domain\Repositories\Dev;
 
-use PhpLab\Sandbox\Common\Libs\Store\StoreFile;
 use PhpLab\Domain\Helpers\EntityHelper;
+use PhpLab\Sandbox\Common\Libs\Store\StoreFile;
 
 abstract class BaseRepository
 {
@@ -16,7 +16,7 @@ abstract class BaseRepository
 
     protected function directory(): string
     {
-        if($this->directory) {
+        if ($this->directory) {
             return $this->directory;
         }
         return static::DIRECTORY;

@@ -3,10 +3,10 @@
 namespace PhpLab\Sandbox\Notify\Domain\Services;
 
 use PhpLab\Sandbox\Notify\Domain\Entities\EmailEntity;
-use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
 use PhpLab\Sandbox\Notify\Domain\Interfaces\Repositories\EmailRepositoryInterface;
 use PhpLab\Sandbox\Notify\Domain\Interfaces\Services\EmailServiceInterface;
 use PhpLab\Sandbox\Notify\Domain\Jobs\SendEmailJob;
+use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobServiceInterface;
 
 class EmailService implements EmailServiceInterface
@@ -21,7 +21,8 @@ class EmailService implements EmailServiceInterface
         $this->jobService = $jobService;
     }
 
-    public function push(EmailEntity $emailEntity, $priority = PriorityEnum::NORMAL) {
+    public function push(EmailEntity $emailEntity, $priority = PriorityEnum::NORMAL)
+    {
         $emailJob = new SendEmailJob($this);
         $emailJob->entity = $emailEntity;
         $pushResult = $this->jobService->push($emailJob);

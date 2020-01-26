@@ -2,19 +2,14 @@
 
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
-use php7extension\yii\helpers\ArrayHelper;
+use ArrayAccess;
+use DateTime;
+use DomainException;
 use PhpLab\Sandbox\Crypt\Dto\TokenDto;
-use PhpLab\Sandbox\Crypt\Entities\JwtHeaderEntity;
-use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
-use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
 use PhpLab\Sandbox\Crypt\Enums\JwtAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Exceptions\BeforeValidException;
 use PhpLab\Sandbox\Crypt\Exceptions\ExpiredException;
-use PhpLab\Sandbox\Crypt\Exceptions\SignatureInvalidException;
-use DomainException;
 use UnexpectedValueException;
-use DateTime;
-use ArrayAccess;
 
 class JwtModelHelper
 {
@@ -26,14 +21,16 @@ class JwtModelHelper
      */
     public static $timeOffset = 0;
 
-    public static function parseToken(string $jwt) : TokenDto {
+    public static function parseToken(string $jwt): TokenDto
+    {
         $tokenDto = self::tokenToDto($jwt);
         self::decodeTokenDto($tokenDto);
         self::validateTokenDto($tokenDto);
         return $tokenDto;
     }
 
-    private static function tokenToDto(string $jwt) : TokenDto {
+    private static function tokenToDto(string $jwt): TokenDto
+    {
         $tokenSegments = explode('.', $jwt);
         if (count($tokenSegments) != 3) {
             throw new UnexpectedValueException('Wrong number of segments');
@@ -44,13 +41,15 @@ class JwtModelHelper
         return $tokenDto;
     }
 
-    private static function decodeTokenDto(TokenDto $tokenDto) {
+    private static function decodeTokenDto(TokenDto $tokenDto)
+    {
         $tokenDto->header = JwtSegmentHelper::decodeSegment($tokenDto->header_encoded);
         $tokenDto->payload = JwtSegmentHelper::decodeSegment($tokenDto->payload_encoded);
         $tokenDto->signature = SafeBase64Helper::decode($tokenDto->signature_encoded);
     }
 
-    private static function validateTokenDto(TokenDto $tokenDto) {
+    private static function validateTokenDto(TokenDto $tokenDto)
+    {
         if (null === $tokenDto->header_encoded) {
             throw new UnexpectedValueException('Invalid header');
         }
@@ -71,7 +70,8 @@ class JwtModelHelper
         }
     }
 
-    public static function verifyTime(TokenDto $tokenDto) {
+    public static function verifyTime(TokenDto $tokenDto)
+    {
         $timestamp = time();
 
         // Check if the nbf if it is defined. This is the time that the
@@ -97,26 +97,28 @@ class JwtModelHelper
         }
     }
 
-    public static function validateToken(TokenDto $tokenDto, array $allowed_algs) {
+    public static function validateToken(TokenDto $tokenDto, array $allowed_algs)
+    {
         $alg = $tokenDto->header->alg;
         if (empty($alg)) {
             throw new UnexpectedValueException('Empty algorithm');
         }
-        if (!JwtAlgorithmEnum::isSupported($alg)) {
+        if ( ! JwtAlgorithmEnum::isSupported($alg)) {
             throw new DomainException('Algorithm not supported');
         }
-        if (!JwtAlgorithmEnum::isSupported($alg)) {
+        if ( ! JwtAlgorithmEnum::isSupported($alg)) {
             throw new UnexpectedValueException('Algorithm not supported');
         }
-        if (!in_array($alg, $allowed_algs)) {
+        if ( ! in_array($alg, $allowed_algs)) {
             throw new UnexpectedValueException('Algorithm not allowed');
         }
     }
 
-    public static function validateKey(TokenDto $tokenDtostring,  $key) {
+    public static function validateKey(TokenDto $tokenDtostring, $key)
+    {
         if (is_array($key) || $key instanceof ArrayAccess) {
             if (isset($tokenDto->header->kid)) {
-                if (!isset($key[$tokenDto->header->kid])) {
+                if ( ! isset($key[$tokenDto->header->kid])) {
                     throw new UnexpectedValueException('"kid" invalid, unable to lookup correct key');
                 }
                 //$key = $key[$tokenDto->header->kid];

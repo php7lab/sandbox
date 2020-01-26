@@ -2,19 +2,18 @@
 
 namespace PhpLab\Sandbox\User\Domain\Services;
 
-use PhpLab\Sandbox\User\Domain\Entities\User;
-use PhpLab\Sandbox\User\Domain\Forms\AuthForm;
-use PhpLab\Sandbox\User\Domain\Repositories\Config\ProfileRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
-use PhpLab\Sandbox\Common\Helpers\StringHelper;
-use php7extension\yii\base\Security;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Illuminate\Support\Collection;
+use php7extension\yii\base\Security;
 use PhpLab\Domain\Exceptions\UnauthorizedException;
 use PhpLab\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Rest\Entities\ValidateErrorEntity;
-use FOS\UserBundle\Model\UserManagerInterface;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
+use PhpLab\Sandbox\User\Domain\Entities\User;
+use PhpLab\Sandbox\User\Domain\Forms\AuthForm;
+use PhpLab\Sandbox\User\Domain\Repositories\Config\ProfileRepository;
 
 class AuthService
 {
@@ -36,7 +35,7 @@ class AuthService
     {
         /** @var User $userEntity */
         $userEntity = $this->userManager->findUserByUsername('user1');
-        if(empty($userEntity)) {
+        if (empty($userEntity)) {
             $exception = new UnauthorizedException;
             throw $exception;
         }
@@ -47,7 +46,7 @@ class AuthService
     {
         /** @var User $userEntity */
         $userEntity = $this->userManager->findUserByUsername($form->login);
-        if(empty($userEntity)) {
+        if (empty($userEntity)) {
             $errorCollection = new Collection;
             $validateErrorEntity = new ValidateErrorEntity;
             $validateErrorEntity->setField('login');
@@ -64,9 +63,10 @@ class AuthService
         return $userEntity;
     }
 
-    private function verificationPassword(UserInterface $userEntity, string $password) : bool {
+    private function verificationPassword(UserInterface $userEntity, string $password): bool
+    {
         $isValidPassword = $this->security->validatePassword($password, $userEntity->getPassword());
-        if( ! $isValidPassword) {
+        if ( ! $isValidPassword) {
             $errorCollection = new Collection;
             $validateErrorEntity = new ValidateErrorEntity;
             $validateErrorEntity->setField('password');
@@ -79,7 +79,8 @@ class AuthService
         return $isValidPassword;
     }
 
-    private function forgeToken(UserInterface $userEntity) {
+    private function forgeToken(UserInterface $userEntity)
+    {
         $jwtEntity = new JwtEntity;
         $jwtEntity->subject = ['id' => $userEntity->getId()];
         $token = 'jwt ' . $this->jwtService->sign($jwtEntity, 'auth');

@@ -2,10 +2,10 @@
 
 namespace PhpLab\Sandbox\Article\Domain\Services;
 
-use PhpLab\Sandbox\Article\Domain\Interfaces\PostRepositoryInterface;
-use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Domain\Interfaces\GetEntityClassInterface;
 use PhpLab\Domain\Services\BaseCrudService;
+use PhpLab\Sandbox\Article\Domain\Interfaces\PostRepositoryInterface;
+use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 
 /**
  * Class PostService

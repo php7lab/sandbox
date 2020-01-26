@@ -4,7 +4,6 @@ namespace PhpLab\Sandbox\Generator\Commands;
 
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use PhpLab\Sandbox\Generator\Domain\Interfaces\DomainServiceInterface;
-use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\BaseInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\DomainNameInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\DomainNamespaceInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\DriverInputScenario;
@@ -13,7 +12,6 @@ use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\IsCrudRepositoryInputScenari
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\IsCrudServiceInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\NameInputScenario;
 use PhpLab\Sandbox\Generator\Domain\Scenarios\Input\TypeInputScenario;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

@@ -2,7 +2,6 @@
 
 namespace PhpLab\Sandbox\Notify\Domain\Repositories\Swift;
 
-use PhpLab\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Sandbox\Notify\Domain\Entities\EmailEntity;
 use PhpLab\Sandbox\Notify\Domain\Interfaces\Repositories\EmailRepositoryInterface;
 
@@ -25,7 +24,7 @@ class EmailRepository implements EmailRepositoryInterface
         $message->setBody($emailEntity->getBody());
         $result = $this->mailer->send($message);
         $isOk = $result > 0;
-        if(!$isOk) {
+        if ( ! $isOk) {
             throw new \Exception('Email send error!');
         }
         return $isOk;

@@ -9,9 +9,6 @@ use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\enums\AccessEnum;
 use php7extension\core\code\helpers\ClassHelper;
 use php7extension\yii\helpers\FileHelper;
-use php7extension\yii\helpers\Inflector;
-use PhpLab\Sandbox\Generator\Domain\Enums\TypeEnum;
-use PhpLab\Sandbox\Generator\Domain\Helpers\LocationHelper;
 use PhpLab\Sandbox\Generator\Domain\Helpers\TemplateCodeHelper;
 use PhpLab\Sandbox\Package\Domain\Helpers\PackageHelper;
 use Zend\Code\Generator\ClassGenerator;
@@ -40,7 +37,7 @@ class WebScenario extends BaseScenario
         $fileGenerator = new FileGenerator;
         $classGenerator = new ClassGenerator;
         $classGenerator->setName($className);
-        if($this->isMakeInterface()) {
+        if ($this->isMakeInterface()) {
             $classGenerator->setImplementedInterfaces([$this->getInterfaceName()]);
             $fileGenerator->setUse($this->getInterfaceFullName());
         }
@@ -48,7 +45,7 @@ class WebScenario extends BaseScenario
         $classGenerator->addProperties([
             ['service', null, PropertyGenerator::FLAG_PRIVATE]
         ]);
-        
+
         $fileGenerator->setUse('Symfony\Bundle\FrameworkBundle\Controller\AbstractController');
         $fileGenerator->setUse('PhpLab\Sandbox\Web\Traits\AccessTrait');
 

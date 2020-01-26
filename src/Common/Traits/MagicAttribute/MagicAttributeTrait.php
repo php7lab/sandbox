@@ -2,7 +2,8 @@
 
 namespace PhpLab\Sandbox\Common\Traits\MagicAttribute;
 
-trait MagicAttributeTrait {
+trait MagicAttributeTrait
+{
 
     use MagicGetterTrait;
     use MagicSetterTrait;

@@ -3,7 +3,6 @@
 namespace PhpLab\Sandbox\Crypt\Entities;
 
 use PhpLab\Domain\Base\BaseEntity;
-use PhpLab\Sandbox\Crypt\Entities\JwtHeaderEntity;
 
 /**
  * Class TokenEntity
@@ -18,7 +17,8 @@ use PhpLab\Sandbox\Crypt\Entities\JwtHeaderEntity;
  * @property $expire_at integer exp: время в формате Unix Time, определяющее момент, когда токен станет не валидным
  * @property $begin_at integer nbf: в противоположность ключу exp, это время в формате Unix Time, определяющее момент, когда токен станет валидным
  */
-class JwtEntity extends BaseEntity {
+class JwtEntity extends BaseEntity
+{
 
     protected $token;
     protected $issuer_url;

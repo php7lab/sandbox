@@ -2,8 +2,6 @@
 
 namespace PhpLab\Sandbox\Article\Domain\Entities;
 
-use PhpLab\Domain\Interfaces\ValidateEntityInterface;
-
 class TagEntity
 {
 

@@ -2,13 +2,12 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
-use php7extension\core\code\entities\ClassVariableEntity;
-use php7extension\yii\helpers\Inflector;
 use php7extension\core\code\entities\ClassEntity;
 use php7extension\core\code\entities\ClassUseEntity;
+use php7extension\core\code\entities\ClassVariableEntity;
 use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\helpers\ClassHelper;
-use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
+use php7extension\yii\helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Enums\TypeEnum;
 use PhpLab\Sandbox\Generator\Domain\Helpers\LocationHelper;
 use Zend\Code\Generator\ClassGenerator;
@@ -31,15 +30,17 @@ class RepositoryScenario extends BaseScenario
         return 'Repositories';
     }
 
-    protected function isMakeInterface() : bool {
+    protected function isMakeInterface(): bool
+    {
         return true;
     }
 
-    protected function createInterface() {
+    protected function createInterface()
+    {
         $fileGenerator = new FileGenerator;
         $interfaceGenerator = new InterfaceGenerator;
         $interfaceGenerator->setName($this->getInterfaceName());
-        if($this->buildDto->isCrudRepository) {
+        if ($this->buildDto->isCrudRepository) {
             $fileGenerator->setUse('PhpLab\Domain\Interfaces\CrudRepositoryInterface');
             $interfaceGenerator->setImplementedInterfaces(['CrudRepositoryInterface']);
         }
@@ -59,13 +60,15 @@ class RepositoryScenario extends BaseScenario
         return $interfaceEntity;*/
     }
 
-    protected function createClass() {
+    protected function createClass()
+    {
         foreach ($this->buildDto->driver as $driver) {
             $this->createOneClass($driver);
         }
     }
 
-    protected function createOneClass(string $driver) {
+    protected function createOneClass(string $driver)
+    {
         $className = $this->getClassName();
         $driverDirName = Inflector::camelize($driver);
         $repoClassName = $driverDirName . '\\' . $className;
@@ -79,7 +82,7 @@ class RepositoryScenario extends BaseScenario
         $classGenerator->setExtendedClass(basename($parentClass));
 
         $classGenerator->setName($className);
-        if($this->isMakeInterface()) {
+        if ($this->isMakeInterface()) {
             $classGenerator->setImplementedInterfaces([$this->getInterfaceName()]);
             $fileGenerator->setUse($this->getInterfaceFullName());
         }
@@ -95,9 +98,6 @@ class RepositoryScenario extends BaseScenario
 
         $fileGenerator->setClass($classGenerator);
         ClassHelper::generateFile($fileGenerator->getNamespace() . '\\' . $className, $fileGenerator->generate());
-
-
-
 
 
         /*$className = $this->getClassName();
@@ -125,10 +125,11 @@ $uses[] = new ClassUseEntity(['name' => $entityFullClassName]);
         return $classEntity;*/
     }
 
-    private function parentClass($driver) {
+    private function parentClass($driver)
+    {
         $className = '';
-        if('eloquent' == $driver) {
-            if($this->buildDto->isCrudRepository) {
+        if ('eloquent' == $driver) {
+            if ($this->buildDto->isCrudRepository) {
                 $className = 'PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository';
             } else {
                 $className = 'PhpLab\Eloquent\Db\Repositories\BaseEloquentRepository';

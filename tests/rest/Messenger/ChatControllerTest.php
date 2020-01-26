@@ -2,9 +2,8 @@
 
 namespace PhpLab\Sandbox\Tests\rest\Messenger;
 
-use PhpLab\Test\BaseRestTest;
-use PhpLab\Sandbox\Web\Enums\HttpMethodEnum;
 use PhpLab\Sandbox\Web\Enums\HttpStatusCodeEnum;
+use PhpLab\Test\BaseRestTest;
 
 class ChatControllerTest extends BaseRestTest
 {

@@ -24,9 +24,10 @@ class User extends BaseUser implements ValidateEntityInterface
     /**
      * ORM\Column(type="string", unique=true, nullable=true)
      */
-     private $apiToken;
+    private $apiToken;
 
-    public function validationRules() : array {
+    public function validationRules(): array
+    {
         return [
             'username' => [
                 new Length(['min' => 3]),

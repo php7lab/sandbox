@@ -2,8 +2,6 @@
 
 namespace PhpLab\Sandbox\Html\Widgets;
 
-use PhpLab\Domain\Data\DataProviderEntity;
-
 class BreadcrumbWidget extends MenuWidget implements WidgetInterface
 {
 

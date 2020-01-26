@@ -4,11 +4,10 @@ namespace PhpLab\Sandbox\Messenger\Domain\Services;
 
 use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Helpers\EntityHelper;
-use PhpLab\Sandbox\Messenger\Domain\Entities\MemberEntity;
-use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
-use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Domain\Interfaces\GetEntityClassInterface;
 use PhpLab\Domain\Services\BaseCrudService;
+use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
+use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent\MemberRepository;
 use PhpLab\Sandbox\User\Domain\Entities\User;
 use PhpLab\Sandbox\User\Domain\Traits\UserAwareTrait;
@@ -31,7 +30,8 @@ class ChatService extends BaseCrudService implements ChatServiceInterface
         $this->memberRepository = $memberRepository;
     }
 
-    private function allSelfChatIds() : array {
+    private function allSelfChatIds(): array
+    {
         /** @var User $userEntity */
         $userEntity = $this->getUser();
 
@@ -43,7 +43,8 @@ class ChatService extends BaseCrudService implements ChatServiceInterface
         return $chatIdArray;
     }
 
-    protected function forgeQuery(Query $query = null) {
+    protected function forgeQuery(Query $query = null)
+    {
         $query = parent::forgeQuery($query);
         $chatIdArray = $this->allSelfChatIds();
         $query->where('id', $chatIdArray);

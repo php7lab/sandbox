@@ -2,7 +2,6 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Input;
 
-use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
 class ModuleNamespaceInputScenario extends BaseInputScenario

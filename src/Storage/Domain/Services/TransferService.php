@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\Storage\Domain\Services;
 
-use PhpLab\Sandbox\Storage\Domain\Interfaces\Services\TransferServiceInterface;
 use PhpLab\Domain\Services\BaseCrudService;
+use PhpLab\Sandbox\Storage\Domain\Interfaces\Services\TransferServiceInterface;
 
 class TransferService extends BaseCrudService implements TransferServiceInterface
 {

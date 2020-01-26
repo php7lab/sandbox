@@ -18,7 +18,8 @@ use PhpLab\Sandbox\Generator\Domain\Libs\MigrationFieldRender\UpdatedAtRender;
 class TemplateCodeHelper
 {
 
-    public static function generateCrudWebRoutesConfig(BuildDto $buildDto, string $controllerClassName) {
+    public static function generateCrudWebRoutesConfig(BuildDto $buildDto, string $controllerClassName)
+    {
         $tpl = file_get_contents(__DIR__ . '/../Templates/Web/config/routes.yaml');
         $tpl = str_replace('{{moduleName}}', $buildDto->moduleName, $tpl);
         $tpl = str_replace('{{name}}', $buildDto->name, $tpl);
@@ -27,7 +28,8 @@ class TemplateCodeHelper
         return $tpl;
     }
 
-    public static function generateCrudApiRoutesConfig(BuildDto $buildDto, string $controllerClassName) {
+    public static function generateCrudApiRoutesConfig(BuildDto $buildDto, string $controllerClassName)
+    {
         $tpl = file_get_contents(__DIR__ . '/../Templates/Api/config/routes.yaml');
         $tpl = str_replace('{{moduleName}}', $buildDto->moduleName, $tpl);
         $tpl = str_replace('{{name}}', $buildDto->name, $tpl);
@@ -40,7 +42,7 @@ class TemplateCodeHelper
     {
         $fieldCode = self::generateAttributes($attributes);
         $code =
-"if ( ! class_exists({$className}::class)) {
+            "if ( ! class_exists({$className}::class)) {
 
     class {$className} extends BaseCreateTableMigration
     {
@@ -61,7 +63,8 @@ class TemplateCodeHelper
         return $code;
     }
 
-    private static function generateAttributes(array $attributes) {
+    private static function generateAttributes(array $attributes)
+    {
         $fieldCode = '';
         $fields = [];
         $spaces = str_repeat(" ", 4 * 4);
@@ -72,16 +75,18 @@ class TemplateCodeHelper
         return $fieldCode;
     }
 
-    private static function runFieldRender(string $renderClass, string $attributeName) : ?string {
+    private static function runFieldRender(string $renderClass, string $attributeName): ?string
+    {
         $renderInstance = new $renderClass;
         $renderInstance->attributeName = $attributeName;
-        if( ! $renderInstance->isMatch()) {
+        if ( ! $renderInstance->isMatch()) {
             return null;
         }
         return $renderInstance->run();
     }
 
-    private static function generateField(string $attributeName) : string {
+    private static function generateField(string $attributeName): string
+    {
         $attributeName = Inflector::underscore($attributeName);
         $renderClasses = [
             IdRender::class,
@@ -96,7 +101,7 @@ class TemplateCodeHelper
         $renderClasses[] = MiscRender::class;
         foreach ($renderClasses as $renderClass) {
             $field = self::runFieldRender($renderClass, $attributeName);
-            if($field) {
+            if ($field) {
                 return $field;
             }
         }

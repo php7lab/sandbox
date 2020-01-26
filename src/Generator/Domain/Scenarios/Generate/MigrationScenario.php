@@ -3,10 +3,8 @@
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
 use php7extension\yii\helpers\FileHelper;
-use php7extension\yii\helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Helpers\TemplateCodeHelper;
 use PhpLab\Sandbox\Package\Domain\Helpers\PackageHelper;
-use function Symfony\Component\Debug\Tests\testHeader;
 use Zend\Code\Generator\FileGenerator;
 
 class MigrationScenario extends BaseScenario

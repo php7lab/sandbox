@@ -2,18 +2,17 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
-use php7extension\core\code\entities\ClassVariableEntity;
-use php7extension\core\code\enums\AccessEnum;
-use php7extension\yii\helpers\Inflector;
 use php7extension\core\code\entities\ClassEntity;
 use php7extension\core\code\entities\ClassUseEntity;
+use php7extension\core\code\entities\ClassVariableEntity;
 use php7extension\core\code\entities\InterfaceEntity;
+use php7extension\core\code\enums\AccessEnum;
 use php7extension\core\code\helpers\ClassHelper;
+use php7extension\yii\helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Generator\InterfaceGenerator;
-use Zend\Code\Generator\ParameterGenerator;
 
 abstract class BaseScenario
 {
@@ -26,6 +25,7 @@ abstract class BaseScenario
     public $buildDto;
 
     abstract public function typeName();
+
     abstract public function classDir();
 
     public function init()
@@ -35,21 +35,24 @@ abstract class BaseScenario
 
     public function run()
     {
-        if($this->isMakeInterface()) {
+        if ($this->isMakeInterface()) {
             $this->createInterface();
         }
         $this->createClass();
     }
 
-    protected function isMakeInterface() : bool {
+    protected function isMakeInterface(): bool
+    {
         return false;
     }
 
-    protected function getClassName() : string {
+    protected function getClassName(): string
+    {
         return Inflector::classify($this->buildDto->name) . $this->typeName();
     }
 
-    protected function getFullClassName() : string {
+    protected function getFullClassName(): string
+    {
         return $this->domainNamespace . '\\' . $this->classDir() . '\\' . $this->getClassName();
     }
 
@@ -58,16 +61,19 @@ abstract class BaseScenario
         return 'Interfaces\\' . $this->classDir();
     }
 
-    protected function getInterfaceFullName() : string {
+    protected function getInterfaceFullName(): string
+    {
         return $this->domainNamespace . '\\' . $this->interfaceDir() . '\\' . $this->getInterfaceName();
     }
 
-    protected function getInterfaceName() : string {
+    protected function getInterfaceName(): string
+    {
         $className = $this->getClassName();
         return $className . 'Interface';
     }
 
-    protected function createInterface() {
+    protected function createInterface()
+    {
         $fileGenerator = new FileGenerator;
         $interfaceGenerator = new InterfaceGenerator;
         $interfaceGenerator->setName($this->getInterfaceName());
@@ -84,17 +90,18 @@ abstract class BaseScenario
         return $interfaceEntity;*/
     }
 
-    protected function createClass() {
+    protected function createClass()
+    {
         $className = $this->getClassName();
         $fullClassName = $this->getFullClassName();
         $fileGenerator = new FileGenerator;
         $classGenerator = new ClassGenerator;
         $classGenerator->setName($className);
-        if($this->isMakeInterface()) {
+        if ($this->isMakeInterface()) {
             $classGenerator->setImplementedInterfaces([$this->getInterfaceName()]);
             $fileGenerator->setUse($this->getInterfaceFullName());
         }
-        if($this->attributes) {
+        if ($this->attributes) {
             foreach ($this->attributes as $attribute) {
                 $classGenerator->addProperties([
                     [Inflector::variablize($attribute)]

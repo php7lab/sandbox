@@ -5,8 +5,8 @@ namespace PhpLab\Sandbox\Article\Domain\Entities;
 use DateTime;
 use Illuminate\Support\Collection;
 use PhpLab\Domain\Interfaces\ValidateEntityInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PostEntity implements ValidateEntityInterface
 {
@@ -84,7 +84,8 @@ class PostEntity implements ValidateEntityInterface
         $this->tags = $tags;
     }
 
-    public function validationRules() : array {
+    public function validationRules(): array
+    {
         return [
             'title' => [
                 new Length(['min' => 3]),

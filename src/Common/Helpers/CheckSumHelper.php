@@ -2,12 +2,14 @@
 
 namespace PhpLab\Sandbox\Common\Helpers;
 
-use PhpLab\Sandbox\Common\Exceptions\InvalidArgumentException;
 use PhpLab\Sandbox\Common\Enums\CheckSumAlgorithmEnum;
+use PhpLab\Sandbox\Common\Exceptions\InvalidArgumentException;
 
-class CheckSumHelper {
+class CheckSumHelper
+{
 
-    public static function verify($data, int $checkSum, string $algorithm) : bool {
+    public static function verify($data, int $checkSum, string $algorithm): bool
+    {
         $calculatedCheckSum = self::calculate($data, $algorithm);
         return $calculatedCheckSum == $checkSum;
     }
@@ -22,7 +24,8 @@ class CheckSumHelper {
         return $calculatedCheckSum;
     }
 
-    private static function luhnAlgorithm($digit) : int {
+    private static function luhnAlgorithm($digit): int
+    {
         $number = strrev(preg_replace('/[^\d]/', '', $digit));
         $sum = 0;
         for ($i = 0, $j = strlen($number); $i < $j; $i++) {
@@ -30,7 +33,7 @@ class CheckSumHelper {
                 $val = $number[$i];
             } else {
                 $val = $number[$i] * 2;
-                if ($val > 9)  {
+                if ($val > 9) {
                     $val -= 9;
                 }
             }

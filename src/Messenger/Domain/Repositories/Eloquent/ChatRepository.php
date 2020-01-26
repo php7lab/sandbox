@@ -2,14 +2,13 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
-use PhpLab\Domain\Enums\RelationEnum;
 use Illuminate\Support\Collection;
+use PhpLab\Domain\Enums\RelationEnum;
+use PhpLab\Domain\Libs\Relation\OneToMany;
 use PhpLab\Eloquent\Db\Helpers\Manager;
+use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
-use PhpLab\Domain\Interfaces\GetEntityClassInterface;
-use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
-use PhpLab\Domain\Libs\Relation\OneToMany;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\FlowRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\MemberRepositoryInterface;
 
@@ -34,7 +33,7 @@ class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositor
         return [
             'messages' => [
                 'type' => RelationEnum::CALLBACK,
-                'callback' => function(Collection $collection) {
+                'callback' => function (Collection $collection) {
                     $m2m = new OneToMany;
                     $m2m->selfModel = $this;
                     $m2m->foreignModel = $this->flowRepository;
@@ -45,7 +44,7 @@ class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositor
             ],
             'members' => [
                 'type' => RelationEnum::CALLBACK,
-                'callback' => function(Collection $collection) {
+                'callback' => function (Collection $collection) {
                     $m2m = new OneToMany;
                     $m2m->selfModel = $this;
                     $m2m->foreignModel = $this->memberRepository;

@@ -4,12 +4,14 @@ namespace PhpLab\Sandbox\Common\Libs\Scenario\Base;
 
 use PhpLab\Sandbox\Common\Libs\Scenario\Collections\ScenarioCollection;
 
-abstract class BaseGroupScenario extends BaseScenario {
+abstract class BaseGroupScenario extends BaseScenario
+{
 
     public $filters = [];
 
-    public function run() {
-        if(empty($this->filters)) {
+    public function run()
+    {
+        if (empty($this->filters)) {
             return;
         }
         $config = $this->getData();
@@ -19,5 +21,5 @@ abstract class BaseGroupScenario extends BaseScenario {
 
         $this->setData($config);
     }
-	
+
 }

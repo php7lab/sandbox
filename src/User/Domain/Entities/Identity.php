@@ -22,7 +22,9 @@ class Identity implements UserInterface
     private $roles;
     private $logo;
 
-    public function eraseCredentials() {}
+    public function eraseCredentials()
+    {
+    }
 
     /**
      * @return mixed

@@ -2,25 +2,23 @@
 
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
-use PhpLab\Domain\Base\BaseEnum;
 use domain\union\v1\entities\MemberEntity;
-use PhpLab\Sandbox\Common\Exceptions\Exception;
 use php7rails\app\domain\helpers\EnvService;
 use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
-use PhpLab\Sandbox\Crypt\Helpers\EncryptHelper;
 
-class SignatureHelper {
+class SignatureHelper
+{
 
     public static function sign($msg, $key, $function = EncryptFunctionEnum::HASH_HMAC, $algorithm = EncryptAlgorithmEnum::SHA256)
     {
-        switch($function) {
+        switch ($function) {
             case EncryptFunctionEnum::HASH_HMAC:
                 return hash_hmac($algorithm, $msg, $key, true);
             case EncryptFunctionEnum::OPENSSL:
                 $signature = '';
                 $success = openssl_sign($msg, $signature, $key, $algorithm);
-                if (!$success) {
+                if ( ! $success) {
                     throw new \Exception("OpenSSL unable to sign data");
                 } else {
                     return $signature;
@@ -30,7 +28,7 @@ class SignatureHelper {
 
     public static function verify($msg, $key, $signature, $function = EncryptFunctionEnum::HASH_HMAC, $algorithm = EncryptAlgorithmEnum::SHA256)
     {
-        switch($function) {
+        switch ($function) {
             case 'openssl':
                 $success = openssl_verify($msg, $signature, $key, $algorithm);
                 if ($success === 1) {

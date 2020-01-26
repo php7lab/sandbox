@@ -15,7 +15,8 @@ use PhpLab\Domain\Base\BaseEntity;
  * @property $payload
  * @property $signature
  */
-class TokenDto extends BaseEntity {
+class TokenDto extends BaseEntity
+{
 
     protected $header_encoded = null;
     protected $payload_encoded = null;

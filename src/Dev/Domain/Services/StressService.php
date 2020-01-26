@@ -3,9 +3,9 @@
 namespace PhpLab\Sandbox\Dev\Domain\Services;
 
 use GuzzleHttp\Client;
-use PhpLab\Sandbox\Common\Libs\Benchmark;
-use php7extension\yii\helpers\ArrayHelper;
 use Illuminate\Support\Collection;
+use php7extension\yii\helpers\ArrayHelper;
+use PhpLab\Sandbox\Common\Libs\Benchmark;
 use PhpLab\Sandbox\Dev\Domain\Entities\ResultEntity;
 use function GuzzleHttp\Promise\settle;
 
@@ -26,7 +26,7 @@ class StressService
         return $resultEntity;
     }
 
-    private function testAge(Collection $queryCollection) : float
+    private function testAge(Collection $queryCollection): float
     {
         $client = new Client;
         $options = [
@@ -49,7 +49,8 @@ class StressService
         return $commonRuntime;
     }
 
-    private function checkErrors(array $results) {
+    private function checkErrors(array $results)
+    {
         foreach ($results as $result) {
             if ($result['state'] != 'fulfilled' || ArrayHelper::getValue($result, 'reason.code') > 500) {
                 throw new \UnexpectedValueException('Response error!');

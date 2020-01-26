@@ -3,7 +3,6 @@
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use Illuminate\Support\Collection;
-use PhpLab\Sandbox\Package\Domain\Libs\GitShell;
 use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Domain\Repositories\BaseRepository;
 use PhpLab\Sandbox\Package\Domain\Entities\CommitEntity;
@@ -11,6 +10,7 @@ use PhpLab\Sandbox\Package\Domain\Entities\GitEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\TagEntity;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Repositories\GitRepositoryInterface;
+use PhpLab\Sandbox\Package\Domain\Libs\GitShell;
 
 class GitRepository extends BaseRepository implements GitRepositoryInterface
 {

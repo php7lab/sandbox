@@ -2,19 +2,13 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
+use Illuminate\Support\Collection;
 use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Enums\RelationEnum;
-use Illuminate\Support\Collection;
-use PhpLab\Domain\Libs\Relation\OneToMany;
 use PhpLab\Domain\Libs\Relation\OneToOne;
 use PhpLab\Eloquent\Db\Helpers\Manager;
-use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
-use PhpLab\Sandbox\Messenger\Domain\Entities\MessageEntity;
-use PhpLab\Sandbox\Messenger\Domain\Entities\FlowEntity;
-use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
-use PhpLab\Domain\Interfaces\GetEntityClassInterface;
 use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
-use PhpLab\Domain\Libs\Relation\ManyToMany;
+use PhpLab\Sandbox\Messenger\Domain\Entities\FlowEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\FlowRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\MessageRepositoryInterface;
 
@@ -44,7 +38,7 @@ class FlowRepository extends BaseEloquentCrudRepository implements FlowRepositor
         return [
             'message' => [
                 'type' => RelationEnum::CALLBACK,
-                'callback' => function(Collection $collection) {
+                'callback' => function (Collection $collection) {
                     $m2m = new OneToOne;
                     //$m2m->selfModel = $this;
                     $m2m->foreignModel = $this->messageRepository;

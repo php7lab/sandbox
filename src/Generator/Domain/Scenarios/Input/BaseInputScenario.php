@@ -22,7 +22,8 @@ abstract class BaseInputScenario
     public $buildDto;
 
     abstract protected function paramName();
-    abstract protected function question() : Question;
+
+    abstract protected function question(): Question;
 
     public function run()
     {

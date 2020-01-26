@@ -31,7 +31,7 @@ class RunCommand extends Command
         $output->writeln('');
 
         $channel = $input->getArgument('channel');
-        if($channel) {
+        if ($channel) {
             $output->writeln("Channel: <fg=blue>{$channel}</>");
         } else {
             $output->writeln("Channel: <fg=blue>all</>");

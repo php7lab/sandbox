@@ -3,9 +3,7 @@
 namespace PhpLab\Sandbox\Crypt\Entities;
 
 use PhpLab\Domain\Base\BaseEntity;
-use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\JwtAlgorithmEnum;
-use PhpLab\Sandbox\Common\Enums\TimeEnum;
 
 /**
  * Class JwtHeaderEntity
@@ -15,7 +13,8 @@ use PhpLab\Sandbox\Common\Enums\TimeEnum;
  * @property $alg string
  * @property $kid string
  */
-class JwtHeaderEntity extends BaseEntity {
+class JwtHeaderEntity extends BaseEntity
+{
 
     protected $typ = 'JWT';
     protected $alg = JwtAlgorithmEnum::HS256;

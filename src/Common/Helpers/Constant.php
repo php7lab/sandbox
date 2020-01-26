@@ -4,51 +4,53 @@ namespace PhpLab\Sandbox\Common\Helpers;
 
 use php7rails\app\enums\YiiEnvEnum;
 
-class Constant {
-	
-	public static function init(/*$appName*/) {
-		self::setBase(); # legacy from CI3
-		//self::setNames(); # define name
-		self::setDirs();
-		//self::setApplication($appName);
+class Constant
+{
+
+    public static function init(/*$appName*/)
+    {
+        self::setBase(); # legacy from CI3
+        //self::setNames(); # define name
+        self::setDirs();
+        //self::setApplication($appName);
         //self::setEnv();
-	}
+    }
 
     /*public static function setEnv($env = YiiEnvEnum::PROD) {
         defined('ENV_MODE') OR define('ENV_MODE', YiiEnvEnum::value($env, YiiEnvEnum::PROD));
     }*/
-	
-	/*public static function setYiiEnv($env = YiiEnvEnum::PROD) {
-		defined('YII_ENV') OR define('YII_ENV', YiiEnvEnum::value($env, YiiEnvEnum::PROD));
-	}
-	
-	public static function setYiiDebug($debug = false) {
-		defined('YII_DEBUG') OR define('YII_DEBUG', $debug);
-	}
-	
-	public static function setContainer($container = []) {
-		if(!empty($container)) {
-			foreach ($container as $name => $definition) {
-				Yii::$container->set($name, $definition);
-			}
-		}
-	}
-	
-	public static function setAliases($aliases = []) {
-		Yii::setAlias('@root', ROOT_DIR);
-		Yii::setAlias('@common', COMMON_DIR);
-		Yii::setAlias('@frontend', FRONTEND_DIR);
-		Yii::setAlias('@backend', BACKEND_DIR);
-		Yii::setAlias('@api', API_DIR);
-		Yii::setAlias('@console', CONSOLE_DIR);
-		Yii::setAlias('@vendor', VENDOR_DIR);
-		Yii::setAlias('@domain', DOMAIN_DIR);
-		if(!empty($aliases)) {
-		    foreach ($aliases as $alias => $path) {
+
+    /*public static function setYiiEnv($env = YiiEnvEnum::PROD) {
+        defined('YII_ENV') OR define('YII_ENV', YiiEnvEnum::value($env, YiiEnvEnum::PROD));
+    }
+    
+    public static function setYiiDebug($debug = false) {
+        defined('YII_DEBUG') OR define('YII_DEBUG', $debug);
+    }
+    
+    public static function setContainer($container = []) {
+        if(!empty($container)) {
+            foreach ($container as $name => $definition) {
+                Yii::$container->set($name, $definition);
+            }
+        }
+    }
+    
+    public static function setAliases($aliases = []) {
+        Yii::setAlias('@root', ROOT_DIR);
+        Yii::setAlias('@common', COMMON_DIR);
+        Yii::setAlias('@frontend', FRONTEND_DIR);
+        Yii::setAlias('@backend', BACKEND_DIR);
+        Yii::setAlias('@api', API_DIR);
+        Yii::setAlias('@console', CONSOLE_DIR);
+        Yii::setAlias('@vendor', VENDOR_DIR);
+        Yii::setAlias('@domain', DOMAIN_DIR);
+        if(!empty($aliases)) {
+            foreach ($aliases as $alias => $path) {
                 Yii::setAlias($alias, $path);
             }
         }
-	}*/
+    }*/
 
     /*public static function setApplication($appName) {
         defined('APP') OR define('APP', strtolower($appName));
@@ -71,43 +73,46 @@ class Constant {
         defined('DOMAIN') OR define('DOMAIN', 'domain');
     }*/
 
-	public static function setBase() {
-		defined('DS') OR define('DS', DIRECTORY_SEPARATOR);
-		defined('SL') OR define('SL', '/');
-		defined('BSL') OR define('BSL', '\\');
-		defined('NBSP') OR define('NBSP', '&nbsp;');
-		//defined('NBSP2X') OR define('NBSP2X', '&nbsp;&nbsp;');
-		defined('NS') OR define('NS', "\n"); //new string Linux
-		//defined('NSW') OR define('NSW', "\r\n"); //new string Windows
-		defined('BL') OR define('BL', '_'); //bottom line
-		defined('DL') OR define('DL', '-'); //dash line
-		defined('DOT') OR define('DOT', '.');
-		defined('SPC') OR define('SPC', ' ');
-		defined('EMP') OR define('EMP', '');
-		defined('TAB') OR define('TAB', "\t");
-		defined('BR') OR define('BR', '<br/>');
-		defined('TIMESTAMP') OR define('TIMESTAMP', time());
-	}
-	
-	private static function setDirs() {
-		defined('ROOT_DIR') OR define('ROOT_DIR', self::getRootDir());
-        defined('VENDOR_DIR') OR define('VENDOR_DIR', ROOT_DIR . DS . VENDOR);
-		/*defined('COMMON_DIR') OR define('COMMON_DIR', ROOT_DIR . DS . COMMON);
-		defined('COMMON_DATA_DIR') OR define('COMMON_DATA_DIR', COMMON_DIR . DS . 'data');
-		defined('FRONTEND_DIR') OR define('FRONTEND_DIR', ROOT_DIR . DS . FRONTEND);
-		defined('BACKEND_DIR') OR define('BACKEND_DIR', ROOT_DIR . DS . BACKEND);
-		defined('API_DIR') OR define('API_DIR', ROOT_DIR . DS . API);
-		defined('CONSOLE_DIR') OR define('CONSOLE_DIR', ROOT_DIR . DS . CONSOLE);*/
+    public static function setBase()
+    {
+        defined('DS') OR define('DS', DIRECTORY_SEPARATOR);
+        defined('SL') OR define('SL', '/');
+        defined('BSL') OR define('BSL', '\\');
+        defined('NBSP') OR define('NBSP', '&nbsp;');
+        //defined('NBSP2X') OR define('NBSP2X', '&nbsp;&nbsp;');
+        defined('NS') OR define('NS', "\n"); //new string Linux
+        //defined('NSW') OR define('NSW', "\r\n"); //new string Windows
+        defined('BL') OR define('BL', '_'); //bottom line
+        defined('DL') OR define('DL', '-'); //dash line
+        defined('DOT') OR define('DOT', '.');
+        defined('SPC') OR define('SPC', ' ');
+        defined('EMP') OR define('EMP', '');
+        defined('TAB') OR define('TAB', "\t");
+        defined('BR') OR define('BR', '<br/>');
+        defined('TIMESTAMP') OR define('TIMESTAMP', time());
+    }
 
-		/*defined('DOMAIN_DIR') OR define('DOMAIN_DIR', ROOT_DIR . DS . DOMAIN);
-		defined('TEST_APPLICATION_DIR') OR define('TEST_APPLICATION_DIR', 'vendor/yii2tool/yii2-test/src/base/_application');*/
-	}
-	
-	private static function getRootDir() {
-		$up = DS . '..';
-		$upScope = str_repeat($up, 5);
-		return realpath(__DIR__ . $upScope);
-	}
+    private static function setDirs()
+    {
+        defined('ROOT_DIR') OR define('ROOT_DIR', self::getRootDir());
+        defined('VENDOR_DIR') OR define('VENDOR_DIR', ROOT_DIR . DS . VENDOR);
+        /*defined('COMMON_DIR') OR define('COMMON_DIR', ROOT_DIR . DS . COMMON);
+        defined('COMMON_DATA_DIR') OR define('COMMON_DATA_DIR', COMMON_DIR . DS . 'data');
+        defined('FRONTEND_DIR') OR define('FRONTEND_DIR', ROOT_DIR . DS . FRONTEND);
+        defined('BACKEND_DIR') OR define('BACKEND_DIR', ROOT_DIR . DS . BACKEND);
+        defined('API_DIR') OR define('API_DIR', ROOT_DIR . DS . API);
+        defined('CONSOLE_DIR') OR define('CONSOLE_DIR', ROOT_DIR . DS . CONSOLE);*/
+
+        /*defined('DOMAIN_DIR') OR define('DOMAIN_DIR', ROOT_DIR . DS . DOMAIN);
+        defined('TEST_APPLICATION_DIR') OR define('TEST_APPLICATION_DIR', 'vendor/yii2tool/yii2-test/src/base/_application');*/
+    }
+
+    private static function getRootDir()
+    {
+        $up = DS . '..';
+        $upScope = str_repeat($up, 5);
+        return realpath(__DIR__ . $upScope);
+    }
 }
 
 /*class Yii extends \php7extension\yii\helpers\FileHelper

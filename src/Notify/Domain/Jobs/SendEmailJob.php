@@ -15,7 +15,8 @@ class SendEmailJob implements JobInterface
     /** @var EmailEntity */
     public $entity;
 
-    public function run() {
+    public function run()
+    {
         /** @var EmailRepositoryInterface $emailRepository */
         $emailRepository = $this->container->get(EmailRepositoryInterface::class);
         $emailRepository->send($this->entity);

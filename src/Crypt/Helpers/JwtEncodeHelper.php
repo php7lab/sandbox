@@ -2,26 +2,20 @@
 
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
+use DomainException;
+use InvalidArgumentException;
 use php7extension\yii\helpers\ArrayHelper;
+use php7rails\extension\jwt\entities\ProfileEntity;
+use php7rails\extension\jwt\entities\TokenEntity;
 use PhpLab\Sandbox\Crypt\Dto\TokenDto;
 use PhpLab\Sandbox\Crypt\Entities\JwtHeaderEntity;
 use PhpLab\Sandbox\Crypt\Entities\JwtProfileEntity;
 use PhpLab\Sandbox\Crypt\Entities\KeyEntity;
-use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
-use PhpLab\Sandbox\Crypt\Enums\EncryptDirectionEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptKeyTypeEnum;
 use PhpLab\Sandbox\Crypt\Enums\JwtAlgorithmEnum;
-use PhpLab\Sandbox\Crypt\Exceptions\BeforeValidException;
-use PhpLab\Sandbox\Crypt\Exceptions\ExpiredException;
 use PhpLab\Sandbox\Crypt\Exceptions\SignatureInvalidException;
-use DomainException;
-use UnexpectedValueException;
-use InvalidArgumentException;
-use DateTime;
 use PhpLab\Sandbox\Crypt\Strategies\Func\FuncContext;
-use php7rails\extension\jwt\entities\ProfileEntity;
-use php7rails\extension\jwt\entities\TokenEntity;
 
 class JwtEncodeHelper
 {
@@ -40,8 +34,7 @@ class JwtEncodeHelper
     }
 
 
-
-    public static function encode(array $payload, KeyEntity $keyEntity, JwtHeaderEntity $jwtHeaderEntity = null) : string
+    public static function encode(array $payload, KeyEntity $keyEntity, JwtHeaderEntity $jwtHeaderEntity = null): string
     {
         $tokenDto = new TokenDto;
         $tokenDto->header_encoded = JwtSegmentHelper::encodeSegment(ArrayHelper::toArray($jwtHeaderEntity));
@@ -51,7 +44,7 @@ class JwtEncodeHelper
         return self::buildTokenFromDto($tokenDto);
     }
 
-    private static function buildTokenFromDto(TokenDto $tokenDto, $full = true) : string
+    private static function buildTokenFromDto(TokenDto $tokenDto, $full = true): string
     {
         $token = $tokenDto->header_encoded . '.' . $tokenDto->payload_encoded;
         if ($full && $tokenDto->signature_encoded) {
@@ -60,10 +53,11 @@ class JwtEncodeHelper
         return $token;
     }
 
-    private static function extractKey(KeyEntity $keyEntity, $type = EncryptKeyTypeEnum::PRIVATE) {
+    private static function extractKey(KeyEntity $keyEntity, $type = EncryptKeyTypeEnum::PRIVATE)
+    {
 
         $isRsa = $keyEntity->type === OPENSSL_KEYTYPE_RSA;
-        if($isRsa) {
+        if ($isRsa) {
             $key = ArrayHelper::getValue($keyEntity, $type);
         } else {
             $key = ArrayHelper::getValue($keyEntity, EncryptKeyTypeEnum::PRIVATE);
@@ -83,7 +77,7 @@ class JwtEncodeHelper
     private static function verifySignature(TokenDto $tokenDto, KeyEntity $keyEntity)
     {
         $isVerified = static::verify($tokenDto, $keyEntity);
-        if (!$isVerified) {
+        if ( ! $isVerified) {
             throw new SignatureInvalidException('Signature verification failed');
         }
     }
@@ -92,7 +86,7 @@ class JwtEncodeHelper
     {
         $key = self::extractKey($keyEntity, EncryptKeyTypeEnum::PRIVATE);
         $msg = self::buildTokenFromDto($tokenDto, false);
-        if (!JwtAlgorithmEnum::isSupported($alg)) {
+        if ( ! JwtAlgorithmEnum::isSupported($alg)) {
             throw new DomainException('Algorithm not supported');
         }
         $algorithm = JwtAlgorithmEnum::getHashAlgorithm($alg);

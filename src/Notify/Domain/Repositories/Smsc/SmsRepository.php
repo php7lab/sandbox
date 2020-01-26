@@ -8,7 +8,8 @@ use PhpLab\Sandbox\Notify\Domain\Interfaces\Repositories\SmsRepositoryInterface;
 class SmsRepository implements SmsRepositoryInterface
 {
 
-    public function send(SmsEntity $smsEntity) {
+    public function send(SmsEntity $smsEntity)
+    {
 
     }
 

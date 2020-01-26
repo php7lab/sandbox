@@ -3,9 +3,6 @@
 namespace PhpLab\Sandbox\Crypt\Entities;
 
 use PhpLab\Domain\Base\BaseEntity;
-use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
-use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
-use PhpLab\Domain\Base\BaseEnum;
 
 /**
  * Class KeyEntity
@@ -16,10 +13,11 @@ use PhpLab\Domain\Base\BaseEnum;
  * @property string $public
  * @property string $secret
  */
-class KeyEntity extends BaseEntity {
+class KeyEntity extends BaseEntity
+{
 
-	protected $type = null;
-	protected $private;
+    protected $type = null;
+    protected $private;
     protected $public;
     protected $secret;
 

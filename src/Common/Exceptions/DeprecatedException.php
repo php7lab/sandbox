@@ -4,6 +4,7 @@ namespace PhpLab\Sandbox\Common\Exceptions;
 
 use Exception;
 
-class DeprecatedException extends Exception {
+class DeprecatedException extends Exception
+{
 
 }

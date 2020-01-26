@@ -2,16 +2,15 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
+use php7extension\core\code\entities\ClassEntity;
+use php7extension\core\code\entities\ClassUseEntity;
 use php7extension\core\code\entities\ClassVariableEntity;
 use php7extension\core\code\entities\DocBlockEntity;
 use php7extension\core\code\entities\DocBlockParameterEntity;
-use php7extension\core\code\enums\AccessEnum;
-use php7extension\yii\helpers\Inflector;
-use php7extension\core\code\entities\ClassEntity;
-use php7extension\core\code\entities\ClassUseEntity;
 use php7extension\core\code\entities\InterfaceEntity;
+use php7extension\core\code\enums\AccessEnum;
 use php7extension\core\code\helpers\ClassHelper;
-use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
+use php7extension\yii\helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Enums\TypeEnum;
 use PhpLab\Sandbox\Generator\Domain\Helpers\LocationHelper;
 use Zend\Code\Generator\ClassGenerator;
@@ -33,22 +32,23 @@ class ServiceScenario extends BaseScenario
         return 'Services';
     }
 
-    protected function isMakeInterface() : bool {
+    protected function isMakeInterface(): bool
+    {
         return true;
     }
 
-    protected function createInterface() {
+    protected function createInterface()
+    {
         $fileGenerator = new FileGenerator;
         $interfaceGenerator = new InterfaceGenerator;
         $interfaceGenerator->setName($this->getInterfaceName());
-        if($this->buildDto->isCrudService) {
+        if ($this->buildDto->isCrudService) {
             $fileGenerator->setUse('PhpLab\Domain\Interfaces\CrudServiceInterface');
             $interfaceGenerator->setImplementedInterfaces(['CrudServiceInterface']);
         }
         $fileGenerator->setNamespace($this->domainNamespace . '\\' . $this->interfaceDir());
         $fileGenerator->setClass($interfaceGenerator);
         ClassHelper::generateFile($fileGenerator->getNamespace() . '\\' . $this->getInterfaceName(), $fileGenerator->generate());
-
 
 
         /*$className = $this->getClassName();
@@ -63,13 +63,14 @@ class ServiceScenario extends BaseScenario
         return $interfaceEntity;*/
     }
 
-    protected function createClass() {
+    protected function createClass()
+    {
         $className = $this->getClassName();
         $fullClassName = $this->getFullClassName();
         $fileGenerator = new FileGenerator;
         $classGenerator = new ClassGenerator;
         $classGenerator->setName($className);
-        if($this->isMakeInterface()) {
+        if ($this->isMakeInterface()) {
             $classGenerator->setImplementedInterfaces([$this->getInterfaceName()]);
             $fileGenerator->setUse($this->getInterfaceFullName());
         }
@@ -78,7 +79,7 @@ class ServiceScenario extends BaseScenario
         //$repositoryInterfaceClassName = basename($repositoryInterfaceFullClassName);
         //$fileGenerator->setUse($repositoryInterfaceFullClassName);
 
-        if($this->attributes) {
+        if ($this->attributes) {
             foreach ($this->attributes as $attribute) {
                 $classGenerator->addProperties([
                     [Inflector::variablize($attribute)]
@@ -89,7 +90,7 @@ class ServiceScenario extends BaseScenario
         $fileGenerator->setClass($classGenerator);
 
 
-        if($this->buildDto->isCrudService) {
+        if ($this->buildDto->isCrudService) {
             $fileGenerator->setUse('PhpLab\Domain\Services\BaseCrudService');
             $classGenerator->setExtendedClass('BaseCrudService');
         } else {
@@ -116,8 +117,6 @@ class ServiceScenario extends BaseScenario
 ";*/
 
         ClassHelper::generateFile($fileGenerator->getNamespace() . '\\' . $className, $fileGenerator->generate());
-
-
 
 
         /*$className = $this->getClassName();

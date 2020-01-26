@@ -9,7 +9,8 @@ use PhpLab\Sandbox\Crypt\Entities\KeyEntity;
 class ProfileRepository
 {
 
-    public function oneByName(string $profileName)  {
+    public function oneByName(string $profileName)
+    {
         $profileEntity = new JwtProfileEntity;
         $profileEntity->name = $profileName;
         $profileEntity->key = new KeyEntity;

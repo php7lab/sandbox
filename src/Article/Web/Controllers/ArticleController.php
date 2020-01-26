@@ -2,11 +2,11 @@
 
 namespace PhpLab\Sandbox\Article\Web\Controllers;
 
-use PhpLab\Domain\Libs\GetParams;
-use PhpLab\Domain\Data\Query;
-use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Domain\Data\DataProvider;
+use PhpLab\Domain\Data\Query;
+use PhpLab\Domain\Libs\GetParams;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
+use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Sandbox\Notify\Domain\Enums\FlashMessageTypeEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,7 @@ class ArticleController extends AbstractController
         $this->service = $postService;
     }
 
-    public function index(Request $request) : Response
+    public function index(Request $request): Response
     {
         $getParams = new GetParams;
         $query = $getParams->getAllParams($request->query->all());
@@ -39,7 +39,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    public function view($id, Request $request) : Response
+    public function view($id, Request $request): Response
     {
         $query = new Query;
         $query->with('category');
@@ -49,12 +49,12 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    public function create(Request $request) : Response
+    public function create(Request $request): Response
     {
         return $this->render('@Article/post/create.html.twig');
     }
 
-    public function update($id, Request $request) : Response
+    public function update($id, Request $request): Response
     {
         $query = new Query;
         $query->with('category');
@@ -64,7 +64,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    public function delete($id, Request $request) : Response
+    public function delete($id, Request $request): Response
     {
         $this->service->deleteById($id);
         $postListUrl = $this->generateUrl('web_article_post_index');

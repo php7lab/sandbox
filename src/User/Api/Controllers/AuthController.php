@@ -2,12 +2,12 @@
 
 namespace PhpLab\Sandbox\User\Api\Controllers;
 
+use PhpLab\Domain\Exceptions\UnprocessibleEntityException;
+use PhpLab\Rest\Libs\JsonRestSerializer;
 use PhpLab\Sandbox\User\Domain\Entities\User;
 use PhpLab\Sandbox\User\Domain\Forms\AuthForm;
 use PhpLab\Sandbox\User\Domain\Services\AuthService;
 use PhpLab\Sandbox\Web\Enums\HttpHeaderEnum;
-use PhpLab\Domain\Exceptions\UnprocessibleEntityException;
-use PhpLab\Rest\Libs\JsonRestSerializer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,7 +68,8 @@ class AuthController extends AbstractController
         return $response;
     }
 
-    private function serializeUser($userEntity) {
+    private function serializeUser($userEntity)
+    {
         //$serializer = new JsonRestSerializer($response);
         //$serializer->serialize($userEntity);
         $context = [

@@ -20,7 +20,7 @@ class PackageHelper
         return $fileName;
     }
 
-    public static function findPathByNamespace(string $namespace) : ?array
+    public static function findPathByNamespace(string $namespace): ?array
     {
         $namespace = trim($namespace, '\\');
         $namespace .= '\\';
@@ -28,7 +28,7 @@ class PackageHelper
         $psr4 = self::getPsr4Dictonary();
         foreach ($psr4 as $ns => $path) {
             $path = $path[0];
-            if(mb_strpos($namespace, $ns) === 0) {
+            if (mb_strpos($namespace, $ns) === 0) {
                 return [
                     'namespace' => $ns,
                     'path' => $path,

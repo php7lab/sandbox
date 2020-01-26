@@ -2,7 +2,8 @@
 
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
-class SafeBase64Helper {
+class SafeBase64Helper
+{
 
     public static function decode(string $input)
     {
@@ -14,7 +15,7 @@ class SafeBase64Helper {
         return base64_decode(strtr($input, '-_', '+/'));
     }
 
-    public static function encode($input) : string
+    public static function encode($input): string
     {
         return str_replace('=', '', strtr(base64_encode($input), '+/', '-_'));
     }

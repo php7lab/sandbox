@@ -2,7 +2,8 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Entities;
 
-class CommitEntity {
+class CommitEntity
+{
 
     private $sha;
     private $author;

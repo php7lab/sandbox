@@ -12,13 +12,14 @@ use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
  * @property KeyEntity $key
  * @property string $algorithm
  */
-class ProfileEntity extends BaseEntity {
+class ProfileEntity extends BaseEntity
+{
 
-	protected $key;
-	protected $algorithm = EncryptAlgorithmEnum::SHA256;
+    protected $key;
+    protected $algorithm = EncryptAlgorithmEnum::SHA256;
 
 
-	public function fieldType()
+    public function fieldType()
     {
         return [
             'key' => KeyEntity::class,

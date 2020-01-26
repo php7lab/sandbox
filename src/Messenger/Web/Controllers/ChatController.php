@@ -2,10 +2,10 @@
 
 namespace PhpLab\Sandbox\Messenger\Web\Controllers;
 
-use PhpLab\Domain\Libs\GetParams;
-use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Data\DataProvider;
+use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Helpers\EntityHelper;
+use PhpLab\Domain\Libs\GetParams;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
