@@ -2,8 +2,6 @@
 
 namespace PhpLab\Sandbox\Crypt\Entities;
 
-use PhpLab\Domain\Base\BaseEntity;
-
 /**
  * Class JwtTokenEntity
  *
@@ -13,12 +11,12 @@ use PhpLab\Domain\Base\BaseEntity;
  * @property $payload array
  * @property $sig string
  */
-class JwtTokenEntity extends BaseEntity
+class JwtTokenEntity
 {
 
-    protected $header;
-    protected $payload;
-    protected $sig;
+    public $header;
+    public $payload;
+    public $sig;
 
     public function fieldType()
     {

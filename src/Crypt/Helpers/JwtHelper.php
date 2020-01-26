@@ -4,6 +4,7 @@ namespace PhpLab\Sandbox\Crypt\Helpers;
 
 use php7extension\yii\helpers\ArrayHelper;
 use php7rails\app\domain\helpers\EnvService;
+use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Domain\Libs\Alias;
 use PhpLab\Sandbox\Common\Helpers\StringHelper;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
@@ -105,7 +106,7 @@ class JwtHelper
 
     private static function entityToToken(JwtEntity $jwtEntity): array
     {
-        $data = $jwtEntity->toArray();
+        $data = EntityHelper::toArray($jwtEntity);
         $data = array_filter($data, function ($value) {
             return $value !== null;
         });

@@ -2,8 +2,6 @@
 
 namespace PhpLab\Sandbox\Crypt\Dto;
 
-use PhpLab\Domain\Base\BaseEntity;
-
 /**
  * Class TokenDto
  * @package PhpLab\Sandbox\Crypt\Dto
@@ -15,16 +13,16 @@ use PhpLab\Domain\Base\BaseEntity;
  * @property $payload
  * @property $signature
  */
-class TokenDto extends BaseEntity
+class TokenDto
 {
 
-    protected $header_encoded = null;
-    protected $payload_encoded = null;
-    protected $signature_encoded = null;
+    public $header_encoded = null;
+    public $payload_encoded = null;
+    public $signature_encoded = null;
 
-    protected $header = null;
-    protected $payload = null;
-    protected $signature = null;
+    public $header = null;
+    public $payload = null;
+    public $signature = null;
 
     public function fields()
     {

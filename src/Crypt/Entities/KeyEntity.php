@@ -2,8 +2,6 @@
 
 namespace PhpLab\Sandbox\Crypt\Entities;
 
-use PhpLab\Domain\Base\BaseEntity;
-
 /**
  * Class KeyEntity
  * @package PhpLab\Sandbox\Crypt\Entities
@@ -13,13 +11,13 @@ use PhpLab\Domain\Base\BaseEntity;
  * @property string $public
  * @property string $secret
  */
-class KeyEntity extends BaseEntity
+class KeyEntity
 {
 
-    protected $type = null;
-    protected $private;
-    protected $public;
-    protected $secret;
+    public $type = null;
+    public $private;
+    public $public;
+    public $secret;
 
     /*public function getType() {
         if(!empty($this->type)) {

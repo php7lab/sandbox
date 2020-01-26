@@ -2,7 +2,6 @@
 
 namespace PhpLab\Sandbox\Crypt\Entities;
 
-use PhpLab\Domain\Base\BaseEntity;
 use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 
 /**
@@ -12,11 +11,11 @@ use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
  * @property KeyEntity $key
  * @property string $algorithm
  */
-class ProfileEntity extends BaseEntity
+class ProfileEntity
 {
 
-    protected $key;
-    protected $algorithm = EncryptAlgorithmEnum::SHA256;
+    public $key;
+    public $algorithm = EncryptAlgorithmEnum::SHA256;
 
 
     public function fieldType()

@@ -23,19 +23,19 @@ use PhpLab\Sandbox\Crypt\Enums\JwtAlgorithmEnum;
 class JwtProfileEntity extends ProfileEntity
 {
 
-    protected $name;
-    protected $life_time = TimeEnum::SECOND_PER_MINUTE * 20;
+    public $name;
+    public $life_time = TimeEnum::SECOND_PER_MINUTE * 20;
     // protected $allowed_algs = ['HS256', 'SHA512', 'HS384', 'RS256'];
-    protected $allowed_algs = [
+    public $allowed_algs = [
         JwtAlgorithmEnum::HS256,
         JwtAlgorithmEnum::HS512,
         JwtAlgorithmEnum::HS384,
         JwtAlgorithmEnum::RS256,
     ];
-    protected $default_alg = JwtAlgorithmEnum::HS256;
-    protected $hash_alg = EncryptAlgorithmEnum::SHA256;
-    protected $func = EncryptFunctionEnum::HASH_HMAC;
-    protected $audience = [];
-    protected $issuer_url;
+    public $default_alg = JwtAlgorithmEnum::HS256;
+    public $hash_alg = EncryptAlgorithmEnum::SHA256;
+    public $func = EncryptFunctionEnum::HASH_HMAC;
+    public $audience = [];
+    public $issuer_url;
 
 }
