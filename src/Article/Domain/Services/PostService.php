@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Article\Domain\Services;
 
 use PhpLab\Domain\Interfaces\GetEntityClassInterface;
-use PhpLab\Domain\Services\BaseCrudService;
+use PhpLab\Domain\Base\BaseCrudService;
 use PhpLab\Sandbox\Article\Domain\Interfaces\PostRepositoryInterface;
 use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 

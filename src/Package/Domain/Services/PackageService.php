@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Services;
 
-use PhpLab\Domain\Services\BaseCrudService;
+use PhpLab\Domain\Base\BaseCrudService;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Repositories\PackageRepositoryInterface;
 use PhpLab\Sandbox\Package\Domain\Interfaces\Services\PackageServiceInterface;
 

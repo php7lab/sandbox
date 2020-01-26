@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Queue\Domain\Services;
 
 use PhpLab\Domain\Helpers\EntityHelper;
-use PhpLab\Domain\Services\BaseCrudService;
+use PhpLab\Domain\Base\BaseCrudService;
 use PhpLab\Sandbox\Queue\Domain\Entities\JobEntity;
 use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
 use PhpLab\Sandbox\Queue\Domain\Helpers\JobHelper;

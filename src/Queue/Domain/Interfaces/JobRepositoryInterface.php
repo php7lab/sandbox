@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Queue\Domain\Interfaces;
 
 use Illuminate\Support\Collection;
 use PhpLab\Domain\Data\Query;
-use PhpLab\Domain\Interfaces\CrudRepositoryInterface;
+use PhpLab\Domain\Interfaces\Repository\CrudRepositoryInterface;
 use PhpLab\Sandbox\Queue\Domain\Entities\JobEntity;
 
 interface JobRepositoryInterface extends CrudRepositoryInterface

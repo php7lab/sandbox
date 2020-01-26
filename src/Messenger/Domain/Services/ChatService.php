@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\Messenger\Domain\Services;
 use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Domain\Interfaces\GetEntityClassInterface;
-use PhpLab\Domain\Services\BaseCrudService;
+use PhpLab\Domain\Base\BaseCrudService;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent\MemberRepository;

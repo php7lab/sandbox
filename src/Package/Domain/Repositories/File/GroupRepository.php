@@ -3,8 +3,8 @@
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use PhpLab\Domain\Data\Query;
-use PhpLab\Domain\Interfaces\ReadRepositoryInterface;
-use PhpLab\Domain\Repositories\BaseRepository;
+use PhpLab\Domain\Interfaces\Repository\ReadRepositoryInterface;
+use PhpLab\Domain\Base\BaseRepository;
 use PhpLab\Sandbox\Common\Libs\Store\StoreFile;
 use PhpLab\Sandbox\Package\Domain\Entities\GroupEntity;
 

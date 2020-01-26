@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\User\Domain\Repositories\Eloquent;
 
-use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
+use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\User\Domain\Entities\Identity;
 use PhpLab\Sandbox\User\Domain\Interfaces\UserRepositoryInterface;
 

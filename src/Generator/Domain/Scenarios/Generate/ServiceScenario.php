@@ -43,7 +43,7 @@ class ServiceScenario extends BaseScenario
         $interfaceGenerator = new InterfaceGenerator;
         $interfaceGenerator->setName($this->getInterfaceName());
         if ($this->buildDto->isCrudService) {
-            $fileGenerator->setUse('PhpLab\Domain\Interfaces\CrudServiceInterface');
+            $fileGenerator->setUse('PhpLab\Domain\Interfaces\Service\CrudServiceInterface');
             $interfaceGenerator->setImplementedInterfaces(['CrudServiceInterface']);
         }
         $fileGenerator->setNamespace($this->domainNamespace . '\\' . $this->interfaceDir());
@@ -56,7 +56,7 @@ class ServiceScenario extends BaseScenario
         $interfaceEntity = new InterfaceEntity;
         $interfaceEntity->name = $this->getInterfaceFullName($className);
         if($this->buildDto->isCrudService) {
-            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Interfaces\CrudServiceInterface']);
+            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Interfaces\Service\CrudServiceInterface']);
             $interfaceEntity->extends = 'CrudServiceInterface';
         }
         ClassHelper::generate($interfaceEntity, $uses);
@@ -91,10 +91,10 @@ class ServiceScenario extends BaseScenario
 
 
         if ($this->buildDto->isCrudService) {
-            $fileGenerator->setUse('PhpLab\Domain\Services\BaseCrudService');
+            $fileGenerator->setUse('PhpLab\Domain\Base\BaseCrudService');
             $classGenerator->setExtendedClass('BaseCrudService');
         } else {
-            $fileGenerator->setUse('PhpLab\Domain\Services\BaseService');
+            $fileGenerator->setUse('PhpLab\Domain\Base\BaseService');
             $classGenerator->setExtendedClass('BaseService');
         }
 
@@ -135,10 +135,10 @@ class ServiceScenario extends BaseScenario
         $uses[] = new ClassUseEntity(['name' => $repositoryInterfaceFullClassName]);
 
         if($this->buildDto->isCrudService) {
-            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Services\BaseCrudService']);
+            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Base\BaseCrudService']);
             $classEntity->extends = 'BaseCrudService';
         } else {
-            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Services\BaseService']);
+            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Base\BaseService']);
             $classEntity->extends = 'BaseService';
         }
 

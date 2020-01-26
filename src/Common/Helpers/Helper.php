@@ -59,14 +59,6 @@ class Helper
         return $result;
     }
 
-    public static function forgeLabels($attributes, $group, $labels = [])
-    {
-        foreach ($attributes as $attribute) {
-            $labels[$attribute] = \Rails::t($group, $attribute);
-        }
-        return $labels;
-    }
-
     public static function post($data = null, Model $model = null)
     {
         if (empty($data) && is_object($model)) {
@@ -76,15 +68,6 @@ class Helper
             $data = \Yii::$app->request->post();
         }
         return $data;
-    }
-
-    public static function generateFormLabels(Model $model, $messagePath)
-    {
-        $labels = [];
-        foreach ($model->attributes() as $attribute) {
-            $labels[$attribute] = \Rails::t($messagePath, $attribute);
-        }
-        return $labels;
     }
 
     public static function forgeForm(Model $model, $data = null)

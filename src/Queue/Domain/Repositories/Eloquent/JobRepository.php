@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\Queue\Domain\Repositories\Eloquent;
 use Illuminate\Support\Collection;
 use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Entities\Query\Where;
-use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
+use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Queue\Domain\Entities\JobEntity;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobRepositoryInterface;
 

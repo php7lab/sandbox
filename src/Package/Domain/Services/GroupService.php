@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Services;
 
-use PhpLab\Domain\Services\BaseCrudService;
+use PhpLab\Domain\Base\BaseCrudService;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\GroupRepository;
 
 class GroupService extends BaseCrudService

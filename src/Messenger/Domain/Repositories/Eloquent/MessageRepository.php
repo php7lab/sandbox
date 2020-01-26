@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
-use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
+use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Messenger\Domain\Entities\MessageEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\MessageRepositoryInterface;
 

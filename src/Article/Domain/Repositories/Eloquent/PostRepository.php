@@ -7,7 +7,7 @@ use PhpLab\Domain\Enums\RelationEnum;
 use PhpLab\Domain\Libs\Relation\ManyToMany;
 use PhpLab\Domain\Libs\Relation\OneToOne;
 use PhpLab\Eloquent\Db\Helpers\Manager;
-use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
+use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Article\Domain\Entities\PostEntity;
 use PhpLab\Sandbox\Article\Domain\Interfaces\CategoryRepositoryInterface;
 use PhpLab\Sandbox\Article\Domain\Interfaces\PostRepositoryInterface;

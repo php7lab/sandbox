@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use PhpLab\Domain\Enums\RelationEnum;
 use PhpLab\Domain\Libs\Relation\OneToMany;
 use PhpLab\Eloquent\Db\Helpers\Manager;
-use PhpLab\Eloquent\Db\Repositories\BaseEloquentCrudRepository;
+use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\FlowRepositoryInterface;

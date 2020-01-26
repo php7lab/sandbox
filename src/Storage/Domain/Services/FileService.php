@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Storage\Domain\Services;
 
-use PhpLab\Domain\Services\BaseCrudService;
+use PhpLab\Domain\Base\BaseCrudService;
 use PhpLab\Sandbox\Storage\Domain\Interfaces\Services\FileServiceInterface;
 
 class FileService extends BaseCrudService implements FileServiceInterface
