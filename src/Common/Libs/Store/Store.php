@@ -4,7 +4,6 @@ namespace PhpLab\Sandbox\Common\Libs\Store;
 
 use php7extension\yii\helpers\FileHelper;
 use php7extension\yii\helpers\ArrayHelper;
-use php7extension\yii\base\Component;
 use PhpLab\Sandbox\Common\Libs\Store\Drivers\DriverInterface;
 
 class Store

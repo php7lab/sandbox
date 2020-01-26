@@ -2,10 +2,9 @@
 
 namespace PhpLab\Sandbox\Common\Libs\Store;
 
-use php7extension\yii\base\Component;
 use php7extension\yii\helpers\ArrayHelper;
 
-class ActiveStore extends Component
+class ActiveStore
 {
 
     public static $dir = '@common/data';
