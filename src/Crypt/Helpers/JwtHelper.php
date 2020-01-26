@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
-use php7rails\domain\Alias;
+use PhpLab\Domain\Libs\Alias;
 use PhpLab\Sandbox\Common\Helpers\StringHelper;
 use php7extension\yii\helpers\ArrayHelper;
 use php7rails\app\domain\helpers\EnvService;
@@ -14,7 +14,7 @@ use PhpLab\Sandbox\Crypt\Entities\KeyEntity;
 use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\JwtAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\RsaBitsEnum;
-use php7rails\domain\BaseEnum;
+use PhpLab\Domain\Base\BaseEnum;
 use UnexpectedValueException;
 
 class JwtHelper {

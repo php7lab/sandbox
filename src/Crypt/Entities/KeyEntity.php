@@ -2,10 +2,10 @@
 
 namespace PhpLab\Sandbox\Crypt\Entities;
 
-use php7rails\domain\BaseEntity;
+use PhpLab\Domain\Base\BaseEntity;
 use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
-use php7rails\domain\BaseEnum;
+use PhpLab\Domain\Base\BaseEnum;
 
 /**
  * Class KeyEntity

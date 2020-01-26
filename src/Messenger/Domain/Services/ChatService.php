@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Services;
 
-use php7rails\domain\data\Query;
+use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Sandbox\Messenger\Domain\Entities\MemberEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;

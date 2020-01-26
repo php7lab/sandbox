@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Enums;
 
-use php7rails\domain\BaseEnum;
+use PhpLab\Domain\Base\BaseEnum;
 
 class RsaBitsEnum extends BaseEnum {
 

@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Common\Helpers\Types;
 
-use php7rails\domain\BaseEntity;
+use PhpLab\Domain\Base\BaseEntity;
 use PhpLab\Sandbox\Common\Helpers\Helper;
 use php7extension\yii\base\InvalidArgumentException;
 use php7extension\yii\helpers\ArrayHelper;

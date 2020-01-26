@@ -7,7 +7,7 @@ use php7rails\app\domain\helpers\EnvService;
 use PhpLab\Sandbox\Crypt\Entities\KeyEntity;
 use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\RsaBitsEnum;
-use php7rails\domain\BaseEnum;
+use PhpLab\Domain\Base\BaseEnum;
 
 class RsaHelper {
 

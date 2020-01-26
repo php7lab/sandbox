@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\Crypt\Helpers;
 use PhpLab\Sandbox\Crypt\Entities\KeyEntity;
 use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
-use php7rails\domain\BaseEnum;
+use PhpLab\Domain\Base\BaseEnum;
 
 class EncryptHelper {
 

@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Common\Enums;
 
-use PhpLab\Domain\Data\BaseEnum;
+use PhpLab\Domain\Base\BaseEnum;
 
 class StatusEnum extends BaseEnum {
 

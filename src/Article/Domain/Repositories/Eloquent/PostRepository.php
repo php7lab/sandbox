@@ -3,12 +3,12 @@
 namespace PhpLab\Sandbox\Article\Domain\Repositories\Eloquent;
 
 use Doctrine\Common\Inflector\Inflector;
-use php7rails\domain\data\Query;
+use PhpLab\Domain\Data\Query;
 use PhpLab\Sandbox\Article\Domain\Entities\PostEntity;
 use PhpLab\Sandbox\Article\Domain\Entities\PostTagEntity;
 use PhpLab\Sandbox\Article\Domain\Interfaces\CategoryRepositoryInterface;
 use PhpLab\Sandbox\Article\Domain\Interfaces\PostRepositoryInterface;
-use php7rails\domain\enums\RelationEnum;
+use PhpLab\Domain\Enums\RelationEnum;
 use PhpLab\Sandbox\Article\Domain\Interfaces\TagPostRepositoryInterface;
 use PhpLab\Sandbox\Article\Domain\Interfaces\TagRepositoryInterface;
 use Illuminate\Support\Collection;

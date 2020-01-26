@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
-use php7rails\domain\BaseEnum;
+use PhpLab\Domain\Base\BaseEnum;
 use domain\union\v1\entities\MemberEntity;
 use php7extension\yii\base\Exception;
 use php7rails\app\domain\helpers\EnvService;

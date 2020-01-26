@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Common\Exceptions;
 
 use InvalidArgumentException;
-use php7rails\domain\helpers\ErrorCollection;
+use PhpLab\Domain\Helpers\ErrorCollection;
 use Exception;
 use php7extension\yii\helpers\ArrayHelper;
 use php7extension\bundle\error\domain\helpers\UnProcessibleHelper;

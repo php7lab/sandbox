@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\Common\Helpers;
 use DateTime;
 use Yii;
 use php7extension\yii\helpers\ArrayHelper;
-use php7rails\domain\BaseEntity;
+use PhpLab\Domain\Base\BaseEntity;
 use php7rails\domain\data\EntityCollection;
 use PhpLab\Sandbox\Common\Helpers\Types\BaseType;
 use php7rails\domain\interfaces\ValueObjectInterface;

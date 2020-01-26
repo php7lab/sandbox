@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use PhpLab\Sandbox\Common\Libs\Store\StoreFile;
-use php7rails\domain\data\Query;
+use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Interfaces\ReadRepositoryInterface;
 use PhpLab\Domain\Repositories\BaseRepository;
 use PhpLab\Sandbox\Package\Domain\Entities\GroupEntity;

@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\Messenger\Web\Controllers;
 
-use php7rails\domain\data\GetParams;
-use php7rails\domain\data\Query;
+use PhpLab\Domain\Libs\GetParams;
+use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Data\DataProvider;
 use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;

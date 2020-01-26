@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
-use php7rails\domain\data\Query;
-use php7rails\domain\enums\RelationEnum;
+use PhpLab\Domain\Data\Query;
+use PhpLab\Domain\Enums\RelationEnum;
 use Illuminate\Support\Collection;
 use PhpLab\Domain\Libs\Relation\OneToMany;
 use PhpLab\Domain\Libs\Relation\OneToOne;

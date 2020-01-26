@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\Article\Web\Controllers;
 
-use php7rails\domain\data\GetParams;
-use php7rails\domain\data\Query;
+use PhpLab\Domain\Libs\GetParams;
+use PhpLab\Domain\Data\Query;
 use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Domain\Data\DataProvider;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;

@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Dto;
 
-use php7rails\domain\BaseEntity;
+use PhpLab\Domain\Base\BaseEntity;
 
 /**
  * Class TokenDto

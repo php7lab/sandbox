@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use Illuminate\Support\Collection;
 use php7extension\yii\helpers\FileHelper;
-use php7rails\domain\data\Query;
+use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Repositories\BaseRepository;
 use PhpLab\Sandbox\Package\Domain\Entities\GroupEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;

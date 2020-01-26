@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Queue\Domain\Interfaces;
 
 use Illuminate\Support\Collection;
-use php7rails\domain\data\Query;
+use PhpLab\Domain\Data\Query;
 use PhpLab\Domain\Interfaces\CrudRepositoryInterface;
 use PhpLab\Sandbox\Queue\Domain\Entities\JobEntity;
 

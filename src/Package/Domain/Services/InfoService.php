@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Services;
 
-use php7rails\domain\data\Query;
+use PhpLab\Domain\Data\Query;
 use PhpLab\Sandbox\Package\Domain\Repositories\File\InfoRepository;
 
 class InfoService

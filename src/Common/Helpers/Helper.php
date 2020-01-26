@@ -7,8 +7,8 @@ use php7extension\yii\helpers\FileHelper;
 use Yii;
 use php7extension\yii\base\Model;
 use php7extension\yii\helpers\ArrayHelper;
-use php7rails\domain\BaseEntity;
-use php7rails\domain\exceptions\UnprocessableEntityHttpException;
+use PhpLab\Domain\Base\BaseEntity;
+use PhpLab\Domain\Exceptions\UnprocessableEntityHttpException;
 
 class Helper {
 

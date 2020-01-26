@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Web\Enums;
 
-use PhpLab\Domain\Data\BaseEnum;
+use PhpLab\Domain\Base\BaseEnum;
 
 class HttpHeaderEnum extends BaseEnum {
 	

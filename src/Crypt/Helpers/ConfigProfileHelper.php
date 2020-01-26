@@ -6,7 +6,7 @@ use php7extension\yii\base\InvalidConfigException;
 use php7rails\extension\common\helpers\ClassHelper;
 use PhpLab\Sandbox\Crypt\Entities\ConfigEntity;
 use PhpLab\Sandbox\Crypt\Entities\ProfileEntity;
-use php7rails\domain\BaseEnum;
+use PhpLab\Domain\Base\BaseEnum;
 use php7extension\yii\helpers\ArrayHelper;
 use php7rails\app\domain\helpers\EnvService;
 use PhpLab\Sandbox\Crypt\Entities\KeyEntity;

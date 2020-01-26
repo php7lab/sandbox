@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Entities;
 
-use php7rails\domain\BaseEntity;
+use PhpLab\Domain\Base\BaseEntity;
 use PhpLab\Sandbox\Crypt\Entities\JwtHeaderEntity;
 
 /**
