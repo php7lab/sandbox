@@ -42,7 +42,7 @@ class PaginationWidget extends BaseWidget
             $items[] = [
                 'label' => $page,
                 'url' => '?page=' . $page,
-                'active' => ($this->dataProviderEntity->page == $page) ? 'active' : '',
+                'active' => ($this->dataProviderEntity->getPage() == $page) ? 'active' : '',
             ];
         }
 
