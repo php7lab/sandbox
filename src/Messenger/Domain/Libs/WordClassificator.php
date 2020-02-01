@@ -77,6 +77,7 @@ class WordClassificator
 
     public function splitWord(string $value): array
     {
+        $value = mb_strtolower($value);
         $code = self::splitWordToArrayOfChar($value);
         $code = self::fillChars($code, $this->wordLength);
         return $code;
