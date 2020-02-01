@@ -19,7 +19,7 @@ abstract class BaseGeneratorCommand extends Command
         $inputScenario->helper = $this->getHelper('question');
         $inputScenario->input = $input;
         $inputScenario->output = $output;
-        $inputScenario->buildDto = $buildDto;
+        $inputScenario->buildDto = $dto;
         return $inputScenario->run();
     }
 
