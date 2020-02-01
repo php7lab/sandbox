@@ -5,7 +5,6 @@ namespace PhpLab\Sandbox\Common\Helpers\Types;
 use php7extension\yii\helpers\ArrayHelper;
 use php7rails\domain\data\EntityCollection;
 use php7rails\domain\values\BaseValue;
-use PhpLab\Domain\Base\BaseEntity;
 use PhpLab\Sandbox\Common\Exceptions\InvalidArgumentException;
 use PhpLab\Sandbox\Common\Helpers\Helper;
 use PhpLab\Sandbox\Common\Libs\ArrayTools\Helpers\Collection;
@@ -22,7 +21,7 @@ class ObjectType extends BaseType
         if (is_object($value)) {
             self::validateObject($config, $value);
         } else {
-            $isEntityClassName = is_subclass_of($class, BaseEntity::class);
+            $isEntityClassName = ! is_subclass_of($class, \Illuminate\Support\Collection::class);
 
             if ($isEntityClassName) {
                 if ( ! is_array($value)) {
@@ -46,7 +45,8 @@ class ObjectType extends BaseType
             $valueObject->set($value);
             return $valueObject;
         }
-        if (is_subclass_of($class, BaseEntity::class)) {
+        $isEntityClassName = ! is_subclass_of($class, \Illuminate\Support\Collection::class);
+        if ($isEntityClassName) {
             $isCollection = ! empty($config['isCollection']);
             if ($isCollection) {
                 return new EntityCollection($class, $value);

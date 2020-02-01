@@ -7,7 +7,7 @@ use php7extension\yii\helpers\ArrayHelper;
 use php7rails\domain\data\EntityCollection;
 use php7rails\domain\interfaces\ValueObjectInterface;
 use php7rails\domain\values\TimeValue;
-use PhpLab\Domain\Base\BaseEntity;
+use PhpLab\Domain\Helpers\EntityHelper;
 use PhpLab\Sandbox\Common\Helpers\Types\BaseType;
 
 class TypeHelper
@@ -35,13 +35,10 @@ class TypeHelper
 
     private static function entityToArray($entity)
     {
-        if (method_exists($entity, 'toArrayRaw')) {
-            /** @var BaseEntity $entity */
-            $item = $entity->toArrayRaw([], [], false);
-        } elseif (method_exists($entity, 'toArray')) {
+        if (method_exists($entity, 'toArray')) {
             $item = $entity->toArray();
-        } elseif (is_object($entity)) {
-            $item = ArrayHelper::toArray($entity);
+        } elseif (EntityHelper::isEntity($entity)) {
+            $item = EntityHelper::toArray($entity);
         } else {
             $item = $entity;
         }
@@ -58,7 +55,7 @@ class TypeHelper
                     $item[$fieldName] = self::decodeValueObject($value);
                 }
                 $pureValue = ArrayHelper::getValue($entity, $fieldName);
-                if ($pureValue instanceof BaseEntity) {
+                if (is_object($pureValue)) {
                     $item[$fieldName] = self::entityToArray($pureValue);
                 }
             }

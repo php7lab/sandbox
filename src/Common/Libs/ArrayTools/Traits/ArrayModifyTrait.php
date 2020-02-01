@@ -5,8 +5,8 @@ namespace PhpLab\Sandbox\Common\Libs\ArrayTools\Traits;
 use php7extension\yii\helpers\ArrayHelper;
 use php7extension\yii\web\NotFoundHttpException;
 use php7rails\domain\Domain;
-use PhpLab\Domain\Base\BaseEntity;
 use PhpLab\Domain\Data\Query;
+use PhpLab\Domain\Helpers\EntityHelper;
 
 /**
  * Trait ArrayModifyTrait
@@ -26,23 +26,24 @@ trait ArrayModifyTrait
 
     abstract protected function setCollection(Array $collection);
 
-    public function insert(BaseEntity $entity)
+    public function insert(object $entity)
     {
         $collection = $this->getCollection();
-        $collection[] = $entity->toArray();
+        $collection[] = EntityHelper::toArray($entity);
         $this->setCollection($collection);
     }
 
-    public function update(BaseEntity $entity)
+    public function update(object $entity)
     {
-        $entityBase = $this->oneById($entity->{$this->primaryKey});
+        $id = EntityHelper::getAttribute($entity, $this->primaryKey);
+        $entityBase = $this->oneById($id);
         $index = $this->getIndexOfEntity($entityBase);
         $collection = $this->getCollection();
-        $collection[$index] = $entity->toArray();
+        $collection[$index] = EntityHelper::toArray($entity);
         $this->setCollection($collection);
     }
 
-    public function delete(BaseEntity $entity)
+    public function delete(object $entity)
     {
         $index = $this->getIndexOfEntity($entity);
         $collection = $this->getCollection();
@@ -55,11 +56,12 @@ trait ArrayModifyTrait
         $this->setCollection([]);
     }
 
-    protected function getIndexOfEntity(BaseEntity $entity)
+    protected function getIndexOfEntity(object $entity)
     {
         $collection = $this->getCollection();
+        $id = EntityHelper::getAttribute($entity, $this->primaryKey);
         foreach ($collection as $index => $data) {
-            if (ArrayHelper::getValue($data, $this->primaryKey) == ArrayHelper::getValue($entity, $this->primaryKey)) {
+            if (ArrayHelper::getValue($data, $this->primaryKey) == $id) {
                 return $index;
             }
         }
