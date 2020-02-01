@@ -1,6 +1,6 @@
 <?php
 
-use PhpLab\Sandbox\Messenger\Commands\BotCommand;
+use PhpLab\Sandbox\Bot\Commands\BotCommand;
 /**
  * @var Application $application
  */

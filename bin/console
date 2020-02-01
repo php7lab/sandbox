@@ -12,6 +12,6 @@ $application = new Application;
 require __DIR__ . '/../src/bin/modules/package/bootstrap.php';
 require __DIR__ . '/../src/bin/modules/dev/bootstrap.php';
 require __DIR__ . '/../src/bin/modules/generator/bootstrap.php';
-require __DIR__ . '/../src/bin/modules/messenger/bootstrap.php';
+require __DIR__ . '/../src/bin/modules/bot/bootstrap.php';
 
 $application->run();

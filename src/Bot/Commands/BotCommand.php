@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Sandbox\Messenger\Commands;
+namespace PhpLab\Sandbox\Bot\Commands;
 
 use PhpLab\Sandbox\Messenger\Domain\Libs\WordClassificator;
 use Phpml\Classification\KNearestNeighbors;
@@ -11,8 +11,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 class BotCommand extends Command
 {
 
-    protected static $defaultName = 'messenger:bot';
+    protected static $defaultName = 'bot:bot';
     private $domainService;
+    private $wordArray = [
+        'привет',
+        'как дела',
+        'да',
+        'нет',
+        'хорошо',
+        'плохо',
+    ];
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -23,8 +31,7 @@ class BotCommand extends Command
         $wordClassificator->setWordLength($wantLen);
         $classifier = new KNearestNeighbors;
         $wordClassificator->setClassifier($classifier);
-        $wordCollection = include(__DIR__ . '/../Resources/data/bot_words.php');
-        $wordClassificator->train($wordCollection);
+        $wordClassificator->train($this->wordArray);
 
         $this->dialog($wordClassificator, $input, $output);
 
@@ -42,8 +49,7 @@ class BotCommand extends Command
 
     private function train(WordClassificator $wordClassificator, KNearestNeighbors $classifier): KNearestNeighbors
     {
-        $wordCollection = include(__DIR__ . '/../Resources/data/bot_words.php');
-        $arr = $wordClassificator->generateTrain($wordCollection, 2);
+        $arr = $wordClassificator->generateTrain($this->wordArray, 2);
         list($samples, $labels) = $wordClassificator->prepareSamplesForTraining($arr);
         $classifier->train($samples, $labels);
         return $classifier;
