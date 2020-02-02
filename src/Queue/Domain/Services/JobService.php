@@ -4,6 +4,7 @@ namespace PhpLab\Sandbox\Queue\Domain\Services;
 
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Base\BaseCrudService;
+use PhpLab\Core\Domain\Helpers\ValidationHelper;
 use PhpLab\Sandbox\Queue\Domain\Entities\JobEntity;
 use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
 use PhpLab\Sandbox\Queue\Domain\Helpers\JobHelper;
@@ -36,7 +37,7 @@ class JobService extends BaseCrudService implements JobServiceInterface
         $jobEntity->setJob($job);
         $jobEntity->setPriority($priority);
         //$jobEntity->setDelay();
-        EntityHelper::validate($jobEntity);
+        ValidationHelper::validateEntity($jobEntity);
         $this->getRepository()->create($jobEntity);
         return $jobEntity;
     }
