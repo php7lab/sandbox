@@ -2,14 +2,14 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
-use php7extension\core\code\entities\ClassEntity;
-use php7extension\core\code\entities\ClassUseEntity;
-use php7extension\core\code\entities\ClassVariableEntity;
-use php7extension\core\code\entities\DocBlockEntity;
-use php7extension\core\code\entities\DocBlockParameterEntity;
-use php7extension\core\code\entities\InterfaceEntity;
-use php7extension\core\code\enums\AccessEnum;
-use php7extension\core\code\helpers\ClassHelper;
+use PhpLab\Core\Legacy\Code\entities\ClassEntity;
+use PhpLab\Core\Legacy\Code\entities\ClassUseEntity;
+use PhpLab\Core\Legacy\Code\entities\ClassVariableEntity;
+use PhpLab\Core\Legacy\Code\entities\DocBlockEntity;
+use PhpLab\Core\Legacy\Code\entities\DocBlockParameterEntity;
+use PhpLab\Core\Legacy\Code\entities\InterfaceEntity;
+use PhpLab\Core\Legacy\Code\enums\AccessEnum;
+use PhpLab\Core\Legacy\Code\helpers\ClassHelper;
 use PhpLab\Core\Legacy\Yii\Helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Enums\TypeEnum;
 use PhpLab\Sandbox\Generator\Domain\Helpers\LocationHelper;
