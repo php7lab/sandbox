@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Services;
 
-use PhpLab\Core\Domain\Data\Query;
+use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Interfaces\GetEntityClassInterface;
 use PhpLab\Core\Domain\Base\BaseCrudService;

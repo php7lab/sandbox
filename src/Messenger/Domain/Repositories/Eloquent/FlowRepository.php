@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Data\Query;
+use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Domain\Enums\RelationEnum;
 use PhpLab\Core\Domain\Libs\Relation\OneToOne;
 use PhpLab\Eloquent\Db\Helpers\Manager;

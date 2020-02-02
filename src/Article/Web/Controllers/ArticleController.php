@@ -2,9 +2,9 @@
 
 namespace PhpLab\Sandbox\Article\Web\Controllers;
 
-use PhpLab\Core\Domain\Data\DataProvider;
-use PhpLab\Core\Domain\Data\Query;
-use PhpLab\Core\Domain\Libs\GetParams;
+use PhpLab\Core\Domain\Helpers\QueryHelper;
+use PhpLab\Core\Domain\Libs\DataProvider;
+use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Sandbox\Notify\Domain\Enums\FlashMessageTypeEnum;
@@ -24,8 +24,7 @@ class ArticleController extends AbstractController
 
     public function index(Request $request): Response
     {
-        $getParams = new GetParams;
-        $query = $getParams->getAllParams($request->query->all());
+        $query = QueryHelper::getAllParams($request->query->all());
         $query->with('category');
 
         $dataProvider = new DataProvider([
