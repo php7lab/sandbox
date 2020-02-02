@@ -4,7 +4,8 @@ namespace PhpLab\Sandbox\Tests\rest\Article;
 
 use PhpLab\Core\Web\Enums\HttpMethodEnum;
 use PhpLab\Core\Web\Enums\HttpStatusCodeEnum;
-use PhpLab\Test\BaseRestTest;
+use PhpLab\Test\Base\BaseRestTest;
+use PhpLab\Test\Helpers\RestHelper;
 
 class PostControllerTest extends BaseRestTest
 {
@@ -129,7 +130,7 @@ class PostControllerTest extends BaseRestTest
             'sort' => 'category_id,id',
         ]);
 
-        $body = $this->getBody($response);
+        $body = RestHelper::getBody($response);
         $this->assertOrder($body, 'category_id', SORT_ASC);
 
         $this->assertPagination($response, null, 2, 4);
@@ -144,7 +145,7 @@ class PostControllerTest extends BaseRestTest
             'sort' => '-category_id,id',
         ]);
 
-        $body = $this->getBody($response);
+        $body = RestHelper::getBody($response);
         $this->assertOrder($body, 'category_id', SORT_DESC);
 
         $this->assertPagination($response, null, 2, 4);
@@ -267,7 +268,7 @@ class PostControllerTest extends BaseRestTest
         ];
         $response = $this->sendPost('article', $data);
         $this->assertCreated($response);
-        $lastId = $this->getLastInsertId($response);
+        $lastId = RestHelper::getLastInsertId($response);
         $responseView = $this->sendGet('article/' . $lastId);
         $this->assertEquals(HttpStatusCodeEnum::OK, $responseView->getStatusCode());
         $this->assertBody($responseView, [

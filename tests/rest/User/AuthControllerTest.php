@@ -3,7 +3,8 @@
 namespace PhpLab\Sandbox\Tests\rest\User;
 
 use PhpLab\Core\Web\Enums\HttpStatusCodeEnum;
-use PhpLab\Test\BaseRestTest;
+use PhpLab\Test\Base\BaseRestTest;
+use PhpLab\Test\Helpers\RestHelper;
 
 class AuthControllerTest extends BaseRestTest
 {
@@ -63,7 +64,7 @@ class AuthControllerTest extends BaseRestTest
             ],
         ];
         $this->assertBody($response, $actualBody);
-        $body = $this->getBody($response);
+        $body = RestHelper::getBody($response);
         $this->assertNotEmpty(preg_match('#jwt\s[\s\S]+\.[\s\S]+\.[\s\S]+#i', $body['api_token']));
         $this->assertEquals(HttpStatusCodeEnum::OK, $response->getStatusCode());
         $this->assertFalse(isset($body['password']));

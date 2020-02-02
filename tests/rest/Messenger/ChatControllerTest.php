@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Tests\rest\Messenger;
 
 use PhpLab\Core\Web\Enums\HttpStatusCodeEnum;
-use PhpLab\Test\BaseRestTest;
+use PhpLab\Test\Base\BaseRestTest;
 
 class ChatControllerTest extends BaseRestTest
 {
