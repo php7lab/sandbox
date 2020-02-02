@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Article\Domain\Interfaces;
 
-use PhpLab\Domain\Interfaces\Service\CrudServiceInterface;
+use PhpLab\Core\Domain\Interfaces\Service\CrudServiceInterface;
 
 interface PostServiceInterface extends CrudServiceInterface
 {

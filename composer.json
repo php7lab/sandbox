@@ -10,7 +10,6 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "illuminate/database": "^6.3",
     "zendframework/zend-code": "^3.3.0"
   },
   "autoload": {

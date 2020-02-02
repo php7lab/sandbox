@@ -3,9 +3,9 @@
 namespace PhpLab\Sandbox\Article\Domain\Repositories\Eloquent;
 
 use Illuminate\Support\Collection;
-use PhpLab\Domain\Enums\RelationEnum;
-use PhpLab\Domain\Libs\Relation\ManyToMany;
-use PhpLab\Domain\Libs\Relation\OneToOne;
+use PhpLab\Core\Domain\Enums\RelationEnum;
+use PhpLab\Core\Domain\Libs\Relation\ManyToMany;
+use PhpLab\Core\Domain\Libs\Relation\OneToOne;
 use PhpLab\Eloquent\Db\Helpers\Manager;
 use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Article\Domain\Entities\PostEntity;

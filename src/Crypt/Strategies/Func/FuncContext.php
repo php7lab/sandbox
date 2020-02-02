@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Crypt\Strategies\Func;
 
 use php7extension\bundle\account\domain\v3\helpers\LoginTypeHelper;
-use PhpLab\Sandbox\Common\Libs\Scenario\Base\BaseStrategyContextHandlers;
+use PhpLab\Core\Common\Libs\Scenario\Base\BaseStrategyContextHandlers;
 use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
 use PhpLab\Sandbox\Crypt\Strategies\Func\Handlers\EmailStrategy;
 use PhpLab\Sandbox\Crypt\Strategies\Func\Handlers\HandlerInterface;

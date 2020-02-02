@@ -2,12 +2,12 @@
 
 namespace PhpLab\Sandbox\User\Api\Controllers;
 
-use PhpLab\Domain\Exceptions\UnprocessibleEntityException;
+use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Rest\Libs\JsonRestSerializer;
 use PhpLab\Sandbox\User\Domain\Entities\User;
 use PhpLab\Sandbox\User\Domain\Forms\AuthForm;
 use PhpLab\Sandbox\User\Domain\Services\AuthService;
-use PhpLab\Sandbox\Web\Enums\HttpHeaderEnum;
+use PhpLab\Core\Web\Enums\HttpHeaderEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\User\Domain\Entities;
 
-use PhpLab\Domain\Base\BaseEntityWithId;
+use PhpLab\Core\Domain\Base\BaseEntityWithId;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class Identity implements UserInterface

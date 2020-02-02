@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Queue\Domain\Entities;
 
 use DateTime;
-use PhpLab\Domain\Interfaces\ValidateEntityInterface;
+use PhpLab\Core\Domain\Interfaces\ValidateEntityInterface;
 use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
 use PhpLab\Sandbox\Queue\Domain\Helpers\JobHelper;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobInterface;

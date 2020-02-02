@@ -2,15 +2,15 @@
 
 namespace PhpLab\Sandbox\Messenger\Web\Controllers;
 
-use PhpLab\Domain\Data\DataProvider;
-use PhpLab\Domain\Data\Query;
-use PhpLab\Domain\Helpers\EntityHelper;
-use PhpLab\Domain\Libs\GetParams;
+use PhpLab\Core\Domain\Data\DataProvider;
+use PhpLab\Core\Domain\Data\Query;
+use PhpLab\Core\Domain\Helpers\EntityHelper;
+use PhpLab\Core\Domain\Libs\GetParams;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Sandbox\Notify\Domain\Enums\FlashMessageTypeEnum;
-use PhpLab\Sandbox\Web\Traits\AccessTrait;
+use PhpLab\Core\Web\Traits\AccessTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

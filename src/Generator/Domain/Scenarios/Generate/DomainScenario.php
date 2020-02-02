@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Generator\Domain\Scenarios\Generate;
 
 use php7extension\core\code\helpers\ClassHelper;
-use PhpLab\Domain\Interfaces\DomainInterface;
+use PhpLab\Core\Domain\Interfaces\DomainInterface;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Generator\MethodGenerator;

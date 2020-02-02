@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Crypt\Helpers;
 
 use php7rails\app\domain\helpers\EnvService;
 use php7rails\extension\common\helpers\ClassHelper;
-use PhpLab\Sandbox\Common\Exceptions\InvalidConfigException;
+use PhpLab\Core\Common\Exceptions\InvalidConfigException;
 use PhpLab\Sandbox\Crypt\Entities\ConfigEntity;
 use PhpLab\Sandbox\Crypt\Entities\ProfileEntity;
 

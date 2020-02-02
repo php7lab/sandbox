@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Bot\Domain\Services;
 
 use PhpLab\Sandbox\Bot\Domain\Interfaces\Services\WordServiceInterface;
-use PhpLab\Domain\Base\BaseCrudService;
+use PhpLab\Core\Domain\Base\BaseCrudService;
 
 class WordService extends BaseCrudService implements WordServiceInterface
 {

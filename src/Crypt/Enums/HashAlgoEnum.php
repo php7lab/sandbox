@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Enums;
 
-use PhpLab\Domain\Base\BaseEnum;
+use PhpLab\Core\Domain\Base\BaseEnum;
 
 /**
  * Class HashAlgoEnum

@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Queue\Domain\Helpers;
 
-use PhpLab\Domain\Helpers\EntityHelper;
+use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Sandbox\Queue\Domain\Entities\JobEntity;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

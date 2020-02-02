@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\User\Domain\Repositories\Config;
 
-use PhpLab\Sandbox\Common\Enums\TimeEnum;
+use PhpLab\Core\Common\Enums\TimeEnum;
 use PhpLab\Sandbox\Crypt\Entities\JwtProfileEntity;
 use PhpLab\Sandbox\Crypt\Entities\KeyEntity;
 

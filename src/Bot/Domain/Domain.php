@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Bot\Domain;
 
-use PhpLab\Domain\Interfaces\DomainInterface;
+use PhpLab\Core\Domain\Interfaces\DomainInterface;
 
 class Domain implements DomainInterface
 {

@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\Dev\Domain\Services;
 use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 use php7extension\yii\helpers\ArrayHelper;
-use PhpLab\Sandbox\Common\Libs\Benchmark;
+use PhpLab\Core\Common\Libs\Benchmark;
 use PhpLab\Sandbox\Dev\Domain\Entities\ResultEntity;
 use function GuzzleHttp\Promise\settle;
 

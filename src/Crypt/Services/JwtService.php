@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Services;
 
-use PhpLab\Sandbox\Common\Traits\ClassAttribute\MagicSetTrait;
+use PhpLab\Core\Common\Traits\ClassAttribute\MagicSetTrait;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
 use PhpLab\Sandbox\Crypt\Helpers\JwtEncodeHelper;
 use PhpLab\Sandbox\Crypt\Helpers\JwtHelper;

@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Package\Domain\Services;
 
 use php7extension\yii\helpers\ArrayHelper;
-use PhpLab\Domain\Base\BaseService;
+use PhpLab\Core\Domain\Base\BaseService;
 use PhpLab\Sandbox\Package\Domain\Entities\CommitEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\TagEntity;

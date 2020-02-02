@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\Tests\rest\Article;
 
-use PhpLab\Sandbox\Web\Enums\HttpMethodEnum;
-use PhpLab\Sandbox\Web\Enums\HttpStatusCodeEnum;
+use PhpLab\Core\Web\Enums\HttpMethodEnum;
+use PhpLab\Core\Web\Enums\HttpStatusCodeEnum;
 use PhpLab\Test\BaseRestTest;
 
 class PostControllerTest extends BaseRestTest

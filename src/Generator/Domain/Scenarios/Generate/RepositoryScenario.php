@@ -41,7 +41,7 @@ class RepositoryScenario extends BaseScenario
         $interfaceGenerator = new InterfaceGenerator;
         $interfaceGenerator->setName($this->getInterfaceName());
         if ($this->buildDto->isCrudRepository) {
-            $fileGenerator->setUse('PhpLab\Domain\Interfaces\Repository\CrudRepositoryInterface');
+            $fileGenerator->setUse('PhpLab\Core\Domain\Interfaces\Repository\CrudRepositoryInterface');
             $interfaceGenerator->setImplementedInterfaces(['CrudRepositoryInterface']);
         }
         $fileGenerator->setNamespace($this->domainNamespace . '\\' . $this->interfaceDir());
@@ -53,7 +53,7 @@ class RepositoryScenario extends BaseScenario
         $interfaceEntity = new InterfaceEntity;
         $interfaceEntity->name = $this->getInterfaceFullName($className);
         if($this->buildDto->isCrudRepository) {
-            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Domain\Interfaces\Repository\CrudRepositoryInterface']);
+            $uses[] = new ClassUseEntity(['name' => 'PhpLab\Core\Domain\Interfaces\Repository\CrudRepositoryInterface']);
             $interfaceEntity->extends = 'CrudRepositoryInterface';
         }
         ClassHelper::generate($interfaceEntity, $uses);
@@ -135,7 +135,7 @@ $uses[] = new ClassUseEntity(['name' => $entityFullClassName]);
                 $className = 'PhpLab\Eloquent\Db\Base\BaseEloquentRepository';
             }
         } else {
-            $className = 'PhpLab\Domain\Base\BaseRepository';
+            $className = 'PhpLab\Core\Domain\Base\BaseRepository';
         }
         return $className;
     }

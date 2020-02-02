@@ -4,9 +4,9 @@ namespace PhpLab\Sandbox\Crypt\Helpers;
 
 use php7extension\yii\helpers\ArrayHelper;
 use php7rails\app\domain\helpers\EnvService;
-use PhpLab\Domain\Helpers\EntityHelper;
-use PhpLab\Domain\Libs\Alias;
-use PhpLab\Sandbox\Common\Helpers\StringHelper;
+use PhpLab\Core\Domain\Helpers\EntityHelper;
+use PhpLab\Core\Domain\Libs\Alias;
+use PhpLab\Core\Common\Helpers\StringHelper;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
 use PhpLab\Sandbox\Crypt\Entities\JwtHeaderEntity;
 use PhpLab\Sandbox\Crypt\Entities\JwtProfileEntity;

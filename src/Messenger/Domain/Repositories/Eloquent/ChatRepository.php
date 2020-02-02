@@ -3,8 +3,8 @@
 namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
 use Illuminate\Support\Collection;
-use PhpLab\Domain\Enums\RelationEnum;
-use PhpLab\Domain\Libs\Relation\OneToMany;
+use PhpLab\Core\Domain\Enums\RelationEnum;
+use PhpLab\Core\Domain\Libs\Relation\OneToMany;
 use PhpLab\Eloquent\Db\Helpers\Manager;
 use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;

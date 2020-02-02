@@ -47,7 +47,7 @@ class WebScenario extends BaseScenario
         ]);
 
         $fileGenerator->setUse('Symfony\Bundle\FrameworkBundle\Controller\AbstractController');
-        $fileGenerator->setUse('PhpLab\Sandbox\Web\Traits\AccessTrait');
+        $fileGenerator->setUse('PhpLab\Core\Web\Traits\AccessTrait');
 
         $classGenerator->setExtendedClass('AbstractController');
         $classGenerator->addTrait('AccessTrait');

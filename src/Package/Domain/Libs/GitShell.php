@@ -4,8 +4,8 @@ namespace PhpLab\Sandbox\Package\Domain\Libs;
 
 use php7extension\yii\helpers\ArrayHelper;
 use php7extension\yii\helpers\FileHelper;
-use PhpLab\Sandbox\Common\Libs\Shell\BaseShell;
-use PhpLab\Sandbox\Common\Libs\Shell\ShellException;
+use PhpLab\Core\Common\Libs\Shell\BaseShell;
+use PhpLab\Core\Common\Libs\Shell\ShellException;
 
 class GitShell extends BaseShell
 {

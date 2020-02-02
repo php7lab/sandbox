@@ -3,8 +3,8 @@
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use Illuminate\Support\Collection;
-use PhpLab\Domain\Helpers\EntityHelper;
-use PhpLab\Domain\Base\BaseRepository;
+use PhpLab\Core\Domain\Helpers\EntityHelper;
+use PhpLab\Core\Domain\Base\BaseRepository;
 use PhpLab\Sandbox\Package\Domain\Entities\CommitEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\GitEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;
