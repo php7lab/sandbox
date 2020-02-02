@@ -6,7 +6,7 @@ use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Rest\Base\BaseCrudApiController;
 use PhpLab\Rest\Libs\Serializer\JsonRestSerializer;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
-use PhpLab\Core\Enums\Web\HttpHeaderEnum;
+use PhpLab\Core\Enums\Http\HttpHeaderEnum;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
