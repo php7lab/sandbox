@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Bot\Api\Controllers;
 
 use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Rest\Base\BaseCrudApiController;
-use PhpLab\Rest\Libs\JsonRestSerializer;
+use PhpLab\Rest\Libs\Serializer\JsonRestSerializer;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Core\Enums\Web\HttpHeaderEnum;
 use Symfony\Component\HttpFoundation\JsonResponse;
