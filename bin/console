@@ -9,9 +9,6 @@ require __DIR__ . '/../../../php7lab/core/src/Libs/Env/bootstrapEnv.php';
 // создаем консольное приложение
 $application = new Application;
 
-require __DIR__ . '/../src/bin/modules/package/bootstrap.php';
-require __DIR__ . '/../src/bin/modules/dev/bootstrap.php';
-require __DIR__ . '/../src/bin/modules/generator/bootstrap.php';
-require __DIR__ . '/../src/bin/modules/bot/bootstrap.php';
+require __DIR__ . '/bootstrap.php';
 
 $application->run();
