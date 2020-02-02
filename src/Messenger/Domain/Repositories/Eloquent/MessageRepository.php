@@ -10,6 +10,9 @@ class MessageRepository extends BaseEloquentCrudRepository implements MessageRep
 {
 
     protected $tableName = 'messenger_message';
-    protected $entityClass = MessageEntity::class;
 
+    public function getEntityClass(): string
+    {
+        return MessageEntity::class;
+    }
 }

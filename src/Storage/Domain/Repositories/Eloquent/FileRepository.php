@@ -10,8 +10,9 @@ class FileRepository extends BaseEloquentCrudRepository implements FileRepositor
 
     protected $tableName = 'storage_file';
 
-    protected $entityClass = 'PhpLab\\Sandbox\\Storage\\Domain\\Entities\\FileEntity';
-
-
+    public function getEntityClass(): string
+    {
+        return 'PhpLab\\Sandbox\\Storage\\Domain\\Entities\\FileEntity';
+    }
 }
 

@@ -10,6 +10,10 @@ class CategoryRepository extends BaseEloquentCrudRepository implements CategoryR
 {
 
     protected $tableName = 'article_category';
-    protected $entityClass = CategoryEntity::class;
+
+    public function getEntityClass(): string
+    {
+        return CategoryEntity::class;
+    }
 
 }

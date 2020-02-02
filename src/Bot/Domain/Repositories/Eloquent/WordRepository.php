@@ -10,8 +10,9 @@ class WordRepository extends BaseEloquentCrudRepository implements WordRepositor
 
     protected $tableName = 'bot_word';
 
-    protected $entityClass = 'PhpLab\\Sandbox\\Bot\\Domain\\Entities\\WordEntity';
-
-
+    public function getEntityClass(): string
+    {
+        return 'PhpLab\\Sandbox\\Bot\\Domain\\Entities\\WordEntity';
+    }
 }
 

@@ -10,6 +10,9 @@ class TagRepository extends BaseEloquentCrudRepository implements TagRepositoryI
 {
 
     protected $tableName = 'article_tag';
-    protected $entityClass = TagEntity::class;
 
+    public function getEntityClass(): string
+    {
+        return TagEntity::class;
+    }
 }

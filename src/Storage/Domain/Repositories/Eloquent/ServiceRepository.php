@@ -10,8 +10,9 @@ class ServiceRepository extends BaseEloquentCrudRepository implements ServiceRep
 
     protected $tableName = 'storage_service';
 
-    protected $entityClass = 'PhpLab\\Sandbox\\Storage\\Domain\\Entities\\ServiceEntity';
-
-
+    public function getEntityClass(): string
+    {
+        return 'PhpLab\\Sandbox\\Storage\\Domain\\Entities\\ServiceEntity';
+    }
 }
 

@@ -16,14 +16,17 @@ class MemberRepository extends BaseEloquentCrudRepository implements MemberRepos
 {
 
     protected $tableName = 'messenger_member';
-    protected $entityClass = MemberEntity::class;
-
     private $userRepository;
 
     public function __construct(Manager $capsule, UserRepositoryInterface $userRepository)
     {
         parent::__construct($capsule);
         $this->userRepository = $userRepository;
+    }
+
+    public function getEntityClass(): string
+    {
+        return MemberEntity::class;
     }
 
     protected function forgeQuery(Query $query = null)

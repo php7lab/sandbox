@@ -16,14 +16,17 @@ class FlowRepository extends BaseEloquentCrudRepository implements FlowRepositor
 {
 
     protected $tableName = 'messenger_flow';
-    protected $entityClass = FlowEntity::class;
-
     private $messageRepository;
 
     public function __construct(Manager $capsule, MessageRepositoryInterface $messageRepository)
     {
         parent::__construct($capsule);
         $this->messageRepository = $messageRepository;
+    }
+
+    public function getEntityClass(): string
+    {
+        return FlowEntity::class;
     }
 
     protected function forgeQuery(Query $query = null)

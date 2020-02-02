@@ -13,7 +13,11 @@ class JobRepository extends BaseEloquentCrudRepository implements JobRepositoryI
 {
 
     protected $tableName = 'queue_job';
-    protected $entityClass = JobEntity::class;
+
+    public function getEntityClass(): string
+    {
+        return JobEntity::class;
+    }
 
     public function allForRun(Query $query = null): Collection
     {

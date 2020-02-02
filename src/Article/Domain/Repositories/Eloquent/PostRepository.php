@@ -18,7 +18,6 @@ class PostRepository extends BaseEloquentCrudRepository implements PostRepositor
 {
 
     protected $tableName = 'article_post';
-    protected $entityClass = PostEntity::class;
     private $categoryRepository;
     private $tagPostRepository;
     private $tagRepository;
@@ -29,6 +28,11 @@ class PostRepository extends BaseEloquentCrudRepository implements PostRepositor
         $this->categoryRepository = $categoryRepository;
         $this->tagPostRepository = $tagPostRepository;
         $this->tagRepository = $tagRepository;
+    }
+
+    public function getEntityClass(): string
+    {
+        return PostEntity::class;
     }
 
     public function relations()
