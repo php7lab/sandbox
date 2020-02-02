@@ -14,7 +14,11 @@
   },
   "autoload": {
     "psr-4": {
-      "PhpLab\\Sandbox\\": "src",
+      "PhpLab\\Sandbox\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "PhpLab\\Sandbox\\Tests\\": "tests"
     }
   }
