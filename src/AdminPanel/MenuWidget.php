@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\AdminPanel;
 
-class MenuWidget extends \PhpLab\Core\Html\Widgets\MenuWidget
+class MenuWidget extends \PhpLab\Web\Html\Widgets\MenuWidget
 {
 
     public $itemOptions = [

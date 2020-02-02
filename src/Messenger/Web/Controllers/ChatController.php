@@ -10,7 +10,7 @@ use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Sandbox\Notify\Domain\Enums\FlashMessageTypeEnum;
-use PhpLab\Core\Web\Traits\AccessTrait;
+use PhpLab\Web\Traits\AccessTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

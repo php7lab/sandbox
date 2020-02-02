@@ -54,7 +54,7 @@ class ApiScenario extends BaseScenario
         ]);
 
         $fileGenerator->setUse('Symfony\Bundle\FrameworkBundle\Controller\AbstractController');
-        $fileGenerator->setUse('PhpLab\Core\Web\Traits\AccessTrait');
+        $fileGenerator->setUse('PhpLab\Web\Traits\AccessTrait');
 
         $classGenerator->setExtendedClass('AbstractController');
         $classGenerator->addTrait('AccessTrait');

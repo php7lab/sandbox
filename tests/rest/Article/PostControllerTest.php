@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\Tests\rest\Article;
 
-use PhpLab\Core\Web\Enums\HttpMethodEnum;
-use PhpLab\Core\Web\Enums\HttpStatusCodeEnum;
+use PhpLab\Core\Common\Enums\Web\HttpMethodEnum;
+use PhpLab\Core\Common\Enums\Web\HttpStatusCodeEnum;
 use PhpLab\Test\Base\BaseRestTest;
 use PhpLab\Test\Helpers\RestHelper;
 
