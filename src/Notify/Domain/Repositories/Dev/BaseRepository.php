@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Notify\Domain\Repositories\Dev;
 
 use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Common\Libs\Store\StoreFile;
+use PhpLab\Core\Libs\Store\StoreFile;
 
 abstract class BaseRepository
 {

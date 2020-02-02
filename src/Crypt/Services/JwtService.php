@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Services;
 
-use PhpLab\Core\Common\Traits\ClassAttribute\MagicSetTrait;
+//use PhpLab\Core\Legacy\Traits\ClassAttribute\MagicSetTrait;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
 use PhpLab\Sandbox\Crypt\Helpers\JwtEncodeHelper;
 use PhpLab\Sandbox\Crypt\Helpers\JwtHelper;
@@ -11,7 +11,7 @@ use PhpLab\Sandbox\Crypt\Libs\ProfileContainer;
 class JwtService
 {
 
-    use MagicSetTrait;
+    //use MagicSetTrait;
 
     /** @var ProfileContainer */
     private $profileContainer;

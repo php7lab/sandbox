@@ -9,7 +9,7 @@ class MlHelper
 
     static public function prepareWord($line)
     {
-        $line = \PhpLab\Core\Common\Helpers\StringHelper::filterChar($line, '#[^а-яА-ЯёЁa-zA-Z\s]+#u');
+        $line = \PhpLab\Core\Helpers\StringHelper::filterChar($line, '#[^а-яА-ЯёЁa-zA-Z\s]+#u');
         return $line;
     }
 

@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 use PhpLab\Core\Domain\Data\Query;
 use PhpLab\Core\Domain\Interfaces\Repository\ReadRepositoryInterface;
 use PhpLab\Core\Domain\Base\BaseRepository;
-use PhpLab\Core\Common\Libs\Store\StoreFile;
+use PhpLab\Core\Libs\Store\StoreFile;
 use PhpLab\Sandbox\Package\Domain\Entities\GroupEntity;
 
 class GroupRepository extends BaseRepository implements ReadRepositoryInterface

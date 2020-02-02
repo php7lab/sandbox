@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\User\Domain\Forms;
 
-use PhpLab\Core\Common\Helpers\ClassHelper;
+use PhpLab\Core\Helpers\ClassHelper;
 
 class AuthForm
 {

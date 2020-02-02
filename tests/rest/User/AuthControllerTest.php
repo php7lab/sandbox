@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Tests\rest\User;
 
-use PhpLab\Core\Common\Enums\Web\HttpStatusCodeEnum;
+use PhpLab\Core\Enums\Web\HttpStatusCodeEnum;
 use PhpLab\Test\Base\BaseRestTest;
 use PhpLab\Test\Helpers\RestHelper;
 

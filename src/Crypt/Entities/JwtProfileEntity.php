@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Entities;
 
-use PhpLab\Core\Common\Enums\TimeEnum;
+use PhpLab\Core\Enums\TimeEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptAlgorithmEnum;
 use PhpLab\Sandbox\Crypt\Enums\EncryptFunctionEnum;
 use PhpLab\Sandbox\Crypt\Enums\JwtAlgorithmEnum;

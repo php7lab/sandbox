@@ -6,7 +6,7 @@ use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Rest\Base\BaseCrudApiController;
 use PhpLab\Rest\Libs\JsonRestSerializer;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
-use PhpLab\Core\Common\Enums\Web\HttpHeaderEnum;
+use PhpLab\Core\Enums\Web\HttpHeaderEnum;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,7 +72,7 @@ class ChatController
     {
         $content = file_get_contents('C:\Users\Admin\Desktop\answer_databse\answer_databse\answer_databse.txt');
         $content = str_replace("\r\n", PHP_EOL, $content);
-        $lineArray = \PhpLab\Core\Common\Helpers\StringHelper::textToLines($content);
+        $lineArray = \PhpLab\Core\Helpers\StringHelper::textToLines($content);
         $rrrrr = [];
 
         foreach ($lineArray as &$line) {

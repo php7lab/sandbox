@@ -6,7 +6,7 @@ use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
 use php7rails\app\domain\helpers\EnvService;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Libs\Alias;
-use PhpLab\Core\Common\Helpers\StringHelper;
+use PhpLab\Core\Helpers\StringHelper;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;
 use PhpLab\Sandbox\Crypt\Entities\JwtHeaderEntity;
 use PhpLab\Sandbox\Crypt\Entities\JwtProfileEntity;
