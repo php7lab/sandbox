@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use Illuminate\Support\Collection;
-use php7extension\yii\helpers\FileHelper;
+use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
 use php7extension\yii\web\NotFoundHttpException;
 use php7rails\domain\interfaces\repositories\ReadInterface;
 use php7rails\domain\repositories\BaseRepository;

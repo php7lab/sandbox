@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Helpers;
 
-use php7extension\yii\helpers\Inflector;
+use PhpLab\Core\Legacy\Yii\Helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Enums\TypeEnum;
 
 class LocationHelper

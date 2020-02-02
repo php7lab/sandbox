@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Services;
 
-use php7extension\yii\helpers\ArrayHelper;
+use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
 use PhpLab\Core\Domain\Base\BaseService;
 use PhpLab\Sandbox\Package\Domain\Entities\CommitEntity;
 use PhpLab\Sandbox\Package\Domain\Entities\PackageEntity;

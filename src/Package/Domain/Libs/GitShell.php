@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\Package\Domain\Libs;
 
-use php7extension\yii\helpers\ArrayHelper;
-use php7extension\yii\helpers\FileHelper;
+use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
 use PhpLab\Core\Common\Libs\Shell\BaseShell;
 use PhpLab\Core\Common\Libs\Shell\ShellException;
 

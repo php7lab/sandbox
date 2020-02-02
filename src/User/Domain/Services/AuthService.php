@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Illuminate\Support\Collection;
-use php7extension\yii\base\Security;
+use PhpLab\Core\Legacy\Yii\Base\Security;
 use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Core\Domain\Entities\ValidateErrorEntity;
 use PhpLab\Sandbox\Crypt\Entities\JwtEntity;

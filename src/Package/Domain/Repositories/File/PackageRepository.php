@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Package\Domain\Repositories\File;
 
 use Illuminate\Support\Collection;
-use php7extension\yii\helpers\FileHelper;
+use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
 use PhpLab\Core\Domain\Data\Query;
 use PhpLab\Core\Domain\Base\BaseRepository;
 use PhpLab\Sandbox\Package\Domain\Entities\GroupEntity;

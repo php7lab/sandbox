@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Crypt\Helpers;
 
-use php7extension\yii\helpers\ArrayHelper;
+use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
 use php7rails\app\domain\helpers\EnvService;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Libs\Alias;

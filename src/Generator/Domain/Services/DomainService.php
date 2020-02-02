@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Generator\Domain\Services;
 
-use php7extension\yii\helpers\Inflector;
+use PhpLab\Core\Legacy\Yii\Helpers\Inflector;
 use PhpLab\Core\Common\Helpers\ClassHelper;
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use PhpLab\Sandbox\Generator\Domain\Interfaces\DomainServiceInterface;

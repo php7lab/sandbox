@@ -8,7 +8,7 @@ use php7extension\core\code\entities\ClassVariableEntity;
 use php7extension\core\code\entities\InterfaceEntity;
 use php7extension\core\code\enums\AccessEnum;
 use php7extension\core\code\helpers\ClassHelper;
-use php7extension\yii\helpers\Inflector;
+use PhpLab\Core\Legacy\Yii\Helpers\Inflector;
 use PhpLab\Sandbox\Generator\Domain\Dto\BuildDto;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;

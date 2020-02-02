@@ -85,7 +85,7 @@ class ChatController
         return array_slice($rrrrr, 0, 200);
         dd(array_slice($rrrrr, 0, 200));
 
-        $rrr = \php7extension\yii\helpers\ArrayHelper::getColumn($lineArray, 'request');
+        $rrr = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::getColumn($lineArray, 'request');
         foreach ($rrr as &$line) {
             $line = \PhpLab\Sandbox\Bot\Domain\Helpers\MlHelper::prepareWord($line);
         }

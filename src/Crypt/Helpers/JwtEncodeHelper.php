@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Crypt\Helpers;
 
 use DomainException;
 use InvalidArgumentException;
-use php7extension\yii\helpers\ArrayHelper;
+use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
 use php7rails\extension\jwt\entities\ProfileEntity;
 use php7rails\extension\jwt\entities\TokenEntity;
 use PhpLab\Sandbox\Crypt\Dto\TokenDto;
