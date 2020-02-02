@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
-use PhpLab\Sandbox\User\Domain\Entities\Identity;
+use PhpLab\Bundle\User\Domain\Entities\Identity;
 
 class MessageEntity
 {
