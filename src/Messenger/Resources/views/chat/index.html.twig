@@ -4,16 +4,16 @@
 
 {% block body %}
 
-    {% include '@Messenger/chat/index.list.html.twig' %}
-
     {{ breadcrumbAdd('Message', '/chat') }}
+
+    {% include '@Messenger/chat/index.list.html.twig' %}
 
     <span class="pull-right">
         <a class="btn btn-success" href="{{ path('web_messenger_chat_create') }}">Create</a>
     </span>
 
     <span>
-        {{ pagination(dataProviderEntity) }} &nbsp;
+        {{ pagination(dataProviderEntity, app.request) }} &nbsp;
     </span>
 
 {% endblock %}
