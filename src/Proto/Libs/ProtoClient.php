@@ -8,7 +8,7 @@ use PhpLab\Core\Enums\Http\HttpHeaderEnum;
 use PhpLab\Sandbox\Proto\Interfaces\TransportInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class RestProtoClient
+class ProtoClient
 {
 
     private $transport;
