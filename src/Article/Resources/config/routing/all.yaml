@@ -1,6 +1,0 @@
-
-api_article:
-    resource: "@ArticleBundle/Api/config/routes.yaml"
-
-web_article:
-    resource: "@ArticleBundle/Web/config/routes.yaml"

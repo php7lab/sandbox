@@ -1,3 +1,0 @@
-
-api_article:
-    resource: "@StorageBundle/Api/config/routes.yaml"
