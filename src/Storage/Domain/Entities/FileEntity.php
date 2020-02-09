@@ -5,29 +5,138 @@ namespace PhpLab\Sandbox\Storage\Domain\Entities;
 class FileEntity
 {
 
-    public $id = null;
+    private $id = null;
+    private $serviceId = null;
+    private $entityId = null;
+    private $authorId = null;
+    private $hash = null;
+    private $extension = null;
+    private $size = null;
+    private $name = null;
+    private $description = null;
+    private $status = null;
+    private $createdAt = null;
+    private $updatedAt = null;
 
-    public $serviceId = null;
+    public function getId()
+    {
+        return $this->id;
+    }
 
-    public $entityId = null;
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
 
-    public $editorId = null;
+    public function getServiceId()
+    {
+        return $this->serviceId;
+    }
 
-    public $hash = null;
+    public function setServiceId($serviceId): void
+    {
+        $this->serviceId = $serviceId;
+    }
 
-    public $extension = null;
+    public function getEntityId()
+    {
+        return $this->entityId;
+    }
 
-    public $size = null;
+    public function setEntityId($entityId): void
+    {
+        $this->entityId = $entityId;
+    }
 
-    public $name = null;
+    public function getAuthorId()
+    {
+        return $this->authorId;
+    }
 
-    public $description = null;
+    public function setAuthorId($authorId): void
+    {
+        $this->authorId = $authorId;
+    }
 
-    public $status = null;
+    public function getHash()
+    {
+        return $this->hash;
+    }
 
-    public $createdAt = null;
+    public function setHash($hash): void
+    {
+        $this->hash = $hash;
+    }
 
-    public $updatedAt = null;
+    public function getExtension()
+    {
+        return $this->extension;
+    }
+
+    public function setExtension($extension): void
+    {
+        $this->extension = $extension;
+    }
+
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    public function setSize($size): void
+    {
+        $this->size = $size;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status): void
+    {
+        $this->status = $status;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt($updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
 
 
 }
