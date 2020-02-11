@@ -4,8 +4,8 @@ api_article_post_index:
     controller: PhpLab\Sandbox\Article\Api\Controllers\ArticleController::index
 
 api_article_post_create:
-    path: /
     methods: [POST]
+    path: /
     controller: PhpLab\Sandbox\Article\Api\Controllers\ArticleController::create
 
 api_article_post_view:
