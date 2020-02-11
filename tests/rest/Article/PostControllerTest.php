@@ -15,7 +15,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testAll()
     {
-        $response = $this->sendGet('article', [
+        $response = $this->sendGet('article-post', [
             'per-page' => '4',
             'page' => '2',
         ]);
@@ -53,7 +53,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testAllWithRelations()
     {
-        $response = $this->sendGet('article', [
+        $response = $this->sendGet('article-post', [
             'per-page' => '4',
             'page' => '2',
             'expand' => 'category,tags',
@@ -124,7 +124,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testAllSortByCategory()
     {
-        $response = $this->sendGet('article', [
+        $response = $this->sendGet('article-post', [
             'per-page' => '4',
             'page' => '2',
             'sort' => 'category_id,id',
@@ -139,7 +139,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testAllSortByCategoryDesc()
     {
-        $response = $this->sendGet('article', [
+        $response = $this->sendGet('article-post', [
             'per-page' => '4',
             'page' => '2',
             'sort' => '-category_id,id',
@@ -154,7 +154,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testAllOnlyFields()
     {
-        $response = $this->sendGet('article', [
+        $response = $this->sendGet('article-post', [
             'per-page' => '2',
             'fields' => 'id',
             'sort' => 'id',
@@ -179,7 +179,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testAllById()
     {
-        $response = $this->sendGet('article', [
+        $response = $this->sendGet('article-post', [
             'per-page' => '4',
             'page' => '2',
             'id' => '3',
@@ -198,7 +198,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testView()
     {
-        $response = $this->sendGet('article/3');
+        $response = $this->sendGet('article-post/3');
 
         $actualBody = [
             'id' => 3,
@@ -211,7 +211,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testViewWithRelations()
     {
-        $response = $this->sendGet('article/3', [
+        $response = $this->sendGet('article-post/3', [
             'expand' => 'category,tags',
         ]);
 
@@ -236,7 +236,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testViewNotFound()
     {
-        $response = $this->sendGet('article/3333');
+        $response = $this->sendGet('article-post/3333');
         $this->assertEquals(HttpStatusCodeEnum::NOT_FOUND, $response->getStatusCode());
     }
 
@@ -246,7 +246,7 @@ class PostControllerTest extends BaseRestTest
             'title' => 'te',
             'category_id' => 3,
         ];
-        $response = $this->sendPost('article', $data);
+        $response = $this->sendPost('article-post', $data);
         $this->assertEquals(HttpStatusCodeEnum::UNPROCESSABLE_ENTITY, $response->getStatusCode());
     }
 
@@ -256,7 +256,7 @@ class PostControllerTest extends BaseRestTest
             'title' => 'te',
             'category_id' => 3,
         ];
-        $response = $this->sendPut('article/100', $data);
+        $response = $this->sendPut('article-post/100', $data);
         $this->assertEquals(HttpStatusCodeEnum::UNPROCESSABLE_ENTITY, $response->getStatusCode());
     }
 
@@ -266,10 +266,10 @@ class PostControllerTest extends BaseRestTest
             'title' => 'test123',
             'category_id' => 3,
         ];
-        $response = $this->sendPost('article', $data);
+        $response = $this->sendPost('article-post', $data);
         $this->assertCreated($response);
         $lastId = RestHelper::getLastInsertId($response);
-        $responseView = $this->sendGet('article/' . $lastId);
+        $responseView = $this->sendGet('article-post/' . $lastId);
         $this->assertEquals(HttpStatusCodeEnum::OK, $responseView->getStatusCode());
         $this->assertBody($responseView, [
             'id' => $lastId,
@@ -277,38 +277,38 @@ class PostControllerTest extends BaseRestTest
             'category_id' => 3,
         ]);
 
-        $response = $this->sendPut('article/' . $lastId, ['title' => 'qwerty']);
+        $response = $this->sendPut('article-post/' . $lastId, ['title' => 'qwerty']);
         $this->assertEquals(HttpStatusCodeEnum::NO_CONTENT, $response->getStatusCode());
 
-        $responseView = $this->sendGet('article/' . $lastId);
+        $responseView = $this->sendGet('article-post/' . $lastId);
         $this->assertBody($responseView, [
             'id' => $lastId,
             'title' => 'qwerty',
             'category_id' => 3,
         ]);
 
-        $response = $this->sendDelete('article/' . $lastId);
+        $response = $this->sendDelete('article-post/' . $lastId);
         $this->assertEquals(HttpStatusCodeEnum::NO_CONTENT, $response->getStatusCode());
 
-        $responseView = $this->sendGet('article/' . $lastId);
+        $responseView = $this->sendGet('article-post/' . $lastId);
         $this->assertEquals(HttpStatusCodeEnum::NOT_FOUND, $responseView->getStatusCode());
     }
 
     public function testMethodAllowed()
     {
-        $response = $this->sendPost('article/1');
+        $response = $this->sendPost('article-post/1');
         $this->assertEquals(HttpStatusCodeEnum::METHOD_NOT_ALLOWED, $response->getStatusCode());
 
-        $response = $this->sendPut('article');
+        $response = $this->sendPut('article-post');
         $this->assertEquals(HttpStatusCodeEnum::METHOD_NOT_ALLOWED, $response->getStatusCode());
 
-        $response = $this->sendDelete('article');
+        $response = $this->sendDelete('article-post');
         $this->assertEquals(HttpStatusCodeEnum::METHOD_NOT_ALLOWED, $response->getStatusCode());
     }
 
     public function testOptions()
     {
-        $response = $this->sendOptions('article/1');
+        $response = $this->sendOptions('article-post/1');
 
         $this->assertCors($response, '*', null, [
             HttpMethodEnum::GET,
@@ -321,7 +321,7 @@ class PostControllerTest extends BaseRestTest
 
     public function testNotRoute()
     {
-        $response = $this->sendGet('article-possst/1');
+        $response = $this->sendGet('article-post-possst/1');
 
         $this->assertEquals(HttpStatusCodeEnum::NOT_FOUND, $response->getStatusCode());
     }

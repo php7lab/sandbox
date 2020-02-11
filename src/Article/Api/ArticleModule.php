@@ -31,7 +31,7 @@ class ArticleModule
         $postService = new PostService($postRepository);
 
         // define routes
-        $routes = RestHelper::defineCrudRoutes('v1/article', ArticleController::class);
+        $routes = RestHelper::defineCrudRoutes('v1/article-post', ArticleController::class);
         $request = Request::createFromGlobals();
 
         $controllers = [
