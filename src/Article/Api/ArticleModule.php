@@ -12,7 +12,7 @@ use PhpLab\Eloquent\Db\Helpers\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use PhpLab\Rest\Helpers\RestHelper;
 
-class ArticleModule extends BaseCrudApiController
+class ArticleModule
 {
 
     private $capsule;
