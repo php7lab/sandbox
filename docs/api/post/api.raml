@@ -1,0 +1,40 @@
+description: "Статьи. Пост"
+get:
+    description: "Получть список постов"
+    is: !include ../../../../../zndoc/rest-api/src/is/all.raml
+    responses:
+        200:
+            body:
+                application/json:
+                    example: !include example/all-response-body.json
+post:
+    securedBy: [Auth]
+    description: "Создать пост"
+    is: !include ../../../../../zndoc/rest-api/src/is/create.raml
+    body:
+        application/json:
+            example: !include example/create-request-body.json
+/{id}:
+    uriParameters:
+        id:
+            description: "ID поста"
+            type: string
+    get:
+        description: "Получить пост"
+        is: !include ../../../../../zndoc/rest-api/src/is/one.raml
+        responses:
+            200:
+                body:
+                    application/json:
+                        example: !include example/one-response-body.json
+    put:
+        securedBy: [Auth]
+        description: "Изменить пост"
+        is: !include ../../../../../zndoc/rest-api/src/is/update.raml
+        body:
+            application/json:
+                example: !include example/update-request-body.json
+    delete:
+        securedBy: [Auth]
+        description: "Удалить пост"
+        is: !include ../../../../../zndoc/rest-api/src/is/delete.raml
