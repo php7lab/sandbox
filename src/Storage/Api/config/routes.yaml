@@ -1,42 +1,42 @@
 api_storage_file_index:
     methods: [GET]
-    path: /
+    path: storage-file
     controller: PhpLab\Sandbox\Storage\Api\Controllers\FileController::index
 
 api_storage_file_create:
-    path: /
     methods: [POST]
+    path: storage-file
     controller: PhpLab\Sandbox\Storage\Api\Controllers\FileController::create
 
 api_storage_file_view:
     methods: [GET]
-    path: /{id}
+    path: storage-file/{id}
     controller: PhpLab\Sandbox\Storage\Api\Controllers\FileController::view
     requirements:
         id: '\d+'
 
 api_storage_file_update:
     methods: [PUT]
-    path: /{id}
+    path: storage-file/{id}
     controller: PhpLab\Sandbox\Storage\Api\Controllers\FileController::update
     requirements:
         id: '\d+'
 
 api_storage_file_delete:
     methods: [DELETE]
-    path: /{id}
+    path: storage-file/{id}
     controller: PhpLab\Sandbox\Storage\Api\Controllers\FileController::delete
     requirements:
         id: '\d+'
 
 api_storage_file_index_options:
     methods: [OPTIONS]
-    path: /
+    path: storage-file
     controller: PhpLab\Sandbox\Storage\Api\Controllers\FileController::options
 
 api_storage_file_options:
     methods: [OPTIONS]
-    path: /{id}
+    path: storage-file/{id}
     controller: PhpLab\Sandbox\Storage\Api\Controllers\FileController::options
     requirements:
         id: '\d+'

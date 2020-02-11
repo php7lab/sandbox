@@ -1,15 +1,15 @@
 wsdl_definition:
-    path: /definition/{name}.wsdl
+    path: definition/{name}.wsdl
     controller: PhpLab\Sandbox\Wsdl\Api\Controllers\HelloServiceController::definition
     requirements:
         name: '.+'
 
 wsdl_run:
-    path: /handle/{name}
+    path: handle/{name}
     controller: PhpLab\Sandbox\Wsdl\Api\Controllers\HelloServiceController::handle
     requirements:
         name: '.+'
 
 wsdl_test:
-    path: /test
+    path: test
     controller: PhpLab\Sandbox\Wsdl\Api\Controllers\HelloServiceController::test

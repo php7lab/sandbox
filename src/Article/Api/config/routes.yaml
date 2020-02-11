@@ -1,42 +1,42 @@
 api_article_post_index:
     methods: [GET]
-    path: /
+    path: article
     controller: PhpLab\Sandbox\Article\Api\Controllers\ArticleController::index
 
 api_article_post_create:
     methods: [POST]
-    path: /
+    path: article
     controller: PhpLab\Sandbox\Article\Api\Controllers\ArticleController::create
 
 api_article_post_view:
     methods: [GET]
-    path: /{id}
+    path: article/{id}
     controller: PhpLab\Sandbox\Article\Api\Controllers\ArticleController::view
     requirements:
         id: '\d+'
 
 api_article_post_update:
     methods: [PUT]
-    path: /{id}
+    path: article/{id}
     controller: PhpLab\Sandbox\Article\Api\Controllers\ArticleController::update
     requirements:
         id: '\d+'
 
 api_article_post_delete:
     methods: [DELETE]
-    path: /{id}
+    path: article/{id}
     controller: PhpLab\Sandbox\Article\Api\Controllers\ArticleController::delete
     requirements:
         id: '\d+'
 
 api_article_post_index_options:
     methods: [OPTIONS]
-    path: /
+    path: article
     controller: PhpLab\Sandbox\Article\Api\Controllers\ArticleController::options
 
 api_article_post_options:
     methods: [OPTIONS]
-    path: /{id}
+    path: article/{id}
     controller: PhpLab\Sandbox\Article\Api\Controllers\ArticleController::options
     requirements:
         id: '\d+'

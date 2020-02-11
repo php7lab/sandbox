@@ -1,4 +1,4 @@
 api_bot_chat_send:
     methods: [POST]
-    path: /v1/bot-chat
+    path: bot-chat
     controller: PhpLab\Sandbox\Bot\Api\Controllers\ChatController::send
