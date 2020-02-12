@@ -7,7 +7,6 @@
 
 * [Article]()
 * [Dev]()
-* [Generator](generator/README.md)
 * [Messenger]()
 * [Notify](notify/README.md)
 * [Package]()
