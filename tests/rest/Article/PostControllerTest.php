@@ -48,7 +48,7 @@ class PostControllerTest extends BaseRestTest
         ];
         $this->assertBody($response, $actualBody);
         $this->assertPagination($response, null, 2, 4);
-        $this->getRestAssert()->assertStatusOk($response, HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
     public function testAllWithRelations()
@@ -119,7 +119,7 @@ class PostControllerTest extends BaseRestTest
         ];
         $this->assertBody($response, $actualBody);
         $this->assertPagination($response, null, 2, 4);
-        $this->getRestAssert()->assertStatusOk($response, HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
     public function testAllSortByCategory()
@@ -134,7 +134,7 @@ class PostControllerTest extends BaseRestTest
         $this->assertOrder($body, 'category_id', SORT_ASC);
 
         $this->assertPagination($response, null, 2, 4);
-        $this->getRestAssert()->assertStatusOk($response, HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
     public function testAllSortByCategoryDesc()
@@ -149,7 +149,7 @@ class PostControllerTest extends BaseRestTest
         $this->assertOrder($body, 'category_id', SORT_DESC);
 
         $this->assertPagination($response, null, 2, 4);
-        $this->getRestAssert()->assertStatusOk($response, HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
     public function testAllOnlyFields()
@@ -174,7 +174,7 @@ class PostControllerTest extends BaseRestTest
         ];
         $this->assertBody($response, $actualBody);
         //$this->assertPagination($response, null, 2, 2);
-        $this->getRestAssert()->assertStatusOk($response, HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
     public function testAllById()
@@ -193,7 +193,7 @@ class PostControllerTest extends BaseRestTest
         $this->assertBody($response, $actualBody);
 
         $this->assertPagination($response, 1, 1, 4);
-        $this->getRestAssert()->assertStatusOk($response, HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
     public function testView()
@@ -206,7 +206,7 @@ class PostControllerTest extends BaseRestTest
             'category_id' => 3,
         ];
         $this->assertBody($response, $actualBody);
-        $this->getRestAssert()->assertStatusOk($response, HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
     public function testViewWithRelations()
@@ -231,7 +231,7 @@ class PostControllerTest extends BaseRestTest
             ],
         ];
         $this->assertBody($response, $actualBody);
-        $this->getRestAssert()->assertStatusOk($response, HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
     public function testViewNotFound()
