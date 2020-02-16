@@ -17,7 +17,7 @@ class ChatControllerTest extends BaseRestTest
             'page' => '2',
         ]);
 
-        /*$actualBody = [
+        /*$expectedBody = [
             [
                 "id" => 5,
                 "title" => 'chat 5',
@@ -39,7 +39,7 @@ class ChatControllerTest extends BaseRestTest
                 'type' => 'public',
             ],
         ];
-        $this->assertBody($response, $actualBody);
+        $this->assertBody($response, $expectedBody);
         $this->assertPagination($response, null, 2, 4);*/
         $this->assertEquals(HttpStatusCodeEnum::UNAUTHORIZED, $response->getStatusCode());
     }

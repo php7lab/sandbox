@@ -20,7 +20,7 @@ class PostControllerTest extends BaseRestTest
             'page' => '2',
         ]);
 
-        $actualBody = [
+        $expectedBody = [
             [
                 "id" => 5,
                 "title" => 'post 5',
@@ -46,7 +46,7 @@ class PostControllerTest extends BaseRestTest
                 'category' => null,
             ]
         ];
-        $this->assertBody($response, $actualBody);
+        $this->assertBody($response, $expectedBody);
         $this->assertPagination($response, null, 2, 4);
         $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
@@ -59,7 +59,7 @@ class PostControllerTest extends BaseRestTest
             'expand' => 'category,tags',
         ]);
 
-        $actualBody = [
+        $expectedBody = [
             [
                 "id" => 5,
                 'category' => [
@@ -117,7 +117,7 @@ class PostControllerTest extends BaseRestTest
                 ],
             ]
         ];
-        $this->assertBody($response, $actualBody);
+        $this->assertBody($response, $expectedBody);
         $this->assertPagination($response, null, 2, 4);
         $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
@@ -160,7 +160,7 @@ class PostControllerTest extends BaseRestTest
             'sort' => 'id',
         ]);
 
-        $actualBody = [
+        $expectedBody = [
             [
                 "id" => 1,
                 "title" => null,
@@ -172,7 +172,7 @@ class PostControllerTest extends BaseRestTest
                 'category_id' => null,
             ],
         ];
-        $this->assertBody($response, $actualBody);
+        $this->assertBody($response, $expectedBody);
         //$this->assertPagination($response, null, 2, 2);
         $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
@@ -185,12 +185,12 @@ class PostControllerTest extends BaseRestTest
             'id' => '3',
         ]);
 
-        $actualBody = [
+        $expectedBody = [
             [
                 "id" => 3,
             ],
         ];
-        $this->assertBody($response, $actualBody);
+        $this->assertBody($response, $expectedBody);
 
         $this->assertPagination($response, 1, 1, 4);
         $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
@@ -200,12 +200,12 @@ class PostControllerTest extends BaseRestTest
     {
         $response = $this->sendGet('article-post/3');
 
-        $actualBody = [
+        $expectedBody = [
             'id' => 3,
             'title' => 'post 3',
             'category_id' => 3,
         ];
-        $this->assertBody($response, $actualBody);
+        $this->assertBody($response, $expectedBody);
         $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
@@ -215,7 +215,7 @@ class PostControllerTest extends BaseRestTest
             'expand' => 'category,tags',
         ]);
 
-        $actualBody = [
+        $expectedBody = [
             'id' => 3,
             'category' => [
                 'id' => 3,
@@ -230,7 +230,7 @@ class PostControllerTest extends BaseRestTest
                 ],
             ],
         ];
-        $this->assertBody($response, $actualBody);
+        $this->assertBody($response, $expectedBody);
         $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
     }
 
