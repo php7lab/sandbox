@@ -121,7 +121,11 @@ class JobEntity implements ValidateEntityInterface
 
     public function setPushedAt($pushedAt): void
     {
-        $this->pushedAt = new DateTime($pushedAt);
+        if ($pushedAt instanceof DateTime) {
+            $this->pushedAt = $pushedAt;
+        } else {
+            $this->pushedAt = new DateTime($pushedAt);
+        }
     }
 
     public function getReservedAt(): ?DateTime
@@ -131,7 +135,11 @@ class JobEntity implements ValidateEntityInterface
 
     public function setReservedAt($reservedAt = null): void
     {
-        $this->reservedAt = new DateTime($reservedAt);
+        if ($reservedAt instanceof DateTime) {
+            $this->reservedAt = $reservedAt;
+        } else {
+            $this->reservedAt = new DateTime($reservedAt);
+        }
     }
 
     public function getDoneAt(): ?DateTime
@@ -141,7 +149,11 @@ class JobEntity implements ValidateEntityInterface
 
     public function setDoneAt($doneAt = null): void
     {
-        $this->doneAt = new DateTime($doneAt);
+        if ($doneAt instanceof DateTime) {
+            $this->doneAt = $doneAt;
+        } else {
+            $this->doneAt = new DateTime($doneAt);
+        }
     }
 
 }
