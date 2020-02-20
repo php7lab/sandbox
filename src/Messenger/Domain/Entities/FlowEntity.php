@@ -2,7 +2,9 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
-class FlowEntity
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+
+class FlowEntity implements EntityIdInterface
 {
 
     private $id;

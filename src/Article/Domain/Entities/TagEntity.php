@@ -2,7 +2,9 @@
 
 namespace PhpLab\Sandbox\Article\Domain\Entities;
 
-class TagEntity
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+
+class TagEntity implements EntityIdInterface
 {
 
     private $id;

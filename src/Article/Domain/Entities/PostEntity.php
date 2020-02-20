@@ -4,11 +4,12 @@ namespace PhpLab\Sandbox\Article\Domain\Entities;
 
 use DateTime;
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Interfaces\ValidateEntityInterface;
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PostEntity implements ValidateEntityInterface
+class PostEntity implements ValidateEntityInterface, EntityIdInterface
 {
 
     private $id;

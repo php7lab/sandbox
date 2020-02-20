@@ -2,7 +2,9 @@
 
 namespace PhpLab\Sandbox\Article\Domain\Entities;
 
-class PostTagEntity
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+
+class PostTagEntity implements EntityIdInterface
 {
 
     private $id;

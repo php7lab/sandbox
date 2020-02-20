@@ -2,7 +2,9 @@
 
 namespace PhpLab\Sandbox\Storage\Domain\Entities;
 
-class FileEntity
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+
+class FileEntity implements EntityIdInterface
 {
 
     private $id = null;

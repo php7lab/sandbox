@@ -2,7 +2,9 @@
 
 namespace PhpLab\Sandbox\Article\Domain\Entities;
 
-class CategoryEntity
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+
+class CategoryEntity implements EntityIdInterface
 {
 
     private $id;

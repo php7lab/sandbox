@@ -4,11 +4,12 @@ namespace PhpLab\Sandbox\RestClient\Domain\Entities;
 
 use PhpLab\Bundle\Crypt\Enums\HashAlgoEnum;
 use PhpLab\Bundle\Crypt\Helpers\SafeBase64Helper;
-use PhpLab\Core\Domain\Interfaces\ValidateEntityInterface;
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
 use PhpLab\Sandbox\RestClient\Domain\Helpers\BookmarkHelper;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class BookmarkEntity implements ValidateEntityInterface
+class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
 {
 
     private $id = null;

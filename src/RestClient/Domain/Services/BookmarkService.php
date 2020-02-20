@@ -6,13 +6,14 @@ use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Exceptions\NotFoundException;
 use PhpLab\Sandbox\RestClient\Domain\Entities\BookmarkEntity;
 use PhpLab\Sandbox\RestClient\Domain\Enums\StatusEnum;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\BookmarkRepositoryInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\BookmarkServiceInterface;
 use PhpLab\Core\Domain\Base\BaseCrudService;
 
 class BookmarkService extends BaseCrudService implements BookmarkServiceInterface
 {
 
-    public function __construct(\PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\BookmarkRepositoryInterface $repository)
+    public function __construct(BookmarkRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

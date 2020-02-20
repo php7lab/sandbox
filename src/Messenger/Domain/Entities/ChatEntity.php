@@ -3,8 +3,9 @@
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
 use Illuminate\Support\Collection;
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 
-class ChatEntity
+class ChatEntity implements EntityIdInterface
 {
 
     private $id;

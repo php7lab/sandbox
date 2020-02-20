@@ -3,12 +3,13 @@
 namespace PhpLab\Sandbox\Queue\Domain\Entities;
 
 use DateTime;
-use PhpLab\Core\Domain\Interfaces\ValidateEntityInterface;
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
 use PhpLab\Sandbox\Queue\Domain\Enums\PriorityEnum;
 use PhpLab\Sandbox\Queue\Domain\Helpers\JobHelper;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobInterface;
 
-class JobEntity implements ValidateEntityInterface
+class JobEntity implements ValidateEntityInterface, EntityIdInterface
 {
 
     private $id;
