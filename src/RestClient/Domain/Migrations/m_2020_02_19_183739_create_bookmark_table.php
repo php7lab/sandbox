@@ -4,6 +4,7 @@ namespace Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
 use PhpLab\Eloquent\Migration\Base\BaseCreateTableMigration;
+use PhpLab\Eloquent\Migration\Enums\ForeignActionEnum;
 
 if ( ! class_exists(m_2020_02_19_183739_create_bookmark_table::class)) {
 
@@ -28,6 +29,12 @@ if ( ! class_exists(m_2020_02_19_183739_create_bookmark_table::class)) {
                 $table->string('description')->comment('Описание');
                 $table->smallInteger('status')->comment('Статус');
                 $table->unique(['hash']);
+                $table
+                    ->foreign('project_id')
+                    ->references('id')
+                    ->on($this->encodeTableName('restclient_project'))
+                    ->onDelete(ForeignActionEnum::CASCADE)
+                    ->onUpdate(ForeignActionEnum::CASCADE);
             };
         }
 
