@@ -6,8 +6,14 @@ use PhpLab\Bundle\Crypt\Enums\HashAlgoEnum;
 use PhpLab\Bundle\Crypt\Helpers\SafeBase64Helper;
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
+use PhpLab\Core\Enums\Http\HttpMethodEnum;
 use PhpLab\Sandbox\RestClient\Domain\Helpers\BookmarkHelper;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\ValidatorBuilder;
 
 class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
 {
@@ -30,6 +36,13 @@ class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
     private $description = null;
     private $status = null;
 
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('hash', new NotBlank);
+
+
+    }
+
     public function validationRules(): array
     {
         return [
@@ -38,9 +51,12 @@ class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
             ],
             'projectId' => [
                 new NotBlank,
+                new Positive,
             ],
             'method' => [
                 new NotBlank,
+               // new Choice(HttpMethodEnum::values()),
+                new Choice(['kjhgf']),
             ],
             'uri' => [
                 new NotBlank,

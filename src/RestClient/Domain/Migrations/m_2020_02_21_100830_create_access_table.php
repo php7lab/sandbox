@@ -17,6 +17,7 @@ if ( ! class_exists(m_2020_02_21_100830_create_access_table::class)) {
         public function tableSchema()
         {
             return function (Blueprint $table) {
+                $table->integer('id')->autoIncrement()->comment('Идентификатор');
                 $table->integer('user_id')->comment('Пользователь');
                 $table->integer('project_id')->comment('Проект');
                 $table
@@ -25,6 +26,7 @@ if ( ! class_exists(m_2020_02_21_100830_create_access_table::class)) {
                     ->on($this->encodeTableName('restclient_project'))
                     ->onDelete(ForeignActionEnum::CASCADE)
                     ->onUpdate(ForeignActionEnum::CASCADE);
+                $table->unique(['user_id' ,'project_id']);
             };
         }
 
