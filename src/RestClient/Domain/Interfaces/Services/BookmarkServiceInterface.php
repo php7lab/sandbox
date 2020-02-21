@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\RestClient\Domain\Interfaces\Services;
 
+use Illuminate\Support\Collection;
 use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Core\Domain\Interfaces\Service\CrudServiceInterface;
 use PhpLab\Core\Exceptions\NotFoundException;
@@ -19,16 +20,17 @@ interface BookmarkServiceInterface extends CrudServiceInterface
 
     /**
      * @param string $hash
-     * @return void
+     * @return BookmarkEntity
+     * @throws NotFoundException
      */
-    public function addToCollection(string $hash);
+    public function addToCollection(string $hash): BookmarkEntity;
 
     /**
      * @param string $hash
      * @return void
      * @throws NotFoundException
      */
-    public function removeByHash(string $hash);
+    public function removeByHash(string $hash): void;
 
     /**
      * @param string $hash
@@ -39,20 +41,20 @@ interface BookmarkServiceInterface extends CrudServiceInterface
 
     /**
      * @param int $projectId
-     * @return mixed
+     * @return Collection
      */
-    public function allFavoriteByProject(int $projectId);
+    public function allFavoriteByProject(int $projectId): Collection;
 
     /**
      * @param int $projectId
-     * @return mixed
+     * @return Collection
      */
-    public function allHistoryByProject(int $projectId);
+    public function allHistoryByProject(int $projectId): Collection;
 
     /**
      * @param int $projectId
-     * @return mixed
+     * @return void
      */
-    public function clearHistory(int $projectId);
+    public function clearHistory(int $projectId): void;
 }
 

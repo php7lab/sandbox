@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\RestClient\Domain\Services;
 
+use Illuminate\Support\Collection;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Exceptions\NotFoundException;
 use PhpLab\Sandbox\RestClient\Domain\Entities\BookmarkEntity;
@@ -32,30 +33,31 @@ class BookmarkService extends BaseCrudService implements BookmarkServiceInterfac
         return $bookmarkEntity;
     }
 
-    public function addToCollection(string $hash) {
+    public function addToCollection(string $hash): BookmarkEntity {
         $bookmarkEntity = $this->repository->oneByHash($hash);
         $bookmarkEntity->setStatus(StatusEnum::FAVORITE);
         $this->repository->update($bookmarkEntity);
+        return $bookmarkEntity;
     }
 
-    public function removeByHash(string $hash) {
-        return $this->repository->removeByHash($hash);
+    public function removeByHash(string $hash): void {
+        $this->repository->removeByHash($hash);
     }
 
     public function oneByHash(string $hash): BookmarkEntity {
         return $this->repository->oneByHash($hash);
     }
 
-    public function allFavoriteByProject(int $projectId) {
+    public function allFavoriteByProject(int $projectId): Collection {
         return $this->repository->allFavoriteByProject($projectId);
     }
 
-    public function allHistoryByProject(int $projectId) {
+    public function allHistoryByProject(int $projectId): Collection {
         return $this->repository->allHistoryByProject($projectId);
     }
 
-    public function clearHistory(int $projectId) {
-        return $this->repository->clearHistory($projectId);
+    public function clearHistory(int $projectId): void {
+        $this->repository->clearHistory($projectId);
     }
 }
 

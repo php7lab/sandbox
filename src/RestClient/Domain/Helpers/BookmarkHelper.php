@@ -39,7 +39,9 @@ class BookmarkHelper
         $manager = new Manager;
         $bookmarkService = new BookmarkRepository($manager);
         $bookmarkService = new BookmarkService($bookmarkService);
-        $bookmarkService->createOrUpdate($data);
+        try {
+            $bookmarkService->createOrUpdate($data);
+        } catch (\Exception $e) {}
     }
 
 }

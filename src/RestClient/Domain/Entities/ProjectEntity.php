@@ -2,10 +2,14 @@
 
 namespace PhpLab\Sandbox\RestClient\Domain\Entities;
 
-class ProjectEntity
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+
+class ProjectEntity implements EntityIdInterface
 {
 
     private $id = null;
+
+    private $name = null;
 
     private $title = null;
 
@@ -21,6 +25,16 @@ class ProjectEntity
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setName($value)
+    {
+        $this->name = $value;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function setTitle($value)
