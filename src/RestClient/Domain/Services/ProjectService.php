@@ -3,6 +3,7 @@
 namespace PhpLab\Sandbox\RestClient\Domain\Services;
 
 use PhpLab\Core\Exceptions\NotFoundException;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\AccessRepositoryInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\BookmarkRepositoryInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\ProjectRepositoryInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
@@ -13,18 +14,36 @@ class ProjectService extends BaseCrudService implements ProjectServiceInterface
 {
 
     private $bookmarkRepository;
+    private $accessRepository;
 
-    public function __construct(ProjectRepositoryInterface $repository, BookmarkRepositoryInterface $bookmarkRepository)
+    public function __construct(
+        ProjectRepositoryInterface $repository,
+        BookmarkRepositoryInterface $bookmarkRepository,
+        AccessRepositoryInterface $accessRepository
+    )
     {
         $this->repository = $repository;
         $this->bookmarkRepository = $bookmarkRepository;
+        $this->accessRepository = $accessRepository;
     }
 
-    public function oneByName(string $projectName) {
+    public function isAllowProject(int $projectId, int $userId)
+    {
+        try {
+            $this->accessRepository->oneByTie($projectId, $userId);
+            return true;
+        } catch (NotFoundException $e) {
+            return false;
+        }
+    }
+
+    public function oneByName(string $projectName)
+    {
         return $this->repository->oneByName($projectName);
     }
 
-    public function projectNameByHash(string $tag): string {
+    public function projectNameByHash(string $tag): string
+    {
         try {
             $bookmarkEntity = $this->bookmarkRepository->oneByHash($tag);
         } catch (NotFoundException $e) {
