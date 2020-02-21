@@ -3,8 +3,13 @@
 namespace PhpLab\Sandbox\RestClient\Domain\Entities;
 
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
+use PhpLab\Core\Enums\StatusEnum;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Url;
 
-class ProjectEntity implements EntityIdInterface
+class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
 {
 
     private $id = null;
@@ -15,7 +20,7 @@ class ProjectEntity implements EntityIdInterface
 
     private $url = null;
 
-    private $status = null;
+    private $status = StatusEnum::ENABLE;
 
     public function setId($value)
     {
@@ -67,6 +72,24 @@ class ProjectEntity implements EntityIdInterface
         return $this->status;
     }
 
-
+    public function validationRules(): array
+    {
+        return [
+            'name' => [
+                new NotBlank,
+                new Regex(['pattern' => '/[a-zA-Z0-9-]+/i']),
+            ],
+            'title' => [
+                new NotBlank,
+            ],
+            'url' => [
+                new NotBlank,
+                new Url,
+            ],
+            'status' => [
+                new NotBlank,
+            ],
+        ];
+    }
 }
 

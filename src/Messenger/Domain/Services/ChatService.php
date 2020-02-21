@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Services;
 
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Interfaces\GetEntityClassInterface;
@@ -51,7 +52,7 @@ class ChatService extends BaseCrudService implements ChatServiceInterface
         return $query;
     }
 
-    public function create($data)
+    public function create($data): EntityIdInterface
     {
         // todo: create by self user id
         return parent::create($data);
