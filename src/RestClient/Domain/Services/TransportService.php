@@ -27,32 +27,29 @@ class TransportService extends BaseService implements TransportServiceInterface
         ];
         $guzzleClient = new Client($config);
         $restClient = new RestClient($guzzleClient);
-
         if ($model->authorization) {
             $restClient->authByLogin($model->authorization);
         }
+        $options = $this->extractOptions($model);
+        $response = $restClient->sendRequest($model->method, $model->endpoint, $options);
+        return $response;
+    }
 
+    private function extractOptions(RequestForm $model): array {
         $options = [];
-
         $query = AdapterHelper::collapseFields($model, 'query');
         if ($query) {
             $options[RequestOptions::QUERY] = $query;
         }
-
         $header = AdapterHelper::collapseFields($model, 'header');
         if ($header) {
             $options[RequestOptions::HEADERS] = $header;
         }
-
         $body = AdapterHelper::collapseFields($model, 'body');
         if ($body) {
             $options[RequestOptions::FORM_PARAMS] = $body;
         }
-
-        //dd($options);
-
-        $response = $restClient->sendRequest($model->method, $model->endpoint, $options);
-        return $response;
+        return $options;
     }
 
 }
