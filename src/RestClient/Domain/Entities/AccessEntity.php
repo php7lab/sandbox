@@ -4,17 +4,29 @@ namespace PhpLab\Sandbox\RestClient\Domain\Entities;
 
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class AccessEntity implements EntityIdInterface, ValidateEntityInterface
 {
 
     private $id = null;
-
     private $userId = null;
-
     private $projectId = null;
+
+    public function validationRules(): array
+    {
+        return [
+            'userId' => [
+                new Assert\NotBlank,
+                new Assert\Positive,
+
+            ],
+            'projectId' => [
+                new Assert\NotBlank,
+                new Assert\Positive,
+            ],
+        ];
+    }
 
     public function setId($value)
     {
@@ -46,18 +58,4 @@ class AccessEntity implements EntityIdInterface, ValidateEntityInterface
         return $this->projectId;
     }
 
-    public function validationRules(): array
-    {
-        return [
-            'userId' => [
-                new NotBlank,
-                new Positive,
-
-            ],
-            'projectId' => [
-                new NotBlank,
-                new Positive,
-            ],
-        ];
-    }
 }

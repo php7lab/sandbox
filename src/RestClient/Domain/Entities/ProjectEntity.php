@@ -5,22 +5,37 @@ namespace PhpLab\Sandbox\RestClient\Domain\Entities;
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
 use PhpLab\Core\Enums\StatusEnum;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Regex;
-use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
 {
 
     private $id = null;
-
     private $name = null;
-
     private $title = null;
-
     private $url = null;
-
     private $status = StatusEnum::ENABLE;
+
+    public function validationRules(): array
+    {
+        return [
+            'name' => [
+                new Assert\NotBlank,
+                new Assert\Regex(['pattern' => '/[a-zA-Z0-9-]+/i']),
+            ],
+            'title' => [
+                new Assert\NotBlank,
+            ],
+            'url' => [
+                new Assert\NotBlank,
+                new Assert\Url,
+            ],
+            'status' => [
+                new Assert\NotBlank,
+                new Assert\Choice(StatusEnum::values()),
+            ],
+        ];
+    }
 
     public function setId($value)
     {
@@ -59,7 +74,7 @@ class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
 
     public function getUrl()
     {
-        return $this->url;
+        return trim($this->url, '/');
     }
 
     public function setStatus($value)
@@ -72,24 +87,5 @@ class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
         return $this->status;
     }
 
-    public function validationRules(): array
-    {
-        return [
-            'name' => [
-                new NotBlank,
-                new Regex(['pattern' => '/[a-zA-Z0-9-]+/i']),
-            ],
-            'title' => [
-                new NotBlank,
-            ],
-            'url' => [
-                new NotBlank,
-                new Url,
-            ],
-            'status' => [
-                new NotBlank,
-            ],
-        ];
-    }
 }
 

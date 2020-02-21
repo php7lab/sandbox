@@ -2,18 +2,11 @@
 
 namespace PhpLab\Sandbox\RestClient\Domain\Entities;
 
-use PhpLab\Bundle\Crypt\Enums\HashAlgoEnum;
-use PhpLab\Bundle\Crypt\Helpers\SafeBase64Helper;
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
 use PhpLab\Core\Enums\Http\HttpMethodEnum;
 use PhpLab\Sandbox\RestClient\Domain\Helpers\BookmarkHelper;
-use Symfony\Component\Validator\Constraints\Choice;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
-use Symfony\Component\Validator\ValidatorBuilder;
 
 class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
 {
@@ -36,30 +29,22 @@ class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
     private $description = null;
     private $status = null;
 
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        $metadata->addPropertyConstraint('hash', new NotBlank);
-
-
-    }
-
     public function validationRules(): array
     {
         return [
             'hash' => [
-                new NotBlank,
+                new Assert\NotBlank,
             ],
             'projectId' => [
-                new NotBlank,
-                new Positive,
+                new Assert\NotBlank,
+                new Assert\Positive,
             ],
             'method' => [
-                new NotBlank,
-               // new Choice(HttpMethodEnum::values()),
-                new Choice(['kjhgf']),
+                new Assert\NotBlank,
+                new Assert\Choice(HttpMethodEnum::values()),
             ],
             'uri' => [
-                new NotBlank,
+                new Assert\NotBlank,
             ],
 
         ];
@@ -82,7 +67,7 @@ class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
 
     public function getHash()
     {
-        if($this->hash) {
+        if ($this->hash) {
             return $this->hash;
         }
         return BookmarkHelper::generateHash($this);
@@ -119,8 +104,6 @@ class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
     }
 
 
-
-
     public function setQuery($value)
     {
         $this->query = $value;
@@ -152,8 +135,6 @@ class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
     }
 
 
-
-
     public function setQueryData($value)
     {
         $this->query = json_decode($value);
@@ -183,8 +164,6 @@ class BookmarkEntity implements ValidateEntityInterface, EntityIdInterface
     {
         return json_encode($this->header);
     }
-
-
 
 
     public function setAuthorization($value)
