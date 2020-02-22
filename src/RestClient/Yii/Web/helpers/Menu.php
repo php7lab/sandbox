@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\RestClient\Yii\Web\helpers;
 use yii2rails\extension\menu\interfaces\MenuInterface;
 use yii2rails\extension\common\helpers\ClassHelper;
 use yii2rails\extension\common\helpers\ModuleHelper;
-use yii2tool\restclient\domain\enums\RestPermissionEnum;
+use PhpLab\Sandbox\RestClient\Domain\Enums\RestClientPermissionEnum;
 
 class Menu implements MenuInterface {
 	
@@ -24,7 +24,7 @@ class Menu implements MenuInterface {
 		}
 		$item['label'] = 'API';
 		$item['visible'] = YII_ENV_DEV;
-		$item['access'] = [RestPermissionEnum::CLIENT_ALL];
+		$item['access'] = [RestClientPermissionEnum::CLIENT_ALL];
 		return $item;
 	}
 	

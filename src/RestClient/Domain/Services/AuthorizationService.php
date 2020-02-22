@@ -3,6 +3,7 @@
 namespace PhpLab\Sandbox\RestClient\Domain\Services;
 
 use Illuminate\Support\Collection;
+use PhpLab\Core\Domain\Libs\DataProvider;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Sandbox\RestClient\Domain\Entities\AuthorizationEntity;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\AuthorizationRepositoryInterface;
@@ -15,6 +16,24 @@ class AuthorizationService extends BaseCrudService implements AuthorizationServi
     public function __construct(AuthorizationRepositoryInterface $repository)
     {
         $this->repository = $repository;
+    }
+
+    public function oneById($id, Query $query = null)
+    {
+        /** @var AuthorizationEntity $entity */
+        $entity = parent::oneById($id, $query);
+        $entity->hidePassword(null);
+        return $entity;
+    }
+
+    public function all(Query $query = null)
+    {
+        /** @var AuthorizationEntity[] $collection */
+        $collection = parent::all($query);
+        foreach ($collection as $entity) {
+            $entity->hidePassword(null);
+        }
+        return $collection;
     }
 
     public function allByProjectId(int $projectId, string $type = null): Collection {

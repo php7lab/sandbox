@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii2tool\restclient\domain\helpers\postman\PostmanHelper;
+use PhpLab\Sandbox\RestClient\Domain\Helpers\Postman\PostmanHelper;
 use PhpLab\Sandbox\RestClient\Yii\Web\helpers\CollectionHelper;
 
 /**

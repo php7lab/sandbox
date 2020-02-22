@@ -37,7 +37,7 @@ class TransportService extends BaseService implements TransportServiceInterface
         if ($model->authorization) {
             try {
                 $authEntity = $this->authorizationService->oneByUsername($projectEntity->getId(), $model->authorization, 'bearer');
-                $restClient->authByLogin($authEntity->getUsername(), $authEntity->getHiddenPassword());
+                $restClient->authByLogin($authEntity->getUsername(), $authEntity->getPassword());
             } catch (NotFoundException $e) {}
         }
         $options = $this->extractOptions($model);

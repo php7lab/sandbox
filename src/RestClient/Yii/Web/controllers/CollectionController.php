@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii2rails\extension\web\helpers\Behavior;
 use yii2bundle\navigation\domain\widgets\Alert;
 use yii2bundle\rest\domain\helpers\MiscHelper;
-use yii2tool\restclient\domain\helpers\postman\PostmanHelper;
+use PhpLab\Sandbox\RestClient\Domain\Helpers\Postman\PostmanHelper;
 
 /**
  * Class CollectionController
