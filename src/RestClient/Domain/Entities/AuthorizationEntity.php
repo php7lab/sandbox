@@ -2,18 +2,34 @@
 
 namespace PhpLab\Sandbox\RestClient\Domain\Entities;
 
-class AuthorizationEntity
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
+class AuthorizationEntity implements EntityIdInterface, ValidateEntityInterface
 {
 
     private $id = null;
-
     private $projectId = null;
-
     private $type = null;
-
     private $username = null;
-
     private $password = null;
+
+    public function validationRules(): array
+    {
+        return [
+            'projectId' => [
+                new Assert\NotBlank,
+                new Assert\Positive,
+            ],
+            'type' => [
+                new Assert\NotBlank,
+            ],
+            'username' => [
+                new Assert\NotBlank,
+            ],
+        ];
+    }
 
     public function setId($value)
     {

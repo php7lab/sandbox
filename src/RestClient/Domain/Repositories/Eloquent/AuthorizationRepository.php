@@ -33,4 +33,3 @@ class AuthorizationRepository extends BaseEloquentCrudRepository implements Auth
     }
 
 }
-
