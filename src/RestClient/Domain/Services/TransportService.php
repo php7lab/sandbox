@@ -5,20 +5,27 @@ namespace PhpLab\Sandbox\RestClient\Domain\Services;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use PhpLab\Core\Domain\Base\BaseService;
+use PhpLab\Core\Domain\Helpers\EntityHelper;
+use PhpLab\Core\Domain\Libs\Query;
+use PhpLab\Core\Exceptions\NotFoundException;
 use PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AuthorizationServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\TransportServiceInterface;
 use PhpLab\Test\Libs\RestClient;
 use Psr\Http\Message\ResponseInterface;
 use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
 use PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class TransportService extends BaseService implements TransportServiceInterface
 {
 
-    /*public function __construct(\PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\TransportRepositoryInterface $repository)
+    private $authorizationService;
+
+    public function __construct(AuthorizationServiceInterface $authorizationService)
     {
-        $this->repository = $repository;
-    }*/
+        $this->authorizationService = $authorizationService;
+    }
 
     public function send(ProjectEntity $projectEntity, RequestForm $model): ResponseInterface
     {
@@ -28,7 +35,10 @@ class TransportService extends BaseService implements TransportServiceInterface
         $guzzleClient = new Client($config);
         $restClient = new RestClient($guzzleClient);
         if ($model->authorization) {
-            $restClient->authByLogin($model->authorization);
+            try {
+                $authEntity = $this->authorizationService->oneByUsername($projectEntity->getId(), $model->authorization, 'bearer');
+                $restClient->authByLogin($authEntity->getUsername(), $authEntity->getHiddenPassword());
+            } catch (NotFoundException $e) {}
         }
         $options = $this->extractOptions($model);
         $response = $restClient->sendRequest($model->method, $model->endpoint, $options);

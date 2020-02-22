@@ -4,6 +4,7 @@ namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 
 use PhpLab\Core\Exceptions\NotFoundException;
 use PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AuthorizationServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\BookmarkServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\TransportServiceInterface;
@@ -18,19 +19,22 @@ class BaseController extends Controller
     protected $bookmarkService;
     protected $projectService;
     protected $transportService;
+    protected $authorizationService;
 
     public function __construct(
         $id, Module $module,
         array $config = [],
         BookmarkServiceInterface $bookmarkService,
         ProjectServiceInterface $projectService,
-        TransportServiceInterface $transportService
+        TransportServiceInterface $transportService,
+        AuthorizationServiceInterface $authorizationService
     )
     {
         parent::__construct($id, $module, $config);
         $this->bookmarkService = $bookmarkService;
         $this->projectService = $projectService;
         $this->transportService = $transportService;
+        $this->authorizationService = $authorizationService;
     }
 
     protected function getProjectByHash(string $tag): ProjectEntity

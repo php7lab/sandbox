@@ -12,4 +12,6 @@ class Domain implements DomainInterface
         return 'restClient';
     }
 
+
 }
+

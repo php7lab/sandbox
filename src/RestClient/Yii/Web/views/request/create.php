@@ -26,6 +26,7 @@ if ($model->method) {
             <?= $this->render('_form', [
                 'model' => $model,
                 'projectEntity' => $projectEntity,
+                'authorization' => $authorization,
             ]) ?>
 
             <? if($response) {

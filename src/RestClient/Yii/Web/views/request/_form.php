@@ -141,7 +141,7 @@ HTML
             </div><!-- #request-headers -->
 
             <div id="request-authorization" class="tab-pane <?= $model->tab == 4 ? 'active' : '' ?>">
-				<?= $form->field($model, 'authorization')->dropDownList(Authorization::loginListForSelect()); ?>
+				<?= $form->field($model, 'authorization')->dropDownList(Authorization::collectionToOptions($authorization)); ?>
             </div><!-- #request-authorization -->
 
             <div id="request-description" class="tab-pane <?= $model->tab == 5 ? 'active' : '' ?>">

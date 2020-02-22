@@ -83,6 +83,7 @@ class RequestController extends BaseController
             'collection' => $collection,
             'projectEntity' => $projectEntity,
             'duration' => $duration,
+            'authorization' => $this->authorizationService->allByProjectId($projectEntity->getId(), 'bearer'),
         ]);
     }
 
