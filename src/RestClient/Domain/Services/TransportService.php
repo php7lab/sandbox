@@ -9,8 +9,8 @@ use PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\TransportServiceInterface;
 use PhpLab\Test\Libs\RestClient;
 use Psr\Http\Message\ResponseInterface;
-use yii2tool\restclient\web\helpers\AdapterHelper;
-use yii2tool\restclient\web\models\RequestForm;
+use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
+use PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm;
 
 class TransportService extends BaseService implements TransportServiceInterface
 {

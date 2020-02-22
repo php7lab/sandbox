@@ -12,14 +12,28 @@ use PhpLab\Sandbox\RestClient\Domain\Services\BookmarkService;
 class BookmarkHelper
 {
 
+    public static function sortArray(array &$array) {
+        ksort($array);
+        foreach ($array as &$item) {
+            if(is_array($item)) {
+                self::sortArray($item);
+            }
+        }
+    }
+
+    public static function arrayToString(array $array): string {
+        self::sortArray($array);
+        return json_encode($array);
+    }
+
     public static function generateHash(BookmarkEntity $bookmarkEntity) {
         $scope =
             $bookmarkEntity->getProjectId() . '.' .
             $bookmarkEntity->getMethod() . '.' .
             $bookmarkEntity->getUri() . '.' .
-            json_encode($bookmarkEntity->getQuery()) . '.' .
-            json_encode($bookmarkEntity->getBody()) . '.' .
-            json_encode($bookmarkEntity->getHeader()) . '.' .
+            self::arrayToString($bookmarkEntity->getQuery()) . '.' .
+            self::arrayToString($bookmarkEntity->getBody()) . '.' .
+            self::arrayToString($bookmarkEntity->getHeader()) . '.' .
             $bookmarkEntity->getAuthorization();
         $hash = hash(HashAlgoEnum::SHA1, $scope, true);
         $base64 = SafeBase64Helper::encode($hash);
