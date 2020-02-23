@@ -15,11 +15,6 @@ class PostControllerTest extends BaseRestTest
 
     public function testAll()
     {
-        $response = $this->sendGet('article-post', [
-            'per-page' => '4',
-            'page' => '2',
-        ]);
-
         $expectedBody = [
             [
                 "id" => 5,
@@ -46,19 +41,19 @@ class PostControllerTest extends BaseRestTest
                 'category' => null,
             ]
         ];
-        $this->assertBody($response, $expectedBody);
-        $this->assertPagination($response, null, 2, 4);
-        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
+
+        $response = $this->getRestClient()->sendGet('article-post', [
+            'per-page' => '4',
+            'page' => '2',
+        ]);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::OK)
+            ->assertPagination(null, 2, 4)
+            ->assertBody($expectedBody);
     }
 
     public function testAllWithRelations()
     {
-        $response = $this->sendGet('article-post', [
-            'per-page' => '4',
-            'page' => '2',
-            'expand' => 'category,tags',
-        ]);
-
         $expectedBody = [
             [
                 "id" => 5,
@@ -117,49 +112,45 @@ class PostControllerTest extends BaseRestTest
                 ],
             ]
         ];
-        $this->assertBody($response, $expectedBody);
-        $this->assertPagination($response, null, 2, 4);
-        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
+        $response = $this->getRestClient()->sendGet('article-post', [
+            'per-page' => '4',
+            'page' => '2',
+            'expand' => 'category,tags',
+        ]);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::OK)
+            ->assertPagination(null, 2, 4)
+            ->assertBody($expectedBody);
     }
 
     public function testAllSortByCategory()
     {
-        $response = $this->sendGet('article-post', [
+        $response = $this->getRestClient()->sendGet('article-post', [
             'per-page' => '4',
             'page' => '2',
             'sort' => 'category_id,id',
         ]);
-
-        $body = RestHelper::getBody($response);
-        $this->assertOrder($body, 'category_id', SORT_ASC);
-
-        $this->assertPagination($response, null, 2, 4);
-        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::OK)
+            ->assertPagination(null, 2, 4)
+            ->assertOrder('category_id', SORT_ASC);
     }
 
     public function testAllSortByCategoryDesc()
     {
-        $response = $this->sendGet('article-post', [
+        $response = $this->getRestClient()->sendGet('article-post', [
             'per-page' => '4',
             'page' => '2',
             'sort' => '-category_id,id',
         ]);
-
-        $body = RestHelper::getBody($response);
-        $this->assertOrder($body, 'category_id', SORT_DESC);
-
-        $this->assertPagination($response, null, 2, 4);
-        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::OK)
+            ->assertPagination(null, 2, 4)
+            ->assertOrder('category_id', SORT_DESC);
     }
 
     public function testAllOnlyFields()
     {
-        $response = $this->sendGet('article-post', [
-            'per-page' => '2',
-            'fields' => 'id',
-            'sort' => 'id',
-        ]);
-
         $expectedBody = [
             [
                 "id" => 1,
@@ -172,49 +163,50 @@ class PostControllerTest extends BaseRestTest
                 'category_id' => null,
             ],
         ];
-        $this->assertBody($response, $expectedBody);
-        //$this->assertPagination($response, null, 2, 2);
-        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
+        $response = $this->getRestClient()->sendGet('article-post', [
+            'per-page' => '2',
+            'fields' => 'id',
+            'sort' => 'id',
+        ]);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::OK)
+            //->assertPagination(null, 2, 4)
+            ->assertBody($expectedBody);
     }
 
     public function testAllById()
     {
-        $response = $this->sendGet('article-post', [
-            'per-page' => '4',
-            'page' => '2',
-            'id' => '3',
-        ]);
-
         $expectedBody = [
             [
                 "id" => 3,
             ],
         ];
-        $this->assertBody($response, $expectedBody);
-
-        $this->assertPagination($response, 1, 1, 4);
-        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
+        $response = $this->getRestClient()->sendGet('article-post', [
+            'per-page' => '4',
+            'page' => '2',
+            'id' => '3',
+        ]);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::OK)
+            ->assertPagination(1, 1, 4)
+            ->assertBody($expectedBody);
     }
 
     public function testView()
     {
-        $response = $this->sendGet('article-post/3');
-
         $expectedBody = [
             'id' => 3,
             'title' => 'post 3',
             'category_id' => 3,
         ];
-        $this->assertBody($response, $expectedBody);
-        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
+        $response = $this->getRestClient()->sendGet('article-post/3');
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::OK)
+            ->assertBody($expectedBody);
     }
 
     public function testViewWithRelations()
     {
-        $response = $this->sendGet('article-post/3', [
-            'expand' => 'category,tags',
-        ]);
-
         $expectedBody = [
             'id' => 3,
             'category' => [
@@ -230,24 +222,30 @@ class PostControllerTest extends BaseRestTest
                 ],
             ],
         ];
-        $this->assertBody($response, $expectedBody);
-        $this->getRestAssert($response)->assertStatusCode(HttpStatusCodeEnum::OK);
+        $response = $this->getRestClient()->sendGet('article-post/3', [
+            'expand' => 'category,tags',
+        ]);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::OK)
+            ->assertBody($expectedBody);
     }
 
     public function testViewNotFound()
     {
-        $response = $this->sendGet('article-post/3333');
-        $this->assertEquals(HttpStatusCodeEnum::NOT_FOUND, $response->getStatusCode());
+        $response = $this->getRestClient()->sendGet('article-post/3333');
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::NOT_FOUND);
     }
 
     public function testBadCreate()
     {
-        $data = [
+        $response = $this->getRestClient()->sendPost('article-post', [
             'title' => 'te',
             'category_id' => 3,
-        ];
-        $response = $this->sendPost('article-post', $data);
-        $this->assertEquals(HttpStatusCodeEnum::UNPROCESSABLE_ENTITY, $response->getStatusCode());
+        ]);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::UNPROCESSABLE_ENTITY)
+            ->assertUnprocessableEntity(['title']);
     }
 
     public function testBadUpdate()
@@ -256,8 +254,11 @@ class PostControllerTest extends BaseRestTest
             'title' => 'te',
             'category_id' => 3,
         ];
-        $response = $this->sendPut('article-post/100', $data);
-        $this->assertEquals(HttpStatusCodeEnum::UNPROCESSABLE_ENTITY, $response->getStatusCode());
+
+        $response = $this->getRestClient()->sendPut('article-post/100', $data);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::UNPROCESSABLE_ENTITY)
+            ->assertUnprocessableEntity(['title']);
     }
 
     public function testCreate()
@@ -266,64 +267,82 @@ class PostControllerTest extends BaseRestTest
             'title' => 'test123',
             'category_id' => 3,
         ];
-        $response = $this->sendPost('article-post', $data);
-        $this->assertCreated($response);
+
+        $response = $this->getRestClient()->sendPost('article-post', $data);
+        $this->getRestAssert($response)
+            ->assertCreated();
+
         $lastId = RestHelper::getLastInsertId($response);
-        $responseView = $this->sendGet('article-post/' . $lastId);
-        $this->assertEquals(HttpStatusCodeEnum::OK, $responseView->getStatusCode());
-        $this->assertBody($responseView, [
-            'id' => $lastId,
-            'title' => 'test123',
-            'category_id' => 3,
-        ]);
 
-        $response = $this->sendPut('article-post/' . $lastId, ['title' => 'qwerty']);
-        $this->assertEquals(HttpStatusCodeEnum::NO_CONTENT, $response->getStatusCode());
 
-        $responseView = $this->sendGet('article-post/' . $lastId);
-        $this->assertBody($responseView, [
-            'id' => $lastId,
-            'title' => 'qwerty',
-            'category_id' => 3,
-        ]);
+        $response = $this->getRestClient()->sendGet('article-post/' . $lastId);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::OK)
+            ->assertBody([
+                'id' => $lastId,
+                'title' => 'test123',
+                'category_id' => 3,
+            ]);
 
-        $response = $this->sendDelete('article-post/' . $lastId);
-        $this->assertEquals(HttpStatusCodeEnum::NO_CONTENT, $response->getStatusCode());
+        $data = [
+            'title' => 'qwerty'
+        ];
 
-        $responseView = $this->sendGet('article-post/' . $lastId);
-        $this->assertEquals(HttpStatusCodeEnum::NOT_FOUND, $responseView->getStatusCode());
+        $response = $this->getRestClient()->sendPut('article-post/' . $lastId, $data);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::NO_CONTENT);
+
+        $response = $this->getRestClient()->sendGet('article-post/' . $lastId);
+        $this->getRestAssert($response)
+            ->assertBody([
+                'id' => $lastId,
+                'title' => 'qwerty',
+                'category_id' => 3,
+            ]);
+
+        $response = $this->getRestClient()->sendDelete('article-post/' . $lastId);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::NO_CONTENT);
+
+        $response = $this->getRestClient()->sendGet('article-post/' . $lastId);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::NOT_FOUND);
     }
 
     public function testMethodAllowed()
     {
-        $response = $this->sendPost('article-post/1');
-        $this->assertEquals(HttpStatusCodeEnum::METHOD_NOT_ALLOWED, $response->getStatusCode());
+        $response = $this->getRestClient()->sendPost('article-post/1');
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::METHOD_NOT_ALLOWED);
 
-        $response = $this->sendPut('article-post');
-        $this->assertEquals(HttpStatusCodeEnum::METHOD_NOT_ALLOWED, $response->getStatusCode());
+        $response = $this->getRestClient()->sendPut('article-post');
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::METHOD_NOT_ALLOWED);
 
-        $response = $this->sendDelete('article-post');
-        $this->assertEquals(HttpStatusCodeEnum::METHOD_NOT_ALLOWED, $response->getStatusCode());
+        $response = $this->getRestClient()->sendDelete('article-post');
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::METHOD_NOT_ALLOWED);
     }
 
     public function testOptions()
     {
-        $response = $this->sendOptions('article-post/1');
-
-        $this->assertCors($response, '*', null, [
+        $response = $this->getRestClient()->sendOptions('article-post/1');
+        $expectedMethods = [
             HttpMethodEnum::GET,
             HttpMethodEnum::POST,
             HttpMethodEnum::PUT,
             HttpMethodEnum::DELETE,
             HttpMethodEnum::OPTIONS,
-        ]);
+        ];
+        $this->getRestAssert($response)
+            ->assertCors('*', null, $expectedMethods);
     }
 
     public function testNotRoute()
     {
-        $response = $this->sendGet('article-post-possst/1');
-
-        $this->assertEquals(HttpStatusCodeEnum::NOT_FOUND, $response->getStatusCode());
+        $response = $this->getRestClient()->sendDelete('article-post-possst/1');
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::NOT_FOUND);
     }
 
 }

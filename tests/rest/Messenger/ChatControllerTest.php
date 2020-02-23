@@ -12,10 +12,12 @@ class ChatControllerTest extends BaseRestTest
 
     public function testAll()
     {
-        $response = $this->sendGet('messenger-chat', [
+        $response = $this->getRestClient()->sendGet('messenger-chat', [
             'per-page' => '4',
             'page' => '2',
         ]);
+        $this->getRestAssert($response)
+            ->assertStatusCode(HttpStatusCodeEnum::UNAUTHORIZED);
 
         /*$expectedBody = [
             [
@@ -41,7 +43,6 @@ class ChatControllerTest extends BaseRestTest
         ];
         $this->assertBody($response, $expectedBody);
         $this->assertPagination($response, null, 2, 4);*/
-        $this->assertEquals(HttpStatusCodeEnum::UNAUTHORIZED, $response->getStatusCode());
     }
 
 }
