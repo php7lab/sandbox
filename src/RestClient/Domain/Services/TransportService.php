@@ -5,18 +5,15 @@ namespace PhpLab\Sandbox\RestClient\Domain\Services;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use PhpLab\Core\Domain\Base\BaseService;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Exceptions\NotFoundException;
 use PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AuthorizationServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\TransportServiceInterface;
+use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
+use PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm;
 use PhpLab\Test\Libs\AuthAgent;
 use PhpLab\Test\Libs\RestClient;
 use Psr\Http\Message\ResponseInterface;
-use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
-use PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class TransportService extends BaseService implements TransportServiceInterface
 {
@@ -40,14 +37,16 @@ class TransportService extends BaseService implements TransportServiceInterface
             try {
                 $authEntity = $this->authorizationService->oneByUsername($projectEntity->getId(), $model->authorization, 'bearer');
                 $restClient->auth()->authByLogin($authEntity->getUsername(), $authEntity->getPassword());
-            } catch (NotFoundException $e) {}
+            } catch (NotFoundException $e) {
+            }
         }
         $options = $this->extractOptions($model);
         $response = $restClient->sendRequest($model->method, $model->endpoint, $options);
         return $response;
     }
 
-    private function extractOptions(RequestForm $model): array {
+    private function extractOptions(RequestForm $model): array
+    {
         $options = [];
         $query = AdapterHelper::collapseFields($model, 'query');
         if ($query) {
