@@ -6,6 +6,7 @@ use PhpLab\Sandbox\RestClient\Domain\Enums\RestClientPermissionEnum;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AccessServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AuthorizationServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use yii\base\Module;
 use RocketLab\Bundle\Rest\Base\BaseCrudController;
 
@@ -21,6 +22,13 @@ class AuthorizationController extends BaseCrudController
     {
         parent::__construct($id, $module, $config);
         $this->service = $authorizationService;
+    }
+
+    public function normalizerContext(): array
+    {
+        return [
+            AbstractNormalizer::IGNORED_ATTRIBUTES => ['password'],
+        ];
     }
 
     public function authentication(): array

@@ -81,9 +81,5 @@ class AuthorizationEntity implements EntityIdInterface, ValidateEntityInterface
         return $this->password;
     }
 
-    public function hidePassword()
-    {
-        $this->password = null;
-    }
 }
 

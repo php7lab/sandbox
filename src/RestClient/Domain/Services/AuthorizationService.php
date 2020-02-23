@@ -3,12 +3,10 @@
 namespace PhpLab\Sandbox\RestClient\Domain\Services;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Libs\DataProvider;
-use PhpLab\Core\Domain\Libs\Query;
+use PhpLab\Core\Domain\Base\BaseCrudService;
 use PhpLab\Sandbox\RestClient\Domain\Entities\AuthorizationEntity;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\AuthorizationRepositoryInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AuthorizationServiceInterface;
-use PhpLab\Core\Domain\Base\BaseCrudService;
 
 class AuthorizationService extends BaseCrudService implements AuthorizationServiceInterface
 {
@@ -18,29 +16,13 @@ class AuthorizationService extends BaseCrudService implements AuthorizationServi
         $this->repository = $repository;
     }
 
-    public function oneById($id, Query $query = null)
+    public function allByProjectId(int $projectId, string $type = null): Collection
     {
-        /** @var AuthorizationEntity $entity */
-        $entity = parent::oneById($id, $query);
-        $entity->hidePassword(null);
-        return $entity;
-    }
-
-    public function all(Query $query = null)
-    {
-        /** @var AuthorizationEntity[] $collection */
-        $collection = parent::all($query);
-        foreach ($collection as $entity) {
-            $entity->hidePassword(null);
-        }
-        return $collection;
-    }
-
-    public function allByProjectId(int $projectId, string $type = null): Collection {
         return $this->getRepository()->allByProjectId($projectId, $type);
     }
 
-    public function oneByUsername(int $projectId, string $username, string $type = null): AuthorizationEntity {
+    public function oneByUsername(int $projectId, string $username, string $type = null): AuthorizationEntity
+    {
         return $this->getRepository()->oneByUsername($projectId, $username, $type);
     }
 
