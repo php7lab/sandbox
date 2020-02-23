@@ -11,6 +11,7 @@ use PhpLab\Core\Exceptions\NotFoundException;
 use PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AuthorizationServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\TransportServiceInterface;
+use PhpLab\Test\Libs\AuthAgent;
 use PhpLab\Test\Libs\RestClient;
 use Psr\Http\Message\ResponseInterface;
 use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
@@ -33,11 +34,12 @@ class TransportService extends BaseService implements TransportServiceInterface
             'base_uri' => $projectEntity->getUrl() . '/',
         ];
         $guzzleClient = new Client($config);
-        $restClient = new RestClient($guzzleClient);
+        $authAgent = new AuthAgent($guzzleClient);
+        $restClient = new RestClient($guzzleClient, $authAgent);
         if ($model->authorization) {
             try {
                 $authEntity = $this->authorizationService->oneByUsername($projectEntity->getId(), $model->authorization, 'bearer');
-                $restClient->authByLogin($authEntity->getUsername(), $authEntity->getPassword());
+                $restClient->auth()->authByLogin($authEntity->getUsername(), $authEntity->getPassword());
             } catch (NotFoundException $e) {}
         }
         $options = $this->extractOptions($model);
