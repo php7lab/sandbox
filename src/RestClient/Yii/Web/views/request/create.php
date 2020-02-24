@@ -39,56 +39,12 @@ if ($model->method) {
 
         </div>
         <div class="col-lg-4">
-
-            <ul class="request-lists nav nav-tabs">
-                <li>
-                    <a href="#collection" data-toggle="tab">
-                        Collection
-                        <?php
-                        $count = array_reduce(EntityHelper::collectionToArray($collection), function ($sum, $rows) {
-                            return $sum + count($rows);
-                        }, 0);
-                        echo Html::tag('span', $count, [
-                            'class' => 'counter' . (!$count ? ' hidden' : '')
-                        ]);
-                        ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="#history" data-toggle="tab">
-                        History
-                        <?= Html::tag('span', count($history), [
-                            'class' => 'counter' . (!count($history) ? ' hidden' : '')
-                        ]) ?>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="tab-content">
-
-                <div class="form-group has-feedback">
-                    <input id="history-search" type="search" class="form-control" placeholder="Search" />
-                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                </div>
-
-                <div id="collection" class="tab-pane">
-                    <?= $this->render('_collection', [
-                        'activeTag' => $tag,
-                        'items' => $collection,
-                        'projectEntity' => $projectEntity,
-                    ]) ?>
-                </div><!-- #collection -->
-
-                <div id="history" class="tab-pane">
-                    <?= $this->render('_history', [
-                        'activeTag' => $tag,
-                        'items' => $history,
-                        'projectEntity' => $projectEntity,
-                    ]) ?>
-                </div><!-- #history -->
-
-            </div>
-
+            <?= $this->render('_collection_widget', [
+                'collection' => $collection,
+                'tag' => $tag,
+                'history' => $history,
+                'projectEntity' => $projectEntity,
+            ]) ?>
         </div>
     </div>
 </div>

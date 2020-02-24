@@ -3,8 +3,10 @@
 namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 
 use PhpLab\Core\Domain\Helpers\EntityHelper;
+use PhpLab\Core\Enums\Http\HttpHeaderEnum;
 use PhpLab\Core\Helpers\UploadHelper;
 use PhpLab\Sandbox\RestClient\Domain\Entities\BookmarkEntity;
+use PhpLab\Test\Helpers\RestHelper;
 use Yii;
 use yii2rails\extension\yii\helpers\ArrayHelper;
 use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
@@ -54,11 +56,12 @@ class RequestController extends BaseController
                 $this->bookmarkService->persist($bookmarkEntity);
                 $tag = $bookmarkEntity->getHash();
 
-                $contentDisposition = $response->getHeader('Content-Disposition')[0] ?? null;
+                $contentDisposition = RestHelper::extractHeaderValues($response, HttpHeaderEnum::CONTENT_DISPOSITION);
+                //$contentDisposition = $response->getHeader('Content-Disposition')[0] ?? null;
 
                 if ($contentDisposition != null) {
-                    $ee = explode(';', $contentDisposition[0]);
-                    if ($ee[0] == 'attachment') {
+                    //$ee = explode(';', $contentDisposition);
+                    if ($contentDisposition[0] == 'attachment') {
                         Yii::$app->response->headers->fromArray($response->getHeaders());
                         return $response->getBody()->getContents();
                     } /*elseif($ee[0] == 'inline') {
@@ -70,8 +73,6 @@ class RequestController extends BaseController
                 }
             }
         }
-
-        $model->addEmptyRows();
 
         $history = $this->bookmarkService->allHistoryByProject($projectEntity->getId());
         $collection = $this->bookmarkService->allFavoriteByProject($projectEntity->getId());

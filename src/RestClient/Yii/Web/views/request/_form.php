@@ -13,6 +13,7 @@ use PhpLab\Sandbox\RestClient\Yii\Web\helpers\Authorization;
  */
 
 $baseUrl = $projectEntity->getUrl() . '/';
+$model->addEmptyRows();
 ?>
     <div class="rest-request-form">
 		<?php $form = ActiveForm::begin([
