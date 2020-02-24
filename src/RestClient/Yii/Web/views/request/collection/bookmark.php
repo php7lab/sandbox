@@ -24,7 +24,7 @@ $items = CollectionHelper::prependCollection($items);
                 </div>
                 <ul>
                     <?php foreach ($rows as $tag => $row): ?>
-	                    <?= $this->render('_item', [
+	                    <?= $this->render('item', [
 		                    'type' => 'collection',
                             //'tag' => $tag,
 		                    'row' => $row,

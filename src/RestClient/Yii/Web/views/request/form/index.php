@@ -7,7 +7,6 @@ use PhpLab\Sandbox\RestClient\Yii\Web\helpers\Authorization;
 
 /**
  * @var \yii\web\View $this
- * @var string $baseUrl
  * @var RequestForm $model
  * @var ActiveForm $form
  * @var \PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity $projectEntity
@@ -123,7 +122,7 @@ HTML
     <div class="tab-content">
 
         <div id="request-query" class="tab-pane <?= $model->tab == 1 ? 'active' : '' ?>">
-            <?= $this->render('_params', [
+            <?= $this->render('params', [
                 'model' => $model,
                 'form' => $form,
                 'keyAttribute' => 'queryKeys',
@@ -133,7 +132,7 @@ HTML
         </div><!-- #request-params -->
 
         <div id="request-body" class="tab-pane <?= $model->tab == 2 ? 'active' : '' ?>">
-            <?= $this->render('_params', [
+            <?= $this->render('params', [
                 'model' => $model,
                 'form' => $form,
                 'keyAttribute' => 'bodyKeys',
@@ -143,7 +142,7 @@ HTML
         </div><!-- #request-body -->
 
         <div id="request-file" class="tab-pane <?= $model->tab == 66 ? 'active' : '' ?>">
-            <?= $this->render('_files', [
+            <?= $this->render('files', [
                 'model' => $model,
                 'form' => $form,
                 /*'keyAttribute' => 'fileKeys',
@@ -153,7 +152,7 @@ HTML
         </div><!-- #request-file -->
 
         <div id="request-headers" class="tab-pane <?= $model->tab == 3 ? 'active' : '' ?>">
-            <?= $this->render('_params', [
+            <?= $this->render('params', [
                 'model' => $model,
                 'form' => $form,
                 'keyAttribute' => 'headerKeys',

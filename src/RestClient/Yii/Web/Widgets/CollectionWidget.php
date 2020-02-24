@@ -31,7 +31,7 @@ class CollectionWidget extends Widget
         $projectEntity = $this->projectService->oneById($this->projectId);
         $collection = $this->bookmarkService->allFavoriteByProject($this->projectId);
         $history = $this->bookmarkService->allHistoryByProject($this->projectId);
-        return $this->renderFile(__DIR__ . '/../views/request/_collection_widget.php', [
+        return $this->renderFile(__DIR__ . '/../views/request/collection/index.php', [
             'collection' => $collection,
             'tag' => $this->tag,
             'history' => $history,

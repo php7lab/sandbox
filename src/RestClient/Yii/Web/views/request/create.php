@@ -2,7 +2,6 @@
 
 /**
  * @var \yii\web\View $this
- * @var string $tag
  * @var string $frame
  * @var \PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm $model
  * @var \PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity $projectEntity
@@ -27,7 +26,7 @@ if ($model->method) {
             </div>
             <? if ($response) { ?>
                 <div id="response" class="rest-request-response">
-                    <?= $this->render('_response', [
+                    <?= $this->render('response/index', [
                         'duration' => $duration,
                         'response' => $response,
                         'frame' => $frame,

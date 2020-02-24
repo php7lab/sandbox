@@ -11,7 +11,7 @@ use yii\helpers\Html;
 <div class="rest-request-history">
     <ul id="history-list" class="request-list">
         <?php foreach ($items as $row): ?>
-	        <?= $this->render('_item', [
+	        <?= $this->render('item', [
 		        'type' => 'history',
                 //'tag' => $tag,
                 'row' => $row,

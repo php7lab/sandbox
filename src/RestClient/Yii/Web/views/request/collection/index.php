@@ -46,7 +46,7 @@ use PhpLab\Sandbox\RestClient\Yii\Web\helpers\CollectionHelper;
     </div>
 
     <div id="collection" class="tab-pane">
-        <?= $this->render('_collection', [
+        <?= $this->render('bookmark', [
             'activeTag' => $tag,
             'items' => $collection,
             'projectEntity' => $projectEntity,
@@ -54,7 +54,7 @@ use PhpLab\Sandbox\RestClient\Yii\Web\helpers\CollectionHelper;
     </div><!-- #collection -->
 
     <div id="history" class="tab-pane">
-        <?= $this->render('_history', [
+        <?= $this->render('history', [
             'activeTag' => $tag,
             'items' => $history,
             'projectEntity' => $projectEntity,

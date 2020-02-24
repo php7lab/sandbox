@@ -28,7 +28,7 @@ class FormWidget extends Widget
     public function run()
     {
         $projectEntity = $this->projectService->oneById($this->projectId);
-        return $this->renderFile(__DIR__ . '/../views/request/_form.php', [
+        return $this->renderFile(__DIR__ . '/../views/request/form/index.php', [
             'model' => $this->model,
             'projectEntity' => $projectEntity,
             'authorization' => $this->authorizationService->allByProjectId($projectEntity->getId(), 'bearer'),

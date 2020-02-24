@@ -57,14 +57,14 @@ use yii\web\Response;
 <div class="tab-content">
 
     <div id="response-body" class="tab-pane">
-        <?= $this->render('response-body', [
+        <?= $this->render('body', [
             'response' => $response,
             'frame' => $frame,
         ]); ?>
     </div><!-- #response-body -->
 
     <div id="response-headers" class="tab-pane">
-        <?= $this->render('response-headers', [
+        <?= $this->render('headers', [
             'response' => $response,
         ]); ?>
     </div><!-- #response-headers -->
