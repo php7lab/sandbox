@@ -2,17 +2,11 @@
 
 namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 
-use PhpLab\Core\Exceptions\NotFoundException;
-use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\BookmarkServiceInterface;
-use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
+use PhpLab\Sandbox\RestClient\Domain\Helpers\Postman\PostmanHelper;
 use Yii;
-use yii\base\Module;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii2rails\extension\web\helpers\Behavior;
 use yii2bundle\navigation\domain\widgets\Alert;
 use yii2bundle\rest\domain\helpers\MiscHelper;
-use PhpLab\Sandbox\RestClient\Domain\Helpers\Postman\PostmanHelper;
+use yii2rails\extension\web\helpers\Behavior;
 
 /**
  * Class CollectionController
@@ -54,9 +48,9 @@ class CollectionController extends BaseController
         \App::$domain->navigation->alert->create('Request was removed from collection successfully.', Alert::TYPE_SUCCESS);
         return $this->redirect(['/rest-client/request/send', 'projectName' => $projectEntity->getName()]);
     }
-	
-	public function actionExportPostman($postmanVersion)
-	{
+
+    public function actionExportPostman($postmanVersion)
+    {
         $collection = $this->bookmarkService->allFavoriteByProject(1);
 
         $cc = PostmanHelper::splitByGroup($collection);
@@ -65,12 +59,12 @@ class CollectionController extends BaseController
 
         $apiVersion = MiscHelper::currentApiVersion();
         $collectionName = MiscHelper::collectionNameFormatId();
-        $fileName = $collectionName .'-' . date('Y-m-d-H-i-s') . '.json';
+        $fileName = $collectionName . '-' . date('Y-m-d-H-i-s') . '.json';
 
         return Yii::$app->response->sendContentAsFile(
             $jsonContent,
             $fileName
         );
-	}
-	
+    }
+
 }

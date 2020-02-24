@@ -11,11 +11,6 @@ use GuzzleHttp\Psr7\Response;
 class AdapterHelper
 {
 
-    public static function guzzleResponseToResponseRecord(Response $response): ResponseRecord
-    {
-
-    }
-
     public static function bookmarkEntityToForm(BookmarkEntity $bookmarkEntity): RequestForm
     {
         /** @var RequestForm $model */
@@ -91,8 +86,6 @@ class AdapterHelper
         }
         return $data;
     }
-
-
 
     private static function buildQuery($data)
     {

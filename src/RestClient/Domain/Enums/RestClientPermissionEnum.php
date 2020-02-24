@@ -9,6 +9,8 @@ class RestClientPermissionEnum extends BaseEnum
 
     const PROJECT_WRITE = 'oRestClientProjectWrite';
     const PROJECT_READ = 'oRestClientProjectRead';
+
+    /** @deprecated */
     const CLIENT_ALL = 'oRestClientAll';
 
     public static function getLabels() {

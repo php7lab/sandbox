@@ -26,7 +26,6 @@ $items = CollectionHelper::prependCollection($items);
                     <?php foreach ($rows as $tag => $row): ?>
 	                    <?= $this->render('item', [
 		                    'type' => 'collection',
-                            //'tag' => $tag,
 		                    'row' => $row,
 		                    'activeTag' => $activeTag,
                             'projectEntity' => $projectEntity,

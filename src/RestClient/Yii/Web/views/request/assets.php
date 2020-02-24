@@ -209,10 +209,6 @@ $this->registerCss(<<<'CSS'
 CSS
 );
 
-$this->registerJs('hljs.highlightBlock(document.getElementById("response-content"));');
-
-$this->registerCss('pre code.hljs {background: transparent}');
-
 $this->registerJs(<<<'JS'
 
 var inputSenderTab = $('#requestform-tab');

@@ -5,10 +5,10 @@ namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 use PhpLab\Core\Enums\Http\HttpHeaderEnum;
 use PhpLab\Core\Helpers\UploadHelper;
 use PhpLab\Sandbox\RestClient\Domain\Entities\BookmarkEntity;
-use PhpLab\Test\Helpers\RestHelper;
-use Yii;
 use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
 use PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm;
+use PhpLab\Test\Helpers\RestHelper;
+use Yii;
 
 /**
  * Class RequestController

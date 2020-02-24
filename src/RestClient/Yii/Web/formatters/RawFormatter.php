@@ -2,7 +2,6 @@
 
 namespace PhpLab\Sandbox\RestClient\Yii\Web\formatters;
 
-use Psr\Http\Message\ResponseInterface;
 use yii\base\BaseObject;
 use yii\helpers\Html;
 

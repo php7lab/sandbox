@@ -2,15 +2,8 @@
 
 namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 
-use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\BookmarkServiceInterface;
-use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
-use Yii;
-use yii\base\Module;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii2rails\extension\web\helpers\Behavior;
 use yii2bundle\navigation\domain\widgets\Alert;
+use yii2rails\extension\web\helpers\Behavior;
 
 /**
  * Class HistoryController
@@ -19,10 +12,6 @@ use yii2bundle\navigation\domain\widgets\Alert;
  */
 class HistoryController extends BaseController
 {
-    /**
-     * @var \PhpLab\Sandbox\RestClient\Yii\Web\Module
-     */
-    public $module;
 
     /**
      * @inheritdoc
