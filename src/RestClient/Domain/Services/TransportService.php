@@ -73,6 +73,7 @@ class TransportService extends BaseService implements TransportServiceInterface
         }
         if ($model->files) {
             foreach ($model->files as $fileUpload) {
+                //dd($model->files);
                 $options[$bodyParam][] = [
                     'name'     => $fileUpload->name,
                     'contents' => fopen($fileUpload->tempName, 'r'),

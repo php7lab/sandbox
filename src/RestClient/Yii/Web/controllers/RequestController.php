@@ -74,9 +74,6 @@ class RequestController extends BaseController
             }
         }
 
-        $history = $this->bookmarkService->allHistoryByProject($projectEntity->getId());
-        $collection = $this->bookmarkService->allFavoriteByProject($projectEntity->getId());
-
         $frame = null;
 
         return $this->render('create', [
@@ -84,11 +81,8 @@ class RequestController extends BaseController
             'model' => $model,
             'response' => $response,
             'frame' => $frame,
-            'history' => $history,
-            'collection' => $collection,
             'projectEntity' => $projectEntity,
             'duration' => $duration,
-            'authorization' => $this->authorizationService->allByProjectId($projectEntity->getId(), 'bearer'),
         ]);
     }
 
