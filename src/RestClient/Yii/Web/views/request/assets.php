@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @var \yii\web\View $this
+ */
+
 $this->registerJs(<<<'JS'
 
 if (window.localStorage) {
@@ -164,6 +168,73 @@ ul.request-list {
 }
 .request-list .active .request-description {
     color: #fff;
+}
+
+CSS
+);
+
+$this->registerJs(<<<JS
+
+if (window.localStorage) {
+    var responseTab = localStorage['responseTab'] || 'response-body';
+    $('a[href="#' + responseTab + '"]').tab('show');
+    $('a[href="#response-body"]').on('shown.bs.tab', function() {
+        localStorage['responseTab'] = 'response-body';
+    });
+    $('a[href="#response-headers"]').on('shown.bs.tab', function() {
+        localStorage['responseTab'] = 'response-headers';
+    });
+}
+
+JS
+);
+$this->registerCss(<<<'CSS'
+
+.nav-tabs > li > .info {
+    position: relative;
+    display: block;
+    padding: 10px 0 10px 15px;
+    font-weight: bold;
+}
+.nav-tabs > li > .info .label {
+    white-space: normal;
+    font-size: 85%;
+}
+#response-headers tbody td {
+    word-break: break-all;
+}
+#response-headers tbody th {
+    width: 30%;
+}
+CSS
+);
+
+$this->registerJs('hljs.highlightBlock(document.getElementById("response-content"));');
+
+$this->registerCss('pre code.hljs {background: transparent}');
+
+$this->registerJs(<<<'JS'
+
+var inputSenderTab = $('#requestform-tab');
+$('a[href="#request-query"]').on('shown.bs.tab', function() {
+    inputSenderTab.val(1);
+    $('#request-query').find(':text').first().focus();
+});
+$('a[href="#request-body"]').on('shown.bs.tab', function() {
+    inputSenderTab.val(2);
+    $('#request-body').find(':text').first().focus();
+});
+$('a[href="#request-headers"]').on('shown.bs.tab', function() {
+    inputSenderTab.val(3);
+    $('#request-headers').find(':text').first().focus();
+});
+
+JS
+);
+$this->registerCss(<<<'CSS'
+
+.form-group-lg .input-group-addon {
+    font-size: 18px;
 }
 
 CSS

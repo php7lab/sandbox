@@ -3,8 +3,10 @@
 /**
  * @var \yii\web\View $this
  * @var string $tag
+ * @var string $frame
  * @var \PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm $model
  * @var \PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity $projectEntity
+ * @var \Symfony\Component\HttpFoundation\Response $response
  */
 
 if ($model->method) {
@@ -17,21 +19,21 @@ if ($model->method) {
 <div class="rest-request-create">
     <div class="row">
         <div class="col-lg-8">
-
-            <?= \PhpLab\Sandbox\RestClient\Yii\Web\Widgets\FormWidget::widget([
-                'projectId' => $projectEntity->getId(),
-                'model' => $model,
-                //'projectEntity' => $projectEntity,
-            ]) ?>
-
-            <? if($response) {
-                echo $this->render('_response', [
-                    'duration' => $duration,
-                    'response' => $response,
-                    'frame' => $frame,
-                ]);
-            } ?>
-
+            <div class="rest-request-form">
+                <?= \PhpLab\Sandbox\RestClient\Yii\Web\Widgets\FormWidget::widget([
+                    'projectId' => $projectEntity->getId(),
+                    'model' => $model,
+                ]) ?>
+            </div>
+            <? if ($response) { ?>
+                <div id="response" class="rest-request-response">
+                    <?= $this->render('_response', [
+                        'duration' => $duration,
+                        'response' => $response,
+                        'frame' => $frame,
+                    ]) ?>
+                </div>
+            <? } ?>
         </div>
         <div class="col-lg-4">
             <?= \PhpLab\Sandbox\RestClient\Yii\Web\Widgets\CollectionWidget::widget([

@@ -2,15 +2,12 @@
 
 namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 
-use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Enums\Http\HttpHeaderEnum;
 use PhpLab\Core\Helpers\UploadHelper;
 use PhpLab\Sandbox\RestClient\Domain\Entities\BookmarkEntity;
 use PhpLab\Test\Helpers\RestHelper;
 use Yii;
-use yii2rails\extension\yii\helpers\ArrayHelper;
 use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
-use PhpLab\Sandbox\RestClient\Yii\Web\helpers\CollectionHelper;
 use PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm;
 
 /**
@@ -43,8 +40,6 @@ class RequestController extends BaseController
         } elseif (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
             if ($model->validate()) {
-
-
                 $model->files = UploadHelper::createUploadedFileArray($_FILES);
 
                 $begin = microtime(true);
@@ -74,7 +69,7 @@ class RequestController extends BaseController
             }
         }
 
-        $frame = null;
+        $frame = null; // 'http://docs.guzzlephp.org/en/stable/quickstart.html#uploading-data';
 
         return $this->render('create', [
             'tag' => $tag,
