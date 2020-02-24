@@ -3,6 +3,7 @@
 namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 
 use PhpLab\Core\Domain\Helpers\EntityHelper;
+use PhpLab\Core\Helpers\UploadHelper;
 use PhpLab\Sandbox\RestClient\Domain\Entities\BookmarkEntity;
 use Yii;
 use yii2rails\extension\yii\helpers\ArrayHelper;
@@ -40,6 +41,9 @@ class RequestController extends BaseController
         } elseif (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
             if ($model->validate()) {
+
+
+                $model->files = UploadHelper::createUploadedFileArray($_FILES);
 
                 $begin = microtime(true);
                 $response = $this->transportService->send($projectEntity, $model);

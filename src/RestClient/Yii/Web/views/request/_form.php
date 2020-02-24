@@ -21,6 +21,7 @@ $baseUrl = $projectEntity->getUrl() . '/';
 				'labelOptions' => ['class' => 'control-label sr-only'],
 			],
 			'enableClientValidation' => false,
+            'options' => ['enctype' => 'multipart/form-data'],
 		]) ?>
 		<?= $form->field($model, 'tab', [
 			'template' => '{input}',
@@ -70,6 +71,7 @@ HTML
 			<?php
 			$queryCount = count($model->queryKeys) - 1;
 			$bodyCount = count($model->bodyKeys) - 1;
+			$fileCount = 0; // count($model->fileKeys) - 1;
 			$headersCount = count($model->headerKeys) - 1;
 			?>
             <li class="<?= $model->tab == 1 ? 'active' : '' ?>">
@@ -86,6 +88,14 @@ HTML
 					<?= Html::tag('span', $bodyCount, [
 						'class' => 'badge badge-default' . (!$bodyCount ? ' hidden' : '')
 					]) ?>
+                </a>
+            </li>
+            <li class="<?= $model->tab == 66 ? 'active' : '' ?>">
+                <a href="#request-file" data-toggle="tab" tabindex="-1">
+                    File
+                    <?= Html::tag('span', $fileCount, [
+                        'class' => 'badge badge-default' . (!$fileCount ? ' hidden' : '')
+                    ]) ?>
                 </a>
             </li>
             <li class="<?= $model->tab == 3 ? 'active' : '' ?>">
@@ -129,6 +139,16 @@ HTML
 					'activeAttribute' => 'bodyActives',
 				]) ?>
             </div><!-- #request-body -->
+
+            <div id="request-file" class="tab-pane <?= $model->tab == 66 ? 'active' : '' ?>">
+                <?= $this->render('_files', [
+                    'model' => $model,
+                    'form' => $form,
+                    /*'keyAttribute' => 'fileKeys',
+                    'valueAttribute' => 'fileValues',
+                    'activeAttribute' => 'fileActives',*/
+                ]) ?>
+            </div><!-- #request-file -->
 
             <div id="request-headers" class="tab-pane <?= $model->tab == 3 ? 'active' : '' ?>">
 				<?= $this->render('_params', [

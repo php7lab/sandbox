@@ -25,6 +25,8 @@ class RequestForm extends Model
     public $bodyValues = [];
     public $bodyActives = [];
 
+    public $files = [];
+
     public $headerKeys = [];
     public $headerValues = [];
     public $headerActives = [];

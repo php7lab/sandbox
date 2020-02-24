@@ -47,6 +47,8 @@ class TransportService extends BaseService implements TransportServiceInterface
 
     private function extractOptions(RequestForm $model): array
     {
+        $bodyParam = $model->files ? RequestOptions::MULTIPART : RequestOptions::FORM_PARAMS;
+
         $options = [];
         $query = AdapterHelper::collapseFields($model, 'query');
         if ($query) {
@@ -58,7 +60,24 @@ class TransportService extends BaseService implements TransportServiceInterface
         }
         $body = AdapterHelper::collapseFields($model, 'body');
         if ($body) {
-            $options[RequestOptions::FORM_PARAMS] = $body;
+            if($bodyParam == RequestOptions::MULTIPART) {
+                foreach ($body as $name => $value) {
+                    $options[$bodyParam][] = [
+                        'name'     => $name,
+                        'contents' => $value,
+                    ];
+                }
+            } else {
+                $options[$bodyParam] = $body;
+            }
+        }
+        if ($model->files) {
+            foreach ($model->files as $fileUpload) {
+                $options[$bodyParam][] = [
+                    'name'     => $fileUpload->name,
+                    'contents' => fopen($fileUpload->tempName, 'r'),
+                ];
+            }
         }
         return $options;
     }
