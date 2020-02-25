@@ -5,7 +5,7 @@
  * @var string $frame
  * @var \PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm $model
  * @var \PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity $projectEntity
- * @var \Symfony\Component\HttpFoundation\Response $response
+ * @var \Psr\Http\Message\ResponseInterface $response
  */
 
 if ($model->method) {
@@ -24,7 +24,7 @@ if ($model->method) {
                     'model' => $model,
                 ]) ?>
             </div>
-            <? if ($response) { ?>
+            <? if ($response->getHeaders()) { ?>
                 <div id="response" class="rest-request-response">
                     <?= $this->render('response/index', [
                         'duration' => $duration,
