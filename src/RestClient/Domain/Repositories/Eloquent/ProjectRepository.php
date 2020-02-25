@@ -9,7 +9,7 @@ use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\ProjectRepositoryIn
 class ProjectRepository extends BaseEloquentCrudRepository implements ProjectRepositoryInterface
 {
 
-    protected $tableName = 'restClient_project';
+    protected $tableName = 'restclient_project';
 
     protected $entityClass = 'PhpLab\\Sandbox\\RestClient\\Domain\\Entities\\ProjectEntity';
 
