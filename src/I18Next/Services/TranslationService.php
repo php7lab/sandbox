@@ -51,31 +51,29 @@ class TranslationService implements TranslationServiceInterface
     public function t(string $bundleName, string $key, array $variables = [])
     {
         $translator = $this->getTranslator($bundleName);
-       // dd()
         return $translator->getTranslation($key, $variables);
     }
 
-    private function getTranslator(string $bundleName): Translator
-    {
-        if ( ! isset($this->translators[$bundleName])) {
-            $bundlePath = $this->bundles[$bundleName];
-            $this->loadBundle($bundleName, $bundlePath);
-        }
-        return $this->translators[$bundleName];
-    }
-
-    private function loadBundle(string $bundleName, string $bundlePath)
+    public function addBundle(string $bundleName, string $bundlePath)
     {
         $path = $this->forgePath($bundlePath);
         $i18n = new Translator($path, $this->language);
         $this->translators[$bundleName] = $i18n;
     }
 
+    private function getTranslator(string $bundleName): Translator
+    {
+        if ( ! isset($this->translators[$bundleName])) {
+            $bundlePath = $this->bundles[$bundleName];
+            $this->addBundle($bundleName, $bundlePath);
+        }
+        return $this->translators[$bundleName];
+    }
+
     private function forgePath(string $bundlePath): string
     {
         $rootDir = FileHelper::rootPath();
         $fileMask = "$rootDir/$bundlePath";
-        //dd();
         return $fileMask;
     }
 

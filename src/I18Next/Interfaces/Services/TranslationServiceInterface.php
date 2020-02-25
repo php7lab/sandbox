@@ -11,4 +11,6 @@ interface TranslationServiceInterface
 
     public function t(string $bundleName, string $key, array $variables = []);
 
+    public function addBundle(string $bundleName, string $bundlePath);
+
 }

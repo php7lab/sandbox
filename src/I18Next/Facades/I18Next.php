@@ -2,21 +2,21 @@
 
 namespace PhpLab\Sandbox\I18Next\Facades;
 
-use PhpLab\Sandbox\I18Next\Services\TranslationService;
+use PhpLab\Sandbox\I18Next\Interfaces\Services\TranslationServiceInterface;
+use Yii;
 
 class I18Next {
 
-    private static $service;
-
     public static function t(string $bundleName, string $key, array $variables = []) {
-        return self::getService()->t($bundleName, $key, $variables);
+        /** @var TranslationServiceInterface $translationService */
+        $translationService = Yii::$container->get(TranslationServiceInterface::class);
+        return $translationService->t($bundleName, $key, $variables);
     }
 
-    public static function getService(): TranslationService {
-        if( ! self::$service) {
-            self::$service = new TranslationService;
-        }
-        return self::$service;
+    public static function addBundle(string $bundleName, string $path) {
+        /** @var TranslationServiceInterface $translationService */
+        $translationService = Yii::$container->get(TranslationServiceInterface::class);
+        $translationService->addBundle($bundleName, $path);
     }
 
 }
