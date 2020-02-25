@@ -24,7 +24,7 @@ if ($model->method) {
                     'model' => $model,
                 ]) ?>
             </div>
-            <? if ($response->getHeaders()) { ?>
+            <? if (is_object($response) && $response->getStatusCode()) { ?>
                 <div id="response" class="rest-request-response">
                     <?= $this->render('response/index', [
                         'duration' => $duration,
