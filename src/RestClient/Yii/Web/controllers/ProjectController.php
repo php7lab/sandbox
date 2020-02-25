@@ -28,9 +28,7 @@ class ProjectController extends BaseController
 
     public function actionIndex()
     {
-        $projectCollection = $this->projectService->all();
-
-
+        $projectCollection = $this->projectService->allByUserId(Yii::$app->user->identity->id);
 
         //dd($projectCollection->whereIn(''));
         return $this->render('index', [

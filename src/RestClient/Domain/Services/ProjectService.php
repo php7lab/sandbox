@@ -2,6 +2,8 @@
 
 namespace PhpLab\Sandbox\RestClient\Domain\Services;
 
+use PhpLab\Core\Domain\Helpers\EntityHelper;
+use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Exceptions\NotFoundException;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\AccessRepositoryInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\BookmarkRepositoryInterface;
@@ -25,6 +27,14 @@ class ProjectService extends BaseCrudService implements ProjectServiceInterface
         $this->repository = $repository;
         $this->bookmarkRepository = $bookmarkRepository;
         $this->accessRepository = $accessRepository;
+    }
+
+    public function allByUserId(int $userId) {
+        $accessCollection = $this->accessRepository->allByUserId($userId);
+        $projectIds = EntityHelper::getColumn($accessCollection, 'project_id');
+        $query = new Query;
+        $query->where('id', $projectIds);
+        return $this->all($query);
     }
 
     public function isAllowProject(int $projectId, int $userId)

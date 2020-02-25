@@ -20,5 +20,11 @@ class AccessRepository extends BaseEloquentCrudRepository implements AccessRepos
         return $this->one($query);
     }
 
+    public function allByUserId(int $userId) {
+        $query = new Query;
+        $query->where('user_id', $userId);
+        return $this->all($query);
+    }
+
 }
 
