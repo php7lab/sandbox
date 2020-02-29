@@ -17,17 +17,17 @@ class TranslationService implements TranslationServiceInterface
     private $defaultLanguage;
     private $fallbackLanguage;
 
-    public function __construct(array $bundles = [], string $defaultLanguage = 'en')
+    public function __construct(array $bundles = [], string $defaultLanguage = null)
     {
         if($bundles) {
-            $this->defaultLanguage = $defaultLanguage;
             $this->bundles = $bundles;
         } else {
             $store = new StoreFile($_ENV['I18NEXT_CONFIG_FILE']);
             $config = $store->load();
-            $this->defaultLanguage = $config['defaultLanguage'] ?? $defaultLanguage;
+            $defaultLanguage = $defaultLanguage ?? ($config['defaultLanguage'] ?? 'en');
             $this->bundles = $config['bundles'] ?? [];
         }
+        $this->defaultLanguage = substr($defaultLanguage, 0, 2);
         $this->language = $this->defaultLanguage;
     }
 
