@@ -2,8 +2,6 @@
 
 namespace PhpLab\Sandbox\RestClient\Yii\Web\formatters;
 
-use yii\helpers\Html;
-
 /**
  * Class HtmlFormatter
  *
@@ -11,16 +9,10 @@ use yii\helpers\Html;
  */
 class HtmlFormatter extends RawFormatter
 {
-    /**
-     * @inheritdoc
-     */
-    public function format($content)
+
+    public function getFormatName(): string
     {
-        return Html::tag('pre',
-            Html::tag('code',
-                Html::encode($content),
-                ['id' => 'response-content', 'class' => 'html']
-            )
-        );
+        return 'html';
     }
+
 }

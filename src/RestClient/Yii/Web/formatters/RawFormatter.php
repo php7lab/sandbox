@@ -3,37 +3,23 @@
 namespace PhpLab\Sandbox\RestClient\Yii\Web\formatters;
 
 use yii\base\BaseObject;
-use yii\helpers\Html;
 
 /**
  * Class RawFormatter
  *
  * @author Roman Zhuravlev <zhuravljov@gmail.com>
  */
-class RawFormatter extends BaseObject
+class RawFormatter
 {
-    /**
-     * @param string $record
-     * @return string
-     */
-    public function format($content)
+
+    public function getFormatName(): string
     {
-        return Html::tag('pre',
-            Html::tag('code',
-                Html::encode($content),
-                ['id' => 'response-content']
-            )
-        );
+        return 'raw';
     }
 
-    /**
-     * @param \Exception $exception
-     * @return string
-     */
-    protected function warn($exception)
+    public function format(string $content): string
     {
-        return Html::tag('div', '<strong>Warning!</strong> ' . $exception->getMessage(), [
-            'class' => 'alert alert-warning',
-        ]);
+        return $content;
     }
+
 }

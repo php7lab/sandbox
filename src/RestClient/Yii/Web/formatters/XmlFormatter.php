@@ -3,7 +3,6 @@
 namespace PhpLab\Sandbox\RestClient\Yii\Web\formatters;
 
 use yii\base\ErrorException;
-use yii\helpers\Html;
 
 /**
  * Class XmlFormatter
@@ -12,25 +11,18 @@ use yii\helpers\Html;
  */
 class XmlFormatter extends RawFormatter
 {
-    /**
-     * @inheritdoc
-     */
-    public function format($content)
+
+    public function getFormatName(): string
+    {
+        return 'xml';
+    }
+
+    public function format(string $content): string
     {
         $dom = new \DOMDocument();
         $dom->formatOutput = true;
-        try {
-            $dom->loadXML($content);
-        } catch (ErrorException $e) {
-            return $this->warn($e) . parent::format($content);
-        }
+        $dom->loadXML($content);
         $xmlContent = $dom->saveXML();
-
-        return Html::tag('pre',
-            Html::tag('code',
-                Html::encode($xmlContent),
-                ['id' => 'response-content', 'class' => 'xml']
-            )
-        );
+        return $xmlContent;
     }
 }
