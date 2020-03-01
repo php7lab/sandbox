@@ -10,28 +10,11 @@ use PhpLab\Sandbox\RestClient\Yii\Web\HighlightAsset;
 use PhpLab\Test\Helpers\RestHelper;
 use yii\helpers\Html;
 
-function codeHtml($contentFormatted, $type) {
-    $contentHtml = '<small class="pull-right text-muted">'.$type.'</small>' . Html::encode($contentFormatted);
-    $contentOptions = [
-        'id' => 'response-content',
-        'class' => $type,
-    ];
-    $codeHtml = Html::tag('code', $contentHtml, $contentOptions);
-    return Html::tag('pre', $codeHtml);
-}
+echo \PhpLab\Sandbox\RestClient\Yii\Web\Widgets\BodyWidget::widget([
+    '' => ,
+]);
 
-function getFormatterConfig(array $formatters, string $contentType) {
-    $formatterConfig = 'PhpLab\Sandbox\RestClient\Yii\Web\formatters\RawFormatter';
-    foreach ($formatters as $mimeType => $config) {
-        if (strpos($contentType, $mimeType) === 0) {
-            $formatterConfig = $config;
-            break;
-        }
-    }
-    return $formatterConfig;
-}
-
-if ($frame) {
+/*if ($frame) {
     echo '<iframe src="' . $frame . '" width="100%" height="800" align="left"></iframe>';
 } else {
     $content = $response->getBody()->getContents();
@@ -39,7 +22,6 @@ if ($frame) {
         try {
             $contentType = RestHelper::extractHeaderValues($response, HttpHeaderEnum::CONTENT_TYPE)[0];
             $formatterConfig = getFormatterConfig($this->context->module->formatters, $contentType);
-            /** @var \PhpLab\Sandbox\RestClient\Yii\Web\formatters\RawFormatter $formatter */
             $formatter = \Yii::createObject($formatterConfig);
             $contentFormatted = $formatter->format($content);
             echo codeHtml($contentFormatted, $formatter->getFormatName());
@@ -55,4 +37,4 @@ if ($frame) {
     } else {
         echo '<div class="alert alert-info">Empty body</div>';
     }
-}
+}*/

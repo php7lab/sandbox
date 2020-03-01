@@ -2,7 +2,8 @@
 
 namespace PhpLab\Sandbox\RestClient\Yii\Web\formatters;
 
-use yii\base\BaseObject;
+use yii\base\ErrorException;
+use yii\base\InvalidArgumentException;
 
 /**
  * Class RawFormatter
@@ -12,11 +13,17 @@ use yii\base\BaseObject;
 class RawFormatter
 {
 
-    public function getFormatName(): string
+    public function getName(): string
     {
         return 'raw';
     }
 
+    /**
+     * @param string $content
+     * @return string
+     * @throws ErrorException
+     * @throws InvalidArgumentException
+     */
     public function format(string $content): string
     {
         return $content;

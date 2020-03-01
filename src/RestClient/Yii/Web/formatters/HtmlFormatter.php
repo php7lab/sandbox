@@ -10,7 +10,7 @@ namespace PhpLab\Sandbox\RestClient\Yii\Web\formatters;
 class HtmlFormatter extends RawFormatter
 {
 
-    public function getFormatName(): string
+    public function getName(): string
     {
         return 'html';
     }

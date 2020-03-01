@@ -57,9 +57,10 @@ use yii\web\Response;
 <div class="tab-content">
 
     <div id="response-body" class="tab-pane">
-        <?= $this->render('body', [
+        <?= \PhpLab\Sandbox\RestClient\Yii\Web\Widgets\BodyWidget::widget([
             'response' => $response,
             'frame' => $frame,
+            'formatters' => $this->context->module->formatters,
         ]); ?>
     </div><!-- #response-body -->
 

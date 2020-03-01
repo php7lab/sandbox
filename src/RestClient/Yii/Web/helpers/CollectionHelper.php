@@ -16,8 +16,9 @@ class CollectionHelper
     public static function prependCollection(Collection $collection)
     {
         $closure = function (BookmarkEntity $row) {
-            if (preg_match('|[^/]+|', ltrim($row->getUri(), '/'), $m)) {
-                return $m[0];
+            $pureUri = ltrim($row->getUri(), '/');
+            if (preg_match('|[^/]+|', $pureUri, $matches)) {
+                return $matches[0];
             } else {
                 return 'common';
             }
@@ -25,6 +26,5 @@ class CollectionHelper
         $collection = ArrayHelper::group($collection, $closure);
         return $collection;
     }
-
 
 }

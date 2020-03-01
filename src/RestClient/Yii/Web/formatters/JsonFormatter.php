@@ -13,7 +13,7 @@ use yii\helpers\Json;
 class JsonFormatter extends RawFormatter
 {
 
-    public function getFormatName(): string
+    public function getName(): string
     {
         return 'json';
     }
