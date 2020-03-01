@@ -14,9 +14,9 @@ use PhpLab\Rest\Helpers\RestHelper;
 use PhpLab\Rest\Helpers\RestResponseHelper;
 use PhpLab\Sandbox\Proto\Transports\ProtoHttpTransport;
 use PhpLab\Sandbox\Proto\Libs\ProtoClient;
-use PhpLab\Test\Base\BaseRestTest;
+use PhpLab\Test\Base\BaseRestApiTest;
 
-class ProtoTest extends BaseRestTest
+class ProtoTest extends BaseRestApiTest
 {
 
     protected $basePath = '';

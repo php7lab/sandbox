@@ -3,9 +3,9 @@
 namespace PhpLab\Sandbox\Tests\rest\Messenger;
 
 use PhpLab\Core\Enums\Http\HttpStatusCodeEnum;
-use PhpLab\Test\Base\BaseRestTest;
+use PhpLab\Test\Base\BaseRestApiTest;
 
-class ChatControllerTest extends BaseRestTest
+class ChatControllerTest extends BaseRestApiTest
 {
 
     protected $basePath = 'api/v1/';
