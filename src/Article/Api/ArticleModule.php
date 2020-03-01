@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\Article\Api;
 
+use PhpLab\Rest\Helpers\RestApiControllerHelper;
 use PhpLab\Sandbox\Article\Api\Controllers\ArticleController;
 use PhpLab\Sandbox\Article\Domain\Repositories\Eloquent\CategoryRepository;
 use PhpLab\Sandbox\Article\Domain\Repositories\Eloquent\PostRepository;
@@ -10,7 +11,6 @@ use PhpLab\Sandbox\Article\Domain\Repositories\Eloquent\TagRepository;
 use PhpLab\Sandbox\Article\Domain\Services\PostService;
 use PhpLab\Eloquent\Db\Helpers\Manager;
 use Symfony\Component\HttpFoundation\Request;
-use PhpLab\Rest\Helpers\RestHelper;
 
 class ArticleModule
 {
@@ -31,13 +31,13 @@ class ArticleModule
         $postService = new PostService($postRepository);
 
         // define routes
-        $routes = RestHelper::defineCrudRoutes('v1/article-post', ArticleController::class);
+        $routes = RestApiControllerHelper::defineCrudRoutes('v1/article-post', ArticleController::class);
         $request = Request::createFromGlobals();
 
         $controllers = [
             ArticleController::class => new ArticleController($postService),
         ];
-        $response = RestHelper::runAll($request, $routes, $controllers);
+        $response = RestApiControllerHelper::runAll($request, $routes, $controllers);
         $response->send();
     }
 
