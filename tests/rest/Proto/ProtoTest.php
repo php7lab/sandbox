@@ -11,6 +11,7 @@ use PhpLab\Bundle\Crypt\Libs\Encoders\GzEncoder;
 use PhpLab\Bundle\Crypt\Libs\Encoders\JsonEncoder;
 use PhpLab\Core\Enums\Http\HttpStatusCodeEnum;
 use PhpLab\Rest\Helpers\RestHelper;
+use PhpLab\Rest\Helpers\RestResponseHelper;
 use PhpLab\Sandbox\Proto\Transports\ProtoHttpTransport;
 use PhpLab\Sandbox\Proto\Libs\ProtoClient;
 use PhpLab\Test\Base\BaseRestTest;
@@ -27,7 +28,7 @@ class ProtoTest extends BaseRestTest
 
         $protoClient = $this->getProtoClient();
         $response = $protoClient->request('GET', '/api/v1/article', ['category_id' => 2, 'per-page' => 3]);
-        $data = RestHelper::getDataFromResponse($response);
+        $data = RestResponseHelper::getDataFromResponse($response);
 
         $this->assertEquals(HttpStatusCodeEnum::OK, $response->getStatusCode());
         $this->assertEquals([

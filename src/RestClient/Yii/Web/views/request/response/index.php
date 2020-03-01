@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\web\Response;
+use PhpLab\Sandbox\RestClient\Yii\Web\Widgets\BodyWidget;
 
 /**
  * @var \yii\web\View $this
@@ -47,9 +48,9 @@ use yii\web\Response;
             }
             ?>
             <span class="<?= $class ?>">
-                        <?= Html::encode($response->getStatusCode()) ?>
-                        <?= isset(Response::$httpStatuses[$response->getStatusCode()]) ? Response::$httpStatuses[$response->getStatusCode()] : '' ?>
-                    </span>
+                <?= Html::encode($response->getStatusCode()) ?>
+                <?= isset(Response::$httpStatuses[$response->getStatusCode()]) ? Response::$httpStatuses[$response->getStatusCode()] : '' ?>
+            </span>
         </div>
     </li>
 </ul>
@@ -57,17 +58,17 @@ use yii\web\Response;
 <div class="tab-content">
 
     <div id="response-body" class="tab-pane">
-        <?= \PhpLab\Sandbox\RestClient\Yii\Web\Widgets\BodyWidget::widget([
+        <?= BodyWidget::widget([
             'response' => $response,
             'frame' => $frame,
             'formatters' => $this->context->module->formatters,
         ]); ?>
-    </div><!-- #response-body -->
+    </div>
 
     <div id="response-headers" class="tab-pane">
         <?= $this->render('headers', [
             'response' => $response,
         ]); ?>
-    </div><!-- #response-headers -->
+    </div>
 
 </div>

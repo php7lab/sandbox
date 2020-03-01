@@ -6,6 +6,7 @@ use PhpLab\Core\Enums\Http\HttpMethodEnum;
 use PhpLab\Core\Enums\Http\HttpStatusCodeEnum;
 use PhpLab\Test\Base\BaseRestTest;
 use PhpLab\Test\Helpers\RestHelper;
+use PhpLab\Rest\Helpers\RestResponseHelper;
 
 class PostControllerTest extends BaseRestTest
 {
@@ -272,7 +273,7 @@ class PostControllerTest extends BaseRestTest
         $this->getRestAssert($response)
             ->assertCreated();
 
-        $lastId = RestHelper::getLastInsertId($response);
+        $lastId = RestResponseHelper::getLastInsertId($response);
 
 
         $response = $this->getRestClient()->sendGet('article-post/' . $lastId);

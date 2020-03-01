@@ -18,13 +18,19 @@ use yii\helpers\Html;
     </thead>-->
     <tbody>
     <?php
-    foreach ($response->getHeaders() as $name => $values): ?>
-        <?php foreach ($values as $value): ?>
+    foreach ($response->getHeaders() as $name => $values) {
+        foreach ($values as $value) { ?>
             <tr>
-                <th><?= Html::encode($name) ?></th>
-                <td><samp><?= Html::encode($value) ?></samp></td>
+                <th>
+                    <?= Html::encode($name) ?>
+                </th>
+                <td>
+                    <samp>
+                        <?= Html::encode($value) ?>
+                    </samp>
+                </td>
             </tr>
-        <?php endforeach; ?>
-    <?php endforeach; ?>
+        <?php }
+    } ?>
     </tbody>
 </table>

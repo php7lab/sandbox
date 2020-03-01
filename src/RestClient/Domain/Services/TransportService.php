@@ -11,8 +11,8 @@ use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AuthorizationServiceInt
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\TransportServiceInterface;
 use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
 use PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm;
-use PhpLab\Test\Libs\AuthAgent;
-use PhpLab\Test\Libs\RestClient;
+use PhpLab\Rest\Contract\Authorization\BearerAuthorization;
+use PhpLab\Rest\Contract\Client\RestClient;
 use Psr\Http\Message\ResponseInterface;
 
 class TransportService extends BaseService implements TransportServiceInterface
@@ -31,7 +31,7 @@ class TransportService extends BaseService implements TransportServiceInterface
             'base_uri' => $projectEntity->getUrl() . '/',
         ];
         $guzzleClient = new Client($config);
-        $authAgent = new AuthAgent($guzzleClient);
+        $authAgent = new BearerAuthorization($guzzleClient);
         $restClient = new RestClient($guzzleClient, $authAgent);
         if ($model->authorization) {
             try {

@@ -8,6 +8,7 @@ use PhpLab\Sandbox\RestClient\Domain\Entities\BookmarkEntity;
 use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
 use PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm;
 use PhpLab\Test\Helpers\RestHelper;
+use PhpLab\Rest\Helpers\RestResponseHelper;
 use Yii;
 
 /**
@@ -51,7 +52,7 @@ class RequestController extends BaseController
                 $this->bookmarkService->persist($bookmarkEntity);
                 $tag = $bookmarkEntity->getHash();
 
-                $contentDisposition = RestHelper::extractHeaderValues($response, HttpHeaderEnum::CONTENT_DISPOSITION);
+                $contentDisposition = RestResponseHelper::extractHeaderValues($response, HttpHeaderEnum::CONTENT_DISPOSITION);
                 //$contentDisposition = $response->getHeader('Content-Disposition')[0] ?? null;
 
                 if ($contentDisposition != null) {

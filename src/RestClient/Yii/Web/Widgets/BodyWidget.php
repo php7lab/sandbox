@@ -6,6 +6,7 @@ use PhpLab\Core\Enums\Http\HttpHeaderEnum;
 use PhpLab\Sandbox\RestClient\Yii\Web\formatters\RawFormatter;
 use PhpLab\Sandbox\RestClient\Yii\Web\HighlightAsset;
 use PhpLab\Test\Helpers\RestHelper;
+use PhpLab\Rest\Helpers\RestResponseHelper;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -25,7 +26,7 @@ class BodyWidget extends Widget
             $content = $this->response->getBody()->getContents();
             if ($content) {
                 try {
-                    $contentType = RestHelper::extractHeaderValues($this->response, HttpHeaderEnum::CONTENT_TYPE)[0];
+                    $contentType = RestResponseHelper::extractHeaderValues($this->response, HttpHeaderEnum::CONTENT_TYPE)[0];
                     $formatter = $this->createFormatter($contentType);
                     $contentFormatted = $formatter->format($content);
                     $html = $this->renderCodeHtml($contentFormatted, $formatter->getName());
