@@ -1,0 +1,8 @@
+<div class="list-group">
+    {% for book in dataProviderEntity.collection %}
+        <a href="{{ path('web_reference_book_view', {id: book.id}) }}" class="list-group-item">
+            {{ book.title }}
+            {#<span class="badge">{{ book.category.title }}</span>#}
+        </a>
+    {% endfor %}
+</div>
