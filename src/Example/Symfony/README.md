@@ -4,5 +4,6 @@
 
 * API
 * Web
+* Resources
 * Commands
 * Admin

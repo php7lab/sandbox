@@ -38,7 +38,7 @@ class BookController extends AbstractController
             'page' => $request->get("page", 1),
             'pageSize' => $request->get("per-page", 10),
         ]);
-        return $this->render('@Messenger/book/index.html.twig', [
+        return $this->render('@Reference/book/index.html.twig', [
             'dataProviderEntity' => $dataProvider->getAll(),
         ]);
     }
@@ -47,12 +47,9 @@ class BookController extends AbstractController
     {
         $this->checkAuth();
         $query = new Query;
-        $query->with('messages');
-        $query->with('members');
         /** @var bookEntity $entity */
         $entity = $this->service->oneById($id, $query);
-        //dd($entity);
-        return $this->render('@Messenger/book/view.html.twig', [
+        return $this->render('@Reference/book/view.html.twig', [
             'book' => $entity,
             'members' => EntityHelper::indexingCollection($entity->getMembers(), 'id'),
         ]);
@@ -61,7 +58,7 @@ class BookController extends AbstractController
     public function create(Request $request): Response
     {
         $this->checkAuth();
-        return $this->render('@Messenger/book/create.html.twig');
+        return $this->render('@Reference/book/create.html.twig');
     }
 
     public function update($id, Request $request): Response
@@ -69,7 +66,7 @@ class BookController extends AbstractController
         $this->checkAuth();
         $query = new Query;
         $entity = $this->service->oneById($id, $query);
-        return $this->render('@Messenger/book/update.html.twig', [
+        return $this->render('@Reference/book/update.html.twig', [
             'book' => $entity,
         ]);
     }
