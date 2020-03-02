@@ -14,6 +14,6 @@ migrate:
 
 ```yaml
 services:
-    PhpLab\Sandbox\Queue\Commands\RunCommand:
+    PhpLab\Sandbox\Queue\Symfony\Commands\RunCommand:
         tags: ['controller.service_arguments']
 ```

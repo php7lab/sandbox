@@ -12,14 +12,14 @@ $capsule = new Manager(null, $eloquentConfigFile);
 
 // --- Bot ---
 
-use PhpLab\Sandbox\Bot\Commands\BotCommand;
+use PhpLab\Sandbox\Bot\Symfony\Commands\BotCommand;
 
 $command = new BotCommand;
 $application->add($command);
 
 // --- Queue ---
 
-use PhpLab\Sandbox\Queue\Commands\RunCommand;
+use PhpLab\Sandbox\Queue\Symfony\Commands\RunCommand;
 use Symfony\Component\DependencyInjection\Container;
 use PhpLab\Sandbox\Queue\Domain\Services\JobService;
 use PhpLab\Sandbox\Queue\Domain\Repositories\Eloquent\JobRepository;

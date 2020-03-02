@@ -1,8 +1,0 @@
-
-api_root:
-    path: '/'
-    controller: PhpLab\Sandbox\Dashboard\Api\Controllers\DocController::index
-
-api_version:
-    path: 'v{version}'
-    controller: PhpLab\Sandbox\Dashboard\Api\Controllers\DocController::show
