@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Example\Yii\Api\controllers;
 
-use PhpLab\Sandbox\Example\Domain\Enums\ReferenceBookPermissionEnum;
+use PhpLab\Sandbox\Example\Domain\Enums\ExampleBookPermissionEnum;
 use PhpLab\Sandbox\Example\Domain\Interfaces\Services\BookServiceInterface;
 use RocketLab\Bundle\Rest\Base\BaseCrudController;
 use yii\base\Module;
@@ -25,7 +25,7 @@ class BookController extends BaseCrudController
     {
         return [
             [
-                [ReferenceBookPermissionEnum::WRITE], ['create', 'update', 'delete']
+                [ExampleBookPermissionEnum::WRITE], ['create', 'update', 'delete']
             ],
         ];
     }

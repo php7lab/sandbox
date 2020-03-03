@@ -9,7 +9,7 @@ use PhpLab\Sandbox\Example\Domain\Interfaces\Repositories\BookRepositoryInterfac
 class BookRepository extends BaseEloquentCrudRepository implements BookRepositoryInterface
 {
 
-    protected $tableName = 'reference_book';
+    protected $tableName = 'example_book';
     protected $entityClass = BookEntity::class;
 
 }

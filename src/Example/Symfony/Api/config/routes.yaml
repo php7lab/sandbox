@@ -1,40 +1,40 @@
-api_reference_book_index:
+api_example_book_index:
     methods: [GET]
     path: messenger-book
     controller: PhpLab\Sandbox\Example\Symfony\Api\Controllers\BookController::index
 
-api_reference_book_create:
+api_example_book_create:
     methods: [POST]
     path: messenger-book
     controller: PhpLab\Sandbox\Example\Symfony\Api\Controllers\BookController::create
 
-api_reference_book_view:
+api_example_book_view:
     methods: [GET]
     path: messenger-book/{id}
     controller: PhpLab\Sandbox\Example\Symfony\Api\Controllers\BookController::view
     requirements:
         id: '\d+'
 
-api_reference_book_update:
+api_example_book_update:
     methods: [PUT]
     path: messenger-book/{id}
     controller: PhpLab\Sandbox\Example\Symfony\Api\Controllers\BookController::update
     requirements:
         id: '\d+'
 
-api_reference_book_delete:
+api_example_book_delete:
     methods: [DELETE]
     path: messenger-book/{id}
     controller: PhpLab\Sandbox\Example\Symfony\Api\Controllers\BookController::delete
     requirements:
         id: '\d+'
 
-api_reference_book_index_options:
+api_example_book_index_options:
     methods: [OPTIONS]
     path: messenger-book
     controller: PhpLab\Sandbox\Example\Symfony\Api\Controllers\BookController::options
 
-api_reference_book_options:
+api_example_book_options:
     methods: [OPTIONS]
     path: messenger-book/{id}
     controller: PhpLab\Sandbox\Example\Symfony\Api\Controllers\BookController::options

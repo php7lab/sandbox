@@ -4,11 +4,11 @@ namespace PhpLab\Sandbox\Example\Domain\Enums;
 
 use PhpLab\Core\Domain\Base\BaseEnum;
 
-class ReferenceBookPermissionEnum extends BaseEnum
+class ExampleBookPermissionEnum extends BaseEnum
 {
 
-    const WRITE = 'oReferenceBookWrite';
-    const READ = 'oReferenceBookRead';
+    const WRITE = 'oExampleBookWrite';
+    const READ = 'oExampleBookRead';
 
     public static function getLabels()
     {

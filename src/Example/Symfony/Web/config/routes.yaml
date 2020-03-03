@@ -1,28 +1,28 @@
-web_reference_book_index:
+web_example_book_index:
     methods: [GET]
     path: book
     controller: PhpLab\Sandbox\Example\Symfony\Web\Controllers\BookController::index
 
-web_reference_book_create:
+web_example_book_create:
     path: book/create
     methods: [GET,POST]
     controller: PhpLab\Sandbox\Example\Symfony\Web\Controllers\BookController::create
 
-web_reference_book_view:
+web_example_book_view:
     methods: [GET]
     path: book/view/{id}
     controller: PhpLab\Sandbox\Example\Symfony\Web\Controllers\BookController::view
     requirements:
         id: '\d+'
 
-web_reference_book_update:
+web_example_book_update:
     methods: [GET,POST]
     path: book/update/{id}
     controller: PhpLab\Sandbox\Example\Symfony\Web\Controllers\BookController::update
     requirements:
         id: '\d+'
 
-web_reference_book_delete:
+web_example_book_delete:
     methods: [POST]
     path: book/delete/{id}
     controller: PhpLab\Sandbox\Example\Symfony\Web\Controllers\BookController::delete

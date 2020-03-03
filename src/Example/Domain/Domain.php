@@ -9,7 +9,7 @@ class Domain implements DomainInterface
 
     public function getName()
     {
-        return 'reference';
+        return 'example';
     }
 
 }

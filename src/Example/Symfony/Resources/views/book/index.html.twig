@@ -1,4 +1,4 @@
-{% extends '@Reference/base.html.twig' %}
+{% extends '@Example/base.html.twig' %}
 
 {% block title %}Main page{% endblock %}
 
@@ -6,10 +6,10 @@
 
     {{ breadcrumbAdd('Message', '/book') }}
 
-    {% include '@Reference/book/index.list.html.twig' %}
+    {% include '@Example/book/index.list.html.twig' %}
 
     <span class="pull-right">
-        <a class="btn btn-success" href="{{ path('web_reference_book_create') }}">Create</a>
+        <a class="btn btn-success" href="{{ path('web_example_book_create') }}">Create</a>
     </span>
 
     <span>

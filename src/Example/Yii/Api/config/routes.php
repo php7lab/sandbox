@@ -1,5 +1,5 @@
 <?php
 
 return [
-    ["class" => "yii\\rest\\UrlRule", "controller" => ["v1/reference-book" => "reference/book"]],
+    ["class" => "yii\\rest\\UrlRule", "controller" => ["v1/example-book" => "example/book"]],
 ];

@@ -1,0 +1,30 @@
+admin_example_book_index:
+    methods: [GET]
+    path: book
+    controller: PhpLab\Sandbox\Example\Symfony\Admin\Controllers\BookController::index
+
+admin_example_book_create:
+    path: book/create
+    methods: [GET,POST]
+    controller: PhpLab\Sandbox\Example\Symfony\Admin\Controllers\BookController::create
+
+admin_example_book_view:
+    methods: [GET]
+    path: book/view/{id}
+    controller: PhpLab\Sandbox\Example\Symfony\Admin\Controllers\BookController::view
+    requirements:
+        id: '\d+'
+
+admin_example_book_update:
+    methods: [GET,POST]
+    path: book/update/{id}
+    controller: PhpLab\Sandbox\Example\Symfony\Admin\Controllers\BookController::update
+    requirements:
+        id: '\d+'
+
+admin_example_book_delete:
+    methods: [POST]
+    path: book/delete/{id}
+    controller: PhpLab\Sandbox\Example\Symfony\Admin\Controllers\BookController::delete
+    requirements:
+        id: '\d+'

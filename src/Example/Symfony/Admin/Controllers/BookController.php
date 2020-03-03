@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Sandbox\Example\Symfony\Web\Controllers;
+namespace PhpLab\Sandbox\Example\Symfony\Admin\Controllers;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use PhpLab\Sandbox\Example\Domain\Interfaces\Services\BookServiceInterface;

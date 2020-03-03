@@ -1,4 +1,4 @@
-{% extends '@Reference/base.html.twig' %}
+{% extends '@Example/base.html.twig' %}
 
 {% block title %}{{ book.title }}{% endblock %}
 
@@ -8,7 +8,7 @@
     {{ breadcrumbAdd(book.title, '/book/view/' ~ book.id) }}
 
     <div class="float-right">
-        <a class="btn btn-primary" href="{{ path('web_reference_book_update', {id: book.id}) }}">update</a>
+        <a class="btn btn-primary" href="{{ path('web_example_book_update', {id: book.id}) }}">update</a>
         <a class="btn btn-danger" href="#deleteModal" data-toggle="modal">delete</a>
     </div>
 
@@ -27,7 +27,7 @@
 
     {% set footer %}
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <form id="delete_form" method="post" action="{{ path('web_reference_book_delete', {id: book.id}) }}"></form>
+        <form id="delete_form" method="post" action="{{ path('web_example_book_delete', {id: book.id}) }}"></form>
         <button class="btn btn-danger" onclick="$('#delete_form').submit()">Delete</button>
     {% endset %}
 
