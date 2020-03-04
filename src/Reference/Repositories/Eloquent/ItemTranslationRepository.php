@@ -6,7 +6,7 @@ use PhpLab\Core\Domain\Entities\Query\Where;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Eloquent\Db\Helpers\Manager;
-use PhpLab\Sandbox\I18Next\Interfaces\Services\TranslationServiceInterface;
+use PhpLab\Core\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 use PhpLab\Sandbox\Reference\Interfaces\Repositories\ItemTranslationRepositoryInterface;
 
 class ItemTranslationRepository extends BaseEloquentCrudRepository implements ItemTranslationRepositoryInterface

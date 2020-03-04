@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Tests\Unit;
 
-use PhpLab\Sandbox\I18Next\Services\TranslationService;
+use PhpLab\Core\Libs\I18Next\Services\TranslationService;
 use PHPUnit\Framework\TestCase;
 
 final class I18NextTest extends TestCase
