@@ -8,6 +8,8 @@
  * @var \Psr\Http\Message\ResponseInterface $response
  */
 
+use Psr\Http\Message\ResponseInterface;
+
 if ($model->method) {
     $this->title = strtoupper($model->method) . ' ' . $model->endpoint;
 } else {
@@ -24,7 +26,7 @@ if ($model->method) {
                     'model' => $model,
                 ]) ?>
             </div>
-            <? if (is_object($response) && $response->getStatusCode()) { ?>
+            <? if ($response instanceof ResponseInterface && $response->getStatusCode()) { ?>
                 <div id="response" class="rest-request-response">
                     <?= $this->render('response/index', [
                         'duration' => $duration,
