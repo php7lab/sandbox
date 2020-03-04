@@ -8,13 +8,12 @@
  * @var \Psr\Http\Message\ResponseInterface $response
  */
 
-use Psr\Http\Message\ResponseInterface;
-
 if ($model->method) {
     $this->title = strtoupper($model->method) . ' ' . $model->endpoint;
 } else {
     $this->title = 'New Request';
 }
+
 ?>
 
 <div class="rest-request-create">
@@ -26,7 +25,8 @@ if ($model->method) {
                     'model' => $model,
                 ]) ?>
             </div>
-            <? if ($response instanceof ResponseInterface && $response->getStatusCode()) { ?>
+
+            <?php if ($response): ?>
                 <div id="response" class="rest-request-response">
                     <?= $this->render('response/index', [
                         'duration' => $duration,
@@ -34,7 +34,8 @@ if ($model->method) {
                         'frame' => $frame,
                     ]) ?>
                 </div>
-            <? } ?>
+            <?php endif ?>
+
         </div>
         <div class="col-lg-4">
             <?= \PhpLab\Sandbox\RestClient\Yii\Web\Widgets\CollectionWidget::widget([
