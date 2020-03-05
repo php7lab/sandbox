@@ -96,10 +96,8 @@ class IdentityController extends Controller
     public function actionView($id)
     {
         $identityEntity = $this->identityService->oneById($id);
-
         $projectCollection = $this->projectService->allWithoutUserId($id);
         $hasProjectCollection = $this->projectService->allByUserId($id);
-
         return $this->render('view', [
             'identityEntity' => $identityEntity,
             'projectCollection' => $projectCollection,

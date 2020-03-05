@@ -13,14 +13,14 @@ $this->title = I18Next::t('restclient', 'identity.create_title');
 
 ?>
 
-<h2>
-    <?= $this->title ?>
-</h2>
+<div class="col-lg-12">
+    <h2>
+        <?= $this->title ?>
+    </h2>
+</div>
 
-<div class="row">
-    <div class="col-lg-5">
-        <?= $this->render('_form', [
-            'model' => $model,
-        ]) ?>
-    </div>
+<div class="col-lg-5">
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
 </div>
