@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\RestClient\Domain\Services;
 
+use common\enums\rbac\PermissionEnum;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Exceptions\NotFoundException;
@@ -10,6 +11,7 @@ use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\BookmarkRepositoryI
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\ProjectRepositoryInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
 use PhpLab\Core\Domain\Base\BaseCrudService;
+use Yii;
 use yii\web\NotFoundHttpException;
 
 class ProjectService extends BaseCrudService implements ProjectServiceInterface
@@ -39,6 +41,9 @@ class ProjectService extends BaseCrudService implements ProjectServiceInterface
 
     public function isAllowProject(int $projectId, int $userId)
     {
+        if(Yii::$app->user->can(PermissionEnum::BACKEND_ALL)) {
+            return true;
+        }
         try {
             $this->accessRepository->oneByTie($projectId, $userId);
             return true;
