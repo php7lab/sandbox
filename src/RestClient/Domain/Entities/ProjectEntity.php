@@ -32,7 +32,7 @@ class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
             ],
             'status' => [
                 new Assert\NotBlank,
-                new Assert\Choice(StatusEnum::values()),
+                //new Assert\Choice(StatusEnum::values()),
             ],
         ];
     }
@@ -88,4 +88,3 @@ class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
     }
 
 }
-
