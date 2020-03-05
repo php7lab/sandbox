@@ -1,0 +1,15 @@
+{
+  "title": "Пользователь",
+  "list_title": "Список пользователей",
+  "create_title": "Создать пользователя",
+  "update_title": "Редактировать пользователя",
+  "attributes": {
+    "login": "Логин"
+  },
+  "messages": {
+    "delete_confirm": "Удалить пользователя?",
+    "created_success": "Пользователь создан!",
+    "deleted_success": "Пользователь удален!",
+    "updated_success": "Пользователь обновлен!"
+  }
+}

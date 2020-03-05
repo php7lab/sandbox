@@ -14,7 +14,7 @@ use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
-class BaseController extends Controller
+abstract class BaseController extends Controller
 {
     protected $bookmarkService;
     protected $projectService;

@@ -27,4 +27,3 @@ class AccessRepository extends BaseEloquentCrudRepository implements AccessRepos
     }
 
 }
-

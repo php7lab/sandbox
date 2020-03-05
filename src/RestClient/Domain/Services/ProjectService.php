@@ -3,6 +3,8 @@
 namespace PhpLab\Sandbox\RestClient\Domain\Services;
 
 use common\enums\rbac\PermissionEnum;
+use PhpLab\Core\Domain\Entities\Query\Where;
+use PhpLab\Core\Domain\Enums\OperatorEnum;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Exceptions\NotFoundException;
@@ -29,6 +31,15 @@ class ProjectService extends BaseCrudService implements ProjectServiceInterface
         $this->repository = $repository;
         $this->bookmarkRepository = $bookmarkRepository;
         $this->accessRepository = $accessRepository;
+    }
+
+    public function allWithoutUserId(int $userId) {
+        $accessCollection = $this->accessRepository->allByUserId($userId);
+        $projectIds = EntityHelper::getColumn($accessCollection, 'project_id');
+        $query = new Query;
+        $where = new Where('id', $projectIds, OperatorEnum::EQUAL, 'and', true);
+        $query->whereNew($where);
+        return $this->all($query);
     }
 
     public function allByUserId(int $userId) {
