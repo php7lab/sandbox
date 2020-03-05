@@ -1,5 +1,6 @@
 <?php
 
+use PhpLab\Core\Libs\I18Next\Facades\I18Next;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -16,6 +17,6 @@ use yii\helpers\Html;
         <?= $form->field($model, 'title')->textInput() ?>
         <?= $form->field($model, 'url')->textInput() ?>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton(I18Next::t('core', 'action.send'), ['class' => 'btn btn-primary']) ?>
     </div>
 <?php ActiveForm::end(); ?>

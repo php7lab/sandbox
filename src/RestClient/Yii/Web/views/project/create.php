@@ -1,5 +1,6 @@
 <?php
 
+use PhpLab\Core\Libs\I18Next\Facades\I18Next;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -8,7 +9,7 @@ use yii\helpers\Html;
  * @var \yii\web\View $this
  */
 
-$this->title = 'Create project';
+$this->title = I18Next::t('restclient', 'project.create_title');
 
 ?>
 

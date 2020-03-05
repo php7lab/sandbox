@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\RestClient\Yii\Web\models;
 
+use PhpLab\Core\Libs\I18Next\Facades\I18Next;
 use yii\base\Model;
 
 class ProjectForm extends Model
@@ -22,9 +23,9 @@ class ProjectForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => 'Имя проекта (слитно на латинице)',
-            'title' => 'Название проекта',
-            'url' => 'Ссылка на REST API',
+            'name' => I18Next::t('restclient', 'project.attributes.name'),
+            'title' => I18Next::t('restclient', 'project.attributes.title'),
+            'url' => I18Next::t('restclient', 'project.attributes.url'),
         ];
     }
 
