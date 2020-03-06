@@ -28,10 +28,6 @@ $this->title = I18Next::t('restclient', 'identity.list_title');
             <?php foreach ($identityCollection as $projectEntity) { ?>
                 <li class="list-group-item list-group-item-action">
                     <div class="btn-group pull-right">
-                        <a href="<?= Url::to(['/rest-client/identity/update', 'id' => $projectEntity->getId()]) ?>"
-                           class="btn btn-xs btn-info">
-                            <i class="fa fa-pencil"></i>
-                        </a>
                         <a href="<?= Url::to(['/rest-client/identity/delete', 'id' => $projectEntity->getId()]) ?>"
                            class="btn btn-xs btn-danger"
                            data-method="post"

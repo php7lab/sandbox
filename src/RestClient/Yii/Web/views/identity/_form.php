@@ -14,6 +14,7 @@ use yii\helpers\Html;
 
 <?php $form = ActiveForm::begin(); ?>
 <?= $form->field($model, 'login')->textInput() ?>
+<?= $form->field($model, 'password')->passwordInput() ?>
 <div class="form-group">
     <?= Html::submitButton(I18Next::t('core', 'action.send'), ['class' => 'btn btn-primary']) ?>
 </div>

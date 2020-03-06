@@ -9,11 +9,12 @@ class IdentityForm extends Model
 {
 
     public $login;
+    public $password;
 
     public function rules()
     {
         return [
-            [['login'], 'required'],
+            [['login', 'password'], 'required'],
         ];
     }
 
@@ -21,6 +22,7 @@ class IdentityForm extends Model
     {
         return [
             'login' => I18Next::t('restclient', 'identity.attributes.login'),
+            'password' => I18Next::t('restclient', 'identity.attributes.password'),
         ];
     }
 

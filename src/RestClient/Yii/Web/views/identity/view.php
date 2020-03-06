@@ -37,9 +37,7 @@ $this->title = $identityEntity->getLogin();
                             <i class="fa fa-plus"></i>
                         </a>
                     </div>
-                    <a href="<?= Url::to(['/rest-client/identity/view', 'projectId' => $projectEntity->getId(), 'userId' => $identityEntity->getId()]) ?>">
-                        <?= $projectEntity->getTitle() ?>
-                    </a>
+                    <?= $projectEntity->getTitle() ?>
                 </li>
             <?php } ?>
         </ul>
@@ -65,9 +63,7 @@ $this->title = $identityEntity->getLogin();
                             <i class="fa fa-trash"></i>
                         </a>
                     </div>
-                    <a href="<?= Url::to(['/rest-client/identity/view', 'id' => $projectEntity->getId()]) ?>">
-                        <?= $projectEntity->getTitle() ?>
-                    </a>
+                    <?= $projectEntity->getTitle() ?>
                 </li>
             <?php } ?>
         </ul>

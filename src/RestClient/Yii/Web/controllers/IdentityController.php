@@ -13,6 +13,8 @@ use PhpLab\Sandbox\RestClient\Yii\Web\models\IdentityForm;
 use Yii;
 use yii\base\Module;
 use yii\web\Controller;
+use yii2rails\domain\base\Model;
+use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
 
 class IdentityController extends Controller
 {
@@ -53,13 +55,27 @@ class IdentityController extends Controller
         ]);
     }
 
+    public function addErrorsFromException(UnprocessableEntityHttpException $e, $model) {
+        $errors = $e->getErrors();
+        if($errors instanceof Model) {
+            $errors = $errors->getErrors();
+        }
+        foreach($errors as $field => $error) {
+            $model->addError($field, $error);
+        }
+    }
+
     public function actionCreate()
     {
         $model = new IdentityForm;
         if (Yii::$app->request->isPost) {
             $body = Yii::$app->request->post();
             $model->load($body, 'IdentityForm');
-            $this->identityService->create($model->toArray());
+            try {
+                \App::$domain->account->identity->create($model->toArray());
+            } catch (UnprocessableEntityHttpException $e) {
+                $this->addErrorsFromException($e, $model);
+            }
             \App::$domain->navigation->alert->create(I18Next::t('restclient', 'identity.messages.created_success'), Alert::TYPE_SUCCESS);
             return $this->redirect(['/rest-client/identity/index']);
         }
@@ -70,28 +86,11 @@ class IdentityController extends Controller
 
     public function actionDelete($id)
     {
-        $this->identityService->deleteById($id);
+        \App::$domain->account->identity->deleteById($id);
         \App::$domain->navigation->alert->create(I18Next::t('restclient', 'identity.messages.deleted_success'), Alert::TYPE_SUCCESS);
         return $this->redirect(['/rest-client/identity/index']);
     }
 
-    public function actionUpdate($id)
-    {
-        $model = new IdentityForm;
-        if (Yii::$app->request->isPost) {
-            $body = Yii::$app->request->post();
-            $model->load($body, 'IdentityForm');
-            $this->identityService->updateById($id, $model->toArray());
-            \App::$domain->navigation->alert->create(I18Next::t('restclient', 'identity.messages.updated_success'), Alert::TYPE_SUCCESS);
-            return $this->redirect(['/rest-client/identity/index']);
-        } else {
-            $identityEntity = $this->identityService->oneById($id);
-            $model->load(EntityHelper::toArray($identityEntity), '');
-        }
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
 
     public function actionView($id)
     {

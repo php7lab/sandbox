@@ -5,7 +5,8 @@
   "create_title": "Создать пользователя",
   "update_title": "Редактировать пользователя",
   "attributes": {
-    "login": "Логин"
+    "login": "Логин",
+    "password": "Пароль"
   },
   "messages": {
     "delete_confirm": "Удалить пользователя?",
