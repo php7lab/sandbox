@@ -4,12 +4,18 @@ namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 
 use PhpLab\Core\Enums\Http\HttpHeaderEnum;
 use PhpLab\Core\Helpers\UploadHelper;
+use PhpLab\Core\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Entities\BookmarkEntity;
+use PhpLab\Sandbox\RestClient\Domain\Enums\RestClientPermissionEnum;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\BookmarkServiceInterface;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\TransportServiceInterface;
 use PhpLab\Sandbox\RestClient\Yii\Web\helpers\AdapterHelper;
 use PhpLab\Sandbox\RestClient\Yii\Web\models\RequestForm;
 use PhpLab\Test\Helpers\RestHelper;
 use PhpLab\Rest\Helpers\RestResponseHelper;
 use Yii;
+use yii\base\Module;
 
 /**
  * Class RequestController
@@ -26,6 +32,44 @@ class RequestController extends BaseController
      * @inheritdoc
      */
     public $defaultAction = 'create';
+
+    protected $bookmarkService;
+    protected $projectService;
+    protected $transportService;
+    protected $translationService;
+    protected $authorizationService;
+    protected $identityService;
+    protected $accessService;
+
+    public function __construct(
+        $id, Module $module,
+        array $config = [],
+        BookmarkServiceInterface $bookmarkService,
+        ProjectServiceInterface $projectService,
+        TransportServiceInterface $transportService
+    )
+    {
+        parent::__construct($id, $module, $config);
+        $this->bookmarkService = $bookmarkService;
+        $this->projectService = $projectService;
+        $this->transportService = $transportService;
+    }
+
+    public function authentication(): array
+    {
+        return [
+            'send',
+        ];
+    }
+
+    public function access(): array
+    {
+        return [
+            [
+                [RestClientPermissionEnum::PROJECT_READ], ['send'],
+            ],
+        ];
+    }
 
     public function actionSend(string $projectName, $tag = null)
     {

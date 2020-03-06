@@ -12,18 +12,55 @@ use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface
 use PhpLab\Sandbox\RestClient\Yii\Web\models\IdentityForm;
 use Yii;
 use yii\base\Module;
-use yii\web\Controller;
+use yii2bundle\account\domain\v3\enums\AccountPermissionEnum;
 use yii2rails\domain\base\Model;
 use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
 
-class IdentityController extends Controller
+class IdentityController extends BaseController
 {
 
-    private $projectService;
-    private $identityService;
-    private $accessService;
+    protected $projectService;
+    protected $identityService;
+    protected $accessService;
 
     public function __construct(
+        $id, Module $module,
+        array $config = [],
+        ProjectServiceInterface $projectService,
+        IdentityServiceInterface $identityService,
+        AccessServiceInterface $accessService
+    )
+    {
+        parent::__construct($id, $module, $config);
+        $this->projectService = $projectService;
+        $this->identityService = $identityService;
+        $this->accessService = $accessService;
+    }
+
+    public function authentication(): array
+    {
+        return [
+            'create',
+            'update',
+            'delete',
+            'index',
+            'view',
+        ];
+    }
+
+    public function access(): array
+    {
+        return [
+            [
+                [AccountPermissionEnum::IDENTITY_READ], ['create', 'update', 'delete'],
+            ],
+            [
+                [AccountPermissionEnum::IDENTITY_WRITE], ['index', 'view'],
+            ],
+        ];
+    }
+
+    /*public function __construct(
         $id,
         Module $module,
         array $config = [],
@@ -40,7 +77,7 @@ class IdentityController extends Controller
         $this->projectService = $projectService;
         $this->identityService = $identityService;
         $this->accessService = $accessService;
-    }
+    }*/
 
     public function actionIndex()
     {

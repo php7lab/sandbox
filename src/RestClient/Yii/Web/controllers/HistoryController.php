@@ -2,8 +2,11 @@
 
 namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 
+use PhpLab\Sandbox\RestClient\Domain\Enums\RestClientPermissionEnum;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\BookmarkServiceInterface;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
+use yii\base\Module;
 use yii2bundle\navigation\domain\widgets\Alert;
-use yii2rails\extension\web\helpers\Behavior;
 
 /**
  * Class HistoryController
@@ -13,16 +16,43 @@ use yii2rails\extension\web\helpers\Behavior;
 class HistoryController extends BaseController
 {
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
+    protected $bookmarkService;
+    protected $projectService;
+
+    public function __construct(
+        $id, Module $module,
+        array $config = [],
+        BookmarkServiceInterface $bookmarkService,
+        ProjectServiceInterface $projectService
+    )
+    {
+        parent::__construct($id, $module, $config);
+        $this->bookmarkService = $bookmarkService;
+        $this->projectService = $projectService;
+    }
+
+    public function authentication(): array
     {
         return [
-            'verb' => Behavior::verb([
-                'delete' => ['post'],
-                'clear' => ['post'],
-            ]),
+            'delete',
+            'clear',
+        ];
+    }
+
+    public function access(): array
+    {
+        return [
+            [
+                [RestClientPermissionEnum::PROJECT_WRITE], ['delete', 'clear'],
+            ],
+        ];
+    }
+
+    public function verbs(): array
+    {
+        return [
+            'delete' => ['post'],
+            'clear' => ['post'],
         ];
     }
 

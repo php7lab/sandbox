@@ -2,8 +2,12 @@
 
 namespace PhpLab\Sandbox\RestClient\Yii\Web\controllers;
 
+use PhpLab\Sandbox\RestClient\Domain\Enums\RestClientPermissionEnum;
 use PhpLab\Sandbox\RestClient\Domain\Helpers\Postman\PostmanHelper;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\BookmarkServiceInterface;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
 use Yii;
+use yii\base\Module;
 use yii2bundle\navigation\domain\widgets\Alert;
 use yii2bundle\rest\domain\helpers\MiscHelper;
 use yii2rails\extension\web\helpers\Behavior;
@@ -20,16 +24,43 @@ class CollectionController extends BaseController
      */
     public $module;
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
+    protected $bookmarkService;
+    protected $projectService;
+
+    public function __construct(
+        $id, Module $module,
+        array $config = [],
+        BookmarkServiceInterface $bookmarkService,
+        ProjectServiceInterface $projectService
+    )
+    {
+        parent::__construct($id, $module, $config);
+        $this->bookmarkService = $bookmarkService;
+        $this->projectService = $projectService;
+    }
+
+    public function authentication(): array
     {
         return [
-            'verb' => Behavior::verb([
-                'link' => ['post'],
-                'unlink' => ['post'],
-            ]),
+            'link',
+            'unlink',
+        ];
+    }
+
+    public function access(): array
+    {
+        return [
+            [
+                [RestClientPermissionEnum::PROJECT_WRITE], ['link', 'unlink'],
+            ],
+        ];
+    }
+
+    public function verbs(): array
+    {
+        return [
+            'link' => ['post'],
+            'unlink' => ['post'],
         ];
     }
 

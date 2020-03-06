@@ -10,16 +10,17 @@ use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\TransportServiceInterface;
 use Yii;
 use yii\base\Module;
-use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
-abstract class BaseController extends Controller
+abstract class BaseController extends \RocketLab\Bundle\Web\Base\BaseController
 {
-    protected $bookmarkService;
+    /*protected $bookmarkService;
     protected $projectService;
     protected $transportService;
     protected $authorizationService;
+    protected $identityService;
+    protected $accessService;
 
     public function __construct(
         $id, Module $module,
@@ -35,7 +36,7 @@ abstract class BaseController extends Controller
         $this->projectService = $projectService;
         $this->transportService = $transportService;
         $this->authorizationService = $authorizationService;
-    }
+    }*/
 
     protected function getProjectByHash(string $tag): ProjectEntity
     {

@@ -6,11 +6,51 @@ use common\enums\rbac\PermissionEnum;
 use kartik\alert\Alert;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Libs\I18Next\Facades\I18Next;
+use PhpLab\Sandbox\RestClient\Domain\Enums\RestClientPermissionEnum;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
 use PhpLab\Sandbox\RestClient\Yii\Web\models\ProjectForm;
 use Yii;
+use yii\base\Module;
+use yii2bundle\account\domain\v3\enums\AccountPermissionEnum;
 
 class ProjectController extends BaseController
 {
+
+    protected $projectService;
+
+    public function __construct(
+        $id, Module $module,
+        array $config = [],
+        ProjectServiceInterface $projectService
+    )
+    {
+        parent::__construct($id, $module, $config);
+        $this->projectService = $projectService;
+    }
+
+    public function authentication(): array
+    {
+        return [
+            'create',
+            'update',
+            'delete',
+            'index',
+            'view',
+        ];
+    }
+
+    public function access(): array
+    {
+        return [
+            [
+                [RestClientPermissionEnum::ACCESS_MANAGE], ['create', 'update', 'delete'],
+            ],
+            [
+                [RestClientPermissionEnum::PROJECT_READ], ['index', 'view'],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         if(Yii::$app->user->can(PermissionEnum::BACKEND_ALL)) {
