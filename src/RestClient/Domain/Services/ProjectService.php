@@ -8,6 +8,7 @@ use PhpLab\Core\Domain\Enums\OperatorEnum;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Exceptions\NotFoundException;
+use PhpLab\Sandbox\RestClient\Domain\Entities\ProjectEntity;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\AccessRepositoryInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\BookmarkRepositoryInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Repositories\ProjectRepositoryInterface;
@@ -33,7 +34,8 @@ class ProjectService extends BaseCrudService implements ProjectServiceInterface
         $this->accessRepository = $accessRepository;
     }
 
-    public function allWithoutUserId(int $userId) {
+    public function allWithoutUserId(int $userId)
+    {
         $accessCollection = $this->accessRepository->allByUserId($userId);
         $projectIds = EntityHelper::getColumn($accessCollection, 'project_id');
         $query = new Query;
@@ -42,7 +44,8 @@ class ProjectService extends BaseCrudService implements ProjectServiceInterface
         return $this->all($query);
     }
 
-    public function allByUserId(int $userId) {
+    public function allByUserId(int $userId)
+    {
         $accessCollection = $this->accessRepository->allByUserId($userId);
         $projectIds = EntityHelper::getColumn($accessCollection, 'project_id');
         $query = new Query;
@@ -52,7 +55,7 @@ class ProjectService extends BaseCrudService implements ProjectServiceInterface
 
     public function isAllowProject(int $projectId, int $userId)
     {
-        if(Yii::$app->user->can(PermissionEnum::BACKEND_ALL)) {
+        if (Yii::$app->user->can(PermissionEnum::BACKEND_ALL)) {
             return true;
         }
         try {
@@ -63,7 +66,7 @@ class ProjectService extends BaseCrudService implements ProjectServiceInterface
         }
     }
 
-    public function oneByName(string $projectName)
+    public function oneByName(string $projectName): ProjectEntity
     {
         return $this->repository->oneByName($projectName);
     }
