@@ -2,14 +2,14 @@
 
 namespace PhpLab\Sandbox\Messenger\Symfony\Web\Controllers;
 
+use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Helpers\QueryHelper;
 use PhpLab\Core\Domain\Libs\DataProvider;
 use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
-use PhpLab\Sandbox\Notify\Domain\Enums\FlashMessageTypeEnum;
+use PhpLab\Sandbox\Notify\Domain\Interfaces\Services\FlashServiceInterface;
 use PhpLab\Web\Traits\AccessTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,10 +21,12 @@ class ChatController extends AbstractController
     use AccessTrait;
 
     private $service;
+    private $flashService;
 
-    public function __construct(ChatServiceInterface $chatService)
+    public function __construct(ChatServiceInterface $chatService, FlashServiceInterface $flashService)
     {
         $this->service = $chatService;
+        $this->flashService = $flashService;
     }
 
     public function index(Request $request): Response
@@ -81,10 +83,7 @@ class ChatController extends AbstractController
         $this->checkAuth();
         $this->service->deleteById($id);
         $chatListUrl = $this->generateUrl('web_messenger_chat_index');
-        $this->addFlash(
-            FlashMessageTypeEnum::SUCCESS,
-            'Chat deleted!'
-        );
+        $this->flashService->addSuccess('Chat deleted!');
         return $this->redirect($chatListUrl);
     }
 

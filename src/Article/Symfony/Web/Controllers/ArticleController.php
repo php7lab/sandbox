@@ -8,6 +8,7 @@ use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Article\Domain\Interfaces\PostServiceInterface;
 use PhpLab\Sandbox\Notify\Domain\Enums\FlashMessageTypeEnum;
+use PhpLab\Sandbox\Notify\Domain\Interfaces\Services\FlashServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +17,12 @@ class ArticleController extends AbstractController
 {
 
     private $service;
+    private $flashService;
 
-    public function __construct(PostServiceInterface $postService)
+    public function __construct(PostServiceInterface $postService, FlashServiceInterface $flashService)
     {
         $this->service = $postService;
+        $this->flashService = $flashService;
     }
 
     public function index(Request $request): Response
@@ -67,10 +70,7 @@ class ArticleController extends AbstractController
     {
         $this->service->deleteById($id);
         $postListUrl = $this->generateUrl('web_article_post_index');
-        $this->addFlash(
-            FlashMessageTypeEnum::SUCCESS,
-            'Post deleted!'
-        );
+        $this->flashService->addSuccess('Post deleted!');
         return $this->redirect($postListUrl);
     }
 

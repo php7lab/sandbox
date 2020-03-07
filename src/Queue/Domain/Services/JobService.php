@@ -11,7 +11,7 @@ use PhpLab\Sandbox\Queue\Domain\Helpers\JobHelper;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobInterface;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobRepositoryInterface;
 use PhpLab\Sandbox\Queue\Domain\Interfaces\JobServiceInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 class JobService extends BaseCrudService implements JobServiceInterface
 {
