@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
-use PhpLab\Bundle\User\Domain\Entities\Identity;
+use PhpBundle\User\Domain\Entities\Identity;
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 
 class MessageEntity implements EntityIdInterface

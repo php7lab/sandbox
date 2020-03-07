@@ -10,8 +10,8 @@ use PhpLab\Core\Domain\Base\BaseCrudService;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent\MemberRepository;
-use PhpLab\Bundle\User\Domain\Entities\User;
-use PhpLab\Bundle\User\Domain\Traits\UserAwareTrait;
+use PhpBundle\User\Domain\Entities\User;
+use PhpBundle\User\Domain\Traits\UserAwareTrait;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**

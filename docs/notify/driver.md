@@ -24,8 +24,8 @@
 
 ```yaml
 services:
-    PhpLab\Sandbox\Notify\Domain\Interfaces\Repositories\EmailRepositoryInterface:
-        class: PhpLab\Sandbox\Notify\Domain\Repositories\Dev\EmailRepository
+    PhpBundle\Notify\Domain\Interfaces\Repositories\EmailRepositoryInterface:
+        class: PhpBundle\Notify\Domain\Repositories\Dev\EmailRepository
         public: true
 ```
 

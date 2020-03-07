@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Proto\Libs;
 
-use PhpLab\Bundle\Crypt\Libs\Encoders\EncoderInterface;
+use PhpBundle\Crypt\Domain\Libs\Encoders\EncoderInterface;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Enums\Http\HttpMethodEnum;
 use PhpLab\Core\Enums\Http\HttpServerEnum;

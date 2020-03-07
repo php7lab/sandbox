@@ -3,7 +3,7 @@
 namespace PhpLab\Sandbox\Proto\Libs;
 
 use GuzzleHttp\Psr7\Response;
-use PhpLab\Bundle\Crypt\Libs\Encoders\EncoderInterface;
+use PhpBundle\Crypt\Domain\Libs\Encoders\EncoderInterface;
 use PhpLab\Core\Enums\Http\HttpHeaderEnum;
 use PhpLab\Sandbox\Proto\Interfaces\TransportInterface;
 use Psr\Http\Message\ResponseInterface;

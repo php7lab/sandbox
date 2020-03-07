@@ -2,8 +2,8 @@
 
 namespace PhpLab\Sandbox\RestClient\Domain\Helpers;
 
-use PhpLab\Bundle\Crypt\Enums\HashAlgoEnum;
-use PhpLab\Bundle\Crypt\Helpers\SafeBase64Helper;
+use PhpBundle\Crypt\Domain\Enums\HashAlgoEnum;
+use PhpBundle\Crypt\Domain\Helpers\SafeBase64Helper;
 use PhpLab\Eloquent\Db\Helpers\Manager;
 use PhpLab\Sandbox\RestClient\Domain\Entities\BookmarkEntity;
 use PhpLab\Sandbox\RestClient\Domain\Repositories\Eloquent\BookmarkRepository;

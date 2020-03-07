@@ -9,7 +9,7 @@ use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Rest\Web\Controller\BaseCrudWebController;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
-use PhpLab\Sandbox\Notify\Domain\Interfaces\Services\FlashServiceInterface;
+use PhpBundle\Notify\Domain\Interfaces\Services\FlashServiceInterface;
 use PhpLab\Web\Traits\AccessTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

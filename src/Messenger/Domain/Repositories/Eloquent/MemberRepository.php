@@ -10,7 +10,7 @@ use PhpLab\Eloquent\Db\Helpers\Manager;
 use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Messenger\Domain\Entities\MemberEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\MemberRepositoryInterface;
-use PhpLab\Bundle\User\Domain\Interfaces\UserRepositoryInterface;
+use PhpBundle\User\Domain\Interfaces\UserRepositoryInterface;
 
 class MemberRepository extends BaseEloquentCrudRepository implements MemberRepositoryInterface
 {

@@ -3,7 +3,7 @@
 ## Отправка письма
 
 ```php
-/** @var \PhpLab\Sandbox\Notify\Domain\Interfaces\Services\EmailServiceInterface $emailService */
+/** @var \PhpBundle\Notify\Domain\Interfaces\Services\EmailServiceInterface $emailService */
 
 $email = new EmailEntity;
 $email->setFrom('from@mail.ru');
@@ -16,7 +16,7 @@ $emailService->push($email);
 ## Отправка SMS-сообщения
 
 ```php
-/** @var \PhpLab\Sandbox\Notify\Domain\Interfaces\Services\SmsServiceInterface $smsService */
+/** @var \PhpBundle\Notify\Domain\Interfaces\Services\SmsServiceInterface $smsService */
 
 $sms = new SmsEntity;
 $sms->setPhone('77051112233');

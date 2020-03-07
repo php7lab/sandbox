@@ -3,12 +3,12 @@
 namespace PhpLab\Sandbox\Tests\rest\Proto;
 
 use Illuminate\Support\Collection;
-use PhpLab\Bundle\Crypt\Libs\Encoders\AesEncoder;
-use PhpLab\Bundle\Crypt\Libs\Encoders\Base64Encoder;
-use PhpLab\Bundle\Crypt\Libs\Encoders\CollectionEncoder;
-use PhpLab\Bundle\Crypt\Libs\Encoders\EncoderInterface;
-use PhpLab\Bundle\Crypt\Libs\Encoders\GzEncoder;
-use PhpLab\Bundle\Crypt\Libs\Encoders\JsonEncoder;
+use PhpBundle\Crypt\Domain\Libs\Encoders\AesEncoder;
+use PhpBundle\Crypt\Domain\Libs\Encoders\Base64Encoder;
+use PhpBundle\Crypt\Domain\Libs\Encoders\CollectionEncoder;
+use PhpBundle\Crypt\Domain\Libs\Encoders\EncoderInterface;
+use PhpBundle\Crypt\Domain\Libs\Encoders\GzEncoder;
+use PhpBundle\Crypt\Domain\Libs\Encoders\JsonEncoder;
 use PhpLab\Core\Enums\Http\HttpStatusCodeEnum;
 use PhpLab\Rest\Helpers\RestResponseHelper;
 use PhpLab\Sandbox\Proto\Transports\ProtoHttpTransport;

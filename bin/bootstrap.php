@@ -19,10 +19,10 @@ $application->add($command);
 
 // --- Queue ---
 
-use PhpLab\Sandbox\Queue\Symfony\Commands\RunCommand;
+use PhpBundle\Queue\Symfony\Commands\RunCommand;
 use Symfony\Component\DependencyInjection\Container;
-use PhpLab\Sandbox\Queue\Domain\Services\JobService;
-use PhpLab\Sandbox\Queue\Domain\Repositories\Eloquent\JobRepository;
+use PhpBundle\Queue\Domain\Services\JobService;
+use PhpBundle\Queue\Domain\Repositories\Eloquent\JobRepository;
 
 $container = new Container;
 $jobRepository = new JobRepository($capsule);
