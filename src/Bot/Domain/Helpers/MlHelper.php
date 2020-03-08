@@ -2,8 +2,6 @@
 
 namespace PhpLab\Sandbox\Bot\Domain\Helpers;
 
-use PhpLab\Core\Domain\Interfaces\DomainInterface;
-
 class MlHelper
 {
 
