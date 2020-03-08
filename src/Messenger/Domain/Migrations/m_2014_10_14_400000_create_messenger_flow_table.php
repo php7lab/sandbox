@@ -18,6 +18,7 @@ class m_2014_10_14_400000_create_messenger_flow_table extends BaseCreateTableMig
             $table->integer('id')->autoIncrement();
             $table->integer('content_id')->comment('');
             $table->integer('chat_id')->comment('');
+            $table->boolean('is_seen')->comment('Прочтено');
             $table
                 ->foreign('content_id')
                 ->references('id')

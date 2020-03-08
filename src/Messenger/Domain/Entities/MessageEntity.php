@@ -61,10 +61,7 @@ class MessageEntity implements EntityIdInterface
         $this->authorId = $authorId;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
+    public function getAuthor(): Identity
     {
         $author = new Identity;
         $author->setId($this->getAuthorId());

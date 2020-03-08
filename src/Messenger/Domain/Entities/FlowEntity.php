@@ -10,6 +10,7 @@ class FlowEntity implements EntityIdInterface
     private $id;
     private $contentId;
     private $chatId;
+    private $isSeen;
     //private $text;
     private $message;
 
@@ -36,6 +37,16 @@ class FlowEntity implements EntityIdInterface
     public function getChatId()
     {
         return $this->chatId;
+    }
+
+    public function getisSeen()
+    {
+        return $this->isSeen;
+    }
+
+    public function setIsSeen($isSeen): void
+    {
+        $this->isSeen = $isSeen;
     }
 
     public function setChatId($chatId): void

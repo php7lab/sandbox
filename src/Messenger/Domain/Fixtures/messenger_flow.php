@@ -9,6 +9,7 @@ $fixture->setCallback(function ($index, FixtureFactoryHelper $fixtureFactory) {
         'id' => $index,
         'content_id' => $index,
         'chat_id' => $fixtureFactory->ordIndex($index, 30),
+        'is_seen' => boolval($index % 10),
     ];
 });
 return $fixture->generateCollection();

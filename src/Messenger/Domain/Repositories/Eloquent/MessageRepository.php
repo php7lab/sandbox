@@ -4,7 +4,7 @@ namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
 use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Messenger\Domain\Entities\MessageEntity;
-use PhpLab\Sandbox\Messenger\Domain\Interfaces\MessageRepositoryInterface;
+use PhpLab\Sandbox\Messenger\Domain\Interfaces\Repositories\MessageRepositoryInterface;
 
 class MessageRepository extends BaseEloquentCrudRepository implements MessageRepositoryInterface
 {

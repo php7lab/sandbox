@@ -10,7 +10,7 @@ use PhpLab\Eloquent\Db\Helpers\Manager;
 use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Messenger\Domain\Entities\FlowEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\FlowRepositoryInterface;
-use PhpLab\Sandbox\Messenger\Domain\Interfaces\MessageRepositoryInterface;
+use PhpLab\Sandbox\Messenger\Domain\Interfaces\Repositories\MessageRepositoryInterface;
 
 class FlowRepository extends BaseEloquentCrudRepository implements FlowRepositoryInterface
 {
