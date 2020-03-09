@@ -14,34 +14,42 @@ class BookmarkRepository extends BaseEloquentCrudRepository implements BookmarkR
 
     protected $tableName = 'restclient_bookmark';
 
-    protected $entityClass = BookmarkEntity::class;
+    public function getEntityClass(): string
+    {
+        return BookmarkEntity::class;
+    }
 
-    public function removeByHash(string $hash): void {
-        $bookmarkEntity =  $this->oneByHash($hash);
+    public function removeByHash(string $hash): void
+    {
+        $bookmarkEntity = $this->oneByHash($hash);
         $this->deleteById($bookmarkEntity->getId());
     }
 
-    public function oneByHash(string $hash): BookmarkEntity {
+    public function oneByHash(string $hash): BookmarkEntity
+    {
         $query = new Query;
         $query->where('hash', $hash);
         return $this->one($query);
     }
 
-    public function allFavoriteByProject(int $projectId): Collection {
+    public function allFavoriteByProject(int $projectId): Collection
+    {
         $query = new Query;
         $query->where('status', StatusEnum::FAVORITE);
         $query->where('project_id', $projectId);
         return $this->all($query);
     }
 
-    public function allHistoryByProject(int $projectId): Collection {
+    public function allHistoryByProject(int $projectId): Collection
+    {
         $query = new Query;
         $query->where('status', StatusEnum::HISTORY);
         $query->where('project_id', $projectId);
         return $this->all($query);
     }
 
-    public function clearHistory(int $projectId): void {
+    public function clearHistory(int $projectId): void
+    {
         $this->deleteByCondition([
             'project_id' => $projectId,
             'status' => StatusEnum::HISTORY,

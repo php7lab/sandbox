@@ -12,7 +12,10 @@ class ProjectRepository extends BaseEloquentCrudRepository implements ProjectRep
 
     protected $tableName = 'restclient_project';
 
-    protected $entityClass = 'PhpLab\\Sandbox\\RestClient\\Domain\\Entities\\ProjectEntity';
+    public function getEntityClass(): string
+    {
+        return ProjectEntity::class;
+    }
 
     public function oneByName(string $projectName): ProjectEntity
     {

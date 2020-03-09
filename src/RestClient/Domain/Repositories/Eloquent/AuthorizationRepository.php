@@ -13,18 +13,23 @@ class AuthorizationRepository extends BaseEloquentCrudRepository implements Auth
 
     protected $tableName = 'restclient_authorization';
 
-    protected $entityClass = 'PhpLab\\Sandbox\\RestClient\\Domain\\Entities\\AuthorizationEntity';
+    public function getEntityClass(): string
+    {
+        return AuthorizationEntity::class;
+    }
 
-    public function allByProjectId(int $projectId, string $type = null): Collection {
+    public function allByProjectId(int $projectId, string $type = null): Collection
+    {
         $query = new Query;
         $query->where('project_id', $projectId);
-        if($type) {
+        if ($type) {
             $query->where('type', 'bearer');
         }
         return $this->all($query);
     }
 
-    public function oneByUsername(int $projectId, string $username, string $type = null): AuthorizationEntity {
+    public function oneByUsername(int $projectId, string $username, string $type = null): AuthorizationEntity
+    {
         $query = new Query;
         $query->where('project_id', $projectId);
         $query->where('type', 'bearer');

@@ -13,7 +13,10 @@ class AccessRepository extends BaseEloquentCrudRepository implements AccessRepos
 
     protected $tableName = 'restclient_access';
 
-    protected $entityClass = 'PhpLab\\Sandbox\\RestClient\\Domain\\Entities\\AccessEntity';
+    public function getEntityClass(): string
+    {
+        return AccessEntity::class;
+    }
 
     public function oneByTie(int $projectId, int $userId): AccessEntity
     {
@@ -23,7 +26,8 @@ class AccessRepository extends BaseEloquentCrudRepository implements AccessRepos
         return $this->one($query);
     }
 
-    public function allByUserId(int $userId): Collection {
+    public function allByUserId(int $userId): Collection
+    {
         $query = new Query;
         $query->where('user_id', $userId);
         return $this->all($query);
