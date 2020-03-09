@@ -12,7 +12,7 @@ class PostControllerTest extends BaseRestApiTest
 {
 
     protected $lastId;
-    protected $basePath = 'api/v1/';
+    protected $basePath = 'api/v1';
 
     public function testAll()
     {
