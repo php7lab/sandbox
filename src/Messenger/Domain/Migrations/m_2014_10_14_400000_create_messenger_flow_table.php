@@ -15,7 +15,7 @@ class m_2014_10_14_400000_create_messenger_flow_table extends BaseCreateTableMig
     public function tableSchema()
     {
         return function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
+            $table->integer('id')->autoIncrement()->comment('Идентификатор');
             $table->integer('content_id')->comment('');
             $table->integer('chat_id')->comment('');
             $table->boolean('is_seen')->comment('Прочтено');

@@ -15,7 +15,7 @@ class m_2014_10_14_300000_create_messenger_message_table extends BaseCreateTable
     public function tableSchema()
     {
         return function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
+            $table->integer('id')->autoIncrement()->comment('Идентификатор');
             $table->integer('author_id')->comment('ID автора');
             //$table->string('chat_id')->comment('');
             $table->string('text')->comment('');
