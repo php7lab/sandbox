@@ -9,7 +9,7 @@ use yii\helpers\Html;
  * @var \yii\web\View $this
  */
 
-$this->title = I18Next::t('restclient', 'identity.update_title');
+$this->title = I18Next::t('restclient', 'identity.create_title');
 
 ?>
 
@@ -20,7 +20,7 @@ $this->title = I18Next::t('restclient', 'identity.update_title');
 </div>
 
 <div class="col-lg-5">
-    <?= $this->render('_form_update', [
+    <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 </div>

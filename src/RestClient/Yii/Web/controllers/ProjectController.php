@@ -12,20 +12,24 @@ use PhpLab\Sandbox\RestClient\Yii\Web\models\ProjectForm;
 use Yii;
 use yii\base\Module;
 use yii2bundle\account\domain\v3\enums\AccountPermissionEnum;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\EnvironmentServiceInterface;
 
 class ProjectController extends BaseController
 {
 
     protected $projectService;
+    protected $environmentService;
 
     public function __construct(
         $id, Module $module,
         array $config = [],
-        ProjectServiceInterface $projectService
+        ProjectServiceInterface $projectService,
+        EnvironmentServiceInterface $environmentService
     )
     {
         parent::__construct($id, $module, $config);
         $this->projectService = $projectService;
+        $this->environmentService = $environmentService;
     }
 
     public function authentication(): array
@@ -60,6 +64,16 @@ class ProjectController extends BaseController
         }
         return $this->render('index', [
             'projectCollection' => $projectCollection,
+        ]);
+    }
+
+    public function actionView($id)
+    {
+        $projectEntity = $this->projectService->oneById($id);
+        $environmentCollection = $this->environmentService->allByProjectId($id);
+        return $this->render('view', [
+            'projectEntity' => $projectEntity,
+            'environmentCollection' => $environmentCollection,
         ]);
     }
 

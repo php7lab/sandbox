@@ -121,13 +121,29 @@ class IdentityController extends BaseController
         ]);
     }
 
+    public function actionUpdate($id) {
+        $model = new IdentityForm;
+        if(Yii::$app->request->isPost) {
+            $body = Yii::$app->request->post();
+            $model->load($body, 'IdentityForm');
+            $this->identityService->updateById($id, $model->toArray());
+            \App::$domain->navigation->alert->create(I18Next::t('restclient', 'identity.messages.updated_success'), Alert::TYPE_SUCCESS);
+            return $this->redirect(['/rest-client/identity/index']);
+        } else {
+            $entity = $this->identityService->oneById($id);
+            $model->load(EntityHelper::toArray($entity), '');
+        }
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
     public function actionDelete($id)
     {
         \App::$domain->account->identity->deleteById($id);
         \App::$domain->navigation->alert->create(I18Next::t('restclient', 'identity.messages.deleted_success'), Alert::TYPE_SUCCESS);
         return $this->redirect(['/rest-client/identity/index']);
     }
-
 
     public function actionView($id)
     {

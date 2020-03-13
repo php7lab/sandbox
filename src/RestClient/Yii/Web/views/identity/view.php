@@ -17,6 +17,10 @@ $this->title = $identityEntity->getLogin();
 ?>
 
 <div class="col-lg-12">
+    <div class="pull-right">
+        <a href="<?= Url::to(['/rest-client/identity/update', 'id' => $identityEntity->getId()]) ?>"
+           class="btn btn-primary"><?= I18Next::t('core', 'action.update') ?></a>
+    </div>
     <h2>
         <?= $this->title ?>
     </h2>
