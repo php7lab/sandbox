@@ -15,6 +15,7 @@ use yii\base\Module;
 use yii2bundle\account\domain\v3\enums\AccountPermissionEnum;
 use yii2rails\domain\base\Model;
 use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
+use RocketLab\Bundle\Web\Helpers\ErrorHelper;
 
 class IdentityController extends BaseController
 {
@@ -60,46 +61,12 @@ class IdentityController extends BaseController
         ];
     }
 
-    /*public function __construct(
-        $id,
-        Module $module,
-        array $config = [],
-        ProjectServiceInterface $projectService,
-        IdentityServiceInterface $identityService,
-        AccessServiceInterface $accessService
-    )
-    {
-        parent::__construct(
-            $id,
-            $module,
-            $config
-        );
-        $this->projectService = $projectService;
-        $this->identityService = $identityService;
-        $this->accessService = $accessService;
-    }*/
-
     public function actionIndex()
     {
-        /*if(Yii::$app->user->can(PermissionEnum::BACKEND_ALL)) {
-            $identityCollection = $this->identityService->all();
-        } else {
-            $identityCollection = $this->identityService->allByUserId(Yii::$app->user->identity->id);
-        }*/
         $identityCollection = $this->identityService->all();
         return $this->render('index', [
             'identityCollection' => $identityCollection,
         ]);
-    }
-
-    public function addErrorsFromException(UnprocessableEntityHttpException $e, $model) {
-        $errors = $e->getErrors();
-        if($errors instanceof Model) {
-            $errors = $errors->getErrors();
-        }
-        foreach($errors as $field => $error) {
-            $model->addError($field, $error);
-        }
     }
 
     public function actionCreate()
@@ -111,7 +78,7 @@ class IdentityController extends BaseController
             try {
                 \App::$domain->account->identity->create($model->toArray());
             } catch (UnprocessableEntityHttpException $e) {
-                $this->addErrorsFromException($e, $model);
+                ErrorHelper::handleError($e, $model);
             }
             \App::$domain->navigation->alert->create(I18Next::t('restclient', 'identity.messages.created_success'), Alert::TYPE_SUCCESS);
             return $this->redirect(['/rest-client/identity/index']);

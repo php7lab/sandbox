@@ -28,7 +28,8 @@ class TransportService extends BaseService implements TransportServiceInterface
     public function send(ProjectEntity $projectEntity, RequestForm $model): ResponseInterface
     {
         $config = [
-            'base_uri' => $projectEntity->getUrl() . '/',
+            'base_uri' => $model->baseUrl. '/',
+            //'base_uri' => $projectEntity->getUrl() . '/',
         ];
         $guzzleClient = new Client($config);
         $authAgent = new BearerAuthorization($guzzleClient);

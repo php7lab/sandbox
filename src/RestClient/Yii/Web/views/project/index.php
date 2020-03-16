@@ -31,10 +31,10 @@ $this->title = I18Next::t('restclient', 'project.list_title');
                            class="btn btn-xs btn-default">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a href="<?= Url::to(['/rest-client/environment/index', 'projectId' => $projectEntity->getId()]) ?>"
+                        <!--<a href="<?/*= Url::to(['/rest-client/environment/index', 'projectId' => $projectEntity->getId()]) */?>"
                            class="btn btn-xs btn-default">
                             <i class="fa fa-microchip"></i>
-                        </a>
+                        </a>-->
                         <a href="<?= Url::to(['/rest-client/project/update', 'id' => $projectEntity->getId()]) ?>"
                            class="btn btn-xs btn-info">
                             <i class="fa fa-pencil"></i>

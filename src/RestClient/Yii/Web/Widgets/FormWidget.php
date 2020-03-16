@@ -6,6 +6,7 @@ use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AuthorizationServiceInt
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
 use Yii;
 use yii\base\Widget;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\EnvironmentServiceInterface;
 
 class FormWidget extends Widget
 {
@@ -17,12 +18,16 @@ class FormWidget extends Widget
     protected $authorizationService;
     /** @var ProjectServiceInterface */
     protected $projectService;
+    /** @var EnvironmentServiceInterface */
+    protected $environmentService;
 
     public function __construct(array $config = [])
     {
         parent::__construct($config);
         $this->authorizationService = Yii::$container->get(AuthorizationServiceInterface::class);
         $this->projectService = Yii::$container->get(ProjectServiceInterface::class);
+        $this->projectService = Yii::$container->get(ProjectServiceInterface::class);
+        $this->environmentService = Yii::$container->get(EnvironmentServiceInterface::class);
     }
 
     public function run()
@@ -31,6 +36,7 @@ class FormWidget extends Widget
         return $this->renderFile(__DIR__ . '/../views/request/form/index.php', [
             'model' => $this->model,
             'projectEntity' => $projectEntity,
+            'environmentCollection' => $this->environmentService->allByProjectId($projectEntity->getId()),
             'authorization' => $this->authorizationService->allByProjectId($projectEntity->getId(), 'bearer'),
         ]);
     }

@@ -7,6 +7,7 @@ use Packages\User\Domain\Interfaces\Services\IdentityServiceInterface;
 use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Libs\I18Next\Facades\I18Next;
+use PhpLab\Sandbox\RestClient\Domain\Enums\RestClientPermissionEnum;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\AccessServiceInterface;
 use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\ProjectServiceInterface;
 use PhpLab\Sandbox\RestClient\Yii\Web\models\EnvironmentForm;
@@ -51,33 +52,12 @@ class EnvironmentController extends BaseController
     {
         return [
             [
-                [AccountPermissionEnum::IDENTITY_READ], ['create', 'update', 'delete'],
+                [RestClientPermissionEnum::PROJECT_READ], ['create', 'update', 'delete'],
             ],
             [
-                [AccountPermissionEnum::IDENTITY_WRITE], ['index', 'view'],
+                [RestClientPermissionEnum::PROJECT_READ], ['index', 'view'],
             ],
         ];
-    }
-
-    public function actionIndex(int $projectId)
-    {
-        $projectEntity = $this->projectService->oneById($projectId);
-        $environmentCollection = $this->environmentService->allByProjectId($projectId);
-        return $this->render('index', [
-            'environmentCollection' => $environmentCollection,
-            'projectEntity' => $projectEntity,
-        ]);
-    }
-
-    public function addErrorsFromException(UnprocessableEntityHttpException $e, $model)
-    {
-        $errors = $e->getErrors();
-        if ($errors instanceof Model) {
-            $errors = $errors->getErrors();
-        }
-        foreach ($errors as $field => $error) {
-            $model->addError($field, $error);
-        }
     }
 
     public function actionCreate(int $projectId)
@@ -133,12 +113,12 @@ class EnvironmentController extends BaseController
         return $this->redirect(['/rest-client/project/view', 'id' => $environmentEntity->getProjectId()]);
     }
 
-    public function actionView($id)
+    /*public function actionView($id)
     {
         $environmentEntity = $this->environmentService->oneById($id);
         return $this->render('view', [
             'environmentEntity' => $environmentEntity,
         ]);
-    }
+    }*/
 
 }

@@ -16,6 +16,7 @@ use PhpLab\Test\Helpers\RestHelper;
 use PhpLab\Rest\Helpers\RestResponseHelper;
 use Yii;
 use yii\base\Module;
+use PhpLab\Sandbox\RestClient\Domain\Interfaces\Services\EnvironmentServiceInterface;
 
 /**
  * Class RequestController
@@ -83,9 +84,14 @@ class RequestController extends BaseController
             $bookmarkEntity = $this->bookmarkService->oneByHash($tag);
             $model = AdapterHelper::bookmarkEntityToForm($bookmarkEntity);
         } elseif (Yii::$app->request->isPost) {
-            $model->load(Yii::$app->request->post());
+            $model->load(Yii::$app->request->post(), 'RequestForm');
+            $model->baseUrl = Yii::$app->request->post('RequestForm')['baseUrl'];
+            //dd($model);
+            //dd(Yii::$app->request->post('RequestForm')['baseUrl']);
             if ($model->validate()) {
                 $model->files = UploadHelper::createUploadedFileArray($_FILES);
+
+                //dd(Yii::$app->request->post());
 
                 $begin = microtime(true);
                 $response = $this->transportService->send($projectEntity, $model);
@@ -123,6 +129,7 @@ class RequestController extends BaseController
             'frame' => $frame,
             'projectEntity' => $projectEntity,
             'duration' => $duration,
+           // 'environmentCollection' => $this->environmentService->allByProjectId($projectEntity->getId()),
         ]);
     }
 

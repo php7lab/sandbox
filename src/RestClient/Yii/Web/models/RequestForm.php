@@ -16,6 +16,7 @@ class RequestForm extends Model
     public $endpoint;
 
     public $tab = 1;
+    public $baseUrl;
 
     public $queryKeys = [];
     public $queryValues = [];
