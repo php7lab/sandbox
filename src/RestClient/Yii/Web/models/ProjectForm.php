@@ -10,13 +10,13 @@ class ProjectForm extends Model
 
     public $name;
     public $title;
-    public $url;
+    //public $url;
 
     public function rules()
     {
         return [
-            [['name', 'title', 'url'], 'required'],
-            ['url', 'url'],
+            [['name', 'title'/*, 'url'*/], 'required'],
+            //['url', 'url'],
         ];
     }
 
@@ -25,7 +25,7 @@ class ProjectForm extends Model
         return [
             'name' => I18Next::t('restclient', 'project.attributes.name'),
             'title' => I18Next::t('restclient', 'project.attributes.title'),
-            'url' => I18Next::t('restclient', 'project.attributes.url'),
+            //'url' => I18Next::t('restclient', 'project.attributes.url'),
         ];
     }
 

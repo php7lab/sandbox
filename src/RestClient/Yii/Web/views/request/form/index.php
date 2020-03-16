@@ -13,13 +13,14 @@ use PhpLab\Sandbox\RestClient\Yii\Web\helpers\Authorization;
  * @var \Illuminate\Support\Collection $environmentCollection
  */
 
-$baseUrl = $projectEntity->getUrl() . '/';
+//$baseUrl = $projectEntity->getUrl() . '/';
 $model->addEmptyRows();
 
 $urlArray = \PhpLab\Core\Domain\Helpers\EntityHelper::getColumn($environmentCollection, 'url');
 $titleArray = \PhpLab\Core\Domain\Helpers\EntityHelper::getColumn($environmentCollection, 'title');
 //$urlOptoins = array_combine($urlArray, $urlArray);
 $urlOptoins = array_combine($urlArray, $titleArray);
+
 ?>
 
 <?php $form = ActiveForm::begin([
@@ -30,7 +31,7 @@ $urlOptoins = array_combine($urlArray, $titleArray);
     'enableClientValidation' => false,
     'options' => [
         'enctype' => 'multipart/form-data',
-        'class' => 'form-inline',
+        //'class' => 'form-inline',
 
     ],
 ]) ?>
@@ -39,8 +40,8 @@ $urlOptoins = array_combine($urlArray, $titleArray);
     'options' => ['class' => ''],
 ])->hiddenInput() ?>
 
-<div class="row">
-    <div class="col-sm-12">
+<div class="row" style="padding-bottom: 15px">
+    <div class="col-sm-12 form-inline">
 
         <div class="form-group">
             <?= $form->field($model, 'method', [
@@ -65,7 +66,7 @@ $urlOptoins = array_combine($urlArray, $titleArray);
                     'class' => '',
                 ],
             ])->textInput([
-                'style' => 'width: 300px;',
+                'style' => 'width: 370px;',
                 'placeholder' => 'endpoint',
                 'autofocus' => true,
             ]) ?>

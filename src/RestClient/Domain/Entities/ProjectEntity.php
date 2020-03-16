@@ -13,7 +13,7 @@ class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
     private $id = null;
     private $name = null;
     private $title = null;
-    private $url = null;
+    //private $url = null;
     private $status = StatusEnum::ENABLE;
 
     public function validationRules(): array
@@ -26,10 +26,10 @@ class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
             'title' => [
                 new Assert\NotBlank,
             ],
-            'url' => [
+            /*'url' => [
                 new Assert\NotBlank,
                 new Assert\Url,
-            ],
+            ],*/
             'status' => [
                 new Assert\NotBlank,
                 //new Assert\Choice(StatusEnum::values()),
@@ -67,7 +67,7 @@ class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
         return $this->title;
     }
 
-    public function setUrl($value)
+    /*public function setUrl($value)
     {
         $this->url = $value;
     }
@@ -75,7 +75,7 @@ class ProjectEntity implements EntityIdInterface, ValidateEntityInterface
     public function getUrl()
     {
         return trim($this->url, '/');
-    }
+    }*/
 
     public function setStatus($value)
     {
