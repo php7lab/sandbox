@@ -11,7 +11,7 @@ class EnvironmentRepository extends BaseEloquentCrudRepository implements Enviro
 
     public function tableName() : string
     {
-        return 'restClient_environment';
+        return 'restclient_environment';
     }
 
     public function getEntityClass() : string

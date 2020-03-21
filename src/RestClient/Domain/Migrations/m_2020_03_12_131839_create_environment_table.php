@@ -11,7 +11,7 @@ if ( ! class_exists(m_2020_03_12_131839_create_environment_table::class)) {
     class m_2020_03_12_131839_create_environment_table extends BaseCreateTableMigration
     {
 
-        protected $tableName = 'restClient_environment';
+        protected $tableName = 'restclient_environment';
         protected $tableComment = '';
 
         public function tableSchema()
