@@ -72,4 +72,3 @@ class BookmarkService extends BaseCrudService implements BookmarkServiceInterfac
         $this->repository->clearHistory($projectId);
     }
 }
-
