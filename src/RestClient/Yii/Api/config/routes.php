@@ -14,13 +14,18 @@ return [
         ],
         "except" => [
             'index',
-            'updqate',
+            'update',
             'create',
         ],
         "extraPatterns" => [
             "all-by-project/<projectId>" => "all-by-project",
         ],
+        "tokens" => [
+            '{id}' => '<id:[\\w\\d\\_\\-]*>',
+        ]
     ],
+
+    "POST {$version}/rest-history/add-to-favorite" => "restclient/history/add-to-favorite",
 
     ["class" => UrlRule::class, "controller" => ["{$version}/rest-access" => "restclient/access"]],
     ["class" => UrlRule::class, "controller" => ["{$version}/rest-authorization" => "restclient/authorization"]],

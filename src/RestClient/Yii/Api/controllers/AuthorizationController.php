@@ -24,7 +24,7 @@ class AuthorizationController extends BaseCrudController
         $this->service = $authorizationService;
     }
 
-    public function normalizerContext(): array
+    protected function normalizerContext(): array
     {
         return [
             AbstractNormalizer::IGNORED_ATTRIBUTES => ['password'],

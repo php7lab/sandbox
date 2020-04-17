@@ -14,4 +14,5 @@ class FavoriteController extends BaseBookmarkController
     public function actionAllByProject($projectId) {
 	    return $this->service->allFavoriteByProject($projectId);
     }
+
 }

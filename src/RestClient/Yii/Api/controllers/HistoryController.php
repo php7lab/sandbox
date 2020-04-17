@@ -14,4 +14,8 @@ class HistoryController extends BaseBookmarkController
     public function actionAllByProject($projectId) {
 	    return $this->service->allHistoryByProject($projectId);
     }
+
+    public function actionAddToFavorite() {
+        $this->service->addToCollection(\Yii::$app->request->post('hash'));
+    }
 }
