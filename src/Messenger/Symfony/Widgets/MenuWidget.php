@@ -5,7 +5,7 @@ namespace PhpLab\Sandbox\Messenger\Symfony\Widgets;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Sandbox\Messenger\Domain\Entities\MessageEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\Services\MessageServiceInterface;
-use PhpLab\Web\BaseWidget;
+use PhpLab\Web\Base\BaseWidget;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
