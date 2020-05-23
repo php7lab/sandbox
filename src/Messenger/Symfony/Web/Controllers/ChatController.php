@@ -35,12 +35,9 @@ class ChatController extends AbstractController
         $query = QueryHelper::getAllParams($request->query->all());
         //$query->with('category');
 
-        $dataProvider = new DataProvider([
-            'service' => $this->service,
-            'query' => $query,
-            'page' => $request->get("page", 1),
-            'pageSize' => $request->get("per-page", 10),
-        ]);
+        $page = $request->get("page", 1);
+        $pageSize = $request->get("per-page", 10);
+        $dataProvider = new DataProvider($this->service, $query, $page, $pageSize);
         return $this->render('@Messenger/chat/index.html.twig', [
             'dataProviderEntity' => $dataProvider->getAll(),
         ]);
