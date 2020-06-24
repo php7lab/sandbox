@@ -17,11 +17,17 @@ class m_2014_10_14_300000_create_messenger_message_table extends BaseCreateTable
         return function (Blueprint $table) {
             $table->integer('id')->autoIncrement()->comment('Идентификатор');
             $table->integer('author_id')->comment('ID автора');
-            //$table->string('chat_id')->comment('');
-            $table->string('text')->comment('');
+            $table->integer('chat_id')->comment('ID чата');
+            $table->string('text')->comment('Текст сообщения');
 
             $table
                 ->foreign('author_id')
+                ->references('id')
+                ->on($this->encodeTableName('fos_user'))
+                ->onDelete(ForeignActionEnum::CASCADE)
+                ->onUpdate(ForeignActionEnum::CASCADE);
+            $table
+                ->foreign('chat_id')
                 ->references('id')
                 ->on($this->encodeTableName('messenger_member'))
                 ->onDelete(ForeignActionEnum::CASCADE)
@@ -30,4 +36,3 @@ class m_2014_10_14_300000_create_messenger_message_table extends BaseCreateTable
     }
 
 }
-

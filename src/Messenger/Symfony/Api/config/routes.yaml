@@ -40,3 +40,10 @@ api_messenger_chat_options:
     controller: PhpLab\Sandbox\Messenger\Symfony\Api\Controllers\ChatController::options
     requirements:
         id: '\d+'
+
+# message
+
+api_messenger_message_send_message:
+    methods: [GET]
+    path: bot/{bot}/send-message
+    controller: PhpLab\Sandbox\Messenger\Symfony\Api\Controllers\MessageController::sendMessageFromBot

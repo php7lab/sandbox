@@ -11,6 +11,7 @@ class MessageEntity implements EntityIdInterface
     private $id;
     private $text;
     private $authorId;
+    private $chatId;
     private $author;
 
     /**
@@ -59,6 +60,22 @@ class MessageEntity implements EntityIdInterface
     public function setAuthorId($authorId): void
     {
         $this->authorId = $authorId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChatId()
+    {
+        return $this->chatId;
+    }
+
+    /**
+     * @param mixed $chatId
+     */
+    public function setChatId($chatId): void
+    {
+        $this->chatId = $chatId;
     }
 
     public function getAuthor(): Identity

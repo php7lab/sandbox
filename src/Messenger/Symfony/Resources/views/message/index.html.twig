@@ -1,0 +1,62 @@
+{% extends '@Messenger/base.html.twig' %}
+
+{% block title %}Main page{% endblock %}
+
+{% block body %}
+
+    {{ breadcrumbAdd('Message', '/message') }}
+
+    {% if chatEntity is defined %}
+        <script>
+            var chatId = {{ chatEntity.id }};
+        </script>
+    {% endif %}
+
+    {#<span class="pull-right">
+        <a class="btn btn-success" href="{{ path('web_messenger_message_create') }}">Create</a>
+    </span>#}
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group">
+                {% for chat in chatCollection %}
+                    <a href="{{ path('web_messenger_message_index', {chatId:chat.id}) }}"
+                       class="list-group-item list-group-item-action {% if chatEntity is defined and chat.id == chatEntity.id %}active{% endif %}">
+                        {{ chat.title }}
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-10">
+
+            <div id="messageBox">
+                <div id="messageList" style="height: 500px; overflow-y: scroll;">
+
+                </div>
+
+                <form method="post" class="form-inline" id="messageForm">
+                    <input name="text" id="messageInput" type="text" class="form-control mb-2 mr-sm-2" placeholder="Message">
+                    <button type="submit" class="btn btn-primary mb-2">Send</button>
+                </form>
+            </div>
+
+            {#{% if dataProviderEntity is defined %}
+                <div id="messageList" style="height: 500px; overflow-y: scroll;">
+                    {% include '@Messenger/message/index.list.html.twig' %}
+                </div>
+                {{ pagination(dataProviderEntity, app.request) }} &nbsp;
+
+                <form method="post" class="form-inline" id="messageForm">
+                    <input name="text" id="messageInput" type="text" class="form-control mb-2 mr-sm-2"
+                           placeholder="Message">
+                    <button type="submit" class="btn btn-primary mb-2">Send</button>
+                </form>
+            {% endif %}#}
+        </div>
+    </div>
+
+    {{ script('/bundles/messenger/message.js') }}
+
+{% endblock %}
