@@ -23,7 +23,7 @@ class MessageController extends BaseCrudApiController
         $response = new JsonResponse;
         $serializer = new JsonRestSerializer($response);
         try {
-            $this->service->sendMessageFromBot($bot, $request->query->get('chat_id'), $request->query->get('text'));
+            $this->service->sendMessageFromBot($bot, $request->query->all());
             $serializer->serialize(['ok'=>true]);
         } catch (UnprocessibleEntityException $e) {
             $errorCollection = $e->getErrorCollection();

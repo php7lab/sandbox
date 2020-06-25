@@ -4,6 +4,7 @@ namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
 use Illuminate\Support\Collection;
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+use Symfony\Component\Security\Core\Security;
 
 class ChatEntity implements EntityIdInterface
 {
@@ -13,6 +14,13 @@ class ChatEntity implements EntityIdInterface
     private $type;
     private $messages;
     private $members;
+
+    private $_security;
+
+    public function setSecurity(Security $security)
+    {
+        $this->_security = $security;
+    }
 
     public function getId()
     {
@@ -26,6 +34,13 @@ class ChatEntity implements EntityIdInterface
 
     public function getTitle()
     {
+        if($this->getType() == 'dialog' && $this->getMembers()) {
+            foreach ($this->getMembers() as $memberEntity) {
+                if($memberEntity->getUserId() != $this->_security->getUser()->getId()) {
+                    return $memberEntity->getUser()->getUsername();
+                }
+            }
+        }
         return $this->title;
     }
 
@@ -54,7 +69,10 @@ class ChatEntity implements EntityIdInterface
         $this->messages = $messages;
     }
 
-    public function getMembers()
+    /**
+     * @return Collection | MemberEntity[]
+     */
+    public function getMembers(): ?Collection
     {
         return $this->members;
     }

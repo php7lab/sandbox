@@ -41,7 +41,7 @@ class MenuWidget extends BaseWidget implements ContainerAwareInterface
         return '<a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-                <img src="/bundles/user/img/user.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <img src="' . $messageEntity->getAuthor()->getLogo() . '" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
                     <p class="dropdown-item-title">
                         ' . $messageEntity->getAuthor()->getUsername() . '

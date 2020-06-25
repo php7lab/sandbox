@@ -2,6 +2,7 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
+use PhpBundle\User\Domain\Entities\Identity;
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -43,7 +44,7 @@ class MemberEntity implements EntityIdInterface
         $this->chatId = $chatId;
     }
 
-    public function getUser()
+    public function getUser(): ?UserInterface
     {
         return $this->user;
     }

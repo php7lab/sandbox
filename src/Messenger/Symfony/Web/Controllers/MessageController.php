@@ -37,7 +37,10 @@ class MessageController extends AbstractController
     {
         $this->checkAuth();
         $chatEntity = $this->chatService->oneById($chatId);
-        $chatCollection = $this->chatService->all();
+        $query = new Query;
+        $query->with('members.user');
+        $query->limit(2);
+        $chatCollection = $this->chatService->all($query);
         $query = QueryHelper::getAllParams($request->query->all());
         $whereChat = new Where('chat_id', $chatId);
         $query->whereNew($whereChat);
@@ -58,7 +61,11 @@ class MessageController extends AbstractController
     {
         $this->checkAuth();
         //$chatEntity = $this->chatService->oneById($chatId);
-        $chatCollection = $this->chatService->all();
+        $query = new Query;
+        $query->with('members.user');
+        $query->limit(2);
+        $chatCollection = $this->chatService->all($query);
+        //dd($chatCollection);
         /*$query = QueryHelper::getAllParams($request->query->all());
         $query->where('chat_id', $chatId);
         $query->orderBy(['id'=>SORT_ASC]);

@@ -4,6 +4,7 @@ namespace PhpLab\Sandbox\Messenger\Domain\Entities;
 
 use PhpBundle\User\Domain\Entities\Identity;
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class MessageEntity implements EntityIdInterface
 {
@@ -13,6 +14,7 @@ class MessageEntity implements EntityIdInterface
     private $authorId;
     private $chatId;
     private $author;
+    private $chat;
 
     /**
      * @return mixed
@@ -78,21 +80,32 @@ class MessageEntity implements EntityIdInterface
         $this->chatId = $chatId;
     }
 
-    public function getAuthor(): Identity
+    public function getAuthor(): ?UserInterface
     {
-        $author = new Identity;
-        $author->setId($this->getAuthorId());
-        $author->setUsername('User ' . $this->getAuthorId());
-        return $author;
-        //return $this->author;
+        return $this->author;
     }
 
     /**
      * @param mixed $author
      */
-    public function setAuthor($author): void
+    public function setAuthor(UserInterface $author): void
     {
         $this->author = $author;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getChat(): ?ChatEntity
+    {
+        return $this->chat;
+    }
+
+    /**
+     * @param mixed $chat
+     */
+    public function setChat(ChatEntity $chat): void
+    {
+        $this->chat = $chat;
+    }
 }
