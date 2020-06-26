@@ -19,7 +19,7 @@ class BookmarkService extends BaseCrudService implements BookmarkServiceInterfac
         $this->repository = $repository;
     }
 
-    public function persist(BookmarkEntity $bookmarkEntity) {
+    public function persist(object $bookmarkEntity) {
         $bookmarkEntity->setId(null);
         try {
             $bookmarkEntity = $this->repository->oneByHash($bookmarkEntity->getHash());

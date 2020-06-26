@@ -8,10 +8,12 @@ use PhpLab\Core\Domain\Base\BaseCrudService;
 use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Rest\Contract\Client\RestClient;
+use PhpLab\Sandbox\Messenger\Domain\Entities\BotEntity;
 use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Entities\FlowEntity;
 use PhpLab\Sandbox\Messenger\Domain\Entities\MessageEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\FlowRepositoryInterface;
+use PhpLab\Sandbox\Messenger\Domain\Interfaces\Repositories\BotRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\Repositories\MessageRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\Services\MessageServiceInterface;
 use Psr\Container\ContainerInterface;
@@ -25,10 +27,12 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
     private $chatService;
     private $security;
     private $flowRepository;
+    private $botRepository;
 
-    public function __construct(MessageRepositoryInterface $repository, FlowRepositoryInterface $flowRepository, ChatService $chatService, Security $security)
+    public function __construct(MessageRepositoryInterface $repository, BotRepositoryInterface $botRepository, FlowRepositoryInterface $flowRepository, ChatService $chatService, Security $security)
     {
         $this->repository = $repository;
+        $this->botRepository = $botRepository;
         $this->flowRepository = $flowRepository;
         $this->chatService = $chatService;
         $this->security = $security;
@@ -124,9 +128,12 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
                 "text" => $messageEntity->getText(),
             ]
         ];
-        $url = 'http://test.bot/bot.php?token=773713470:AAHTBIYMDvcreuZBxKpvAQWVLOQOG24F-mE';
-        
-        $client = new Client(['base_uri' => $url]);
+
+        $query = new Query;
+        $query->where('user_id', $botIdentity->getId());
+        /** @var BotEntity $botEntity */
+        $botEntity = $this->botRepository->one($query);
+        $client = new Client(['base_uri' => $botEntity->getHookUrl()]);
         $response = $client->request('POST', '', [
             'json' => $data,
         ]);
