@@ -1,44 +1,44 @@
-web_messenger_chat_index:
-    methods: [GET]
-    path: chat
-    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::index
-
-web_messenger_chat_create:
-    path: chat/create
-    methods: [GET,POST]
-    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::create
-
-web_messenger_chat_view:
-    methods: [GET]
-    path: chat/view/{id}
-    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::view
-    requirements:
-        id: '\d+'
-
-web_messenger_chat_update:
-    methods: [GET,POST]
-    path: chat/update/{id}
-    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::update
-    requirements:
-        id: '\d+'
-
-web_messenger_chat_delete:
-    methods: [POST]
-    path: chat/delete/{id}
-    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::delete
-    requirements:
-        id: '\d+'
+#web_messenger_chat_index:
+#    methods: [GET]
+#    path: chat
+#    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::index
+#
+#web_messenger_chat_create:
+#    path: chat/create
+#    methods: [GET,POST]
+#    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::create
+#
+#web_messenger_chat_view:
+#    methods: [GET]
+#    path: chat/view/{id}
+#    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::view
+#    requirements:
+#        id: '\d+'
+#
+#web_messenger_chat_update:
+#    methods: [GET,POST]
+#    path: chat/update/{id}
+#    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::update
+#    requirements:
+#        id: '\d+'
+#
+#web_messenger_chat_delete:
+#    methods: [POST]
+#    path: chat/delete/{id}
+#    controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\ChatController::delete
+#    requirements:
+#        id: '\d+'
 
 # Message
 
-web_messenger_message_index:
+web_messenger_chat_index:
     methods: [GET]
-    path: messenger/{chatId}
+    path: messenger
     controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\MessageController::index
 
 web_messenger_chat_list:
     methods: [GET]
-    path: messenger
+    path: chat-list
     controller: PhpLab\Sandbox\Messenger\Symfony\Web\Controllers\MessageController::chatList
 
 web_messenger_message_message-list:

@@ -14,6 +14,7 @@ use PhpBundle\Notify\Domain\Interfaces\Services\FlashServiceInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\Services\MessageServiceInterface;
 use PhpLab\Web\Traits\AccessTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -33,7 +34,7 @@ class MessageController extends AbstractController
         $this->service = $messageService;
     }
 
-    public function index(Request $request, int $chatId): Response
+    /*public function index(Request $request, int $chatId): Response
     {
         $this->checkAuth();
         $chatEntity = $this->chatService->oneById($chatId);
@@ -55,30 +56,27 @@ class MessageController extends AbstractController
             'chatEntity' => $chatEntity,
             'chatCollection' => $chatCollection,
         ]);
+    }*/
+
+    public function index(Request $request): Response
+    {
+        $this->checkAuth();
+        //$query = new Query;
+        //$query->with('members.user');
+        //$query->limit(2);
+        //$chatCollection = $this->chatService->all($query);
+        return $this->render('@Messenger/message/index.html.twig', [
+            //'chatCollection' => $chatCollection,
+        ]);
     }
 
     public function chatList(Request $request): Response
     {
         $this->checkAuth();
-        //$chatEntity = $this->chatService->oneById($chatId);
         $query = new Query;
         $query->with('members.user');
-        $query->limit(2);
         $chatCollection = $this->chatService->all($query);
-        //dd($chatCollection);
-        /*$query = QueryHelper::getAllParams($request->query->all());
-        $query->where('chat_id', $chatId);
-        $query->orderBy(['id'=>SORT_ASC]);
-        $page = $request->get("page", 1);
-        $pageSize = $request->get("per-page", 10000000000);*/
-        // todo: make converter
-        /*$dataProvider = new DataProvider($this->service, $query, $page, $pageSize);
-        $dataProvider->getEntity()->setMaxPageSize(10000000000);*/
-        return $this->render('@Messenger/message/index.html.twig', [
-            //'dataProviderEntity' => $dataProvider->getAll(),
-            //'chatEntity' => $chatEntity,
-            'chatCollection' => $chatCollection,
-        ]);
+        return new JsonResponse(EntityHelper::collectionToArray($chatCollection));
     }
 
     public function messageList(Request $request, int $chatId = null): Response
@@ -108,7 +106,7 @@ class MessageController extends AbstractController
         $this->getUser();
         $text = $request->request->get('text');
         $this->service->sendMessage($chatId, $text);
-        $postListUrl = $this->generateUrl('web_messenger_message_index', ['chatId'=>$chatId]);
+        //$postListUrl = $this->generateUrl('web_messenger_message_index', ['chatId'=>$chatId]);
         return new Response();
     }
 

@@ -25,4 +25,11 @@ class BotRepository extends BaseEloquentCrudRepository implements BotRepositoryI
     {
         return BotEntity::class;
     }
+
+    public function oneByUserId(int $userId): BotEntity {
+        $query = new Query;
+        $query->where('user_id', $userId);
+        /** @var BotEntity $botEntity */
+        return $this->one($query);
+    }
 }

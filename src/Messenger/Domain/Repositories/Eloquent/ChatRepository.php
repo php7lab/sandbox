@@ -4,6 +4,7 @@ namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
 use Illuminate\Support\Collection;
 use PhpLab\Core\Domain\Enums\RelationEnum;
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Domain\Libs\Relation\OneToMany;
 use PhpLab\Eloquent\Db\Helpers\Manager;
@@ -22,7 +23,11 @@ class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositor
     private $memberRepository;
     private $security;
 
-    public function __construct(Manager $capsule, /*FlowRepositoryInterface $flowRepository,*/ MemberRepositoryInterface $memberRepository, Security $security)
+    public function __construct(
+        Manager $capsule, 
+        /*FlowRepositoryInterface $flowRepository,*/ 
+        MemberRepositoryInterface $memberRepository, 
+        Security $security)
     {
         parent::__construct($capsule);
         //$this->flowRepository = $flowRepository;
@@ -33,6 +38,13 @@ class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositor
     public function getEntityClass(): string
     {
         return ChatEntity::class;
+    }
+
+    public function oneByIdWithMembers($id, Query $query = null): ChatEntity
+    {
+        $query = $this->forgeQuery($query);
+        $query->with('members.user');
+        return parent::oneById($id, $query);
     }
 
     public function _all(Query $query = null)

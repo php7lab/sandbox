@@ -3,9 +3,11 @@
 namespace PhpLab\Sandbox\Messenger\Domain\Interfaces;
 
 use PhpLab\Core\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use PhpLab\Core\Domain\Libs\Query;
+use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 
 interface ChatRepositoryInterface extends CrudRepositoryInterface
 {
 
-
+    public function oneByIdWithMembers($id, Query $query = null): ChatEntity;
 }

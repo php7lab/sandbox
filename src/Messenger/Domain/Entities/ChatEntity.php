@@ -32,6 +32,18 @@ class ChatEntity implements EntityIdInterface
         $this->id = $id;
     }
 
+    public function getLogo()
+    {
+        if($this->getType() == 'dialog' && $this->getMembers()) {
+            foreach ($this->getMembers() as $memberEntity) {
+                if($memberEntity->getUserId() != $this->_security->getUser()->getId()) {
+                    return $memberEntity->getUser()->getLogo();
+                }
+            }
+        }
+        return $this->title;
+    }
+
     public function getTitle()
     {
         if($this->getType() == 'dialog' && $this->getMembers()) {

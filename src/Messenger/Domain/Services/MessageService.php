@@ -4,6 +4,8 @@ namespace PhpLab\Sandbox\Messenger\Domain\Services;
 
 use FOS\UserBundle\Model\FosUserInterface;
 use GuzzleHttp\Client;
+use PhpBundle\User\Domain\Exceptions\UnauthorizedException;
+use PhpBundle\User\Domain\Interfaces\UserRepositoryInterface;
 use PhpLab\Core\Domain\Base\BaseCrudService;
 use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Core\Domain\Libs\Query;
@@ -28,14 +30,25 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
     private $security;
     private $flowRepository;
     private $botRepository;
+    private $userRepository;
+    private $botService;
 
-    public function __construct(MessageRepositoryInterface $repository, BotRepositoryInterface $botRepository, FlowRepositoryInterface $flowRepository, ChatService $chatService, Security $security)
+    public function __construct(
+        MessageRepositoryInterface $repository,
+        BotService $botService,
+        UserRepositoryInterface $userRepository,
+        BotRepositoryInterface $botRepository,
+        FlowRepositoryInterface $flowRepository,
+        ChatService $chatService,
+        Security $security)
     {
         $this->repository = $repository;
         $this->botRepository = $botRepository;
         $this->flowRepository = $flowRepository;
+        $this->userRepository = $userRepository;
         $this->chatService = $chatService;
         $this->security = $security;
+        $this->botService = $botService;
     }
 
     public function createEntity(array $attributes = []): MessageEntity
@@ -53,60 +66,54 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
 
     public function sendMessageFromBot($botToken, array $request)
     {
-        //dd($request);
-        $chatId = $request['chat_id'];
-        $text = $request['text'];
-        list($botId, $botKey) = explode(':', $botToken);
-        $message = new MessageEntity;
-        $message->setAuthorId($botId);
-        $message->setChatId($chatId);
-        $message->setText($text);
-        $this->repository->create($message);
-        $this->sendMessage($chatId, $text);
-        return $message;
+        $botEntity = $this->botService->authByToken($botToken);
+        $chatEntity = $this->chatService->repository->oneByIdWithMembers($request['chat_id']);
+
+        $messageEntity = new MessageEntity;
+        $messageEntity->setAuthorId($botEntity->getUserId());
+        $messageEntity->setChatId($chatEntity->getId());
+        $messageEntity->setChat($chatEntity);
+        $messageEntity->setText($request['text']);
+        $this->repository->create($messageEntity);
+        $this->sendFlow($messageEntity);
+        return $messageEntity;
     }
 
     public function sendMessage(int $chatId, string $text)
     {
-        $query = new Query;
-        $query->with('members.user');
-        /** @var ChatEntity $chatEntity */
-        $chatEntity = $this->chatService->oneById($chatId, $query);
-        //dd($chatEntity);
+        $chatEntity = $this->chatService->repository->oneByIdWithMembers($chatId);
         $messageEntity = $this->createEntity();
-
-        //$user = $this->container->get('security.token_storage')->getToken()->getUser();
-        //$messageEntity->setAuthorId($user->getId());
         $messageEntity->setChatId($chatId);
         $messageEntity->setChat($chatEntity);
-        /*
-
-        dd($chatEntity);*/
         $messageEntity->setText($text);
         $this->repository->create($messageEntity);
-
-        $this->sendFlow($chatEntity, $messageEntity);
+        $this->sendFlow($messageEntity);
         return $messageEntity;
     }
 
-    private function sendFlow(ChatEntity $chatEntity, MessageEntity $messageEntity)
+    private function sendFlow(MessageEntity $messageEntity)
     {
+        $chatEntity = $messageEntity->getChat();
+        $author = $this->userRepository->oneById($messageEntity->getAuthorId());
+        $messageEntity->setAuthor($author);
         foreach ($chatEntity->getMembers() as $memberEntity) {
             $roles = $memberEntity->getUser()->getRolesArray();
             if (in_array('ROLE_BOT', $roles)) {
-                $this->sendMessageToBot($memberEntity->getUser(), $messageEntity);
+                if($messageEntity->getAuthorId() != $memberEntity->getUserId()) {
+                    $this->sendMessageToBot($memberEntity->getUser(), $messageEntity);
+                }
+            } else {
+                $flowEntity = new FlowEntity;
+                $flowEntity->setChatId($chatEntity->getId());
+                $flowEntity->setMessageId($messageEntity->getId());
+                $flowEntity->setUserId($memberEntity->getUserId());
+                $this->flowRepository->create($flowEntity);
             }
-            $flowEntity = new FlowEntity;
-            $flowEntity->setChatId($chatEntity->getId());
-            $flowEntity->setMessageId($messageEntity->getId());
-            $flowEntity->setUserId($memberEntity->getUserId());
-            $this->flowRepository->create($flowEntity);
         }
     }
 
     public function sendMessageToBot(UserInterface $botIdentity, MessageEntity $messageEntity)
     {
-        $me = $this->security->getUser();
         $data = [
             "update_id" => $messageEntity->getId(),
             "message" => [
@@ -114,8 +121,8 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
                 "from" => [
                     "id" => $messageEntity->getAuthorId(),
                     "is_bot" => false,
-                    "first_name" => $me->getUsername(),
-                    "username" => $me->getUsername(),
+                    "first_name" => $messageEntity->getAuthor()->getUsername(),
+                    "username" => $messageEntity->getAuthor()->getUsername(),
                     "language_code" => "ru",
                 ],
                 "chat" => [
@@ -129,10 +136,7 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
             ]
         ];
 
-        $query = new Query;
-        $query->where('user_id', $botIdentity->getId());
-        /** @var BotEntity $botEntity */
-        $botEntity = $this->botRepository->one($query);
+        $botEntity = $this->botRepository->oneByUserId($botIdentity->getId());
         $client = new Client(['base_uri' => $botEntity->getHookUrl()]);
         $response = $client->request('POST', '', [
             'json' => $data,
