@@ -17,7 +17,10 @@ DotEnvHelper::init();
 
 $container = Container::getInstance();
 
-$daemon = new SocketDaemon;
+/** @var SocketDaemon $daemon */
+$daemon = $container->get(SocketDaemon::class);
+
+//$daemon->init();
 $daemon->runAll();
 
 

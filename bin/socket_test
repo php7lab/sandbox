@@ -19,15 +19,12 @@ DotEnvHelper::init();
 
 $container = Container::getInstance();
 
-$daemon = new SocketDaemon;
-/*$daemon->runAll();*/
-
-$userId = 377819118;
-$data = ['message' => 'test'];
+/** @var SocketDaemon $daemon */
+$daemon = $container->get(SocketDaemon::class);
 
 $event = new SocketEventEntity;
-$event->setUserId($userId);
+$event->setUserId(377819118);
 $event->setName(SocketEventEnum::MESSAGE);
-$event->setData($data);
+$event->setData(['message' => 'test']);
 
 $daemon->sendMessageToTcp($event);

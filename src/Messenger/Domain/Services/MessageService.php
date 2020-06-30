@@ -18,6 +18,9 @@ use PhpLab\Sandbox\Messenger\Domain\Interfaces\FlowRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\Repositories\BotRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\Repositories\MessageRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\Services\MessageServiceInterface;
+use PhpLab\Sandbox\Socket\Domain\Entities\SocketEventEntity;
+use PhpLab\Sandbox\Socket\Domain\Enums\SocketEventEnum;
+use PhpLab\Sandbox\Socket\Domain\Libs\SocketDaemon;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Security;
@@ -32,6 +35,7 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
     private $botRepository;
     private $userRepository;
     private $botService;
+    private $socketDaemon;
 
     public function __construct(
         MessageRepositoryInterface $repository,
@@ -40,7 +44,8 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
         BotRepositoryInterface $botRepository,
         FlowRepositoryInterface $flowRepository,
         ChatService $chatService,
-        Security $security)
+        Security $security,
+        SocketDaemon $socketDaemon)
     {
         $this->repository = $repository;
         $this->botRepository = $botRepository;
@@ -49,6 +54,7 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
         $this->chatService = $chatService;
         $this->security = $security;
         $this->botService = $botService;
+        $this->socketDaemon = $socketDaemon;
     }
 
     public function createEntity(array $attributes = []): MessageEntity
@@ -96,7 +102,20 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
         $chatEntity = $messageEntity->getChat();
         $author = $this->userRepository->oneById($messageEntity->getAuthorId());
         $messageEntity->setAuthor($author);
+
         foreach ($chatEntity->getMembers() as $memberEntity) {
+
+            $isMe = $memberEntity->getUserId() == $this->security->getUser()->getId();
+            $event = new SocketEventEntity;
+            $event->setUserId($memberEntity->getUserId());
+            $event->setName('sendMessage');
+            $event->setData([
+                'direction' => $isMe ? 'out' : 'in',
+                'text' => $messageEntity->getText(),
+                'chatId' => $memberEntity->getChatId(),
+            ]);
+            $this->socketDaemon->sendMessageToTcp($event);
+
             $roles = $memberEntity->getUser()->getRolesArray();
             if (in_array('ROLE_BOT', $roles)) {
                 if($messageEntity->getAuthorId() != $memberEntity->getUserId()) {

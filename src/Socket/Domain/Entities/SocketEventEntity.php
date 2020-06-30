@@ -3,14 +3,6 @@
 namespace PhpLab\Sandbox\Socket\Domain\Entities;
 
 use PhpLab\Sandbox\Socket\Domain\Enums\SocketEventStatusEnum;
-use Symfony\Component\Console\Application;
-use PhpLab\Core\Libs\Env\DotEnvHelper;
-use Illuminate\Container\Container;
-
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Workerman\Connection\ConnectionInterface;
-use Workerman\Worker;
 
 class SocketEventEntity {
 
@@ -19,32 +11,32 @@ class SocketEventEntity {
     private $status = SocketEventStatusEnum::OK;
     private $data;
 
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->userId;
     }
 
-    public function setUserId($userId): void
+    public function setUserId(int $userId): void
     {
         $this->userId = $userId;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus($status): void
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
