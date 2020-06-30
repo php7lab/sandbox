@@ -24,6 +24,7 @@ class BotCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        dd($output);
         $output->writeln('<fg=white># Привет, я Бот!</>');
 
         $wordClassificator = new WordClassificator;
