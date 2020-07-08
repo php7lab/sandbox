@@ -8,6 +8,7 @@ use PhpLab\Core\Enums\Http\HttpMethodEnum;
 use PhpLab\Core\Enums\Http\HttpServerEnum;
 use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
 use PhpLab\Sandbox\Proto\Entities\RequestEntity;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RestProto
@@ -53,7 +54,7 @@ class RestProto
         if ( ! $this->isCryptRequest()) {
             return;
         }
-        $requestEntity = $this->decodeRequest($_POST['data']);
+        $requestEntity = $this->decodeRequest(Request::createFromGlobals()->getContent());
         $this->applyToEnv($requestEntity);
     }
 

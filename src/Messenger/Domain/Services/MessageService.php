@@ -157,7 +157,7 @@ class MessageService extends BaseCrudService implements MessageServiceInterface
 
         $botEntity = $this->botRepository->oneByUserId($botIdentity->getId());
         $client = new Client(['base_uri' => $botEntity->getHookUrl()]);
-        $response = $client->request('POST', '', [
+        $response = $client->post(null, [
             'json' => $data,
         ]);
     }
