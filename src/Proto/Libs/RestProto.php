@@ -19,26 +19,21 @@ class RestProto
     const CRYPT_CONTENT_TYPE = 'application/x-base64';
 
     private $encoderInstance;
-    private $originalServer;
 
-    public function __construct(EncoderInterface $encoder, array $server)
+    public function __construct(EncoderInterface $encoder)
     {
         $this->encoderInstance = $encoder;
-        $this->originalServer = $server;
     }
 
     public function encodeResponse(Response $response): Response
     {
-        if ( ! $this->isCryptRequest()) {
-            return $response;
-        }
         $headers = [];
         $encodedResponse = new Response;
         foreach ($response->headers->all() as $headerKey => $headerValue) {
             $headers[$headerKey] = ArrayHelper::first($headerValue);
         }
         $payload = [
-            'statusCode' => $response->getStatusCode(),
+            'status' => $response->getStatusCode(),
             'headers' => $headers,
             'content' => $response->getContent(),
         ];
@@ -48,21 +43,10 @@ class RestProto
         return $encodedResponse;
     }
 
-    public function prepareRequest()
+    public function prepareRequest(string $content): RequestEntity
     {
-        global $_POST;
-        if ( ! $this->isCryptRequest()) {
-            return;
-        }
-        $requestEntity = $this->decodeRequest(Request::createFromGlobals()->getContent());
-        $this->applyToEnv($requestEntity);
-    }
-
-    private function isCryptRequest(): bool
-    {
-        $isPostMethod = strtolower($this->originalServer[HttpServerEnum::REQUEST_METHOD]) == 'post';
-        $isCryptRequest = $isPostMethod && ! empty($this->originalServer[self::CRYPT_SERVER_NAME]);
-        return $isCryptRequest;
+        $requestEntity = $this->decodeRequest($content);
+        return $requestEntity;
     }
 
     private function decodeRequest(string $encodedData): RequestEntity
@@ -76,16 +60,7 @@ class RestProto
         return $requestEntity;
     }
 
-    private function applyToEnv(RequestEntity $requestEntity)
-    {
-        global $_SERVER, $_GET, $_POST, $_FILES;
-        $server = $this->forgeServer($requestEntity);
-        $_SERVER = array_merge($_SERVER, $server);
-        $_GET = $requestEntity->getQuery() ?? [];
-        $_POST = $requestEntity->getBody() ?? [];
-    }
-
-    private function forgeServer(RequestEntity $requestEntity): array
+    public function forgeServer(RequestEntity $requestEntity): array
     {
         $server = [];
         if ($requestEntity->getHeaders()) {

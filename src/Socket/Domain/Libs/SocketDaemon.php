@@ -40,10 +40,14 @@ class SocketDaemon {
 
     public function sendMessageToTcp(SocketEventEntity $eventEntity) {
         // соединяемся с локальным tcp-сервером
-        $instance = stream_socket_client($this->localUrl);
-        $serialized = serialize($eventEntity);
-        // отправляем сообщение
-        fwrite($instance, $serialized . "\n");
+        try {
+            $instance = stream_socket_client($this->localUrl);
+            $serialized = serialize($eventEntity);
+            // отправляем сообщение
+            fwrite($instance, $serialized . "\n");
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function onWsStart() {
