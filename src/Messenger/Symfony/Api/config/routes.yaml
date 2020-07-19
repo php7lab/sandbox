@@ -43,6 +43,13 @@ api_messenger_chat_options:
 
 # message
 
+api_messenger_message_list:
+    methods: [GET]
+    path: messenger-messages/{chatId}
+    controller: PhpLab\Sandbox\Messenger\Symfony\Api\Controllers\MessageController::allByChatId
+    requirements:
+        chatId: '\d+'
+
 api_messenger_message_send_message:
     methods: [GET]
     path: bot/{bot}/send-message
