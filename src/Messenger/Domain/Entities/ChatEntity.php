@@ -14,13 +14,7 @@ class ChatEntity implements EntityIdInterface
     private $type;
     private $messages;
     private $members;
-
-    private $_security;
-
-    public function setSecurity(Security $security)
-    {
-        $this->_security = $security;
-    }
+    private $authUserId;
 
     public function getId()
     {
@@ -36,7 +30,7 @@ class ChatEntity implements EntityIdInterface
     {
         if($this->getType() == 'dialog' && $this->getMembers()) {
             foreach ($this->getMembers() as $memberEntity) {
-                if($memberEntity->getUserId() != $this->_security->getUser()->getId()) {
+                if($memberEntity->getUserId() != $this->getAuthUserId()) {
                     return $memberEntity->getUser()->getLogo();
                 }
             }
@@ -48,7 +42,7 @@ class ChatEntity implements EntityIdInterface
     {
         if($this->getType() == 'dialog' && $this->getMembers()) {
             foreach ($this->getMembers() as $memberEntity) {
-                if($memberEntity->getUserId() != $this->_security->getUser()->getId()) {
+                if($memberEntity->getUserId() != $this->getAuthUserId()) {
                     return $memberEntity->getUser()->getUsername();
                 }
             }
@@ -92,6 +86,16 @@ class ChatEntity implements EntityIdInterface
     public function setMembers($members): void
     {
         $this->members = $members;
+    }
+
+    public function getAuthUserId()
+    {
+        return $this->authUserId;
+    }
+
+    public function setAuthUserId($authUserId): void
+    {
+        $this->authUserId = $authUserId;
     }
 
 }

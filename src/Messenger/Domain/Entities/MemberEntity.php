@@ -44,12 +44,12 @@ class MemberEntity implements EntityIdInterface
         $this->chatId = $chatId;
     }
 
-    public function getUser(): ?UserInterface
+    public function getUser()/*: ?UserInterface*/
     {
         return $this->user;
     }
 
-    public function setUser(UserInterface $user): void
+    public function setUser(/*UserInterface*/ $user): void
     {
         $this->user = $user;
     }

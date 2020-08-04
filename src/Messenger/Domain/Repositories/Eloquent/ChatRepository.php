@@ -21,18 +21,19 @@ class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositor
     protected $tableName = 'messenger_chat';
     private $flowRepository;
     private $memberRepository;
-    private $security;
+    //private $security;
 
     public function __construct(
         Manager $capsule, 
         /*FlowRepositoryInterface $flowRepository,*/ 
-        MemberRepositoryInterface $memberRepository, 
-        Security $security)
+        MemberRepositoryInterface $memberRepository
+        //Security $security
+    )
     {
         parent::__construct($capsule);
         //$this->flowRepository = $flowRepository;
         $this->memberRepository = $memberRepository;
-        $this->security = $security;
+        //$this->security = $security;
     }
 
     public function getEntityClass(): string
@@ -47,14 +48,14 @@ class ChatRepository extends BaseEloquentCrudRepository implements ChatRepositor
         return parent::oneById($id, $query);
     }
 
-    public function _all(Query $query = null)
+    /*public function _all(Query $query = null)
     {
         $collection = parent::_all($query);
         foreach ($collection as $entity) {
             $entity->setSecurity($this->security);
         }
         return $collection;
-    }
+    }*/
 
     public function relations()
     {

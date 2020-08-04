@@ -2,11 +2,13 @@
 
 namespace PhpLab\Sandbox\Messenger\Domain\Services;
 
+use Packages\User\Domain\Services\AuthService;
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Domain\Helpers\EntityHelper;
 use PhpLab\Core\Domain\Interfaces\GetEntityClassInterface;
 use PhpLab\Core\Domain\Base\BaseCrudService;
+use PhpLab\Sandbox\Messenger\Domain\Entities\ChatEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatRepositoryInterface;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent\MemberRepository;
@@ -20,28 +22,37 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class ChatService extends BaseCrudService implements ChatServiceInterface
 {
 
-    use UserAwareTrait;
+    //use UserAwareTrait;
 
     private $memberRepository;
+    private $authService;
 
-    public function __construct(TokenStorageInterface $tokenStorage, ChatRepositoryInterface $repository, MemberRepository $memberRepository)
+    public function __construct(AuthService $authService, ChatRepositoryInterface $repository, MemberRepository $memberRepository)
     {
         $this->repository = $repository;
-        $this->setTokenStorage($tokenStorage);
+        $this->authService = $authService;
         $this->memberRepository = $memberRepository;
     }
 
     private function allSelfChatIds(): array
     {
         /** @var User $userEntity */
-        $userEntity = $this->getUser();
-
+        $userEntity = $this->authService->getIdentity();
         $memberQuery = Query::forge();
         $memberQuery->where('user_id', $userEntity->getId());
         $memberCollection = $this->memberRepository->all($memberQuery);
-
         $chatIdArray = EntityHelper::getColumn($memberCollection, 'chatId');
         return $chatIdArray;
+    }
+
+    public function all(Query $query = null)
+    {
+        /** @var ChatEntity[] $collection */
+        $collection = parent::all($query);
+        foreach ($collection as $entity) {
+            $entity->setAuthUserId($this->authService->getIdentity()->getId());
+        }
+        return $collection;
     }
 
     protected function forgeQuery(Query $query = null)

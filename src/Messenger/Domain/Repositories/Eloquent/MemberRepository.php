@@ -3,6 +3,7 @@
 namespace PhpLab\Sandbox\Messenger\Domain\Repositories\Eloquent;
 
 use Illuminate\Support\Collection;
+use Packages\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use PhpLab\Core\Domain\Libs\Query;
 use PhpLab\Core\Domain\Enums\RelationEnum;
 use PhpLab\Core\Domain\Libs\Relation\OneToOne;
@@ -10,7 +11,6 @@ use PhpLab\Eloquent\Db\Helpers\Manager;
 use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpLab\Sandbox\Messenger\Domain\Entities\MemberEntity;
 use PhpLab\Sandbox\Messenger\Domain\Interfaces\MemberRepositoryInterface;
-use PhpBundle\User\Domain\Interfaces\UserRepositoryInterface;
 
 class MemberRepository extends BaseEloquentCrudRepository implements MemberRepositoryInterface
 {
@@ -18,7 +18,7 @@ class MemberRepository extends BaseEloquentCrudRepository implements MemberRepos
     protected $tableName = 'messenger_member';
     private $userRepository;
 
-    public function __construct(Manager $capsule, UserRepositoryInterface $userRepository)
+    public function __construct(Manager $capsule, IdentityRepositoryInterface $userRepository)
     {
         parent::__construct($capsule);
         $this->userRepository = $userRepository;
