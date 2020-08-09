@@ -5,13 +5,13 @@ namespace PhpLab\Sandbox\Bot\Symfony\Api\Controllers;
 use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
 use PhpLab\Rest\Base\BaseCrudApiController;
 use PhpLab\Rest\Libs\Serializer\JsonRestSerializer;
-use PhpLab\Sandbox\Messenger\Domain\Interfaces\ChatServiceInterface;
+use PhpBundle\Messenger\Domain\Interfaces\ChatServiceInterface;
 use PhpLab\Core\Enums\Http\HttpHeaderEnum;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use PhpLab\Sandbox\Messenger\Domain\Libs\WordClassificator;
+use PhpBundle\Messenger\Domain\Libs\WordClassificator;
 use Phpml\Classification\KNearestNeighbors;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

@@ -2,7 +2,7 @@
 
 namespace PhpLab\Sandbox\Socket\Symfony\Commands;
 
-use PhpLab\Sandbox\Messenger\Domain\Libs\WordClassificator;
+use PhpBundle\Messenger\Domain\Libs\WordClassificator;
 use Phpml\Classification\KNearestNeighbors;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

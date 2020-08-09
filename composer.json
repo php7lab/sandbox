@@ -1,5 +1,5 @@
 {
-  "name": "php7lab/sandbox",
+  "name": "php7lab/socket",
   "type": "extension",
   "license": "MIT",
   "authors": [
@@ -11,8 +11,8 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "PhpLab\\Sandbox\\": "src",
-      "PhpLab\\Sandbox\\Tests\\": "tests"
+      "PhpLab\\Socket\\": "src",
+      "PhpLab\\Socket\\Tests\\": "tests"
     }
   }
 }
