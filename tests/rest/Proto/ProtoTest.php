@@ -11,8 +11,8 @@ use PhpBundle\Crypt\Domain\Libs\Encoders\GzEncoder;
 use PhpBundle\Crypt\Domain\Libs\Encoders\JsonEncoder;
 use PhpLab\Core\Enums\Http\HttpStatusCodeEnum;
 use PhpLab\Rest\Helpers\RestResponseHelper;
-use PhpLab\Sandbox\Proto\Transports\ProtoHttpTransport;
-use PhpLab\Sandbox\Proto\Libs\ProtoClient;
+use PhpBundle\CryptTunnel\Domain\Transports\ProtoHttpTransport;
+use PhpBundle\CryptTunnel\Domain\Libs\ProtoClient;
 use PhpLab\Test\Base\BaseRestApiTest;
 
 class ProtoTest extends BaseRestApiTest
